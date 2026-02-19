@@ -406,29 +406,53 @@
     </div>
   </section>
 
-  <!-- SLIDE 13: IMPLEMENTATION PHASES (paper) -->
+  <!-- SLIDE 13: RELEASE SCHEDULE V1 (paper) -->
   <section data-background-color="#FFF7EF" class="slide-paper">
-    <div class="section-label">Rollout Plan</div>
-    <h2>Four phases from MVP to full platform</h2>
-    <p class="body" style="margin-bottom: 1em;">Built on Findity's white-label platform, our first objective is to deliver the UX and workflows. We ship the core expense workflow first on the Findity engine, then expand outward. Travel management is explicitly deprioritized — we will not compete with Navan.</p>
-    <div class="cadence-row">
-      <div class="cadence-item">
-        <h4>Phase 1 · MVP</h4>
-        <p>UX and workflows on Findity. Expense submission, Visa/MC real-time feeds from US Bank, basic policies, and approval workflows. The core loop from card swipe to finance reconciliation.</p>
+    <div class="section-label">Release Schedule</div>
+    <h2>V1: The core expense platform</h2>
+    <div class="func-grid">
+      <div class="func-item">
+        <div class="func-num">V1.0 · MVP</div>
+        <h3>Core Expense Loop</h3>
+        <p>Findity platform integration. US Bank Visa/MC real-time card feeds. Corporate card expense submission with MCC auto-categorization. Basic policy engine (company-level rules, receipt thresholds, per-transaction limits). Card mandate Levels 1–2. Single-level manager approval. Mobile receipt capture with OCR. SSO. RBAC. Audit trail.</p>
       </div>
-      <div class="cadence-item">
-        <h4>Phase 2 · +4 Weeks</h4>
-        <p>Card-agnostic personal card flow, reimbursement processing, the advanced policy engine with full hierarchy, and mobile app for employees and managers.</p>
+      <div class="func-item">
+        <div class="func-num">V1.1 · +4 Weeks</div>
+        <h3>Policy Engine &amp; Approvals</h3>
+        <p>Full policy hierarchy (company, department, role, project). All 4 card mandate levels. Complete spend policies: GSA per-diem, monthly caps, category restrictions, preferred vendors, meal attendees. Violation handling (soft/hard/block). Policy visibility at every stage. Multi-level approval routing. Auto-approval engine. Delegation, escalation, batch approval.</p>
+      </div>
+      <div class="func-item">
+        <div class="func-num">V1.2 · +8 Weeks</div>
+        <h3>Finance Operations</h3>
+        <p>Card reconciliation workspace with 5-status view. Period close workflow with automated reminders and manager escalation. GL auto-coding with MCC-to-GL mapping. Split coding across cost centers and projects. GL validation. Accrual period assignment. Core finance reports: compliance scorecard, card ratio, unreconciled aging, spend analysis, cycle time.</p>
+      </div>
+      <div class="func-item">
+        <div class="func-num">V1.3 · +10 Weeks</div>
+        <h3>Personal Cards &amp; Reimbursement</h3>
+        <p>Personal card and out-of-pocket expense flow. Justification capture for non-corporate card usage. Reimbursement queue with batch processing. ACH and payroll payment methods. Employee reimbursement status tracking. Personal vs. corporate card ratio reporting. Card-agnostic pricing enforcement (per-user billing for own-card users).</p>
       </div>
     </div>
-    <div class="cadence-row">
-      <div class="cadence-item">
-        <h4>Phase 3 · +8 Weeks</h4>
-        <p>Basic purchasing module with purchase-to-card matching, three-way match, and unplanned spend flagging.</p>
+  </section>
+
+  <!-- SLIDE 14: RELEASE SCHEDULE V1.5–V2 (dark) -->
+  <section data-background-color="#1A1817" class="slide-dark">
+    <div class="section-label">Release Schedule</div>
+    <h2>V1.5–V2: Mobile, purchasing, integrations</h2>
+    <div class="func-grid">
+      <div class="func-item">
+        <div class="func-num">V1.5 · +14 Weeks</div>
+        <h3>Mobile &amp; Receipt Intelligence</h3>
+        <p>Full mobile app for employees: receipt capture, quick-submit, mileage tracking, expense status, purchase requests. Manager mobile: swipe approve/reject, policy flags, batch approve, delegation. Email forwarding receipt capture. Bulk upload with auto-matching. Match confidence scoring. Missing receipt affidavit. Mileage engine (IRS rates, Google Maps, recurring routes). Per-diem engine (GSA, custom rates, partial days). Push notifications.</p>
       </div>
-      <div class="cadence-item">
-        <h4>Phase 4 · +12 Weeks</h4>
-        <p>Advanced reporting and dashboards, FNBO backup card program integration, expanded ERP connectors.</p>
+      <div class="func-item">
+        <div class="func-num">V2.0 · +18 Weeks</div>
+        <h3>Basic Purchasing</h3>
+        <p>Purchase request workflow: create, route, approve. PO number generation. Purchase-to-card matching (vendor, amount within 10%, 30-day window). Three-way match: request, approval, card transaction. Unplanned spend flagging and compliance reporting. Duplicate detection.</p>
+      </div>
+      <div class="func-item" style="grid-column: 1 / -1; border-right: none;">
+        <div class="func-num">V2.1 · +22 Weeks</div>
+        <h3>Integrations &amp; Advanced Reporting</h3>
+        <p>ERP/GL connectors: QuickBooks, NetSuite, Sage Intacct, Microsoft Dynamics. HRIS: BambooHR, ADP, Workday. FNBO backup card program. Slack/Teams approval notifications. Calendar integration (Google, Outlook). Bank account verification (CAS). Full reporting suite: top spenders, duplicate detection, reimbursement queue, audit trail export. Data retention configuration. SOC 2 Type II certification.</p>
       </div>
     </div>
   </section>
