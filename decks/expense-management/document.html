@@ -843,8 +843,8 @@
   <div class="doc-header-inner">
     <div class="eyebrow">Centime · Product Specification</div>
     <h1>Centime Expense Management</h1>
-    <div class="subtitle">A policy-driven expense and lightweight purchasing platform for mid-market finance teams.</div>
-    <div class="meta">Version 0.1 · Draft · February 2026 · Internal</div>
+    <div class="subtitle">A policy-driven expense and lightweight purchasing platform for US mid-market finance teams, built on Findity's white-label T&E engine.</div>
+    <div class="meta">Version 0.2 · Draft · February 2026 · US Market · Internal</div>
   </div>
 </header>
 
@@ -856,7 +856,7 @@
   <div class="doc-section">
     <div class="section-number">01 — Overview</div>
     <h2>What we are building</h2>
-    <p class="lead">Centime Expense Management is a policy-driven expense and lightweight purchasing platform designed for mid-market finance teams. The system enforces corporate card usage as the default payment method, provides configurable policy guardrails, and delivers a streamlined experience across three core personas.</p>
+    <p class="lead">Centime Expense Management is a policy-driven expense and lightweight purchasing platform for US mid-market finance teams, built on Findity's white-label T&E engine. We own the UX and workflows; Findity provides the expense processing engine. The first objective is to build a differentiated user experience and workflow layer. The system enforces corporate card usage as the default payment method, provides configurable policy guardrails, and delivers a streamlined experience across three core personas.</p>
 
     <div class="gap-grid">
       <div class="gap-col">
@@ -877,7 +877,7 @@
     <div class="pillar-grid">
       <div class="pillar">
         <h4>Corporate Card First</h4>
-        <p>Every policy default, UX nudge, and workflow assumes corporate card usage. Personal card reimbursement is a supported exception, not a parallel track.</p>
+        <p>Every policy default, UX nudge, and workflow assumes corporate card usage via our US Bank (primary) and FNBO (secondary) card programs. The system is card-agnostic -- it accepts any Visa or Mastercard -- but pricing favors our cards: free with committed spend on our programs, per-active-user/month for customers using their own cards.</p>
       </div>
       <div class="pillar">
         <h4>Policy at the Center</h4>
@@ -885,7 +885,7 @@
       </div>
       <div class="pillar">
         <h4>Mid-Market Pragmatism</h4>
-        <p>Enough control for a 200-2,000 employee company without the configuration overhead of enterprise ERP expense modules.</p>
+        <p>Enough control for a 200-2,000 employee US company without the configuration overhead of enterprise ERP expense modules. Findity's proven engine handles the processing complexity; we focus on UX and workflows.</p>
       </div>
       <div class="pillar">
         <h4>Accountability Without Friction</h4>
@@ -995,6 +995,7 @@
     </div>
 
     <h3>Corporate Card Mandate Levels</h3>
+    <p>These mandate levels apply to corporate cards issued through our US Bank (primary) and FNBO (secondary) card programs. The system is card-agnostic and will accept transactions from any Visa or Mastercard, but policy enforcement and real-time feed availability are optimized for our issued cards.</p>
     <table class="comparison-table">
       <thead>
         <tr>
@@ -1028,7 +1029,7 @@
     </table>
 
     <div class="highlight-box" style="border-left-color: var(--ft-mandarin);">
-      <p><strong>Default recommendation:</strong> Level 2 (Preferred) as company default, Level 3 (Required) for T&E categories above $50.</p>
+      <p><strong>Default recommendation:</strong> Level 2 (Preferred) as company default, Level 3 (Required) for T&E categories above $50. Note: card-agnostic acceptance means customers using non-program cards (any Visa/Mastercard) still get full policy enforcement -- they just pay per active user instead of getting the platform free with committed spend.</p>
     </div>
 
     <h3>Spend Policies</h3>
@@ -1100,9 +1101,9 @@
     <p class="lead">Travel and entertainment is the primary use case. Two submission paths serve different payment methods, with the corporate card path as the default.</p>
 
     <h3>Corporate Card Transaction Flow</h3>
-    <p>This is the primary path. Card transactions flow in automatically and the employee completes the record.</p>
+    <p>This is the primary path. Card transactions flow in via real-time Visa and Mastercard network feeds and the employee completes the record. We do not have real-time Amex integration; Amex transactions require manual entry or batch file upload.</p>
     <ol class="step-flow">
-      <li>Card transaction posted by card network</li>
+      <li>Card transaction posted via real-time Visa or Mastercard feed</li>
       <li>Auto-matched to merchant category via MCC code; pre-populated expense line created</li>
       <li>Employee reviews, adds receipt, confirms GL/project code</li>
       <li>Routed to manager for approval (or auto-approved if within policy)</li>
@@ -1149,7 +1150,7 @@
       <div class="gap-col">
         <h4>Per-Diem</h4>
         <ul>
-          <li>GSA rates pre-loaded for US cities; configurable for international</li>
+          <li>GSA rates pre-loaded for US cities only</li>
           <li>Company can override GSA with custom rates</li>
           <li>Configurable as actuals-with-cap or flat allowance</li>
           <li>Partial day calculations for departure/return days</li>
@@ -1521,7 +1522,12 @@
         <tr>
           <td style="white-space: normal;">Corporate Card Providers</td>
           <td>Inbound</td>
-          <td>Card transaction feed -- real-time or daily batch (Visa, Mastercard, Amex commercial feeds)</td>
+          <td>Visa and Mastercard real-time feeds from US Bank and FNBO card programs. No real-time Amex integration.</td>
+        </tr>
+        <tr>
+          <td style="white-space: normal;">Findity Platform</td>
+          <td>Bidirectional</td>
+          <td>White-label T&E expense engine. We own UX and workflows; Findity provides expense processing, policy evaluation, and receipt OCR.</td>
         </tr>
         <tr>
           <td style="white-space: normal;">ERP / GL</td>
@@ -1557,7 +1563,7 @@
       <tbody>
         <tr>
           <td>Travel Booking</td>
-          <td>Auto-create trip containers from bookings (Navan, TripActions, Concur Travel)</td>
+          <td>Deprioritized. We will not compete with Navan on travel management. If integrated later, limited to auto-creating trip containers from third-party bookings.</td>
         </tr>
         <tr>
           <td>Calendar</td>
@@ -1634,14 +1640,14 @@
   <div class="doc-section">
     <div class="section-number">11 — Implementation & Rollout</div>
     <h2>Phased delivery and configuration</h2>
-    <p class="lead">A phased approach lets us ship a focused MVP and expand scope with each release, validating assumptions along the way.</p>
+    <p class="lead">Built on Findity's white-label T&E platform, we focus first on building the UX and workflow layer. A phased approach lets us ship a focused MVP and expand scope with each release, validating assumptions along the way.</p>
 
     <h3>Phased Approach</h3>
     <div class="phase-row cols-4">
       <div class="phase">
         <div class="phase-label">Phase 1 — MVP</div>
-        <h4>Core T&E</h4>
-        <p>T&E with corporate card integration, basic policies, approval workflows.</p>
+        <h4>UX & Workflows on Findity</h4>
+        <p>UX and workflow layer on Findity engine, Visa/MC real-time feeds from US Bank, basic policies, approval workflows.</p>
       </div>
       <div class="phase">
         <div class="phase-label">Phase 2 — MVP + 4 Weeks</div>
@@ -1656,7 +1662,7 @@
       <div class="phase">
         <div class="phase-label">Phase 4 — MVP + 12 Weeks</div>
         <h4>Advanced</h4>
-        <p>Advanced reporting, budget integration, travel booking integration.</p>
+        <p>Advanced reporting, budget integration, FNBO backup card program integration.</p>
       </div>
     </div>
 
@@ -1680,46 +1686,62 @@
   <!-- SECTION 12: OPEN QUESTIONS (CLARET TAKEAWAY) -->
   <!-- ============================================================ -->
   <div class="takeaway">
-    <div class="section-number">12 — Open Questions</div>
-    <h2>Decisions that shape the product</h2>
-    <p>These questions must be resolved to finalize scope, architecture, and go-to-market strategy. Each carries a preliminary recommendation.</p>
+    <div class="section-number">12 — Decisions & Open Questions</div>
+    <h2>What we have decided, and what remains</h2>
+    <p>Several foundational questions from v0.1 are now resolved. The remaining open questions focus on integration architecture and operational details.</p>
 
+    <h3 style="color: var(--ft-white); margin-top: 36px; margin-bottom: 16px; font-family: 'Libre Baskerville', serif; font-size: 22px;">Decisions Made</h3>
     <ul class="question-list">
       <li>
         <span class="num">1</span>
         <span>
-          <strong>Card program management</strong> -- Do we issue/manage corporate cards, or only consume card feeds from existing bank programs?
-          <span class="rec">Recommendation: Consume feeds in V1; card issuance is a future consideration.</span>
+          <strong>Card program management</strong> -- RESOLVED: We are not an issuer. We do not have a card-management interface. US Bank is the primary T&E card issuing partner; FNBO is secondary/backup. We consume card feeds.
         </span>
       </li>
       <li>
         <span class="num">2</span>
         <span>
-          <strong>Budget module depth</strong> -- How tightly do we integrate with departmental budgets? Real-time budget check at approval, or reporting-only?
+          <strong>International support</strong> -- RESOLVED: US only. No multi-currency, no international per-diem rates, no FX handling.
         </span>
       </li>
       <li>
         <span class="num">3</span>
         <span>
-          <strong>International support</strong> -- Multi-currency expense submission and FX handling in V1, or US-only first?
+          <strong>Pricing model</strong> -- RESOLVED: Use our card (US Bank/FNBO) = free with committed spend. Use your own card = pay per active user per month.
         </span>
       </li>
       <li>
         <span class="num">4</span>
         <span>
+          <strong>Build vs. partner</strong> -- RESOLVED: Built on Findity's white-label T&E platform. Findity provides the expense engine; we provide UX and workflows.
+        </span>
+      </li>
+    </ul>
+
+    <h3 style="color: var(--ft-white); margin-top: 36px; margin-bottom: 16px; font-family: 'Libre Baskerville', serif; font-size: 22px;">Open Questions</h3>
+    <ul class="question-list">
+      <li>
+        <span class="num">1</span>
+        <span>
+          <strong>Budget module depth</strong> -- How tightly do we integrate with departmental budgets? Real-time budget check at approval, or reporting-only?
+        </span>
+      </li>
+      <li>
+        <span class="num">2</span>
+        <span>
           <strong>Centime platform integration</strong> -- How deeply does this connect to existing AP automation? Shared vendor master? Shared payment processing? Single dashboard?
         </span>
       </li>
       <li>
-        <span class="num">5</span>
+        <span class="num">3</span>
         <span>
-          <strong>Pricing model</strong> -- Per-employee per-month? Tiered by transaction volume? Bundled with existing Centime products?
+          <strong>Findity integration architecture</strong> -- What is the boundary between our UX/workflow layer and Findity's engine? Where do we own the data model vs. consume theirs? How do we handle customization that goes beyond Findity's configuration surface?
         </span>
       </li>
       <li>
-        <span class="num">6</span>
+        <span class="num">4</span>
         <span>
-          <strong>Build vs. partner</strong> -- Receipt OCR, card feeds, travel booking -- build or integrate with existing providers (e.g., Coupa, Expensify APIs)?
+          <strong>US Bank card program operations</strong> -- How do we handle card issuance requests, limit management, and cardholder onboarding? What is the operational handoff between our platform, US Bank, and the customer's admin?
         </span>
       </li>
     </ul>
@@ -1729,7 +1751,7 @@
 
 <div class="doc-footer">
   <a href="../">Back to presentations</a>
-  <div class="draft-note">This spec is a working draft intended to align product, engineering, and go-to-market teams on scope and priorities. It is not a final requirements document.</div>
+  <div class="draft-note">v0.2 — This spec is a working draft intended to align product, engineering, and go-to-market teams on scope and priorities. It is not a final requirements document.</div>
 </div>
 
 </body>

@@ -147,8 +147,8 @@
   <section data-background-color="#1A1817" class="slide-dark">
     <div class="eyebrow">Centime · Product Specification</div>
     <h1>Expense Management</h1>
-    <div class="subtitle">A policy-driven expense and lightweight purchasing platform built for mid-market finance teams. Corporate card first. Accountability without friction.</div>
-    <div class="meta">v0.1 Draft · February 2026 · BC / Product</div>
+    <div class="subtitle">A policy-driven expense platform built on Findity's white-label framework for US mid-market finance teams. Card-agnostic, but designed to favor our cards. UX and workflows first.</div>
+    <div class="meta">v0.2 Draft · February 2026 · BC / Product · US Market · US Bank (Primary) · FNBO (Backup)</div>
   </section>
 
   <!-- SLIDE 2: DESIGN PRINCIPLES (salmon) -->
@@ -158,8 +158,8 @@
     <div class="func-grid">
       <div class="func-item">
         <div class="func-num">Principle 01</div>
-        <h3>Corporate Card First</h3>
-        <p>Every policy default, UX nudge, and workflow assumes corporate card usage. Personal card reimbursement is a supported exception, never a parallel track.</p>
+        <h3>Our Card First, Any Card Accepted</h3>
+        <p>We issue T&amp;E cards through US Bank (primary) and FNBO (backup). Every UX nudge and workflow favors our card. But the system is card-agnostic — employees using their own cards pay per active user per month; our card is free with committed spend.</p>
       </div>
       <div class="func-item">
         <div class="func-num">Principle 02</div>
@@ -168,8 +168,8 @@
       </div>
       <div class="func-item">
         <div class="func-num">Principle 03</div>
-        <h3>Mid-Market Pragmatism</h3>
-        <p>Enough control for a 200 to 2,000 employee company with multiple departments and locations, without the configuration overhead of enterprise ERP expense modules.</p>
+        <h3>Built on Findity, Not from Scratch</h3>
+        <p>Findity's white-label T&amp;E platform is purpose-built for this. We bring the UX, workflows, card partnerships, and Centime integration. They bring the expense engine. Mid-market pragmatism: 200 to 2,000 employees without enterprise configuration overhead.</p>
       </div>
       <div class="func-item">
         <div class="func-num">Principle 04</div>
@@ -220,7 +220,7 @@
   <section data-background-color="#FFF1E5">
     <div class="section-label">Enforcing the Default</div>
     <h2>Four levels of corporate card mandate</h2>
-    <p class="body" style="margin-bottom: 0.6em;">The system provides graduated enforcement. Each expense category can be assigned its own level, so travel may be stricter than office supplies. The recommended default is Level 2 company-wide, escalating to Level 3 for T&amp;E categories above $50.</p>
+    <p class="body" style="margin-bottom: 0.6em;">The system provides graduated enforcement for our Centime-issued cards (US Bank / FNBO). Each expense category can be assigned its own level. Employees using their own cards are always accepted but pay per active user per month. The recommended default is Level 2 company-wide, escalating to Level 3 for T&amp;E categories above $50.</p>
     <div class="func-grid">
       <div class="func-item">
         <div class="func-num">Level 1 · Encouraged</div>
@@ -283,7 +283,7 @@
       <div class="func-item">
         <div class="func-num">Per-Diem</div>
         <h3>GSA Rates Built In</h3>
-        <p>GSA rates pre-loaded for US cities, configurable for international. Companies can override with custom rates. Supports actuals-with-cap or flat allowance modes, including partial-day calculations for departure and return days.</p>
+        <p>GSA rates pre-loaded for US cities. Companies can override with custom rates. Supports actuals-with-cap or flat allowance modes, including partial-day calculations for departure and return days. US only at launch.</p>
       </div>
     </div>
   </section>
@@ -358,22 +358,23 @@
   <section data-background-color="#1A1817" class="slide-dark">
     <div class="section-label">System Connections</div>
     <h2>Integrations: required and desired</h2>
-    <p class="body" style="margin-bottom: 0.8em;">The platform does not operate in isolation. It consumes card feeds, syncs employee data, pushes approved expenses to the general ledger, and connects to Centime's own AP platform for reimbursement processing. These are not nice-to-haves; they are architectural requirements.</p>
+    <p class="body" style="margin-bottom: 0.8em;">The platform is built on Findity's white-label T&amp;E engine. Around it, we integrate card feeds, employee data, the general ledger, and Centime's own AP platform. These are architectural requirements, not nice-to-haves.</p>
     <div class="integration-grid">
       <div class="integration-col">
         <h3>Required</h3>
-        <div class="integration-item"><strong>Corporate Card Feeds</strong> — Visa, Mastercard, Amex commercial feeds. Real-time preferred, daily batch as fallback. Transaction data via tokenized feeds for PCI compliance.</div>
+        <div class="integration-item"><strong>Findity Platform</strong> — White-label T&amp;E engine providing the core expense processing, receipt OCR, and policy framework. We build the UX and workflows on top.</div>
+        <div class="integration-item"><strong>Visa &amp; Mastercard Feeds</strong> — Real-time transaction feeds from our US Bank and FNBO card programs. Tokenized for PCI compliance. No real-time Amex integration.</div>
         <div class="integration-item"><strong>ERP / GL</strong> — QuickBooks, NetSuite, Sage Intacct, Microsoft Dynamics. Outbound push of approved expense data with full GL coding for journal entry.</div>
         <div class="integration-item"><strong>HRIS</strong> — BambooHR, ADP, Workday. Inbound sync of employee data, department, manager, and cost center assignments.</div>
-        <div class="integration-item"><strong>Centime AP</strong> — Bidirectional. Reimbursements via payment rails, vendor and supplier data sync. The natural connection point to our existing platform.</div>
+        <div class="integration-item"><strong>Centime AP</strong> — Bidirectional. Reimbursements via payment rails, vendor and supplier data sync.</div>
         <div class="integration-item"><strong>SSO / Directory</strong> — Okta, Azure AD, Google Workspace. Authentication and automated user provisioning.</div>
       </div>
       <div class="integration-col">
         <h3>Desired</h3>
-        <div class="integration-item"><strong>Travel Booking</strong> — Navan, TripActions, Concur Travel. Auto-create trip containers from bookings so expenses are pre-organized before the trip begins.</div>
         <div class="integration-item"><strong>Calendar</strong> — Google Calendar, Outlook. Associate expenses with meetings and events for automatic business purpose documentation.</div>
         <div class="integration-item"><strong>Slack / Teams</strong> — Approval notifications and quick-approve actions so managers never leave their communication tool to clear a queue.</div>
         <div class="integration-item"><strong>Bank Account Verification</strong> — CAS integration to verify employee bank accounts for ACH reimbursement, reducing payment errors and fraud risk.</div>
+        <div class="integration-item"><strong>Travel Booking</strong> — Deprioritized. We will not compete with Navan on travel management. Basic trip container support is a future consideration.</div>
       </div>
     </div>
   </section>
@@ -410,15 +411,15 @@
   <section data-background-color="#FFF7EF" class="slide-paper">
     <div class="section-label">Rollout Plan</div>
     <h2>Four phases from MVP to full platform</h2>
-    <p class="body" style="margin-bottom: 1em;">We ship the core T&amp;E workflow first, then expand outward. Each phase adds a layer of capability while the previous phase stabilizes in production. The per-customer configuration checklist covers policy rules, card mandate levels, approval routing, GL mapping, cost center structure, per-diem rates, receipt thresholds, reimbursement schedules, card feed connections, ERP integration, and SSO.</p>
+    <p class="body" style="margin-bottom: 1em;">Built on Findity's white-label platform, our first objective is to deliver the UX and workflows. We ship the core expense workflow first on the Findity engine, then expand outward. Travel management is explicitly deprioritized — we will not compete with Navan.</p>
     <div class="cadence-row">
       <div class="cadence-item">
         <h4>Phase 1 · MVP</h4>
-        <p>T&amp;E with corporate card integration, basic policies, and approval workflows. The essential loop from card swipe to finance reconciliation.</p>
+        <p>UX and workflows on Findity. Expense submission, Visa/MC real-time feeds from US Bank, basic policies, and approval workflows. The core loop from card swipe to finance reconciliation.</p>
       </div>
       <div class="cadence-item">
         <h4>Phase 2 · +4 Weeks</h4>
-        <p>Personal card reimbursement, the advanced policy engine with full hierarchy, and the mobile app for employees and managers.</p>
+        <p>Card-agnostic personal card flow, reimbursement processing, the advanced policy engine with full hierarchy, and mobile app for employees and managers.</p>
       </div>
     </div>
     <div class="cadence-row">
@@ -428,42 +429,38 @@
       </div>
       <div class="cadence-item">
         <h4>Phase 4 · +12 Weeks</h4>
-        <p>Advanced reporting and dashboards, departmental budget integration, and travel booking system integration.</p>
+        <p>Advanced reporting and dashboards, departmental budget integration, FNBO backup card program integration.</p>
       </div>
     </div>
   </section>
 
   <!-- SLIDE 14: OPEN QUESTIONS (claret) -->
   <section data-background-color="#990F3D" class="slide-claret">
-    <div class="section-label">Decisions Needed</div>
-    <h2>Six open questions before we build</h2>
+    <div class="section-label">What's Decided · What's Open</div>
+    <h2>Key decisions made, questions remaining</h2>
     <ul class="question-list">
       <li>
-        <span class="q-num">01</span>
-        <span><strong>Card program management.</strong> Do we issue and manage corporate cards ourselves, or only consume card feeds from existing bank programs? Recommendation: consume feeds in V1, consider card issuance as a future expansion.</span>
+        <span class="q-num" style="color: var(--ft-wheat); opacity: 0.5;">&#10003;</span>
+        <span><strong>Platform:</strong> Findity white-label. <strong>Market:</strong> US only. <strong>Card partners:</strong> US Bank (primary), FNBO (backup). <strong>Pricing:</strong> Free with our card + committed spend; per active user/month for own card. <strong>Travel:</strong> Deprioritized — we won't compete with Navan.</span>
       </li>
       <li>
-        <span class="q-num">02</span>
+        <span class="q-num">01</span>
         <span><strong>Budget module depth.</strong> How tightly do we integrate with departmental budgets? Real-time budget checks at approval time, or reporting-only visibility? The answer shapes the policy engine's complexity.</span>
       </li>
       <li>
-        <span class="q-num">03</span>
-        <span><strong>International support.</strong> Multi-currency expense submission and FX handling in V1, or US-only first? Currency conversion adds complexity to every layer from submission to GL posting.</span>
-      </li>
-      <li>
-        <span class="q-num">04</span>
+        <span class="q-num">02</span>
         <span><strong>Centime platform integration.</strong> How deeply does this connect to existing AP automation? Shared vendor master? Shared payment processing? A single unified dashboard across products?</span>
       </li>
       <li>
-        <span class="q-num">05</span>
-        <span><strong>Pricing model.</strong> Per-employee per-month? Tiered by transaction volume? Bundled with existing Centime products? The model affects which features gate to which tiers.</span>
+        <span class="q-num">03</span>
+        <span><strong>Findity integration architecture.</strong> What is the boundary between our UX/workflow layer and Findity's engine? Where do we own the data model vs. consume theirs? API-first or embedded UI components?</span>
       </li>
       <li>
-        <span class="q-num">06</span>
-        <span><strong>Build vs. partner.</strong> Receipt OCR, card feeds, and travel booking integration — do we build these capabilities or integrate with existing providers like specialized OCR services and card network APIs?</span>
+        <span class="q-num">04</span>
+        <span><strong>US Bank card program operations.</strong> How do we handle card issuance, limit management, and cardholder onboarding? What is the operational handoff between Centime and US Bank?</span>
       </li>
     </ul>
-    <div class="closing-line">This spec is a working draft. These questions need resolution before engineering begins.</div>
+    <div class="closing-line">v0.2 — Key strategic decisions locked. Engineering-level questions remain before build begins.</div>
   </section>
 
 </div>
