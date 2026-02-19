@@ -191,7 +191,7 @@
       </div>
       <div class="pillar">
         <h3>Manager</h3>
-        <p>The approver. Direct managers, department heads, project leads in the approval chain. They need to review and approve from mobile, see policy violations flagged without reading every line item, understand budget impact before approving, and delegate authority when out of office.</p>
+        <p>The approver. Direct managers, department heads, project leads in the approval chain. They need to review and approve from mobile, see policy violations flagged without reading every line item, and delegate authority when out of office.</p>
         <p class="persona-quote">"I get a pile of expense reports at month-end and can't tell which ones actually need my attention."</p>
       </div>
       <div class="pillar">
@@ -295,7 +295,7 @@
     <p class="body" style="margin-bottom: 0.8em;">This module handles pre-approved purchases that do not go through a formal procurement system. It covers office supplies, software subscriptions, professional services, conference registrations, and team events below a company-configurable threshold. Capital expenditures, multi-year contracts, and inventory purchasing are explicitly out of scope. The goal is control and accountability, not full procure-to-pay.</p>
     <div class="flow-chain">
       <div class="flow-step"><span class="flow-arrow">1.</span> Employee creates a purchase request with category, vendor, amount, and justification</div>
-      <div class="flow-step"><span class="flow-arrow">2.</span> Policy engine validates budget and routes to the right approver</div>
+      <div class="flow-step"><span class="flow-arrow">2.</span> Policy engine validates and routes to the right approver</div>
       <div class="flow-step"><span class="flow-arrow">3.</span> Approved request generates a PO number sent to the employee</div>
       <div class="flow-step"><span class="flow-arrow">4.</span> Employee makes the purchase on corporate card</div>
       <div class="flow-step"><span class="flow-arrow">5.</span> Card transaction auto-matched to approved PO within 10% amount and 30-day window</div>
@@ -341,7 +341,7 @@
     <div class="pillar-grid">
       <div class="pillar">
         <h3>Reimbursement</h3>
-        <p>Approved personal-card expenses enter a reimbursement queue. Finance runs batches on a configurable schedule, approves the batch, and pays via ACH, payroll integration, or check. Employees see real-time status from approved through processing to paid, with an expected payment date. Payments can flow through Centime's existing payment rails.</p>
+        <p>Approved personal-card expenses enter a reimbursement queue. Finance runs batches on a configurable schedule, approves the batch, and pays via ACH, payroll integration, or check. Employees see real-time status from approved through processing to paid, with an expected payment date.</p>
       </div>
       <div class="pillar">
         <h3>GL Coding</h3>
@@ -358,15 +358,14 @@
   <section data-background-color="#1A1817" class="slide-dark">
     <div class="section-label">System Connections</div>
     <h2>Integrations: required and desired</h2>
-    <p class="body" style="margin-bottom: 0.8em;">The platform is built on Findity's white-label T&amp;E engine. Around it, we integrate card feeds, employee data, the general ledger, and Centime's own AP platform. These are architectural requirements, not nice-to-haves.</p>
+    <p class="body" style="margin-bottom: 0.8em;">The platform is built on Findity's white-label T&amp;E engine. Around it, we integrate card feeds, employee data, and the general ledger. The GL/ERP integration is the connection point to the broader Centime platform — nothing more is needed.</p>
     <div class="integration-grid">
       <div class="integration-col">
         <h3>Required</h3>
         <div class="integration-item"><strong>Findity Platform</strong> — White-label T&amp;E engine providing the core expense processing, receipt OCR, and policy framework. We build the UX and workflows on top.</div>
         <div class="integration-item"><strong>Visa &amp; Mastercard Feeds</strong> — Real-time transaction feeds from our US Bank and FNBO card programs. Tokenized for PCI compliance. No real-time Amex integration.</div>
-        <div class="integration-item"><strong>ERP / GL</strong> — QuickBooks, NetSuite, Sage Intacct, Microsoft Dynamics. Outbound push of approved expense data with full GL coding for journal entry.</div>
+        <div class="integration-item"><strong>ERP / GL</strong> — The connection point to the broader Centime platform. QuickBooks, NetSuite, Sage Intacct, Microsoft Dynamics. Outbound push of approved expense data with full GL coding.</div>
         <div class="integration-item"><strong>HRIS</strong> — BambooHR, ADP, Workday. Inbound sync of employee data, department, manager, and cost center assignments.</div>
-        <div class="integration-item"><strong>Centime AP</strong> — Bidirectional. Reimbursements via payment rails, vendor and supplier data sync.</div>
         <div class="integration-item"><strong>SSO / Directory</strong> — Okta, Azure AD, Google Workspace. Authentication and automated user provisioning.</div>
       </div>
       <div class="integration-col">
@@ -429,38 +428,30 @@
       </div>
       <div class="cadence-item">
         <h4>Phase 4 · +12 Weeks</h4>
-        <p>Advanced reporting and dashboards, departmental budget integration, FNBO backup card program integration.</p>
+        <p>Advanced reporting and dashboards, FNBO backup card program integration, expanded ERP connectors.</p>
       </div>
     </div>
   </section>
 
   <!-- SLIDE 14: OPEN QUESTIONS (claret) -->
   <section data-background-color="#990F3D" class="slide-claret">
-    <div class="section-label">What's Decided · What's Open</div>
-    <h2>Key decisions made, questions remaining</h2>
+    <div class="section-label">Decisions Locked</div>
+    <h2>Strategic framework resolved. One architecture question remains.</h2>
     <ul class="question-list">
       <li>
         <span class="q-num" style="color: var(--ft-wheat); opacity: 0.5;">&#10003;</span>
-        <span><strong>Platform:</strong> Findity white-label. <strong>Market:</strong> US only. <strong>Card partners:</strong> US Bank (primary), FNBO (backup). <strong>Pricing:</strong> Free with our card + committed spend; per active user/month for own card. <strong>Travel:</strong> Deprioritized — we won't compete with Navan.</span>
+        <span><strong>Platform:</strong> Findity white-label. <strong>Market:</strong> US only. <strong>Card partners:</strong> US Bank (primary), FNBO (backup). <strong>Pricing:</strong> Free with our card + committed spend; per active user/month for own card.</span>
       </li>
       <li>
-        <span class="q-num">01</span>
-        <span><strong>Budget module depth.</strong> How tightly do we integrate with departmental budgets? Real-time budget checks at approval time, or reporting-only visibility? The answer shapes the policy engine's complexity.</span>
+        <span class="q-num" style="color: var(--ft-wheat); opacity: 0.5;">&#10003;</span>
+        <span><strong>Travel:</strong> Deprioritized — won't compete with Navan. <strong>Budget:</strong> No budget module — out of scope. <strong>Centime integration:</strong> GL/ERP is the connection point, nothing more. <strong>Card management:</strong> US Bank provides their own interface to clients directly.</span>
       </li>
       <li>
-        <span class="q-num">02</span>
-        <span><strong>Centime platform integration.</strong> How deeply does this connect to existing AP automation? Shared vendor master? Shared payment processing? A single unified dashboard across products?</span>
-      </li>
-      <li>
-        <span class="q-num">03</span>
-        <span><strong>Findity integration architecture.</strong> What is the boundary between our UX/workflow layer and Findity's engine? Where do we own the data model vs. consume theirs? API-first or embedded UI components?</span>
-      </li>
-      <li>
-        <span class="q-num">04</span>
-        <span><strong>US Bank card program operations.</strong> How do we handle card issuance, limit management, and cardholder onboarding? What is the operational handoff between Centime and US Bank?</span>
+        <span class="q-num" style="font-size: 1.3em;">?</span>
+        <span><strong>Findity integration architecture.</strong> What is the boundary between our UX/workflow layer and Findity's engine? Where do we own the data model vs. consume theirs? How do we handle customization beyond Findity's configuration surface? <em>More to follow.</em></span>
       </li>
     </ul>
-    <div class="closing-line">v0.2 — Key strategic decisions locked. Engineering-level questions remain before build begins.</div>
+    <div class="closing-line">v0.3 — Strategic decisions locked. Findity architecture definition is the critical path to engineering.</div>
   </section>
 
 </div>

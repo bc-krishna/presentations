@@ -844,7 +844,7 @@
     <div class="eyebrow">Centime · Product Specification</div>
     <h1>Centime Expense Management</h1>
     <div class="subtitle">A policy-driven expense and lightweight purchasing platform for US mid-market finance teams, built on Findity's white-label T&E engine.</div>
-    <div class="meta">Version 0.2 · Draft · February 2026 · US Market · Internal</div>
+    <div class="meta">Version 0.3 · Draft · February 2026 · US Market · Internal</div>
   </div>
 </header>
 
@@ -919,7 +919,6 @@
         <ul>
           <li>Review and approve/reject expenses efficiently, ideally from mobile</li>
           <li>See policy violations and out-of-policy flags without reading every line</li>
-          <li>Understand budget impact of approvals</li>
           <li>Delegate approval authority when out of office</li>
         </ul>
       </div>
@@ -951,7 +950,6 @@
         <ul class="frustration-list">
           <li>"I get a pile of expense reports at month-end"</li>
           <li>"I can't tell which ones actually need my attention"</li>
-          <li>"I approved it but don't know if it hit the right budget"</li>
         </ul>
       </div>
       <div class="pillar">
@@ -1230,7 +1228,7 @@
     <h3>Purchase Request Flow</h3>
     <ol class="step-flow">
       <li>Employee creates purchase request with category, vendor, estimated amount, and business justification</li>
-      <li>Policy engine validates: budget check, approval routing, card mandate</li>
+      <li>Policy engine validates: approval routing, card mandate</li>
       <li>Routed to manager (and optionally finance for amounts above threshold)</li>
       <li>Approved -- employee receives approval confirmation with PO number</li>
       <li>Employee makes purchase using corporate card</li>
@@ -1262,7 +1260,7 @@
         <tr>
           <td>Estimated Amount</td>
           <td>Yes</td>
-          <td>Used for budget check and approval threshold</td>
+          <td>Used for approval threshold routing</td>
         </tr>
         <tr>
           <td>Business Justification</td>
@@ -1283,11 +1281,6 @@
           <td>Recurring?</td>
           <td>Yes</td>
           <td>If yes: frequency and duration</td>
-        </tr>
-        <tr>
-          <td>Budget Line</td>
-          <td>Configurable</td>
-          <td>Tied to departmental budget if budget module active</td>
         </tr>
         <tr>
           <td>Payment Method</td>
@@ -1439,10 +1432,6 @@
       <li><span class="dot" style="background: var(--ft-mandarin);"></span><span><strong>Employee visibility:</strong> Employee sees status (approved, queued, processing, paid) with expected payment date</span></li>
     </ul>
 
-    <div class="highlight-box" style="border-left-color: var(--ft-mandarin);">
-      <p><strong>Integration point:</strong> Reimbursement payments can flow through Centime's existing payment rails, creating a natural connection to the AP/payments platform.</p>
-    </div>
-
     <h3>GL Coding & Allocation</h3>
     <ul class="body-list">
       <li><strong>Auto-coding:</strong> MCC-to-GL mapping with company-configurable rules</li>
@@ -1475,7 +1464,7 @@
         </tr>
         <tr>
           <td>Spend by Category</td>
-          <td>Actual vs. budget by GL category, department, project</td>
+          <td>Spend by GL category, department, project with trend analysis</td>
         </tr>
         <tr>
           <td>Approval Cycle Time</td>
@@ -1507,7 +1496,7 @@
   <div class="doc-section">
     <div class="section-number">08 — Integrations</div>
     <h2>System connectivity</h2>
-    <p class="lead">The platform connects to card networks, ERPs, HRIS systems, and Centime's own AP module to deliver a complete expense lifecycle.</p>
+    <p class="lead">The platform connects to card networks, ERPs, HRIS systems, and SSO providers. The GL/ERP integration is the connection point to the broader Centime platform -- approved expense data pushes to the same ledger that Centime AP and cash management already consume.</p>
 
     <h3>Required Integrations</h3>
     <table class="comparison-table">
@@ -1538,11 +1527,6 @@
           <td>HRIS</td>
           <td>Inbound</td>
           <td>Employee data, department, manager, cost center sync (BambooHR, ADP, Workday)</td>
-        </tr>
-        <tr>
-          <td>Centime AP</td>
-          <td>Bidirectional</td>
-          <td>Reimbursements via payment rails; vendor/supplier data sync</td>
         </tr>
         <tr>
           <td>SSO / Directory</td>
@@ -1662,7 +1646,7 @@
       <div class="phase">
         <div class="phase-label">Phase 4 — MVP + 12 Weeks</div>
         <h4>Advanced</h4>
-        <p>Advanced reporting, budget integration, FNBO backup card program integration.</p>
+        <p>Advanced reporting, expanded ERP connectors, FNBO backup card program integration.</p>
       </div>
     </div>
 
@@ -1688,14 +1672,14 @@
   <div class="takeaway">
     <div class="section-number">12 — Decisions & Open Questions</div>
     <h2>What we have decided, and what remains</h2>
-    <p>Several foundational questions from v0.1 are now resolved. The remaining open questions focus on integration architecture and operational details.</p>
+    <p>All foundational product questions are now resolved except one. This section captures the locked decisions and the single remaining open question.</p>
 
-    <h3 style="color: var(--ft-white); margin-top: 36px; margin-bottom: 16px; font-family: 'Libre Baskerville', serif; font-size: 22px;">Decisions Made</h3>
+    <h3 style="color: var(--ft-white); margin-top: 36px; margin-bottom: 16px; font-family: 'Libre Baskerville', serif; font-size: 22px;">Decisions Locked</h3>
     <ul class="question-list">
       <li>
         <span class="num">1</span>
         <span>
-          <strong>Card program management</strong> -- RESOLVED: We are not an issuer. We do not have a card-management interface. US Bank is the primary T&E card issuing partner; FNBO is secondary/backup. We consume card feeds.
+          <strong>Card program management</strong> -- RESOLVED: We are not an issuer. US Bank provides their own card management interface directly to clients for card issuance, limit management, and cardholder onboarding. We consume card transaction feeds only. FNBO is secondary/backup.
         </span>
       </li>
       <li>
@@ -1716,6 +1700,18 @@
           <strong>Build vs. partner</strong> -- RESOLVED: Built on Findity's white-label T&E platform. Findity provides the expense engine; we provide UX and workflows.
         </span>
       </li>
+      <li>
+        <span class="num">5</span>
+        <span>
+          <strong>No budget module</strong> -- RESOLVED: Centime Expense Management does not include budget tracking, budget checks, or actual-vs-budget reporting. Budgets live in the customer's ERP/GL. We push approved expense data; the ERP owns the budget comparison.
+        </span>
+      </li>
+      <li>
+        <span class="num">6</span>
+        <span>
+          <strong>Centime platform integration = GL/ERP only</strong> -- RESOLVED: The GL/ERP push is the connection to the broader Centime platform. No shared vendor master, no shared payment processing, no single unified dashboard, no bidirectional AP integration, no Centime payment rails for reimbursement.
+        </span>
+      </li>
     </ul>
 
     <h3 style="color: var(--ft-white); margin-top: 36px; margin-bottom: 16px; font-family: 'Libre Baskerville', serif; font-size: 22px;">Open Questions</h3>
@@ -1723,25 +1719,7 @@
       <li>
         <span class="num">1</span>
         <span>
-          <strong>Budget module depth</strong> -- How tightly do we integrate with departmental budgets? Real-time budget check at approval, or reporting-only?
-        </span>
-      </li>
-      <li>
-        <span class="num">2</span>
-        <span>
-          <strong>Centime platform integration</strong> -- How deeply does this connect to existing AP automation? Shared vendor master? Shared payment processing? Single dashboard?
-        </span>
-      </li>
-      <li>
-        <span class="num">3</span>
-        <span>
-          <strong>Findity integration architecture</strong> -- What is the boundary between our UX/workflow layer and Findity's engine? Where do we own the data model vs. consume theirs? How do we handle customization that goes beyond Findity's configuration surface?
-        </span>
-      </li>
-      <li>
-        <span class="num">4</span>
-        <span>
-          <strong>US Bank card program operations</strong> -- How do we handle card issuance requests, limit management, and cardholder onboarding? What is the operational handoff between our platform, US Bank, and the customer's admin?
+          <strong>Findity integration architecture</strong> -- What is the boundary between our UX/workflow layer and Findity's engine? Where do we own the data model vs. consume theirs? How do we handle customization that goes beyond Findity's configuration surface? <em style="color: rgba(255,255,255,0.6);">More to follow.</em>
         </span>
       </li>
     </ul>
@@ -1751,7 +1729,7 @@
 
 <div class="doc-footer">
   <a href="../">Back to presentations</a>
-  <div class="draft-note">v0.2 — This spec is a working draft intended to align product, engineering, and go-to-market teams on scope and priorities. It is not a final requirements document.</div>
+  <div class="draft-note">v0.3 — This spec is a working draft intended to align product, engineering, and go-to-market teams on scope and priorities. It is not a final requirements document.</div>
 </div>
 
 </body>
