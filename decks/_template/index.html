@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deck Title — Centime</title>
+
+  <!-- Reveal.js 5.x -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+
+  <!-- Centime Editorial Theme -->
+  <link rel="stylesheet" href="../../css/theme/centime-editorial.css">
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+  <!--
+    BACKGROUND VARIANTS
+    ===================
+    Dark:   data-background-color="#1A1817" class="slide-dark"
+    Salmon: data-background-color="#FFF1E5"               (default, no extra class)
+    Paper:  data-background-color="#FFF7EF" class="slide-paper"
+    Claret: data-background-color="#990F3D" class="slide-claret"
+
+    AVAILABLE COMPONENT CLASSES
+    ===========================
+    .eyebrow           — Small uppercase label (mandarin on dark)
+    .section-label      — Small uppercase label (claret on light, mandarin on dark)
+    .subtitle           — Light-weight subtitle text
+    .meta               — Date/context line with top border
+
+    .big-number-row     — Flex row for large stats
+    .big-number-block   — Container inside .big-number-row
+    .big-number         — The large number itself
+    .big-number-label   — Caption beneath number
+    .arrow-connector    — Arrow between number blocks
+    .growth-note        — Claret badge/tag
+
+    .pillar-grid        — 3-column grid with top rule
+    .pillar             — Individual column
+    .pillar-number      — Large accent number
+    .pillar h3 / p      — Heading and body
+
+    .gap-grid           — 2-column grid for gap/status items
+    .gap-item           — Individual item (flex with status dot)
+    .gap-status         — Colored dot indicator
+
+    .opp-points         — Flex row for opportunity cards
+    .opp-point          — Card with top accent border
+
+    .func-grid          — 2-column grid for function items
+    .func-item          — Individual function
+    .func-item-full     — Full-width function (spans both columns)
+    .func-num           — Numbered label (e.g., "01 · Demand Gen")
+
+    .team-grid          — 2-column grid for team members
+    .team-member        — Individual member card
+    .team-name          — Person's name
+    .team-role          — Role label
+    .team-owns          — Description of responsibilities
+    .team-note          — Italic footnote
+
+    .metric-hero        — Centered hero stat block
+    .metric-label       — Small label above metric
+    .metric-name        — Large metric value
+    .metric-sub         — Subtitle below metric
+    .cadence-row        — Flex row for cadence items
+    .cadence-item       — Individual cadence block
+
+    .cta-list           — Numbered action list
+    .cta-list .num      — Number in list
+    .closing-line       — Italic sign-off line
+  -->
+
+  <!-- TITLE SLIDE (dark) -->
+  <section data-background-color="#1A1817" class="slide-dark">
+    <div class="eyebrow">Centime · Deck Title</div>
+    <h1>Your Headline Here</h1>
+    <div class="subtitle">A brief description of the presentation's purpose and audience.</div>
+    <div class="meta">Month Year · Context</div>
+  </section>
+
+  <!-- CONTENT SLIDE (salmon — default) -->
+  <section data-background-color="#FFF1E5">
+    <div class="section-label">Section Name</div>
+    <h2>Slide heading on salmon</h2>
+    <p class="body">Body text goes here. This is the default background — warm salmon from the FT palette. Good for data-driven slides, grids, and general content.</p>
+  </section>
+
+  <!-- CONTENT SLIDE (paper — warm white) -->
+  <section data-background-color="#FFF7EF" class="slide-paper">
+    <div class="section-label">Section Name</div>
+    <h2>Slide heading on paper</h2>
+    <p class="body">Slightly lighter than salmon. Useful for alternation or when you want the content to feel even more spacious.</p>
+  </section>
+
+  <!-- ACCENT SLIDE (claret) -->
+  <section data-background-color="#990F3D" class="slide-claret">
+    <div class="section-label">Key Moment</div>
+    <h2>A bold statement that deserves its own slide.</h2>
+  </section>
+
+  <!-- CLOSING SLIDE (dark) -->
+  <section data-background-color="#1A1817" class="slide-dark">
+    <div class="section-label">What Happens Next</div>
+    <h2>Your closing message here.</h2>
+    <ul class="cta-list">
+      <li>
+        <span class="num">01</span>
+        <span>First action item or takeaway.</span>
+      </li>
+      <li>
+        <span class="num">02</span>
+        <span>Second action item or takeaway.</span>
+      </li>
+    </ul>
+  </section>
+
+</div>
+</div>
+
+<!-- Reveal.js 5.x -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    center: false,
+    transition: 'fade',
+    transitionSpeed: 'default',
+    width: 960,
+    height: 700,
+    margin: 0.04,
+    controls: true,
+    progress: true,
+    slideNumber: true,
+    overview: true,
+  });
+</script>
+</body>
+</html>

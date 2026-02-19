@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presentations — Centime</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ft-pink:     #FFF1E5;
+      --ft-dark:     #33302E;
+      --ft-black:    #1A1817;
+      --ft-claret:   #990F3D;
+      --ft-wheat:    #F2DFCE;
+      --ft-slate:    #66605C;
+      --ft-paper:    #FFF7EF;
+      --ft-rule:     #CEC6B9;
+      --ft-mandarin: #FF8833;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--ft-pink);
+      font-family: 'Source Sans 3', sans-serif;
+      color: var(--ft-dark);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 80px 40px;
+    }
+
+    .container {
+      max-width: 720px;
+      width: 100%;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--ft-claret);
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--ft-black);
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--ft-slate);
+      line-height: 1.5;
+      margin-bottom: 60px;
+      max-width: 520px;
+    }
+
+    .deck-list {
+      border-top: 3px solid var(--ft-black);
+    }
+
+    .deck-item {
+      display: block;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--ft-rule);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s;
+    }
+
+    .deck-item:hover {
+      background: var(--ft-paper);
+      padding-left: 16px;
+      margin-left: -16px;
+      margin-right: -16px;
+      padding-right: 16px;
+    }
+
+    .deck-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--ft-claret);
+      margin-bottom: 6px;
+    }
+
+    .deck-title {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--ft-black);
+      margin-bottom: 6px;
+    }
+
+    .deck-meta {
+      font-size: 15px;
+      color: var(--ft-slate);
+    }
+
+    .footer {
+      margin-top: 60px;
+      padding-top: 24px;
+      border-top: 1px solid var(--ft-rule);
+      font-size: 14px;
+      color: var(--ft-slate);
+    }
+
+    .footer a {
+      color: var(--ft-claret);
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="eyebrow">Centime · Presentations</div>
+    <h1>Slide Decks</h1>
+    <div class="subtitle">Internal presentations built with Reveal.js and the Centime editorial theme.</div>
+
+    <div class="deck-list">
+      <a class="deck-item" href="decks/marketing-kickoff/">
+        <div class="deck-label">Marketing</div>
+        <div class="deck-title">Marketing Team Kickoff</div>
+        <div class="deck-meta">Building the Engine for $5M — February 2026</div>
+      </a>
+    </div>
+
+    <div class="footer">
+      New deck? Start from the <a href="decks/_template/">template</a>.
+    </div>
+  </div>
+</body>
+</html>

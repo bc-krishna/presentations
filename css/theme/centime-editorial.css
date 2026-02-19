@@ -1,0 +1,601 @@
+/*
+ * Centime Editorial Theme for Reveal.js
+ * Merged FT editorial design + Prism design guide (Libre Baskerville + Source Sans Pro)
+ */
+
+/* ================================================
+   GOOGLE FONTS
+   ================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap');
+
+/* ================================================
+   DESIGN TOKENS
+   ================================================ */
+:root {
+  /* FT Editorial Palette */
+  --ft-pink:     #FFF1E5;
+  --ft-dark:     #33302E;
+  --ft-black:    #1A1817;
+  --ft-claret:   #990F3D;
+  --ft-oxford:   #0F5499;
+  --ft-teal:     #0D7680;
+  --ft-wheat:    #F2DFCE;
+  --ft-white:    #FFFFFF;
+  --ft-slate:    #66605C;
+  --ft-light:    #F6E9D8;
+  --ft-paper:    #FFF7EF;
+  --ft-rule:     #CEC6B9;
+  --ft-mandarin: #FF8833;
+
+  /* Prism Status Colors */
+  --prism-success: #2E7D32;
+  --prism-warning: #F9A825;
+  --prism-error:   #C62828;
+  --prism-info:    #0F5499;
+}
+
+/* ================================================
+   REVEAL.JS VARIABLE OVERRIDES
+   ================================================ */
+.reveal {
+  --r-background-color: var(--ft-pink);
+  --r-main-font: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+  --r-main-font-size: 22px;
+  --r-main-color: var(--ft-dark);
+  --r-heading-font: 'Libre Baskerville', Georgia, serif;
+  --r-heading-color: var(--ft-black);
+  --r-heading-font-weight: 700;
+  --r-heading-line-height: 1.15;
+  --r-heading-letter-spacing: normal;
+  --r-heading-text-transform: none;
+  --r-heading1-size: 2.4em;
+  --r-heading2-size: 1.8em;
+  --r-heading3-size: 1.1em;
+  --r-heading4-size: 0.85em;
+  --r-link-color: var(--ft-claret);
+  --r-link-color-hover: var(--ft-oxford);
+  --r-selection-background-color: rgba(153, 15, 61, 0.25);
+  --r-selection-color: var(--ft-black);
+}
+
+/* ================================================
+   BASE OVERRIDES
+   ================================================ */
+.reveal {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides section {
+  text-align: left;
+  padding: 60px;
+  box-sizing: border-box;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4 {
+  font-family: var(--r-heading-font);
+  font-weight: 700;
+  line-height: var(--r-heading-line-height);
+  text-transform: none;
+  letter-spacing: normal;
+  margin-bottom: 0.5em;
+}
+
+.reveal h1 { font-size: 2.6em; }
+.reveal h2 { font-size: 1.8em; }
+.reveal h3 { font-size: 1.1em; }
+
+.reveal p,
+.reveal li {
+  font-family: var(--r-main-font);
+  line-height: 1.6;
+}
+
+.reveal p.body {
+  font-size: 0.82em;
+  color: var(--ft-dark);
+  line-height: 1.65;
+  max-width: 640px;
+}
+
+/* ================================================
+   SECTION LABEL (Eyebrow)
+   ================================================ */
+.reveal .section-label {
+  font-family: var(--r-main-font);
+  font-size: 0.55em;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ft-claret);
+  margin-bottom: 0.8em;
+}
+
+.reveal .eyebrow {
+  font-family: var(--r-main-font);
+  font-size: 0.6em;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--ft-mandarin);
+  margin-bottom: 1.5em;
+}
+
+/* ================================================
+   SLIDE BACKGROUND VARIANTS
+   ================================================ */
+
+/* Dark (black bg) — default for title / gap / cta / team */
+.slide-dark { color: var(--ft-pink); }
+.slide-dark h1,
+.slide-dark h2 { color: var(--ft-pink); }
+.slide-dark .section-label { color: var(--ft-mandarin); }
+.slide-dark p.body { color: var(--ft-wheat); }
+
+/* Claret bg */
+.slide-claret { color: var(--ft-white); }
+.slide-claret h1,
+.slide-claret h2,
+.slide-claret h3 { color: var(--ft-white); }
+.slide-claret .section-label { color: var(--ft-wheat); opacity: 0.7; }
+
+/* Paper (warm off-white) */
+.slide-paper h2 { color: var(--ft-black); }
+
+/* Salmon (ft-pink) — default Reveal bg */
+/* No extra overrides needed — base styles handle this */
+
+/* ================================================
+   TITLE SLIDE
+   ================================================ */
+.reveal .subtitle {
+  font-family: var(--r-main-font);
+  font-size: 1em;
+  font-weight: 300;
+  color: var(--ft-wheat);
+  line-height: 1.5;
+  max-width: 520px;
+  margin-bottom: 2em;
+}
+
+.reveal .meta {
+  font-family: var(--r-main-font);
+  font-size: 0.64em;
+  color: var(--ft-slate);
+  border-top: 1px solid rgba(206,198,185,0.2);
+  padding-top: 1em;
+}
+
+/* ================================================
+   BIG NUMBER ROW (Objective slide)
+   ================================================ */
+.reveal .big-number-row {
+  display: flex;
+  align-items: baseline;
+  gap: 40px;
+  margin: 1.5em 0;
+  padding: 1.5em 0;
+  border-top: 1px solid var(--ft-rule);
+  border-bottom: 1px solid var(--ft-rule);
+}
+
+.reveal .big-number-block { flex: 1; }
+
+.reveal .big-number {
+  font-family: var(--r-heading-font);
+  font-size: 3.2em;
+  font-weight: 700;
+  color: var(--ft-black);
+  line-height: 1;
+}
+
+.reveal .big-number-label {
+  font-family: var(--r-main-font);
+  font-size: 0.68em;
+  font-weight: 400;
+  color: var(--ft-slate);
+  margin-top: 0.4em;
+}
+
+.reveal .arrow-connector {
+  font-family: var(--r-heading-font);
+  font-size: 2.2em;
+  color: var(--ft-claret);
+  padding-bottom: 0.6em;
+}
+
+.reveal .growth-note {
+  display: inline-block;
+  background: var(--ft-claret);
+  color: var(--ft-white);
+  font-family: var(--r-main-font);
+  font-size: 0.64em;
+  font-weight: 600;
+  padding: 0.3em 0.8em;
+  border-radius: 2px;
+  margin-top: 0.8em;
+}
+
+/* ================================================
+   PILLAR GRID (Foundation slide)
+   ================================================ */
+.reveal .pillar-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+  margin: 1.5em 0;
+  border-top: 3px solid var(--ft-black);
+}
+
+.reveal .pillar {
+  padding: 1.2em 1.2em 1.2em 0;
+  border-bottom: 1px solid var(--ft-rule);
+}
+
+.reveal .pillar:not(:last-child) {
+  border-right: 1px solid var(--ft-rule);
+  padding-right: 1.2em;
+}
+
+.reveal .pillar:not(:first-child) {
+  padding-left: 1.2em;
+}
+
+.reveal .pillar-number {
+  font-family: var(--r-heading-font);
+  font-size: 2em;
+  font-weight: 700;
+  color: var(--ft-claret);
+  line-height: 1;
+  margin-bottom: 0.4em;
+}
+
+.reveal .pillar h3 {
+  font-size: 1em;
+  color: var(--ft-black);
+  margin-bottom: 0.4em;
+}
+
+.reveal .pillar p {
+  font-family: var(--r-main-font);
+  font-size: 0.68em;
+  color: var(--ft-slate);
+  line-height: 1.55;
+}
+
+/* ================================================
+   GAP GRID (Honest Assessment slide)
+   ================================================ */
+.reveal .gap-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin: 1.5em 0;
+}
+
+.reveal .gap-item {
+  padding: 1em 0;
+  border-bottom: 1px solid rgba(206,198,185,0.15);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7em;
+}
+
+.reveal .gap-item:nth-child(odd) {
+  padding-right: 1.5em;
+  border-right: 1px solid rgba(206,198,185,0.15);
+}
+
+.reveal .gap-item:nth-child(even) {
+  padding-left: 1.5em;
+}
+
+.reveal .gap-status {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--ft-claret);
+  margin-top: 0.3em;
+}
+
+.reveal .gap-item h4 {
+  font-family: var(--r-heading-font);
+  font-size: 0.86em;
+  font-weight: 700;
+  color: var(--ft-pink);
+  margin-bottom: 0.2em;
+}
+
+.reveal .gap-item p {
+  font-family: var(--r-main-font);
+  font-size: 0.64em;
+  color: var(--ft-wheat);
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+/* ================================================
+   OPPORTUNITY POINTS (Opportunity slide)
+   ================================================ */
+.reveal .opp-points {
+  margin: 1.8em 0;
+  display: flex;
+  gap: 2em;
+}
+
+.reveal .opp-point {
+  flex: 1;
+  border-top: 2px solid rgba(255,255,255,0.3);
+  padding-top: 1em;
+}
+
+.reveal .opp-point h3 {
+  font-size: 0.9em;
+  color: var(--ft-white);
+  margin-bottom: 0.4em;
+}
+
+.reveal .opp-point p {
+  font-family: var(--r-main-font);
+  font-size: 0.68em;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.55;
+}
+
+/* ================================================
+   FUNCTION GRID (Functions slide)
+   ================================================ */
+.reveal .func-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin: 1.5em 0;
+  border-top: 3px solid var(--ft-black);
+}
+
+.reveal .func-item {
+  padding: 1.2em 0;
+  border-bottom: 1px solid var(--ft-rule);
+}
+
+.reveal .func-item:nth-child(odd) {
+  padding-right: 1.5em;
+  border-right: 1px solid var(--ft-rule);
+}
+
+.reveal .func-item:nth-child(even) {
+  padding-left: 1.5em;
+}
+
+.reveal .func-num {
+  font-family: var(--r-main-font);
+  font-size: 0.5em;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--ft-claret);
+  text-transform: uppercase;
+  margin-bottom: 0.4em;
+}
+
+.reveal .func-item h3 {
+  font-size: 1em;
+  color: var(--ft-black);
+  margin-bottom: 0.3em;
+}
+
+.reveal .func-item p {
+  font-family: var(--r-main-font);
+  font-size: 0.68em;
+  color: var(--ft-slate);
+  line-height: 1.55;
+}
+
+.reveal .func-item-full {
+  grid-column: 1 / -1;
+  border-right: none !important;
+  padding-left: 0 !important;
+}
+
+/* ================================================
+   TEAM GRID (Team slide)
+   ================================================ */
+.reveal .team-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin: 1.5em 0;
+  border-top: 2px solid rgba(206,198,185,0.25);
+}
+
+.reveal .team-member {
+  padding: 1.2em 0;
+  border-bottom: 1px solid rgba(206,198,185,0.12);
+}
+
+.reveal .team-member:nth-child(odd) {
+  padding-right: 1.5em;
+  border-right: 1px solid rgba(206,198,185,0.12);
+}
+
+.reveal .team-member:nth-child(even) {
+  padding-left: 1.5em;
+}
+
+.reveal .team-name {
+  font-family: var(--r-heading-font);
+  font-size: 1.2em;
+  font-weight: 700;
+  color: var(--ft-pink);
+  margin-bottom: 0.1em;
+}
+
+.reveal .team-role {
+  font-family: var(--r-main-font);
+  font-size: 0.6em;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ft-claret);
+  margin-bottom: 0.6em;
+}
+
+.reveal .team-owns {
+  font-family: var(--r-main-font);
+  font-size: 0.68em;
+  color: var(--ft-wheat);
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+.reveal .team-owns strong {
+  color: var(--ft-pink);
+  font-weight: 600;
+  opacity: 1;
+}
+
+.reveal .team-note {
+  margin-top: 1.2em;
+  padding-top: 1em;
+  border-top: 1px solid rgba(206,198,185,0.15);
+  font-family: var(--r-main-font);
+  font-size: 0.72em;
+  color: var(--ft-wheat);
+  line-height: 1.6;
+  font-style: italic;
+  opacity: 0.7;
+}
+
+/* ================================================
+   METRIC HERO (North Star slide)
+   ================================================ */
+.reveal .metric-hero {
+  margin: 1.5em 0;
+  padding: 1.5em 0;
+  border-top: 3px solid var(--ft-black);
+  border-bottom: 1px solid var(--ft-rule);
+  text-align: center;
+}
+
+.reveal .metric-hero .metric-label {
+  font-family: var(--r-main-font);
+  font-size: 0.6em;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ft-slate);
+  margin-bottom: 0.6em;
+}
+
+.reveal .metric-hero .metric-name {
+  font-family: var(--r-heading-font);
+  font-size: 2.4em;
+  font-weight: 700;
+  color: var(--ft-claret);
+  line-height: 1.1;
+  margin-bottom: 0.4em;
+}
+
+.reveal .metric-hero .metric-sub {
+  font-family: var(--r-main-font);
+  font-size: 0.9em;
+  font-weight: 300;
+  color: var(--ft-slate);
+}
+
+.reveal .cadence-row {
+  display: flex;
+  gap: 0;
+  border-top: 1px solid var(--ft-rule);
+}
+
+.reveal .cadence-item {
+  flex: 1;
+  padding: 1em 1em 1em 0;
+  border-bottom: 1px solid var(--ft-rule);
+}
+
+.reveal .cadence-item:not(:last-child) {
+  border-right: 1px solid var(--ft-rule);
+  padding-right: 1em;
+}
+
+.reveal .cadence-item:not(:first-child) {
+  padding-left: 1em;
+}
+
+.reveal .cadence-item h4 {
+  font-family: var(--r-main-font);
+  font-size: 0.55em;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ft-claret);
+  margin-bottom: 0.3em;
+}
+
+.reveal .cadence-item p {
+  font-family: var(--r-main-font);
+  font-size: 0.68em;
+  color: var(--ft-dark);
+  line-height: 1.5;
+}
+
+/* ================================================
+   CTA LIST (Next Steps slide)
+   ================================================ */
+.reveal .cta-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid rgba(206,198,185,0.2);
+}
+
+.reveal .cta-list li {
+  font-family: var(--r-main-font);
+  font-size: 0.82em;
+  font-weight: 400;
+  color: var(--ft-wheat);
+  padding: 0.8em 0;
+  border-bottom: 1px solid rgba(206,198,185,0.12);
+  display: flex;
+  align-items: baseline;
+  gap: 0.7em;
+  line-height: 1.5;
+}
+
+.reveal .cta-list .num {
+  font-family: var(--r-heading-font);
+  font-size: 1.1em;
+  font-weight: 700;
+  color: var(--ft-claret);
+  flex-shrink: 0;
+  width: 1.6em;
+}
+
+.reveal .closing-line {
+  margin-top: 1.8em;
+  padding-top: 1em;
+  border-top: 1px solid rgba(206,198,185,0.2);
+  font-family: var(--r-heading-font);
+  font-size: 1em;
+  font-style: italic;
+  color: var(--ft-wheat);
+  opacity: 0.8;
+}
+
+/* ================================================
+   PRINT STYLES
+   ================================================ */
+@media print {
+  .reveal .slides section {
+    padding: 40px;
+  }
+}
