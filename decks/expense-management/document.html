@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Expense Management — Partnership Evaluation Framework</title>
+<title>Centime Expense Management — Product Specification</title>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -123,6 +123,16 @@
     margin-bottom: 12px;
   }
 
+  .doc-section h4 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ft-black);
+    line-height: 1.3;
+    margin-top: 28px;
+    margin-bottom: 8px;
+  }
+
   .doc-section p {
     font-size: 17px;
     line-height: 1.7;
@@ -137,6 +147,25 @@
     color: var(--ft-slate);
     max-width: 640px;
     margin-bottom: 24px;
+  }
+
+  .doc-section ul.body-list,
+  .doc-section ol.body-list {
+    margin: 0 0 20px 24px;
+    max-width: 640px;
+  }
+
+  .doc-section ul.body-list li,
+  .doc-section ol.body-list li {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ft-dark);
+    margin-bottom: 6px;
+  }
+
+  .doc-section ul.body-list li strong,
+  .doc-section ol.body-list li strong {
+    color: var(--ft-black);
   }
 
   /* ---- HIGHLIGHT BOX ---- */
@@ -191,6 +220,14 @@
     border-top: 3px solid var(--ft-black);
   }
 
+  .pillar-grid.cols-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .pillar-grid.cols-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .pillar {
     padding: 24px 20px 24px 0;
     border-bottom: 1px solid var(--ft-rule);
@@ -211,6 +248,7 @@
     font-weight: 700;
     color: var(--ft-black);
     margin-bottom: 6px;
+    margin-top: 0;
   }
 
   .pillar p {
@@ -262,6 +300,29 @@
     background: var(--ft-paper);
   }
 
+  /* ---- DARK TABLE VARIANT ---- */
+  .doc-section-dark .comparison-table {
+    border-top-color: var(--ft-wheat);
+  }
+
+  .doc-section-dark .comparison-table thead th {
+    color: var(--ft-mandarin);
+    border-bottom-color: rgba(206,198,185,0.3);
+  }
+
+  .doc-section-dark .comparison-table tbody td {
+    color: var(--ft-wheat);
+    border-bottom-color: rgba(206,198,185,0.15);
+  }
+
+  .doc-section-dark .comparison-table tbody td:first-child {
+    color: var(--ft-pink);
+  }
+
+  .doc-section-dark .comparison-table tbody tr:hover {
+    background: rgba(255,255,255,0.04);
+  }
+
   /* ---- CHECKLIST ---- */
   .checklist {
     list-style: none;
@@ -294,6 +355,95 @@
     color: var(--ft-black);
   }
 
+  /* ---- STEP FLOW ---- */
+  .step-flow {
+    margin: 28px 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step-counter;
+  }
+
+  .step-flow li {
+    counter-increment: step-counter;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 14px 0;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ft-dark);
+  }
+
+  .step-flow li + li {
+    border-top: 1px solid var(--ft-rule);
+  }
+
+  .step-flow li::before {
+    content: counter(step-counter);
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--ft-claret);
+    color: var(--ft-white);
+    font-family: 'Libre Baskerville', serif;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+
+  .step-flow.dark-flow li::before {
+    background: var(--ft-mandarin);
+    color: var(--ft-black);
+  }
+
+  .step-flow.dark-flow li {
+    color: var(--ft-wheat);
+  }
+
+  .step-flow.dark-flow li + li {
+    border-top-color: rgba(206,198,185,0.15);
+  }
+
+  /* ---- POLICY HIERARCHY ---- */
+  .policy-hierarchy {
+    margin: 28px 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .policy-hierarchy .tier {
+    position: relative;
+    padding: 16px 20px 16px 24px;
+    border-left: 3px solid var(--ft-claret);
+    margin-left: 0;
+  }
+
+  .policy-hierarchy .tier:nth-child(2) { margin-left: 32px; }
+  .policy-hierarchy .tier:nth-child(3) { margin-left: 64px; }
+  .policy-hierarchy .tier:nth-child(4) { margin-left: 96px; }
+
+  .policy-hierarchy .tier-label {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ft-black);
+    margin-bottom: 2px;
+  }
+
+  .policy-hierarchy .tier-desc {
+    font-size: 14px;
+    color: var(--ft-slate);
+    line-height: 1.5;
+  }
+
+  .policy-hierarchy .tier + .tier {
+    margin-top: 4px;
+  }
+
   /* ---- GAP GRID ---- */
   .gap-grid {
     display: grid;
@@ -311,6 +461,7 @@
     padding: 20px 0 12px;
     border-bottom: 1px solid var(--ft-rule);
     margin-bottom: 0;
+    margin-top: 0;
   }
 
   .gap-col ul {
@@ -349,6 +500,10 @@
     border-top: 3px solid var(--ft-claret);
   }
 
+  .phase-row.cols-4 {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
   .phase {
     padding: 24px 24px 24px 0;
     border-bottom: 1px solid var(--ft-rule);
@@ -378,6 +533,7 @@
     font-weight: 700;
     color: var(--ft-black);
     margin-bottom: 8px;
+    margin-top: 0;
   }
 
   .phase p {
@@ -419,6 +575,89 @@
     color: var(--ft-pink);
   }
 
+  /* ---- PERSONA CARD ---- */
+  .persona-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    margin: 32px 0;
+    border-top: 3px solid var(--ft-black);
+  }
+
+  .persona {
+    padding: 24px 24px 24px 0;
+    border-bottom: 1px solid var(--ft-rule);
+  }
+
+  .persona:not(:last-child) {
+    border-right: 1px solid var(--ft-rule);
+    padding-right: 24px;
+  }
+
+  .persona:not(:first-child) {
+    padding-left: 24px;
+  }
+
+  .persona h4 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ft-black);
+    margin-bottom: 4px;
+    margin-top: 0;
+  }
+
+  .persona .persona-who {
+    font-size: 14px;
+    color: var(--ft-slate);
+    margin-bottom: 12px;
+    font-style: italic;
+  }
+
+  .persona ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .persona li {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ft-dark);
+    padding: 5px 0;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .persona li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ft-claret);
+  }
+
+  /* ---- FRUSTRATION QUOTE ---- */
+  .frustration-list {
+    margin: 20px 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .frustration-list li {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--ft-slate);
+    line-height: 1.55;
+    padding: 8px 0 8px 20px;
+    border-left: 3px solid var(--ft-rule);
+    margin-bottom: 8px;
+  }
+
   /* ---- DARK SECTION ---- */
   .doc-section-dark {
     background: var(--ft-black);
@@ -431,12 +670,45 @@
     color: var(--ft-pink);
   }
 
+  .doc-section-dark h3 {
+    color: var(--ft-pink);
+  }
+
+  .doc-section-dark h4 {
+    color: var(--ft-pink);
+  }
+
   .doc-section-dark .section-number {
     color: var(--ft-mandarin);
   }
 
   .doc-section-dark p {
     color: var(--ft-wheat);
+  }
+
+  .doc-section-dark .body-list li {
+    color: var(--ft-wheat);
+  }
+
+  .doc-section-dark .body-list li strong {
+    color: var(--ft-pink);
+  }
+
+  .doc-section-dark .checklist {
+    border-top-color: rgba(206,198,185,0.2);
+  }
+
+  .doc-section-dark .checklist li {
+    color: var(--ft-wheat);
+    border-bottom-color: rgba(206,198,185,0.15);
+  }
+
+  .doc-section-dark .checklist .dot {
+    background: var(--ft-mandarin);
+  }
+
+  .doc-section-dark .checklist strong {
+    color: var(--ft-pink);
   }
 
   /* ---- KEY TAKEAWAY ---- */
@@ -468,30 +740,47 @@
     max-width: 640px;
   }
 
-  .takeaway .pillars {
-    display: flex;
-    gap: 40px;
-    margin-top: 32px;
+  .takeaway p strong {
+    color: var(--ft-white);
+  }
+
+  .takeaway .question-list {
+    list-style: none;
+    margin: 32px 0 0;
+    padding: 0;
     border-top: 2px solid rgba(255,255,255,0.3);
-    padding-top: 24px;
   }
 
-  .takeaway .pillars div {
-    flex: 1;
+  .takeaway .question-list li {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.85);
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
   }
 
-  .takeaway .pillars h4 {
+  .takeaway .question-list .num {
     font-family: 'Libre Baskerville', serif;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
     color: var(--ft-white);
-    margin-bottom: 6px;
+    flex-shrink: 0;
+    width: 24px;
   }
 
-  .takeaway .pillars p {
-    font-size: 15px;
-    color: rgba(255,255,255,0.75);
-    line-height: 1.5;
+  .takeaway .question-list strong {
+    color: var(--ft-white);
+  }
+
+  .takeaway .question-list .rec {
+    display: block;
+    font-size: 14px;
+    font-style: italic;
+    color: rgba(255,255,255,0.6);
+    margin-top: 4px;
   }
 
   /* ---- FOOTER ---- */
@@ -509,19 +798,31 @@
     text-decoration: none;
   }
 
+  .doc-footer .draft-note {
+    font-style: italic;
+    margin-top: 8px;
+  }
+
   /* ---- RESPONSIVE ---- */
   @media (max-width: 768px) {
     .doc-header { padding: 48px 28px 40px; }
     .doc-header h1 { font-size: 32px; }
     .doc-body { padding: 0 28px 48px; }
     .pillar-grid { grid-template-columns: 1fr 1fr; }
+    .pillar-grid.cols-3 { grid-template-columns: 1fr; }
+    .persona-grid { grid-template-columns: 1fr; }
+    .persona { border-right: none !important; padding-left: 0 !important; }
     .gap-grid { grid-template-columns: 1fr; gap: 0; }
     .phase-row { grid-template-columns: 1fr; }
+    .phase-row.cols-4 { grid-template-columns: 1fr; }
     .phase { border-right: none !important; padding-left: 0 !important; }
     .comparison-table { font-size: 14px; }
+    .comparison-table tbody td:first-child { white-space: normal; }
     .doc-section-dark { margin: 40px -28px 0; padding: 40px 28px; }
     .takeaway { margin: 40px -28px 0; padding: 40px 28px; }
-    .takeaway .pillars { flex-direction: column; gap: 24px; }
+    .policy-hierarchy .tier:nth-child(2) { margin-left: 16px; }
+    .policy-hierarchy .tier:nth-child(3) { margin-left: 32px; }
+    .policy-hierarchy .tier:nth-child(4) { margin-left: 48px; }
   }
 
   @media print {
@@ -529,6 +830,9 @@
     .doc-header { background: var(--ft-black); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .doc-section-dark { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .takeaway { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .doc-section { break-inside: avoid; }
+    .comparison-table { break-inside: avoid; }
+    .step-flow { break-inside: avoid; }
   }
 </style>
 </head>
@@ -537,217 +841,895 @@
 <!-- HEADER -->
 <header class="doc-header">
   <div class="doc-header-inner">
-    <div class="eyebrow">Centime · Product Strategy</div>
-    <h1>Expense Management Partnership Evaluation</h1>
-    <div class="subtitle">A framework for selecting a card-agnostic, ERP-integrated expense management partner to serve Centime's mid-market clients.</div>
-    <div class="meta">February 2026 · Internal · Confidential</div>
+    <div class="eyebrow">Centime · Product Specification</div>
+    <h1>Centime Expense Management</h1>
+    <div class="subtitle">A policy-driven expense and lightweight purchasing platform for mid-market finance teams.</div>
+    <div class="meta">Version 0.1 · Draft · February 2026 · Internal</div>
   </div>
 </header>
 
 <div class="doc-body">
 
-  <!-- GOAL -->
+  <!-- ============================================================ -->
+  <!-- SECTION 1: OVERVIEW -->
+  <!-- ============================================================ -->
   <div class="doc-section">
-    <div class="goal-box">
-      <div class="goal-label">Platform Goal</div>
-      <p>Deliver a card-agnostic, ERP-integrated, partner-embeddable expense management platform that meets mid-market client needs — companies with $5M to $100M in revenue — with a core focus on expense capture, policy enforcement, and ERP synchronization across any card, any issuer.</p>
-    </div>
-  </div>
+    <div class="section-number">01 — Overview</div>
+    <h2>What we are building</h2>
+    <p class="lead">Centime Expense Management is a policy-driven expense and lightweight purchasing platform designed for mid-market finance teams. The system enforces corporate card usage as the default payment method, provides configurable policy guardrails, and delivers a streamlined experience across three core personas.</p>
 
-  <!-- SECTION 1: STRATEGIC CONTEXT -->
-  <div class="doc-section">
-    <div class="section-number">01 — Strategic Context</div>
-    <h2>Why this matters now</h2>
-    <p class="lead">Centime's clients rely on QuickBooks, Sage Intacct, Microsoft Dynamics 365 Business Central, and Oracle NetSuite. Any expense management partner must meet them where they are.</p>
+    <div class="gap-grid">
+      <div class="gap-col">
+        <h4>Travel & Entertainment</h4>
+        <ul>
+          <li>The core use case covering meals, travel, lodging, mileage, and incidentals</li>
+        </ul>
+      </div>
+      <div class="gap-col">
+        <h4>Basic Purchasing</h4>
+        <ul>
+          <li>Controlled spend for supplies, software subscriptions, professional services, and other operational purchases requiring pre-approval</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Design Principles</h3>
     <div class="pillar-grid">
       <div class="pillar">
-        <h4>Deep ERP Integration</h4>
-        <p>Native connectors or open APIs for all four core ERPs.</p>
+        <h4>Corporate Card First</h4>
+        <p>Every policy default, UX nudge, and workflow assumes corporate card usage. Personal card reimbursement is a supported exception, not a parallel track.</p>
       </div>
       <div class="pillar">
-        <h4>Card Agnosticism</h4>
-        <p>Multi-card, multi-issuer support — Visa, Mastercard, Amex, any bank.</p>
+        <h4>Policy at the Center</h4>
+        <p>Rules are not bolted on -- they shape the UI the employee sees, the options available, and the approval routing.</p>
       </div>
       <div class="pillar">
-        <h4>Expense Automation</h4>
-        <p>Receipt capture to approval to GL posting — best-in-class.</p>
+        <h4>Mid-Market Pragmatism</h4>
+        <p>Enough control for a 200-2,000 employee company without the configuration overhead of enterprise ERP expense modules.</p>
       </div>
       <div class="pillar">
-        <h4>Embeddable</h4>
-        <p>White-label ready for Centime and bank/channel partners.</p>
+        <h4>Accountability Without Friction</h4>
+        <p>Capture what finance needs for audit and GL coding without making employees hate the process.</p>
       </div>
     </div>
   </div>
 
-  <!-- SECTION 2: COMPARATIVE ANALYSIS -->
+  <!-- ============================================================ -->
+  <!-- SECTION 2: PERSONAS & CORE NEEDS -->
+  <!-- ============================================================ -->
   <div class="doc-section">
-    <div class="section-number">02 — Comparative Analysis</div>
-    <h2>Findity vs. Vergo</h2>
-    <p>In addition to Fyle and Navan — each with known limitations — two emerging partners warrant deeper investigation. Other solutions under consideration include InLogik.</p>
+    <div class="section-number">02 — Personas & Core Needs</div>
+    <h2>Who we are building for</h2>
+    <p class="lead">Three core personas define every workflow, screen, and policy configuration in the system.</p>
 
+    <div class="persona-grid">
+      <div class="persona">
+        <h4>Employee</h4>
+        <div class="persona-who">Submitter -- road warriors, occasional travelers, department leads making purchases</div>
+        <ul>
+          <li>Submit expenses quickly with minimal data entry</li>
+          <li>Understand what's covered by policy before spending</li>
+          <li>Know the status of submitted expenses and pending reimbursements</li>
+          <li>Use corporate card with transactions flowing in automatically</li>
+        </ul>
+      </div>
+      <div class="persona">
+        <h4>Manager</h4>
+        <div class="persona-who">Approver -- direct managers, department heads, project leads</div>
+        <ul>
+          <li>Review and approve/reject expenses efficiently, ideally from mobile</li>
+          <li>See policy violations and out-of-policy flags without reading every line</li>
+          <li>Understand budget impact of approvals</li>
+          <li>Delegate approval authority when out of office</li>
+        </ul>
+      </div>
+      <div class="persona">
+        <h4>Finance</h4>
+        <div class="persona-who">Controller / Reimburser -- AP team, finance managers, controllers</div>
+        <ul>
+          <li>Enforce policy consistently across the organization</li>
+          <li>Reconcile corporate card statements against submitted expenses</li>
+          <li>Process reimbursements for personal-card expenses</li>
+          <li>Ensure proper GL coding and cost center allocation</li>
+          <li>Maintain audit trail and compliance documentation</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Key Frustrations to Solve</h3>
+    <div class="pillar-grid cols-3">
+      <div class="pillar">
+        <h4>Employee</h4>
+        <ul class="frustration-list">
+          <li>"I don't know what I'm allowed to spend"</li>
+          <li>"I lost a receipt and now I'm stuck"</li>
+          <li>"I submitted two weeks ago and have no idea where it is"</li>
+        </ul>
+      </div>
+      <div class="pillar">
+        <h4>Manager</h4>
+        <ul class="frustration-list">
+          <li>"I get a pile of expense reports at month-end"</li>
+          <li>"I can't tell which ones actually need my attention"</li>
+          <li>"I approved it but don't know if it hit the right budget"</li>
+        </ul>
+      </div>
+      <div class="pillar">
+        <h4>Finance</h4>
+        <ul class="frustration-list">
+          <li>"Employees submit late and I can't close the period"</li>
+          <li>"Half the card transactions are unmatched"</li>
+          <li>"I spend hours fixing GL codes"</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3: POLICY ENGINE (DARK) -->
+  <!-- ============================================================ -->
+  <div class="doc-section-dark">
+    <div class="section-number">03 — Policy Engine</div>
+    <h2>The backbone of the system</h2>
+    <p>Policies are not just validation rules -- they shape the employee experience, determine approval routing, and control payment method availability.</p>
+
+    <h3>Policy Hierarchy</h3>
+    <p>Policies are evaluated in a layered hierarchy. More specific policies override general ones.</p>
+    <div class="policy-hierarchy">
+      <div class="tier" style="border-left-color: var(--ft-mandarin);">
+        <div class="tier-label" style="color: var(--ft-pink);">Company Default</div>
+        <div class="tier-desc" style="color: var(--ft-wheat);">Base rules that apply to all employees across all departments</div>
+      </div>
+      <div class="tier" style="border-left-color: var(--ft-mandarin);">
+        <div class="tier-label" style="color: var(--ft-pink);">Department / Division Override</div>
+        <div class="tier-desc" style="color: var(--ft-wheat);">Department-specific rules override company defaults</div>
+      </div>
+      <div class="tier" style="border-left-color: var(--ft-mandarin);">
+        <div class="tier-label" style="color: var(--ft-pink);">Role-Based Override</div>
+        <div class="tier-desc" style="color: var(--ft-wheat);">Executive, Sales, and other role-specific policy adjustments</div>
+      </div>
+      <div class="tier" style="border-left-color: var(--ft-mandarin);">
+        <div class="tier-label" style="color: var(--ft-pink);">Project / Event Override</div>
+        <div class="tier-desc" style="color: var(--ft-wheat);">Temporary overrides scoped to a specific project or event</div>
+      </div>
+    </div>
+
+    <h3>Corporate Card Mandate Levels</h3>
     <table class="comparison-table">
       <thead>
         <tr>
-          <th>Capability</th>
-          <th>Findity</th>
-          <th>Vergo</th>
+          <th>Level</th>
+          <th>Name</th>
+          <th>Behavior</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Market Origin</td>
-          <td>Sweden / EU, expanding to U.S.</td>
-          <td>U.S.-based (New York / Miami)</td>
+          <td>1</td>
+          <td style="color: var(--ft-pink); font-weight: 700;">Encouraged</td>
+          <td>Personal card accepted; employee sees a reminder that corporate card is preferred.</td>
         </tr>
         <tr>
-          <td>Go-to-Market</td>
-          <td>API + white-label for software providers and banks</td>
-          <td>Direct SaaS + embedded banking</td>
+          <td>2</td>
+          <td style="color: var(--ft-pink); font-weight: 700;">Preferred</td>
+          <td>Personal card accepted but requires a written justification field. Justification visible to approver and finance.</td>
         </tr>
         <tr>
-          <td>Card Feeds</td>
-          <td>Fully card-agnostic; Visa, Mastercard, Amex via issuer/file/API. U.S. feed latency to be validated.</td>
-          <td>Card-agnostic in principle; integration maturity unclear. Feed method and refresh frequency to be confirmed.</td>
+          <td>3</td>
+          <td style="color: var(--ft-pink); font-weight: 700;">Required</td>
+          <td>Personal card submission blocked. Employee must use corporate card or submit a policy exception request that routes to finance for pre-approval.</td>
         </tr>
         <tr>
-          <td>ERP Integrations</td>
-          <td>QuickBooks, NetSuite, Dynamics 365 listed. Sage Intacct not yet confirmed; U.S. depth to be validated.</td>
-          <td>No native connectors for QB, Intacct, NetSuite, or Dynamics. Would require joint roadmap.</td>
+          <td>4</td>
+          <td style="color: var(--ft-pink); font-weight: 700;">Mandatory with Auto-Reject</td>
+          <td>Personal card expenses are auto-rejected with a message directing the employee to use their corporate card. No exception path without finance override.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight-box" style="border-left-color: var(--ft-mandarin);">
+      <p><strong>Default recommendation:</strong> Level 2 (Preferred) as company default, Level 3 (Required) for T&E categories above $50.</p>
+    </div>
+
+    <h3>Spend Policies</h3>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Policy Type</th>
+          <th>Configuration Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Per-Diem Limits</td>
+          <td>Daily caps by expense type (meals, lodging, transport) with city/region tiers</td>
         </tr>
         <tr>
-          <td>Expense Capture</td>
-          <td>Mature OCR, per-diem, mileage, duplicate detection.</td>
-          <td>Core capture present; automation depth unproven.</td>
+          <td>Per-Transaction Limits</td>
+          <td>Max amount per single expense line by category</td>
         </tr>
         <tr>
-          <td>White-Label</td>
-          <td>Built for re-branding and embedding; partner-first architecture.</td>
-          <td>Limited OEM readiness; more closed application.</td>
+          <td>Monthly/Quarterly Caps</td>
+          <td>Rolling spend limits per employee or department</td>
         </tr>
         <tr>
-          <td>Compliance</td>
-          <td>GDPR, EU VAT, multi-language. U.S. IRS per-diem and tax logic can be added quickly.</td>
-          <td>Native U.S. compliance and tax rules.</td>
+          <td>Category Restrictions</td>
+          <td>Blocked categories (e.g., no alcohol for certain departments)</td>
         </tr>
         <tr>
-          <td>Strategic Fit</td>
-          <td>High potential if U.S. ERP depth confirmed.</td>
-          <td>High potential if ERP gap closed rapidly.</td>
+          <td>Receipt Thresholds</td>
+          <td>Dollar amount above which receipt attachment is mandatory</td>
+        </tr>
+        <tr>
+          <td>Advance Booking</td>
+          <td>Minimum days in advance for flights/hotels to qualify for standard approval</td>
+        </tr>
+        <tr>
+          <td>Preferred Vendor Rules</td>
+          <td>Flag or block expenses at non-preferred vendors (hotel chains, airlines, car rental)</td>
+        </tr>
+        <tr>
+          <td>Meal Attendee Requirements</td>
+          <td>Require attendee names and business purpose for meals above a threshold</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Policy Violation Handling</h3>
+    <ul class="rec-list">
+      <li><span class="num">01</span><span><strong>Soft Warning</strong> -- Employee sees a yellow flag but can still submit. Approver sees the flag.</span></li>
+      <li><span class="num">02</span><span><strong>Hard Warning</strong> -- Employee must acknowledge the violation and provide justification before submitting. Violation is prominently flagged for approver.</span></li>
+      <li><span class="num">03</span><span><strong>Block</strong> -- Expense cannot be submitted. Employee is directed to the correct action.</span></li>
+    </ul>
+
+    <h3>Policy Visibility</h3>
+    <p>Employees should never have to guess. The system surfaces applicable policies at three moments.</p>
+    <ul class="checklist">
+      <li><span class="dot" style="background: var(--ft-mandarin);"></span><span><strong>Pre-trip / Pre-purchase:</strong> "Your meal per-diem in Chicago is $75/day. Hotel limit is $250/night."</span></li>
+      <li><span class="dot" style="background: var(--ft-mandarin);"></span><span><strong>At submission:</strong> Real-time validation as fields are completed -- green check or warning before they hit submit.</span></li>
+      <li><span class="dot" style="background: var(--ft-mandarin);"></span><span><strong>In rejection:</strong> Clear, specific reason tied to a named policy -- not a generic "rejected by manager."</span></li>
+    </ul>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 4: T&E EXPENSE MANAGEMENT -->
+  <!-- ============================================================ -->
+  <div class="doc-section">
+    <div class="section-number">04 — T&E Expense Management</div>
+    <h2>The core expense workflow</h2>
+    <p class="lead">Travel and entertainment is the primary use case. Two submission paths serve different payment methods, with the corporate card path as the default.</p>
+
+    <h3>Corporate Card Transaction Flow</h3>
+    <p>This is the primary path. Card transactions flow in automatically and the employee completes the record.</p>
+    <ol class="step-flow">
+      <li>Card transaction posted by card network</li>
+      <li>Auto-matched to merchant category via MCC code; pre-populated expense line created</li>
+      <li>Employee reviews, adds receipt, confirms GL/project code</li>
+      <li>Routed to manager for approval (or auto-approved if within policy)</li>
+      <li>Finance reconciliation and period close</li>
+    </ol>
+
+    <ul class="body-list">
+      <li>Card transactions appear in the employee's queue within <strong>24 hours</strong> of posting (real-time feed preferred, batch as fallback)</li>
+      <li>System auto-categorizes based on MCC and <strong>learns from corrections</strong></li>
+      <li>Transactions sitting unreconciled for >5 days trigger a <strong>reminder to the employee</strong></li>
+      <li>Unreconciled transactions at period close are <strong>flagged in finance dashboard</strong> with escalation options</li>
+    </ul>
+
+    <h3>Personal Card / Out-of-Pocket Flow</h3>
+    <p>The exception path for personal card expenses. Higher friction by design to reinforce corporate card usage.</p>
+    <ol class="step-flow">
+      <li>Employee creates manual expense entry</li>
+      <li>System prompts: "Do you have a corporate card?" with policy-level messaging</li>
+      <li>If personal card allowed: justification required per policy level</li>
+      <li>Receipt upload mandatory (no threshold exception for personal card)</li>
+      <li>Routed to manager for approval</li>
+      <li>Approved expenses added to reimbursement queue</li>
+      <li>Finance processes reimbursement via payroll or direct payment</li>
+    </ol>
+
+    <ul class="body-list">
+      <li>Personal card expenses <strong>always require a receipt</strong> regardless of amount</li>
+      <li>Justification for not using corporate card is a <strong>required field</strong>, visible in approval and audit views</li>
+      <li>Reimbursement is a separate payment process with its own <strong>configurable batch schedule</strong></li>
+      <li>Dashboard prominently shows <strong>personal vs. corporate card ratio</strong> by employee and department</li>
+    </ul>
+
+    <h3>Mileage & Per-Diem</h3>
+    <div class="gap-grid">
+      <div class="gap-col">
+        <h4>Mileage</h4>
+        <ul>
+          <li>IRS standard rate auto-updated annually (with manual override)</li>
+          <li>Google Maps integration for route calculation and distance verification</li>
+          <li>Round-trip and commute offset configurable by policy</li>
+          <li>Recurring route templates for frequent travelers</li>
+        </ul>
+      </div>
+      <div class="gap-col">
+        <h4>Per-Diem</h4>
+        <ul>
+          <li>GSA rates pre-loaded for US cities; configurable for international</li>
+          <li>Company can override GSA with custom rates</li>
+          <li>Configurable as actuals-with-cap or flat allowance</li>
+          <li>Partial day calculations for departure/return days</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Expense Reports</h3>
+    <p>Expenses can be submitted individually or grouped into reports. Finance configures which modes are available.</p>
+    <div class="pillar-grid cols-3">
+      <div class="pillar">
+        <h4>Trip-Based Reports</h4>
+        <p>Employee creates a trip container; all expenses for that trip are grouped together.</p>
+      </div>
+      <div class="pillar">
+        <h4>Period-Based Reports</h4>
+        <p>Monthly submission of all outstanding expenses in a single batch.</p>
+      </div>
+      <div class="pillar">
+        <h4>Ad-Hoc Submission</h4>
+        <p>Individual expense lines submitted without a report wrapper. Reduces month-end pileup.</p>
+      </div>
+    </div>
+
+    <h3>Receipt Management</h3>
+    <ul class="checklist">
+      <li><span class="dot"></span><span><strong>Mobile capture:</strong> Camera-based receipt scanning with OCR extraction (amount, date, vendor, tax)</span></li>
+      <li><span class="dot"></span><span><strong>Email forwarding:</strong> Dedicated receipt email address (receipts@[company].centime.com) that auto-attaches to matching card transaction</span></li>
+      <li><span class="dot"></span><span><strong>Bulk upload:</strong> Drag-and-drop multiple receipts with auto-matching</span></li>
+      <li><span class="dot"></span><span><strong>Match confidence:</strong> System shows match confidence score; employee confirms or corrects</span></li>
+      <li><span class="dot"></span><span><strong>Missing receipt affidavit:</strong> For lost receipts above threshold, employee signs a digital affidavit (configurable -- some companies block this entirely)</span></li>
+    </ul>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 5: BASIC PURCHASING -->
+  <!-- ============================================================ -->
+  <div class="doc-section">
+    <div class="section-number">05 — Basic Purchasing</div>
+    <h2>Lightweight pre-approved purchasing</h2>
+    <p class="lead">This module handles pre-approved purchases that don't go through a formal procurement system. The goal is control and accountability, not full P2P.</p>
+
+    <h3>Scope</h3>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>In Scope</th>
+          <th>Out of Scope</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="white-space: normal;">Office supplies and equipment</td>
+          <td>Capital expenditures / fixed assets</td>
+        </tr>
+        <tr>
+          <td style="white-space: normal;">Software subscriptions (&lt;$X/year)</td>
+          <td>Multi-year contracts</td>
+        </tr>
+        <tr>
+          <td style="white-space: normal;">Professional services (consultants, contractors)</td>
+          <td>RFP-driven sourcing</td>
+        </tr>
+        <tr>
+          <td style="white-space: normal;">Conference and event registrations</td>
+          <td>Inventory purchasing</td>
+        </tr>
+        <tr>
+          <td style="white-space: normal;">Team meals and events</td>
+          <td>Raw materials / manufacturing inputs</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>The dollar threshold for "basic" vs. "formal procurement" is company-configurable (e.g., purchases under $5,000).</p>
+
+    <h3>Purchase Request Flow</h3>
+    <ol class="step-flow">
+      <li>Employee creates purchase request with category, vendor, estimated amount, and business justification</li>
+      <li>Policy engine validates: budget check, approval routing, card mandate</li>
+      <li>Routed to manager (and optionally finance for amounts above threshold)</li>
+      <li>Approved -- employee receives approval confirmation with PO number</li>
+      <li>Employee makes purchase using corporate card</li>
+      <li>Card transaction auto-matched to approved PO</li>
+      <li>Three-way match: Request, Approval, Card Transaction</li>
+      <li>Finance closes the loop</li>
+    </ol>
+
+    <h3>Purchase Request Fields</h3>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Required</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Category</td>
+          <td>Yes</td>
+          <td>Drives GL coding and approval routing</td>
+        </tr>
+        <tr>
+          <td>Vendor / Supplier</td>
+          <td>Yes</td>
+          <td>Free text or select from vendor list</td>
+        </tr>
+        <tr>
+          <td>Estimated Amount</td>
+          <td>Yes</td>
+          <td>Used for budget check and approval threshold</td>
+        </tr>
+        <tr>
+          <td>Business Justification</td>
+          <td>Yes</td>
+          <td>Why this purchase is needed</td>
+        </tr>
+        <tr>
+          <td>Department / Cost Center</td>
+          <td>Yes</td>
+          <td>Auto-populated from employee profile, editable</td>
+        </tr>
+        <tr>
+          <td>Project Code</td>
+          <td>Configurable</td>
+          <td>Required for project-based accounting</td>
+        </tr>
+        <tr>
+          <td>Recurring?</td>
+          <td>Yes</td>
+          <td>If yes: frequency and duration</td>
+        </tr>
+        <tr>
+          <td>Budget Line</td>
+          <td>Configurable</td>
+          <td>Tied to departmental budget if budget module active</td>
+        </tr>
+        <tr>
+          <td>Payment Method</td>
+          <td>Auto</td>
+          <td>Defaults to corporate card per policy</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Purchase-to-Card Matching</h3>
+    <ul class="body-list">
+      <li>System attempts <strong>auto-match</strong> based on vendor name, amount (within 10% tolerance), and date range (within 30 days of approval)</li>
+      <li>Matched transactions <strong>inherit GL coding</strong> and project codes from the approved request</li>
+      <li>Unmatched approved requests open for >30 days trigger a <strong>follow-up to the employee</strong></li>
+      <li>Purchases made without a prior request are flagged as <strong>"unplanned spend"</strong> -- still processed, but visible in compliance reporting</li>
+    </ul>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 6: APPROVAL WORKFLOWS -->
+  <!-- ============================================================ -->
+  <div class="doc-section">
+    <div class="section-number">06 — Approval Workflows</div>
+    <h2>Configurable routing and actions</h2>
+    <p class="lead">Approval routing is the link between policy enforcement and operational efficiency. The system supports multi-dimensional routing with configurable escalation.</p>
+
+    <h3>Routing Rules</h3>
+    <div class="pillar-grid">
+      <div class="pillar">
+        <h4>Amount Threshold</h4>
+        <p>Different approvers at different dollar levels. E.g., &lt;$500 = manager, $500-$5,000 = director, &gt;$5,000 = VP + finance.</p>
+      </div>
+      <div class="pillar">
+        <h4>Category</h4>
+        <p>Certain categories always route to specific approvers. E.g., travel to travel coordinator, software to IT.</p>
+      </div>
+      <div class="pillar">
+        <h4>Policy Violation</h4>
+        <p>Any policy violation can add an additional approver. E.g., finance review for out-of-policy expenses.</p>
+      </div>
+      <div class="pillar">
+        <h4>Department</h4>
+        <p>Department-specific approval chains with configurable levels and thresholds.</p>
+      </div>
+    </div>
+
+    <h3>Approval Actions</h3>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Action</th>
+          <th>Effect</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Approve</td>
+          <td>Moves to next approver in chain or to finance queue</td>
+        </tr>
+        <tr>
+          <td>Reject</td>
+          <td>Returns to employee with required rejection reason (tied to policy where applicable)</td>
+        </tr>
+        <tr>
+          <td>Return for Correction</td>
+          <td>Employee can edit and resubmit without starting over</td>
+        </tr>
+        <tr>
+          <td>Approve with Modification</td>
+          <td>Approver can adjust GL code, cost center, or amount (with audit trail)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Auto-Approval</h3>
+    <p>Expenses that meet ALL of the following criteria can be auto-approved (configurable):</p>
+    <ul class="checklist">
+      <li><span class="dot"></span><span>Within policy limits</span></li>
+      <li><span class="dot"></span><span>Corporate card transaction with receipt attached</span></li>
+      <li><span class="dot"></span><span>Correct GL category (high-confidence auto-categorization)</span></li>
+      <li><span class="dot"></span><span>Below auto-approval dollar threshold (company-configured, e.g., $100)</span></li>
+      <li><span class="dot"></span><span>Employee has no active policy violations</span></li>
+    </ul>
+    <p>Auto-approved expenses still appear in the manager's dashboard for visibility but do not require action.</p>
+
+    <h3>Delegation & Escalation</h3>
+    <ul class="body-list">
+      <li><strong>Delegation:</strong> Approver can delegate to a named alternate for a date range (vacation coverage)</li>
+      <li><strong>Escalation:</strong> Expenses pending approval for >X days auto-escalate to the next level in the chain</li>
+      <li><strong>Batch approval:</strong> Manager can select multiple compliant expenses and approve in one action</li>
+    </ul>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 7: FINANCE OPERATIONS (DARK) -->
+  <!-- ============================================================ -->
+  <div class="doc-section-dark">
+    <div class="section-number">07 — Finance Operations</div>
+    <h2>Reconciliation, reimbursement, and GL coding</h2>
+    <p>The finance workspace is the operational control center. It ties together card reconciliation, reimbursement processing, and general ledger management.</p>
+
+    <h3>Corporate Card Reconciliation</h3>
+    <p>The reconciliation workspace gives finance a single view of all card activity.</p>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Meaning</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Matched</td>
+          <td>Card transaction matched to submitted, approved expense</td>
+        </tr>
+        <tr>
+          <td>Submitted -- Pending</td>
+          <td>Employee submitted, waiting on manager approval</td>
+        </tr>
+        <tr>
+          <td>Unsubmitted</td>
+          <td>Card transaction with no employee submission (aging tracked)</td>
+        </tr>
+        <tr>
+          <td>Disputed</td>
+          <td>Employee flagged transaction as not theirs</td>
+        </tr>
+        <tr>
+          <td>Personal Charge</td>
+          <td>Employee flagged as personal -- repayment tracked</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Period Close Workflow</h3>
+    <ol class="step-flow dark-flow">
+      <li>Finance sets a submission deadline (e.g., 5th business day after month-end)</li>
+      <li>System sends automated reminders at T-5, T-3, T-1, and T+0 days</li>
+      <li>After deadline, unsubmitted transactions are escalated to employee's manager</li>
+      <li>Finance can force-close with "unreconciled" flag for audit trail</li>
+    </ol>
+
+    <h3>Reimbursement Processing</h3>
+    <p>For approved personal-card and out-of-pocket expenses.</p>
+    <ul class="checklist">
+      <li><span class="dot" style="background: var(--ft-mandarin);"></span><span><strong>Batch processing:</strong> Finance runs reimbursement batches on a configurable schedule</span></li>
+      <li><span class="dot" style="background: var(--ft-mandarin);"></span><span><strong>Payment methods:</strong> Direct deposit (ACH), payroll integration, or check</span></li>
+      <li><span class="dot" style="background: var(--ft-mandarin);"></span><span><strong>Approval:</strong> Finance approves the reimbursement batch before payment execution</span></li>
+      <li><span class="dot" style="background: var(--ft-mandarin);"></span><span><strong>Employee visibility:</strong> Employee sees status (approved, queued, processing, paid) with expected payment date</span></li>
+    </ul>
+
+    <div class="highlight-box" style="border-left-color: var(--ft-mandarin);">
+      <p><strong>Integration point:</strong> Reimbursement payments can flow through Centime's existing payment rails, creating a natural connection to the AP/payments platform.</p>
+    </div>
+
+    <h3>GL Coding & Allocation</h3>
+    <ul class="body-list">
+      <li><strong>Auto-coding:</strong> MCC-to-GL mapping with company-configurable rules</li>
+      <li><strong>Split coding:</strong> Single expense allocated across multiple cost centers or projects</li>
+      <li><strong>Default coding:</strong> Employee profile carries default department/cost center; overrideable per expense</li>
+      <li><strong>Coding validation:</strong> Invalid combinations blocked at submission (e.g., project code X cannot be paired with department Y)</li>
+      <li><strong>Period assignment:</strong> Expenses can be assigned to the period incurred vs. period submitted (accrual support)</li>
+    </ul>
+
+    <h3>Finance Dashboard & Reporting</h3>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Report</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Policy Compliance</td>
+          <td>Percentage of expenses in-policy by department, category, time period</td>
+        </tr>
+        <tr>
+          <td>Card Ratio</td>
+          <td>Track adoption of corporate card mandate -- drill to department and individual</td>
+        </tr>
+        <tr>
+          <td>Unreconciled Aging</td>
+          <td>Card transactions without employee submission, by age bucket</td>
+        </tr>
+        <tr>
+          <td>Spend by Category</td>
+          <td>Actual vs. budget by GL category, department, project</td>
+        </tr>
+        <tr>
+          <td>Approval Cycle Time</td>
+          <td>Average time from submission to final approval</td>
+        </tr>
+        <tr>
+          <td>Top Spenders</td>
+          <td>Highest spend employees/departments with trend lines</td>
+        </tr>
+        <tr>
+          <td>Duplicate Detection</td>
+          <td>Flagged potential duplicate submissions</td>
+        </tr>
+        <tr>
+          <td>Reimbursement Queue</td>
+          <td>Outstanding reimbursements by status and age</td>
+        </tr>
+        <tr>
+          <td>Audit Trail Export</td>
+          <td>Full history of any expense: submission, edits, approvals, payment</td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <!-- SECTION 3: MUST-HAVES -->
+  <!-- ============================================================ -->
+  <!-- SECTION 8: INTEGRATIONS -->
+  <!-- ============================================================ -->
   <div class="doc-section">
-    <div class="section-number">03 — Must-Haves</div>
-    <h2>Non-negotiable requirements</h2>
-    <p>Any partner — regardless of origin or architecture — must deliver every capability on this list.</p>
-    <ul class="checklist">
-      <li><span class="dot"></span><span><strong>Card Transaction Feeds:</strong> Real-time or near-real-time from Visa, Mastercard, and Amex issuers.</span></li>
-      <li><span class="dot"></span><span><strong>Receipt Capture / OCR:</strong> Mobile upload, email ingestion, auto-matching to card transactions.</span></li>
-      <li><span class="dot"></span><span><strong>Approval Workflows:</strong> Multi-level, rule-based, cost-centre aware.</span></li>
-      <li><span class="dot"></span><span><strong>Policy Enforcement:</strong> Category rules, spend limits, duplicate checks.</span></li>
-      <li><span class="dot"></span><span><strong>Per-Diem / Mileage:</strong> IRS-compliant automation.</span></li>
-      <li><span class="dot"></span><span><strong>Reimbursement & AP Sync:</strong> Seamless link to Centime's AP module.</span></li>
-      <li><span class="dot"></span><span><strong>ERP Posting:</strong> Bi-directional sync to GL, dimensions, and projects.</span></li>
-      <li><span class="dot"></span><span><strong>Multi-Entity / Currency:</strong> Group and subsidiary support.</span></li>
-      <li><span class="dot"></span><span><strong>Analytics & Reporting:</strong> Spend insights and exportable data.</span></li>
-      <li><span class="dot"></span><span><strong>Mobile UX:</strong> Intuitive, white-label-ready apps.</span></li>
-      <li><span class="dot"></span><span><strong>Partner Enablement:</strong> APIs, SLA, and roadmap transparency.</span></li>
-    </ul>
+    <div class="section-number">08 — Integrations</div>
+    <h2>System connectivity</h2>
+    <p class="lead">The platform connects to card networks, ERPs, HRIS systems, and Centime's own AP module to deliver a complete expense lifecycle.</p>
+
+    <h3>Required Integrations</h3>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>System</th>
+          <th>Direction</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="white-space: normal;">Corporate Card Providers</td>
+          <td>Inbound</td>
+          <td>Card transaction feed -- real-time or daily batch (Visa, Mastercard, Amex commercial feeds)</td>
+        </tr>
+        <tr>
+          <td style="white-space: normal;">ERP / GL</td>
+          <td>Outbound</td>
+          <td>Approved expense data with GL coding for journal entry (QuickBooks, NetSuite, Sage Intacct, Microsoft Dynamics)</td>
+        </tr>
+        <tr>
+          <td>HRIS</td>
+          <td>Inbound</td>
+          <td>Employee data, department, manager, cost center sync (BambooHR, ADP, Workday)</td>
+        </tr>
+        <tr>
+          <td>Centime AP</td>
+          <td>Bidirectional</td>
+          <td>Reimbursements via payment rails; vendor/supplier data sync</td>
+        </tr>
+        <tr>
+          <td>SSO / Directory</td>
+          <td>Inbound</td>
+          <td>Authentication and user provisioning (Okta, Azure AD, Google Workspace)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Desired Integrations</h3>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>System</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Travel Booking</td>
+          <td>Auto-create trip containers from bookings (Navan, TripActions, Concur Travel)</td>
+        </tr>
+        <tr>
+          <td>Calendar</td>
+          <td>Associate expenses with meetings/events (Google, Outlook)</td>
+        </tr>
+        <tr>
+          <td>Slack / Teams</td>
+          <td>Approval notifications and quick-approve actions</td>
+        </tr>
+        <tr>
+          <td>Bank Account Verification</td>
+          <td>Verify employee bank accounts for ACH reimbursement (CAS)</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
-  <!-- SECTION 4: GAP CLOSURE -->
+  <!-- ============================================================ -->
+  <!-- SECTION 9: MOBILE EXPERIENCE -->
+  <!-- ============================================================ -->
   <div class="doc-section">
-    <div class="section-number">04 — Gap-Closure Assessment</div>
-    <h2>What each vendor needs to prove</h2>
+    <div class="section-number">09 — Mobile Experience</div>
+    <h2>Mobile is not a companion app</h2>
+    <p class="lead">Mobile must support the full employee and manager workflow. It is a primary interface, not an afterthought.</p>
+
     <div class="gap-grid">
       <div class="gap-col">
-        <h4>Findity</h4>
+        <h4>Employee Capabilities</h4>
         <ul>
-          <li>Mature multi-issuer support; validate U.S. issuer coverage and feed speed</li>
-          <li>QuickBooks, NetSuite, Dynamics 365 listed; validate depth and Intacct plans</li>
-          <li>Add IRS per-diem and tax tables — low effort</li>
-          <li>Mature in EU; extend support coverage to U.S. hours</li>
-          <li>Proven enterprise volumes in EU</li>
+          <li>Receipt capture with OCR</li>
+          <li>Quick-submit from card transaction notification</li>
+          <li>Mileage tracking (GPS-based)</li>
+          <li>View expense status and reimbursement timeline</li>
+          <li>Create purchase requests</li>
         </ul>
       </div>
       <div class="gap-col">
-        <h4>Vergo</h4>
+        <h4>Manager Capabilities</h4>
         <ul>
-          <li>Early stage; confirm issuer API availability and standardization</li>
-          <li>Build ERP connectors from scratch (estimated 6–9 months)</li>
-          <li>Already U.S. localized</li>
-          <li>Smaller team; SLA unknown</li>
-          <li>Needs mid-market load testing</li>
+          <li>Review and approve/reject with swipe gestures</li>
+          <li>See policy flags and violation details</li>
+          <li>Batch approve compliant expenses</li>
+          <li>Delegate approval</li>
         </ul>
       </div>
     </div>
-  </div>
 
-  <!-- SECTION 5: EVALUATION PATH -->
-  <div class="doc-section">
-    <div class="section-number">05 — Evaluation Path Forward</div>
-    <h2>Three phases to a decision</h2>
-    <div class="phase-row">
-      <div class="phase">
-        <div class="phase-label">Phase 1 — Next 30 Days</div>
-        <h4>Discovery</h4>
-        <p>Technical deep dives with both vendors. Review API docs for card feeds and ERP connectors. Confirm U.S. ERP support across QB, NetSuite, Intacct, and Dynamics BC.</p>
-      </div>
-      <div class="phase">
-        <div class="phase-label">Phase 2 — Q1 2026</div>
-        <h4>Pilot</h4>
-        <p>Select one partner for a pilot with 3–5 U.S. clients across ERPs. Measure cycle time, posting accuracy, user satisfaction, and SLA response.</p>
-      </div>
-      <div class="phase">
-        <div class="phase-label">Phase 3 — Post-Pilot</div>
-        <h4>Decision</h4>
-        <p>Weighted scoring on ERP integration depth, card feed quality, functional completeness, SLA quality, and commercial scalability.</p>
-      </div>
+    <div class="highlight-box">
+      <p><strong>Desktop only:</strong> Finance operations (reconciliation, reimbursement processing, GL management, reporting) are desktop/web workflows. Mobile is not required for finance operations.</p>
     </div>
   </div>
 
-  <!-- SECTION 6: RECOMMENDATIONS (dark) -->
-  <div class="doc-section-dark">
-    <div class="section-number">06 — Interim Recommendation</div>
-    <h2>A dual-track approach while we evaluate</h2>
-    <ul class="rec-list">
-      <li><span class="num">01</span><span><strong>Keep Fyle</strong> for existing clients and short-term coverage.</span></li>
-      <li><span class="num">02</span><span><strong>Partner with Navan</strong> with a focus on NetSuite — especially important when clients need an integrated travel solution.</span></li>
-      <li><span class="num">03</span><span><strong>Evaluate Findity and Vergo in parallel</strong>, with Findity currently ahead on functional readiness — ERP connectivity and expense engine maturity.</span></li>
-      <li><span class="num">04</span><span>Make <strong>ERP integration and card-feed maturity</strong> the defining evaluation criteria.</span></li>
-      <li><span class="num">05</span><span>Delay bank-partner exposure until U.S. readiness is confirmed.</span></li>
-      <li><span class="num">06</span><span>Focus proof-of-concept on <strong>ERP posting, multi-issuer card ingestion, and policy enforcement</strong> workflows.</span></li>
+  <!-- ============================================================ -->
+  <!-- SECTION 10: SECURITY & COMPLIANCE -->
+  <!-- ============================================================ -->
+  <div class="doc-section">
+    <div class="section-number">10 — Security & Compliance</div>
+    <h2>Access control, audit, and data protection</h2>
+    <p class="lead">The platform must meet mid-market enterprise security standards while maintaining a complete audit trail for every action in the system.</p>
+
+    <ul class="checklist">
+      <li><span class="dot"></span><span><strong>Role-based access control:</strong> Employee, Manager, Finance Admin, Finance Viewer, System Admin</span></li>
+      <li><span class="dot"></span><span><strong>Audit trail:</strong> Every action logged -- submission, edit, approval, rejection, GL change, payment</span></li>
+      <li><span class="dot"></span><span><strong>Data retention:</strong> Configurable retention policies per document type (receipts, reports, approvals)</span></li>
+      <li><span class="dot"></span><span><strong>SOC 2 Type II:</strong> Required for mid-market enterprise sales</span></li>
+      <li><span class="dot"></span><span><strong>PCI compliance:</strong> No card numbers stored -- transaction data via tokenized feeds</span></li>
+      <li><span class="dot"></span><span><strong>Receipt storage:</strong> Encrypted at rest, access-controlled, tamper-evident</span></li>
     </ul>
   </div>
 
-  <!-- KEY TAKEAWAY -->
-  <div class="takeaway">
-    <div class="section-number">Key Takeaway</div>
-    <h2>Centime's advantage will come from owning the integration layer</h2>
-    <p>Expense automation that works with any card and any ERP — no bank lock-in required. The platform that wins is the one that disappears into the client's existing stack.</p>
-    <div class="pillars">
-      <div>
-        <h4>Card Agnosticism</h4>
-        <p>First-class multi-issuer support across Visa, Mastercard, and Amex.</p>
+  <!-- ============================================================ -->
+  <!-- SECTION 11: IMPLEMENTATION & ROLLOUT -->
+  <!-- ============================================================ -->
+  <div class="doc-section">
+    <div class="section-number">11 — Implementation & Rollout</div>
+    <h2>Phased delivery and configuration</h2>
+    <p class="lead">A phased approach lets us ship a focused MVP and expand scope with each release, validating assumptions along the way.</p>
+
+    <h3>Phased Approach</h3>
+    <div class="phase-row cols-4">
+      <div class="phase">
+        <div class="phase-label">Phase 1 — MVP</div>
+        <h4>Core T&E</h4>
+        <p>T&E with corporate card integration, basic policies, approval workflows.</p>
       </div>
-      <div>
-        <h4>Deep ERP Integration</h4>
-        <p>Forecast accuracy and AP sync depend on real-time, bi-directional ERP connectivity.</p>
+      <div class="phase">
+        <div class="phase-label">Phase 2 — MVP + 4 Weeks</div>
+        <h4>Reimbursement</h4>
+        <p>Personal card reimbursement, advanced policy engine, mobile app.</p>
       </div>
-      <div>
-        <h4>Embeddable Architecture</h4>
-        <p>White-label ready for Centime, banks, and channel partners.</p>
+      <div class="phase">
+        <div class="phase-label">Phase 3 — MVP + 8 Weeks</div>
+        <h4>Purchasing</h4>
+        <p>Basic purchasing module, purchase-to-card matching.</p>
+      </div>
+      <div class="phase">
+        <div class="phase-label">Phase 4 — MVP + 12 Weeks</div>
+        <h4>Advanced</h4>
+        <p>Advanced reporting, budget integration, travel booking integration.</p>
       </div>
     </div>
+
+    <h3>Configuration Checklist (Per Customer)</h3>
+    <ul class="checklist">
+      <li><span class="dot"></span><span>Policy hierarchy and rules</span></li>
+      <li><span class="dot"></span><span>Corporate card mandate level by category</span></li>
+      <li><span class="dot"></span><span>Approval routing and thresholds</span></li>
+      <li><span class="dot"></span><span>GL chart of accounts mapping</span></li>
+      <li><span class="dot"></span><span>Department / cost center structure</span></li>
+      <li><span class="dot"></span><span>Per-diem rates and city tiers</span></li>
+      <li><span class="dot"></span><span>Receipt threshold amounts</span></li>
+      <li><span class="dot"></span><span>Reimbursement schedule and payment method</span></li>
+      <li><span class="dot"></span><span>Card feed connection(s)</span></li>
+      <li><span class="dot"></span><span>ERP / GL integration</span></li>
+      <li><span class="dot"></span><span>SSO configuration</span></li>
+    </ul>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 12: OPEN QUESTIONS (CLARET TAKEAWAY) -->
+  <!-- ============================================================ -->
+  <div class="takeaway">
+    <div class="section-number">12 — Open Questions</div>
+    <h2>Decisions that shape the product</h2>
+    <p>These questions must be resolved to finalize scope, architecture, and go-to-market strategy. Each carries a preliminary recommendation.</p>
+
+    <ul class="question-list">
+      <li>
+        <span class="num">1</span>
+        <span>
+          <strong>Card program management</strong> -- Do we issue/manage corporate cards, or only consume card feeds from existing bank programs?
+          <span class="rec">Recommendation: Consume feeds in V1; card issuance is a future consideration.</span>
+        </span>
+      </li>
+      <li>
+        <span class="num">2</span>
+        <span>
+          <strong>Budget module depth</strong> -- How tightly do we integrate with departmental budgets? Real-time budget check at approval, or reporting-only?
+        </span>
+      </li>
+      <li>
+        <span class="num">3</span>
+        <span>
+          <strong>International support</strong> -- Multi-currency expense submission and FX handling in V1, or US-only first?
+        </span>
+      </li>
+      <li>
+        <span class="num">4</span>
+        <span>
+          <strong>Centime platform integration</strong> -- How deeply does this connect to existing AP automation? Shared vendor master? Shared payment processing? Single dashboard?
+        </span>
+      </li>
+      <li>
+        <span class="num">5</span>
+        <span>
+          <strong>Pricing model</strong> -- Per-employee per-month? Tiered by transaction volume? Bundled with existing Centime products?
+        </span>
+      </li>
+      <li>
+        <span class="num">6</span>
+        <span>
+          <strong>Build vs. partner</strong> -- Receipt OCR, card feeds, travel booking -- build or integrate with existing providers (e.g., Coupa, Expensify APIs)?
+        </span>
+      </li>
+    </ul>
   </div>
 
 </div>
 
 <div class="doc-footer">
   <a href="../">Back to presentations</a>
+  <div class="draft-note">This spec is a working draft intended to align product, engineering, and go-to-market teams on scope and priorities. It is not a final requirements document.</div>
 </div>
 
 </body>
