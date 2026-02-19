@@ -123,10 +123,13 @@
 
 <!-- Reveal.js 5.x -->
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<!-- Menu plugin -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/menu.css">
+<script src="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/menu.js"></script>
 <script>
   Reveal.initialize({
     hash: true,
-    center: false,
+    center: true,
     transition: 'fade',
     transitionSpeed: 'default',
     width: 960,
@@ -136,6 +139,17 @@
     progress: true,
     slideNumber: true,
     overview: true,
+    menu: {
+      side: 'left',
+      titleSelector: 'h1, h2, .section-label',
+      hideMissingTitles: true,
+      markers: true,
+      themes: false,
+      transitions: false,
+      openButton: true,
+      openSlideNumber: false,
+    },
+    plugins: [ RevealMenu ],
   });
 </script>
 </body>

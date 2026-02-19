@@ -592,6 +592,42 @@
 }
 
 /* ================================================
+   MENU PLUGIN OVERRIDES
+   ================================================ */
+.slide-menu-wrapper .slide-menu {
+  background: var(--ft-black);
+  border-right: 3px solid var(--ft-claret);
+}
+
+.slide-menu-wrapper .slide-menu-items li.slide-menu-item {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 15px;
+  color: var(--ft-wheat);
+  border-bottom: 1px solid rgba(206,198,185,0.1);
+  padding: 12px 20px;
+}
+
+.slide-menu-wrapper .slide-menu-items li.slide-menu-item.active,
+.slide-menu-wrapper .slide-menu-items li.slide-menu-item:hover {
+  background: rgba(153, 15, 61, 0.25);
+  color: var(--ft-pink);
+}
+
+.slide-menu-wrapper .slide-menu-toolbar {
+  background: var(--ft-black);
+  border-bottom: 1px solid rgba(206,198,185,0.15);
+}
+
+.slide-menu-wrapper .slide-menu-toolbar li a {
+  color: var(--ft-wheat);
+  font-family: 'Source Sans 3', sans-serif;
+}
+
+.slide-menu-wrapper .slide-menu-toolbar li.active-toolbar-button a {
+  color: var(--ft-mandarin);
+}
+
+/* ================================================
    PRINT STYLES
    ================================================ */
 @media print {
