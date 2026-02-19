@@ -40,7 +40,7 @@
 .reveal {
   --r-background-color: var(--ft-pink);
   --r-main-font: 'Source Sans 3', 'Source Sans Pro', sans-serif;
-  --r-main-font-size: 36px;
+  --r-main-font-size: 24px;
   --r-main-color: var(--ft-dark);
   --r-heading-font: 'Libre Baskerville', Georgia, serif;
   --r-heading-color: var(--ft-black);
@@ -72,7 +72,7 @@
 
 .reveal .slides section {
   text-align: left;
-  padding: 48px;
+  padding: 32px;
   box-sizing: border-box;
 }
 
