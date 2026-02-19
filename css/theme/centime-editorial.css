@@ -40,7 +40,7 @@
 .reveal {
   --r-background-color: var(--ft-pink);
   --r-main-font: 'Source Sans 3', 'Source Sans Pro', sans-serif;
-  --r-main-font-size: 28px;
+  --r-main-font-size: 36px;
   --r-main-color: var(--ft-dark);
   --r-heading-font: 'Libre Baskerville', Georgia, serif;
   --r-heading-color: var(--ft-black);
@@ -48,10 +48,10 @@
   --r-heading-line-height: 1.15;
   --r-heading-letter-spacing: normal;
   --r-heading-text-transform: none;
-  --r-heading1-size: 2.4em;
-  --r-heading2-size: 1.8em;
-  --r-heading3-size: 1.1em;
-  --r-heading4-size: 0.85em;
+  --r-heading1-size: 2em;
+  --r-heading2-size: 1.4em;
+  --r-heading3-size: 1em;
+  --r-heading4-size: 0.8em;
   --r-link-color: var(--ft-claret);
   --r-link-color-hover: var(--ft-oxford);
   --r-selection-background-color: rgba(153, 15, 61, 0.25);
@@ -72,7 +72,7 @@
 
 .reveal .slides section {
   text-align: left;
-  padding: 60px;
+  padding: 48px;
   box-sizing: border-box;
 }
 
@@ -99,10 +99,10 @@
 }
 
 .reveal p.body {
-  font-size: 0.82em;
+  font-size: 0.72em;
   color: var(--ft-dark);
   line-height: 1.65;
-  max-width: 640px;
+  max-width: 800px;
 }
 
 /* ================================================
@@ -110,7 +110,7 @@
    ================================================ */
 .reveal .section-label {
   font-family: var(--r-main-font);
-  font-size: 0.55em;
+  font-size: 0.5em;
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -120,7 +120,7 @@
 
 .reveal .eyebrow {
   font-family: var(--r-main-font);
-  font-size: 0.6em;
+  font-size: 0.55em;
   font-weight: 600;
   letter-spacing: 2.5px;
   text-transform: uppercase;
@@ -157,11 +157,11 @@
    ================================================ */
 .reveal .subtitle {
   font-family: var(--r-main-font);
-  font-size: 1em;
+  font-size: 0.82em;
   font-weight: 300;
   color: var(--ft-wheat);
   line-height: 1.5;
-  max-width: 520px;
+  max-width: 700px;
   margin-bottom: 2em;
 }
 
