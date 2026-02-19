@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Management — Partnership Evaluation</title>
+
+  <!-- Reveal.js 5.x -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+
+  <!-- Centime Editorial Theme -->
+  <link rel="stylesheet" href="../../css/theme/centime-editorial.css">
+
+  <!-- Deck-specific overrides -->
+  <style>
+    /* Comparison table for Reveal slides */
+    .reveal .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-top: 3px solid var(--ft-black);
+      margin: 1.2em 0;
+      font-family: var(--r-main-font);
+    }
+    .reveal .comp-table thead th {
+      font-size: 0.5em;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--ft-claret);
+      text-align: left;
+      padding: 0.8em 0.7em 0.5em;
+      border-bottom: 1px solid var(--ft-black);
+    }
+    .reveal .comp-table tbody td {
+      font-size: 0.6em;
+      line-height: 1.5;
+      color: var(--ft-dark);
+      padding: 0.6em 0.7em;
+      border-bottom: 1px solid var(--ft-rule);
+      vertical-align: top;
+    }
+    .reveal .comp-table tbody td:first-child {
+      font-family: var(--r-heading-font);
+      font-size: 0.58em;
+      font-weight: 700;
+      color: var(--ft-black);
+      white-space: nowrap;
+      padding-left: 0;
+    }
+
+    /* Requirements checklist */
+    .reveal .req-list {
+      list-style: none;
+      margin: 1em 0;
+      padding: 0;
+      border-top: 1px solid var(--ft-rule);
+      columns: 2;
+      column-gap: 2em;
+    }
+    .reveal .req-list li {
+      font-size: 0.62em;
+      line-height: 1.5;
+      color: var(--ft-dark);
+      padding: 0.5em 0;
+      border-bottom: 1px solid var(--ft-rule);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5em;
+      break-inside: avoid;
+    }
+    .reveal .req-dot {
+      flex-shrink: 0;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--ft-claret);
+      margin-top: 0.35em;
+    }
+    .reveal .req-list strong {
+      color: var(--ft-black);
+    }
+
+    /* Takeaway pillars on claret */
+    .reveal .take-pillars {
+      display: flex;
+      gap: 2em;
+      margin-top: 1.5em;
+      border-top: 2px solid rgba(255,255,255,0.3);
+      padding-top: 1em;
+    }
+    .reveal .take-pillars div { flex: 1; }
+    .reveal .take-pillars h3 {
+      font-size: 0.9em;
+      color: var(--ft-white);
+      margin-bottom: 0.3em;
+    }
+    .reveal .take-pillars p {
+      font-size: 0.65em;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+  <!-- SLIDE 1: TITLE -->
+  <section data-background-color="#1A1817" class="slide-dark">
+    <div class="eyebrow">Centime · Product Strategy</div>
+    <h1>Expense Management Partnership Evaluation</h1>
+    <div class="subtitle">A framework for selecting a card-agnostic, ERP-integrated expense partner for Centime's mid-market clients.</div>
+    <div class="meta">February 2026 · Internal</div>
+  </section>
+
+  <!-- SLIDE 2: THE GOAL -->
+  <section data-background-color="#FFF1E5">
+    <div class="section-label">The Goal</div>
+    <h2>One platform. Any card. Any ERP.</h2>
+    <p class="body" style="margin-bottom: 1em;">Centime needs an expense management partner that can serve mid-market companies — $5M to $100M in revenue — without forcing them to change their cards or their accounting system. The platform must handle expense capture, policy enforcement, and ERP synchronization across any issuer.</p>
+    <div class="pillar-grid">
+      <div class="pillar">
+        <div class="pillar-number" style="font-size: 1.4em;">01</div>
+        <h3>ERP Integration</h3>
+        <p>Native connectors for QB, Intacct, Dynamics 365, and NetSuite.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-number" style="font-size: 1.4em;">02</div>
+        <h3>Card Agnostic</h3>
+        <p>Visa, Mastercard, Amex — any issuer, any bank.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-number" style="font-size: 1.4em;">03</div>
+        <h3>Embeddable</h3>
+        <p>White-label ready for Centime and bank partners.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 3: LANDSCAPE -->
+  <section data-background-color="#FFF7EF" class="slide-paper">
+    <div class="section-label">The Landscape</div>
+    <h2>Two emerging partners worth evaluating</h2>
+    <p class="body" style="margin-bottom: 0.8em;">Fyle and Navan are known quantities with known limitations. Findity and Vergo are newer entrants that deserve a closer look. InLogik is also under consideration.</p>
+    <table class="comp-table">
+      <thead>
+        <tr><th></th><th>Findity</th><th>Vergo</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Origin</td><td>Sweden / EU, expanding to U.S.</td><td>U.S.-based (NY / Miami)</td></tr>
+        <tr><td>Go-to-Market</td><td>API + white-label for platforms & banks</td><td>Direct SaaS + embedded banking</td></tr>
+        <tr><td>Card Feeds</td><td>Fully card-agnostic; multi-issuer via API/file</td><td>Card-agnostic in principle; maturity unclear</td></tr>
+        <tr><td>ERP Connectors</td><td>QB, NetSuite, Dynamics listed; Intacct TBD</td><td>No native ERP connectors today</td></tr>
+        <tr><td>White-Label</td><td>Partner-first architecture; built for embedding</td><td>Limited OEM readiness</td></tr>
+        <tr><td>Strategic Fit</td><td>High — if U.S. ERP depth confirmed</td><td>High — if ERP gap closed rapidly</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- SLIDE 4: MUST-HAVES -->
+  <section data-background-color="#FFF1E5">
+    <div class="section-label">Non-Negotiable Requirements</div>
+    <h2>Eleven capabilities every partner must deliver</h2>
+    <ul class="req-list">
+      <li><span class="req-dot"></span><span><strong>Card Feeds:</strong> Real-time from Visa, Mastercard, Amex issuers.</span></li>
+      <li><span class="req-dot"></span><span><strong>Receipt / OCR:</strong> Mobile upload, email ingestion, auto-matching.</span></li>
+      <li><span class="req-dot"></span><span><strong>Approvals:</strong> Multi-level, rule-based, cost-centre aware.</span></li>
+      <li><span class="req-dot"></span><span><strong>Policy:</strong> Category rules, limits, duplicate checks.</span></li>
+      <li><span class="req-dot"></span><span><strong>Per-Diem / Mileage:</strong> IRS-compliant automation.</span></li>
+      <li><span class="req-dot"></span><span><strong>AP Sync:</strong> Seamless link to Centime's AP module.</span></li>
+      <li><span class="req-dot"></span><span><strong>ERP Posting:</strong> Bi-directional GL sync.</span></li>
+      <li><span class="req-dot"></span><span><strong>Multi-Entity:</strong> Group and subsidiary support.</span></li>
+      <li><span class="req-dot"></span><span><strong>Analytics:</strong> Spend insights and exports.</span></li>
+      <li><span class="req-dot"></span><span><strong>Mobile UX:</strong> White-label-ready apps.</span></li>
+      <li><span class="req-dot"></span><span><strong>Partner APIs:</strong> SLA and roadmap transparency.</span></li>
+    </ul>
+  </section>
+
+  <!-- SLIDE 5: GAP CLOSURE -->
+  <section data-background-color="#1A1817" class="slide-dark">
+    <div class="section-label">Gap-Closure Assessment</div>
+    <h2>What each vendor still needs to prove</h2>
+    <div class="gap-grid">
+      <div class="gap-item">
+        <div class="gap-status"></div>
+        <div>
+          <h4>Findity</h4>
+          <p>Mature expense engine and multi-issuer support. Key gaps: validate U.S. issuer feed speed, confirm Sage Intacct plans, extend support to U.S. hours. IRS per-diem is low-effort. Proven at enterprise scale in EU.</p>
+        </div>
+      </div>
+      <div class="gap-item">
+        <div class="gap-status"></div>
+        <div>
+          <h4>Vergo</h4>
+          <p>Strong U.S. presence and banking relationships. Key gaps: no ERP connectors — estimated 6–9 months to build. Issuer API maturity unclear. Smaller team, SLA unknown. Needs mid-market load testing.</p>
+        </div>
+      </div>
+    </div>
+    <p class="body" style="margin-top: 1em;">Findity is closer to production readiness. Vergo's path is longer but its U.S. banking network is a strategic asset worth preserving.</p>
+  </section>
+
+  <!-- SLIDE 6: EVALUATION PATH -->
+  <section data-background-color="#FFF7EF" class="slide-paper">
+    <div class="section-label">Evaluation Path Forward</div>
+    <h2>Three phases to a decision</h2>
+    <div class="cadence-row" style="border-top: 3px solid var(--ft-claret);">
+      <div class="cadence-item">
+        <h4>Phase 1 — Next 30 Days</h4>
+        <p>Technical deep dives with both vendors. Review API docs for card feeds and ERP connectors. Confirm U.S. ERP support for QB, NetSuite, Intacct, and Dynamics BC.</p>
+      </div>
+      <div class="cadence-item">
+        <h4>Phase 2 — Q1 2026</h4>
+        <p>Select one partner for pilot. 3–5 U.S. clients across ERPs. Measure cycle time, posting accuracy, user satisfaction, and SLA response.</p>
+      </div>
+      <div class="cadence-item">
+        <h4>Phase 3 — Post-Pilot</h4>
+        <p>Weighted scoring on ERP depth, card feed quality, functional completeness, SLA quality, and commercial scalability.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 7: RECOMMENDATIONS -->
+  <section data-background-color="#1A1817" class="slide-dark">
+    <div class="section-label">Interim Recommendation</div>
+    <h2>A dual-track approach while we evaluate</h2>
+    <ul class="cta-list">
+      <li><span class="num">01</span><span><strong>Keep Fyle</strong> for existing clients and short-term coverage.</span></li>
+      <li><span class="num">02</span><span><strong>Partner with Navan</strong> for NetSuite — especially when clients need integrated travel.</span></li>
+      <li><span class="num">03</span><span><strong>Evaluate Findity and Vergo in parallel</strong> — Findity currently ahead on ERP connectivity and expense engine maturity.</span></li>
+      <li><span class="num">04</span><span>Make <strong>ERP integration and card-feed maturity</strong> the defining evaluation criteria.</span></li>
+      <li><span class="num">05</span><span>Delay bank-partner exposure until U.S. readiness is confirmed.</span></li>
+      <li><span class="num">06</span><span>Focus proof-of-concept on <strong>ERP posting, multi-issuer card ingestion, and policy enforcement</strong>.</span></li>
+    </ul>
+  </section>
+
+  <!-- SLIDE 8: KEY TAKEAWAY -->
+  <section data-background-color="#990F3D" class="slide-claret">
+    <div class="section-label">Key Takeaway</div>
+    <h2>Centime's advantage will come from owning the integration layer</h2>
+    <p class="body" style="color: rgba(255,255,255,0.85); max-width: 640px; margin-bottom: 0;">Expense automation that works with any card and any ERP — no bank lock-in required. The platform that wins is the one that disappears into the client's existing stack.</p>
+    <div class="take-pillars">
+      <div>
+        <h3>Card Agnosticism</h3>
+        <p>First-class multi-issuer support across Visa, Mastercard, and Amex.</p>
+      </div>
+      <div>
+        <h3>Deep ERP Integration</h3>
+        <p>Forecast accuracy and AP sync depend on real-time, bi-directional connectivity.</p>
+      </div>
+      <div>
+        <h3>Embeddable Architecture</h3>
+        <p>White-label ready for Centime, banks, and channel partners.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+</div>
+
+<!-- Reveal.js 5.x -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<!-- Menu plugin -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/menu.css">
+<script src="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/menu.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    center: true,
+    transition: 'fade',
+    transitionSpeed: 'default',
+    width: 960,
+    height: 700,
+    margin: 0.04,
+    controls: true,
+    progress: true,
+    slideNumber: true,
+    overview: true,
+    menu: {
+      side: 'left',
+      titleSelector: 'h1, h2, .section-label',
+      hideMissingTitles: true,
+      markers: true,
+      themes: false,
+      transitions: false,
+      openButton: true,
+      openSlideNumber: false,
+    },
+    plugins: [ RevealMenu ],
+  });
+</script>
+</body>
+</html>
