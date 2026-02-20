@@ -82,9 +82,9 @@ Since the bond lapsed, Centime has developed and deployed a capability called Ce
 
 Exchange is a supplier onboarding and management platform that serves as the verification layer for Centime's payables solutions — both AP Automation and Payments Automation. Before a supplier can receive any payment through the Centime platform, it must complete Exchange verification. The key controls include:
 
-**Real-Time Bank Account Ownership Verification (CAS)**
+**Real-Time Bank Account Ownership Verification**
 
-Our proprietary Centime Account Services (CAS) technology verifies bank account ownership in real time through browser-based bank authentication. The supplier logs into their own bank account through a secure session, and we confirm that the account number provided matches an account to which the supplier has authenticated access. This is not a micro-deposit. It is not a third-party database lookup. It is real-time proof of ownership. A fraudster impersonating a supplier cannot pass this verification unless they have login access to the account they are claiming as their own.
+Our proprietary account verification technology verifies bank account ownership in real time through browser-based bank authentication. The supplier logs into their own bank account through a secure session, and we confirm that the account number provided matches an account to which the supplier has authenticated access. This is not a micro-deposit. It is not a third-party database lookup. It is real-time proof of ownership. A fraudster impersonating a supplier cannot pass this verification unless they have login access to the account they are claiming as their own.
 
 **Comprehensive Document Collection and Verification**
 
@@ -152,7 +152,7 @@ The new insuring agreement would cover:
 
 - Provided that the payment was made through the Centime platform (via either AP Automation or Payments Automation) to a supplier that had been enrolled and verified through the Centime Exchange platform at the time of the transfer
 
-The critical underwriting control is the proviso: coverage applies only to payments made to Exchange-verified suppliers. This means every covered payment has gone through real-time bank account ownership verification (CAS), document collection and validation, and any applicable KYB/compliance screening. The underwriter's exposure is limited to the population of payments where Centime's full verification stack has been applied.
+The critical underwriting control is the proviso: coverage applies only to payments made to Exchange-verified suppliers. This means every covered payment has gone through real-time bank account ownership verification, document collection and validation, and any applicable KYB/compliance screening. The underwriter's exposure is limited to the population of payments where Centime's full verification stack has been applied.
 
 Payments to suppliers who have not completed Exchange verification would not be covered under Agreement (B). This gives the underwriter a clear, binary trigger: verified = covered; unverified = not covered. It also incentivizes Centime to drive enrollment velocity, which further reduces residual risk over time.
 
@@ -207,7 +207,7 @@ We are prepared to furnish the following to support the underwriter's assessment
 
 1. Updated application with current business profile, customer count, transaction volume, and payment processing figures
 
-2. Technical documentation on Exchange verification controls, including CAS bank account ownership verification, document management workflows, and KYB/compliance screening processes
+2. Technical documentation on Exchange verification controls, including real-time bank account ownership verification, document management workflows, and KYB/compliance screening processes
 
 3. Claims history confirmation (zero claims during prior bond period)
 
@@ -225,15 +225,15 @@ We are prepared to furnish the following to support the underwriter's assessment
 
 We want to be direct about why we believe this is an attractive risk for the underwriter, not just a good outcome for Centime.
 
-**The verification controls are superior to market standard.** Most B2B payment platforms rely on third-party database lookups, micro-deposits, or manual document review to verify supplier banking information. These methods are either slow (micro-deposits take 2–3 days and can be intercepted), passive (database lookups check against stale records), or human-dependent (manual review introduces error and inconsistency). Centime's CAS technology performs real-time bank account ownership verification through direct bank authentication. This is a fundamentally stronger control than anything else in market, and it is the foundation of every Exchange-verified supplier record.
+**The verification controls are superior to market standard.** Most B2B payment platforms rely on third-party database lookups, micro-deposits, or manual document review to verify supplier banking information. These methods are either slow (micro-deposits take 2–3 days and can be intercepted), passive (database lookups check against stale records), or human-dependent (manual review introduces error and inconsistency). Centime's account verification technology performs real-time bank account ownership verification through direct bank authentication. This is a fundamentally stronger control than anything else in market, and it is the foundation of every Exchange-verified supplier record.
 
-**The coverage trigger is binary and auditable.** A supplier is either Exchange-verified or it is not. This is not a subjective standard. It is a system state that is timestamped, logged, and auditable. The underwriter can define minimum verification requirements (for example, CAS completion must be no older than 12 months; W-9 must be on file; etc.) and Centime can enforce them programmatically. This gives the underwriter bright-line control over what qualifies for coverage.
+**The coverage trigger is binary and auditable.** A supplier is either Exchange-verified or it is not. This is not a subjective standard. It is a system state that is timestamped, logged, and auditable. The underwriter can define minimum verification requirements (for example, bank account verification must be no older than 12 months; W-9 must be on file; etc.) and Centime can enforce them programmatically. This gives the underwriter bright-line control over what qualifies for coverage.
 
 **The premium model is self-funding with no adverse selection.** The per-customer premium structure means every payables customer contributes to the premium pool automatically — there is no opt-in, which eliminates the adverse selection risk inherent in voluntary insurance programs. The underwriter's premium income grows as Centime's customer base grows, and the exposure grows proportionally. Centime collects and remits on a predictable schedule, creating a low-friction, growing revenue stream for the underwriter.
 
 **The claims history is clean.** Centime has operated its payment platform since inception with zero fraudulent payment losses. The prior bond period produced zero claims. While past performance does not guarantee future results, it does demonstrate that Centime's platform controls and customer base represent a well-managed risk.
 
-**The competitive precedent exists.** PaymentWorks has offered bundled fraud indemnification to its customer base for years, also through specialty insurance underwriting. Their model has proven commercially viable and, to our knowledge, has not produced significant claims activity. The market has established that B2B payment platform indemnification is an insurable risk when backed by appropriate verification controls. Centime's verification controls, particularly CAS, are more rigorous than PaymentWorks' validation methods.
+**The competitive precedent exists.** PaymentWorks has offered bundled fraud indemnification to its customer base for years, also through specialty insurance underwriting. Their model has proven commercially viable and, to our knowledge, has not produced significant claims activity. The market has established that B2B payment platform indemnification is an insurable risk when backed by appropriate verification controls. Centime's verification controls, particularly real-time bank account verification, are more rigorous than PaymentWorks' validation methods.
 
 ---
 
@@ -247,7 +247,7 @@ We want to be direct about why we believe this is an attractive risk for the und
 | **Why it matters** | Fraud indemnification has become a competitive requirement in B2B payments. Our primary competitor bundles it. The Tier 2 platforms cannot offer it. This coverage, combined with our bank-channel distribution and full-lifecycle payables platform, creates a market position no competitor can replicate. |
 | **What we're asking** | A conversation with the underwriting team to discuss amended terms. We are prepared to provide all documentation needed to support the assessment and are flexible on structure, limits, and premium within the framework described above. |
 
-We would welcome the opportunity to schedule a call with the underwriting team to walk through the Exchange platform, demonstrate the CAS verification technology, and discuss the amended coverage in detail. We believe the combination of Centime's zero-claims history, the Exchange verification infrastructure, and the bundled distribution model presents an underwriting opportunity that is both well-controlled and commercially attractive.
+We would welcome the opportunity to schedule a call with the underwriting team to walk through the Exchange platform, demonstrate the account verification technology, and discuss the amended coverage in detail. We believe the combination of Centime's zero-claims history, the Exchange verification infrastructure, and the bundled distribution model presents an underwriting opportunity that is both well-controlled and commercially attractive.
 
 Thank you for your time and consideration. We look forward to your response.
 
