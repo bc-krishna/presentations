@@ -643,15 +643,64 @@
   }
 
   @media print {
-    body { background: white; }
-    .doc-header { background: var(--ft-black); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .doc-section-dark { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .takeaway { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .doc-section { break-inside: avoid; }
-    .comparison-table { break-inside: avoid; }
-    .step-flow { break-inside: avoid; }
-    .highlight-box { break-inside: avoid; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .goal-box { break-inside: avoid; }
+    /* Force all background colors and images to print */
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+
+    body { background: var(--ft-pink) !important; }
+
+    /* Preserve all backgrounds */
+    .doc-header { background: var(--ft-black) !important; }
+    .doc-section-dark { background: var(--ft-black) !important; }
+    .takeaway { background: var(--ft-claret) !important; }
+    .highlight-box { background: var(--ft-black) !important; }
+    .goal-box { background: var(--ft-paper) !important; }
+
+    /* Preserve pseudo-element backgrounds (numbered steps, dots) */
+    .step-flow li::before { background: var(--ft-claret) !important; }
+    .doc-section-dark .step-flow li::before { background: var(--ft-mandarin) !important; }
+    .checklist .dot { background: var(--ft-claret) !important; }
+    .doc-section-dark .checklist .dot { background: var(--ft-mandarin) !important; }
+    .gap-col li::before { background: var(--ft-claret) !important; }
+
+    /* Page break control — avoid orphaned elements */
+    .doc-section { page-break-inside: auto; }
+    .doc-section h2 { page-break-after: avoid; }
+    .doc-section h3 { page-break-after: avoid; }
+    .doc-section h4 { page-break-after: avoid; }
+    .section-number { page-break-after: avoid; }
+    .comparison-table { page-break-inside: avoid; }
+    .pillar-grid { page-break-inside: avoid; }
+    .gap-grid { page-break-inside: avoid; }
+    .highlight-box { page-break-inside: avoid; }
+    .goal-box { page-break-inside: avoid; }
+    .step-flow { page-break-inside: auto; }
+    .step-flow li { page-break-inside: avoid; }
+    .checklist li { page-break-inside: avoid; }
+    .closing-block { page-break-inside: avoid; }
+    .signature { page-break-inside: avoid; }
+    .enclosures { page-break-inside: avoid; }
+
+    /* Hide web-only footer in print */
+    .doc-footer { display: none; }
+
+    /* Full-bleed dark and claret sections in print */
+    .doc-section-dark,
+    .takeaway {
+      margin-left: -60px !important;
+      margin-right: -60px !important;
+      padding-left: 60px !important;
+      padding-right: 60px !important;
+    }
+
+    /* Set PDF page size — no @page margin since HTML layout provides its own spacing */
+    @page {
+      size: letter;
+      margin: 0;
+    }
   }
 </style>
 </head>
