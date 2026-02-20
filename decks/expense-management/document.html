@@ -843,7 +843,7 @@
   <div class="doc-header-inner">
     <div class="eyebrow">Centime · Product Specification</div>
     <h1>Centime Expense Management</h1>
-    <div class="subtitle">A policy-driven expense and lightweight purchasing platform for US mid-market finance teams, built on Findity's white-label T&E engine.</div>
+    <div class="subtitle">A policy-driven expense platform for US mid-market finance teams, built on Findity's white-label T&E engine.</div>
     <div class="meta">Version 0.3 · Draft · February 2026 · US Market · Internal</div>
   </div>
 </header>
@@ -856,7 +856,7 @@
   <div class="doc-section">
     <div class="section-number">01 — Overview</div>
     <h2>What we are building</h2>
-    <p class="lead">Centime Expense Management is a policy-driven expense and lightweight purchasing platform for US mid-market finance teams, built on Findity's white-label T&E engine. We own the UX and workflows; Findity provides the expense processing engine. The first objective is to build a differentiated user experience and workflow layer. The system enforces corporate card usage as the default payment method, provides configurable policy guardrails, and delivers a streamlined experience across three core personas.</p>
+    <p class="lead">Centime Expense Management is a policy-driven expense platform for US mid-market finance teams, built on Findity's white-label T&E engine. We own the UX and workflows; Findity provides the expense processing engine. The first objective is to build a differentiated user experience and workflow layer. The system enforces corporate card usage as the default payment method, provides configurable policy guardrails, and delivers a streamlined experience across three core personas.</p>
 
     <div class="gap-grid">
       <div class="gap-col">
@@ -866,9 +866,9 @@
         </ul>
       </div>
       <div class="gap-col">
-        <h4>Basic Purchasing</h4>
+        <h4>Purchase Requests</h4>
         <ul>
-          <li>Controlled spend for supplies, software subscriptions, professional services, and other operational purchases requiring pre-approval</li>
+          <li>Employee-facing purchase request capture that feeds into Centime's existing AP approval workflow for operational spend</li>
         </ul>
       </div>
     </div>
@@ -1187,16 +1187,36 @@
   <!-- SECTION 5: BASIC PURCHASING -->
   <!-- ============================================================ -->
   <div class="doc-section">
-    <div class="section-number">05 — Basic Purchasing</div>
-    <h2>Lightweight pre-approved purchasing</h2>
-    <p class="lead">This module handles pre-approved purchases that don't go through a formal procurement system. The goal is control and accountability, not full P2P.</p>
+    <div class="section-number">05 — Purchase Requests</div>
+    <h2>Purchase requests flow through existing AP</h2>
+    <p class="lead">Purchase-to-pay approval is part of Centime's existing accounts payable process. The expense platform provides the employee-facing capture point; everything downstream &mdash; approval routing, PO generation, three-way matching &mdash; is handled by the AP workflow that already exists.</p>
+
+    <h3>Why This Isn't a Separate Module</h3>
+    <p>Centime already has AP with configurable approval routing, vendor management, and payment processing. Building a parallel purchasing workflow inside the expense product would duplicate that infrastructure and create two sources of truth for spend approval. Instead, the expense platform acts as an entry point: the employee submits a purchase request, and it enters the AP pipeline like any other payable.</p>
+
+    <h3>What the Expense Platform Provides</h3>
+    <ul class="body-list">
+      <li><strong>Purchase request form</strong> &mdash; employee creates a request with category, vendor, estimated amount, cost center, and business justification</li>
+      <li><strong>Policy pre-check</strong> &mdash; flags requests that exceed category limits, require additional documentation, or fall outside approved vendor lists before they enter AP</li>
+      <li><strong>Mobile capture</strong> &mdash; employees can create purchase requests from their phone with the same fields available on desktop</li>
+      <li><strong>Card transaction linking</strong> &mdash; when the corporate card transaction arrives (via Findity), the expense platform matches it to the approved request and inherits GL coding</li>
+      <li><strong>Unplanned spend flagging</strong> &mdash; card transactions without a prior approved request are flagged for compliance reporting</li>
+    </ul>
+
+    <h3>What Centime AP Handles</h3>
+    <ul class="body-list">
+      <li><strong>Approval routing</strong> &mdash; amount-threshold, department, category-based routing through the existing AP approval engine</li>
+      <li><strong>PO generation</strong> &mdash; approved requests generate PO numbers through the existing AP process</li>
+      <li><strong>Three-way matching</strong> &mdash; request, approval, and card transaction reconciliation</li>
+      <li><strong>Vendor management</strong> &mdash; approved vendor lists, payment terms, and supplier onboarding</li>
+    </ul>
 
     <h3>Scope</h3>
     <table class="comparison-table">
       <thead>
         <tr>
-          <th>In Scope</th>
-          <th>Out of Scope</th>
+          <th>In Scope (Operational Spend)</th>
+          <th>Out of Scope (Formal Procurement)</th>
         </tr>
       </thead>
       <tbody>
@@ -1223,80 +1243,7 @@
       </tbody>
     </table>
 
-    <p>The dollar threshold for "basic" vs. "formal procurement" is company-configurable (e.g., purchases under $5,000).</p>
-
-    <h3>Purchase Request Flow</h3>
-    <ol class="step-flow">
-      <li>Employee creates purchase request with category, vendor, estimated amount, and business justification</li>
-      <li>Policy engine validates: approval routing, card mandate</li>
-      <li>Routed to manager (and optionally finance for amounts above threshold)</li>
-      <li>Approved -- employee receives approval confirmation with PO number</li>
-      <li>Employee makes purchase using corporate card</li>
-      <li>Card transaction auto-matched to approved PO</li>
-      <li>Three-way match: Request, Approval, Card Transaction</li>
-      <li>Finance closes the loop</li>
-    </ol>
-
-    <h3>Purchase Request Fields</h3>
-    <table class="comparison-table">
-      <thead>
-        <tr>
-          <th>Field</th>
-          <th>Required</th>
-          <th>Notes</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Category</td>
-          <td>Yes</td>
-          <td>Drives GL coding and approval routing</td>
-        </tr>
-        <tr>
-          <td>Vendor / Supplier</td>
-          <td>Yes</td>
-          <td>Free text or select from vendor list</td>
-        </tr>
-        <tr>
-          <td>Estimated Amount</td>
-          <td>Yes</td>
-          <td>Used for approval threshold routing</td>
-        </tr>
-        <tr>
-          <td>Business Justification</td>
-          <td>Yes</td>
-          <td>Why this purchase is needed</td>
-        </tr>
-        <tr>
-          <td>Department / Cost Center</td>
-          <td>Yes</td>
-          <td>Auto-populated from employee profile, editable</td>
-        </tr>
-        <tr>
-          <td>Project Code</td>
-          <td>Configurable</td>
-          <td>Required for project-based accounting</td>
-        </tr>
-        <tr>
-          <td>Recurring?</td>
-          <td>Yes</td>
-          <td>If yes: frequency and duration</td>
-        </tr>
-        <tr>
-          <td>Payment Method</td>
-          <td>Auto</td>
-          <td>Defaults to corporate card per policy</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3>Purchase-to-Card Matching</h3>
-    <ul class="body-list">
-      <li>System attempts <strong>auto-match</strong> based on vendor name, amount (within 10% tolerance), and date range (within 30 days of approval)</li>
-      <li>Matched transactions <strong>inherit GL coding</strong> and project codes from the approved request</li>
-      <li>Unmatched approved requests open for >30 days trigger a <strong>follow-up to the employee</strong></li>
-      <li>Purchases made without a prior request are flagged as <strong>"unplanned spend"</strong> -- still processed, but visible in compliance reporting</li>
-    </ul>
+    <p>The dollar threshold for "operational" vs. "formal procurement" is company-configurable (e.g., purchases under $5,000).</p>
   </div>
 
   <!-- ============================================================ -->
@@ -1695,14 +1642,13 @@
       <li><span class="dot"></span><span>Push notifications for approvals and status changes</span></li>
     </ul>
 
-    <h3>V2.0 — Basic Purchasing &amp; Integrations (+18–22 Weeks)</h3>
-    <p>Pre-approved purchasing, three-way matching, ERP connectors, and the integrations that make the platform sticky in the customer's stack.</p>
+    <h3>V2.0 — Purchase Requests &amp; Integrations (+18–22 Weeks)</h3>
+    <p>Purchase request capture integrated with Centime AP, ERP connectors, and the integrations that make the platform sticky in the customer's stack.</p>
     <ul class="checklist">
-      <li><span class="dot"></span><span>Purchase request workflow: create, route, approve</span></li>
-      <li><span class="dot"></span><span>PO number generation</span></li>
-      <li><span class="dot"></span><span>Purchase-to-card matching (vendor name, amount ±10%, 30-day window)</span></li>
-      <li><span class="dot"></span><span>Three-way match: request → approval → card transaction</span></li>
-      <li><span class="dot"></span><span>Unplanned spend flagging and compliance reporting</span></li>
+      <li><span class="dot"></span><span>Purchase request capture: employee-facing form with category, vendor, amount, cost center, justification</span></li>
+      <li><span class="dot"></span><span>AP integration: requests route into Centime's existing P2P approval workflow</span></li>
+      <li><span class="dot"></span><span>Card-to-request matching: link Findity card transactions to approved AP requests</span></li>
+      <li><span class="dot"></span><span>Unplanned spend flagging: card transactions without prior approved requests surface in compliance reporting</span></li>
       <li><span class="dot"></span><span>Duplicate detection</span></li>
       <li><span class="dot"></span><span>ERP/GL connectors: QuickBooks, NetSuite, Sage Intacct, Microsoft Dynamics</span></li>
       <li><span class="dot"></span><span>HRIS integration: BambooHR, ADP, Workday</span></li>

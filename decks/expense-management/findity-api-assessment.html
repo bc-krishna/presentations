@@ -637,7 +637,7 @@
     <h2>The product we designed</h2>
     <p class="lead">Before mapping the Findity API, a summary of what we set out to build. The full product specification is available as a <a href="document.html" style="color: var(--ft-claret);">scrollable document</a> and a <a href="index.html" style="color: var(--ft-claret);">slide deck</a>.</p>
 
-    <p>Centime Expense Management is a policy-driven expense and lightweight purchasing platform for US mid-market finance teams (200&ndash;2,000 employees), built on Findity&rsquo;s white-label T&amp;E engine. We own the UX and workflows; Findity provides the expense processing engine. The platform enforces corporate card usage as the default, provides configurable policy guardrails, and delivers a streamlined experience across three personas: employee (submitter), manager (approver), and finance (controller).</p>
+    <p>Centime Expense Management is a policy-driven expense platform for US mid-market finance teams (200&ndash;2,000 employees), built on Findity&rsquo;s white-label T&amp;E engine. We own the UX and workflows; Findity provides the expense processing engine. The platform enforces corporate card usage as the default, provides configurable policy guardrails, and delivers a streamlined experience across three personas: employee (submitter), manager (approver), and finance (controller).</p>
 
     <h3>Design Principles</h3>
     <div class="pillar-grid cols-4">
@@ -663,7 +663,7 @@
     <ul class="checklist">
       <li><span class="dot"></span><span><strong>Policy engine:</strong> Four corporate card mandate levels (Encouraged, Preferred, Required, Mandatory). Policy hierarchy (company &rarr; department &rarr; role &rarr; project). Per-category spend limits, receipt thresholds, per-diem and mileage rules. Three violation responses: soft warning, hard warning, block.</span></li>
       <li><span class="dot"></span><span><strong>T&amp;E expense management:</strong> Corporate card transaction auto-ingestion with MCC categorization. Personal card exception path with justification. Mobile receipt capture with OCR. Mileage (IRS rates, Google Maps, commute offsets). Per-diem (GSA rates, custom rates, partial-day). Trip-based and period-based expense reports.</span></li>
-      <li><span class="dot"></span><span><strong>Basic purchasing:</strong> Pre-approved purchase request workflow for operational spend below a configurable threshold. PO generation, corporate card purchase, three-way matching (request &rarr; approval &rarr; card transaction). Unplanned spend flagging.</span></li>
+      <li><span class="dot"></span><span><strong>Purchase requests:</strong> Employee-facing purchase request capture for operational spend below a configurable threshold. Requests feed into Centime&rsquo;s existing AP approval workflow. Card-to-request matching links Findity transactions to approved requests. Unplanned spend flagging.</span></li>
       <li><span class="dot"></span><span><strong>Approval workflows:</strong> Multi-dimensional routing by amount, category, department, and violation status. Auto-approval for clean, in-policy expenses. Delegation with date ranges. Aging escalation. Batch approval. Return for correction and approve with modification.</span></li>
       <li><span class="dot"></span><span><strong>Finance operations:</strong> Five-status card reconciliation workspace. Period close with automated reminders and manager escalation. Reimbursement batch processing via ACH or payroll. GL auto-coding (MCC-to-GL mapping), split coding, GL validation. Full reporting suite: compliance scorecard, card ratio, unreconciled aging, spend analysis, cycle time, duplicate detection.</span></li>
       <li><span class="dot"></span><span><strong>Integrations:</strong> ERP/GL push (QuickBooks, NetSuite, Sage Intacct, Dynamics). HRIS sync (BambooHR, ADP, Workday). SSO (Okta, Azure AD, Google). Visa/MC card feeds from US Bank and FNBO. Slack/Teams approval notifications. Calendar expense association.</span></li>
@@ -686,7 +686,7 @@
         <tr><td>V1.2</td><td>+8 weeks</td><td>Finance operations: reconciliation workspace, period close, GL coding, core reports</td></tr>
         <tr><td>V1.3</td><td>+10 weeks</td><td>Personal card flow, reimbursement processing, card-agnostic pricing enforcement</td></tr>
         <tr><td>V1.5</td><td>+14 weeks</td><td>Full mobile app, receipt intelligence, mileage engine, per-diem engine</td></tr>
-        <tr><td>V2.0</td><td>+18&ndash;22 weeks</td><td>Basic purchasing, three-way matching, ERP/HRIS/SSO integrations, advanced reporting</td></tr>
+        <tr><td>V2.0</td><td>+18&ndash;22 weeks</td><td>Purchase request capture (AP integration), ERP/HRIS/SSO integrations, advanced reporting</td></tr>
       </tbody>
     </table>
 
@@ -856,16 +856,16 @@
   <!-- SECTION 05: BASIC PURCHASING -->
   <!-- ============================================================ -->
   <div class="doc-section">
-    <div class="section-number">05 &mdash; Mapping to the Spec: Basic Purchasing</div>
-    <h2>Entirely our build</h2>
-    <p class="lead">Spec section 05. Findity is an expense platform, not a procurement platform. No purchase request workflow, no PO generation, no 3-way matching, no pre-approval routing. This module is 100% ours.</p>
+    <div class="section-number">05 &mdash; Mapping to the Spec: Purchase Requests</div>
+    <h2>Capture is ours; approval is existing AP</h2>
+    <p class="lead">Spec section 05. Purchase-to-pay approval is part of Centime&rsquo;s existing accounts payable process. The expense platform provides the employee-facing purchase request form; approval routing, PO generation, and three-way matching are handled by the AP workflow that already exists.</p>
 
-    <p>However, the integration point is clear: once a purchase is made on a corporate card, the card transaction flows into Findity normally via the Connect API. We can match the Findity expense to our purchase request in our layer.</p>
+    <p>Findity&rsquo;s role is limited and clean: it has no purchase request concept, but when the employee makes the purchase on a corporate card, the card transaction flows into Findity via the Connect API. Our layer matches the Findity expense to the AP-approved request and inherits the GL coding.</p>
 
-    <p>The architecture is straightforward. The purchase request module lives entirely in our stack. When the card transaction arrives via Findity and auto-creates an expense, we perform the match &mdash; vendor name, amount &plusmn;10%, 30-day window &mdash; and link the Findity expense ID to our approved PO. The expense inherits the GL coding from the purchase request.</p>
+    <p>This is not a new module &mdash; it is a capture point. The employee creates a purchase request in the expense platform (category, vendor, amount, cost center, justification), and the request enters Centime&rsquo;s AP pipeline. The AP process handles everything downstream: approval routing, PO generation, vendor management. The expense platform&rsquo;s value-add is the employee-facing UX, policy pre-check, mobile capture, and card-to-request matching after the purchase is made.</p>
 
     <div class="highlight-box">
-      <p><strong>Basic purchasing is 100% our module.</strong> Findity never sees a purchase request. The integration point is post-purchase: when the card transaction creates a Findity expense, we match it to our approved PO and inherit the GL coding.</p>
+      <p><strong>The expense platform captures purchase requests. Centime AP approves them.</strong> Findity never sees a purchase request. The integration point is post-purchase: when the card transaction creates a Findity expense, we match it to the AP-approved request and inherit the GL coding.</p>
     </div>
   </div>
 
@@ -994,7 +994,7 @@
       <li><span class="dot"></span><span><strong>V1.2</strong> &mdash; Finance ops (our build, uses Findity exports/reports)</span></li>
       <li><span class="dot"></span><span><strong>V1.3</strong> &mdash; Personal cards (Findity PRIVATE liability type)</span></li>
       <li><span class="dot"></span><span><strong>V1.5</strong> &mdash; Mobile (our app, Findity Expense API)</span></li>
-      <li><span class="dot"></span><span><strong>V2.0</strong> &mdash; Purchasing (entirely our module) + ERP connectors (Findity export &rarr; our transform)</span></li>
+      <li><span class="dot"></span><span><strong>V2.0</strong> &mdash; Purchase request capture (integrated with Centime AP) + ERP connectors (Findity export &rarr; our transform)</span></li>
     </ul>
   </div>
 
@@ -1050,7 +1050,7 @@
       <li><span class="dot"></span><span>Approval routing logic (amount, category, department, violation triggers)</span></li>
       <li><span class="dot"></span><span>Auto-approval, delegation, escalation</span></li>
       <li><span class="dot"></span><span>All finance workflows (reconciliation, reimbursement, period close)</span></li>
-      <li><span class="dot"></span><span>Basic purchasing module (entirely)</span></li>
+      <li><span class="dot"></span><span>Purchase request capture (approval via existing AP)</span></li>
       <li><span class="dot"></span><span>ERP/GL connectors (QBO, NetSuite, Sage Intacct, Dynamics)</span></li>
       <li><span class="dot"></span><span>HRIS sync, SSO, mobile applications</span></li>
       <li><span class="dot"></span><span>Reporting and analytics</span></li>

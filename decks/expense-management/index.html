@@ -290,18 +290,18 @@
 
   <!-- SLIDE 8: BASIC PURCHASING (dark) -->
   <section data-background-color="#1A1817" class="slide-dark">
-    <div class="section-label">Lightweight P2P</div>
-    <h2>Basic purchasing: control without overhead</h2>
-    <p class="body" style="margin-bottom: 0.8em;">This module handles pre-approved purchases that do not go through a formal procurement system. It covers office supplies, software subscriptions, professional services, conference registrations, and team events below a company-configurable threshold. Capital expenditures, multi-year contracts, and inventory purchasing are explicitly out of scope. The goal is control and accountability, not full procure-to-pay.</p>
+    <div class="section-label">Purchase Requests</div>
+    <h2>Purchase requests flow through existing AP</h2>
+    <p class="body" style="margin-bottom: 0.8em;">Purchase-to-pay approval is part of Centime&rsquo;s existing AP process. The expense platform provides the employee-facing capture point &mdash; category, vendor, amount, justification &mdash; and routes the request into Centime&rsquo;s AP approval workflow. Approval routing, PO generation, and three-way matching are handled by AP, not rebuilt here.</p>
     <div class="flow-chain">
-      <div class="flow-step"><span class="flow-arrow">1.</span> Employee creates a purchase request with category, vendor, amount, and justification</div>
-      <div class="flow-step"><span class="flow-arrow">2.</span> Policy engine validates and routes to the right approver</div>
-      <div class="flow-step"><span class="flow-arrow">3.</span> Approved request generates a PO number sent to the employee</div>
-      <div class="flow-step"><span class="flow-arrow">4.</span> Employee makes the purchase on corporate card</div>
-      <div class="flow-step"><span class="flow-arrow">5.</span> Card transaction auto-matched to approved PO within 10% amount and 30-day window</div>
-      <div class="flow-step"><span class="flow-arrow">6.</span> Three-way match closes the loop: request, approval, card transaction</div>
+      <div class="flow-step"><span class="flow-arrow">1.</span> Employee creates purchase request in expense platform (category, vendor, amount, justification)</div>
+      <div class="flow-step"><span class="flow-arrow">2.</span> Policy pre-check flags limits, vendor restrictions, documentation requirements</div>
+      <div class="flow-step"><span class="flow-arrow">3.</span> Request enters Centime AP &mdash; routed through existing P2P approval workflow</div>
+      <div class="flow-step"><span class="flow-arrow">4.</span> Employee makes purchase on corporate card</div>
+      <div class="flow-step"><span class="flow-arrow">5.</span> Card transaction arrives via Findity &mdash; expense platform matches to approved request</div>
+      <div class="flow-step"><span class="flow-arrow">6.</span> GL coding inherited from AP-approved request &mdash; loop closed</div>
     </div>
-    <p class="body">Purchases made without a prior request are flagged as unplanned spend. They still process through the system, but they surface in compliance reporting so finance can see patterns and address them.</p>
+    <p class="body">Card transactions without a prior approved request are flagged as unplanned spend. They still process through the expense system, but surface in compliance reporting so finance can see patterns and address them.</p>
   </section>
 
   <!-- SLIDE 9: APPROVAL WORKFLOWS (salmon) -->
@@ -437,7 +437,7 @@
   <!-- SLIDE 14: RELEASE SCHEDULE V1.5–V2 (dark) -->
   <section data-background-color="#1A1817" class="slide-dark">
     <div class="section-label">Release Schedule</div>
-    <h2>V1.5–V2: Mobile, purchasing, integrations</h2>
+    <h2>V1.5–V2: Mobile, purchase requests, integrations</h2>
     <div class="func-grid">
       <div class="func-item">
         <div class="func-num">V1.5 · +14 Weeks</div>
@@ -446,8 +446,8 @@
       </div>
       <div class="func-item">
         <div class="func-num">V2.0 · +18 Weeks</div>
-        <h3>Basic Purchasing</h3>
-        <p>Purchase request workflow: create, route, approve. PO number generation. Purchase-to-card matching (vendor, amount within 10%, 30-day window). Three-way match: request, approval, card transaction. Unplanned spend flagging and compliance reporting. Duplicate detection.</p>
+        <h3>Purchase Requests</h3>
+        <p>Employee-facing purchase request capture integrated with Centime AP. Requests route into existing P2P approval workflow. Card-to-request matching links Findity transactions to approved requests. Unplanned spend flagging. Duplicate detection.</p>
       </div>
       <div class="func-item" style="grid-column: 1 / -1; border-right: none;">
         <div class="func-num">V2.1 · +22 Weeks</div>
