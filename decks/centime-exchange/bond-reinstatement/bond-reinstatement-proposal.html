@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bond B1230FC — Proposal for Reinstatement with Amended Coverage</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ft-pink:     #FFF1E5;
+    --ft-dark:     #33302E;
+    --ft-black:    #1A1817;
+    --ft-claret:   #990F3D;
+    --ft-oxford:   #0F5499;
+    --ft-teal:     #0D7680;
+    --ft-wheat:    #F2DFCE;
+    --ft-white:    #FFFFFF;
+    --ft-slate:    #66605C;
+    --ft-light:    #F6E9D8;
+    --ft-paper:    #FFF7EF;
+    --ft-rule:     #CEC6B9;
+    --ft-mandarin: #FF8833;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--ft-pink);
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--ft-dark);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---- HEADER ---- */
+  .doc-header {
+    background: var(--ft-black);
+    color: var(--ft-pink);
+    padding: 80px 60px 72px;
+  }
+
+  .doc-header-inner {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  .doc-header .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--ft-mandarin);
+    margin-bottom: 32px;
+  }
+
+  .doc-header h1 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--ft-pink);
+    margin-bottom: 20px;
+    max-width: 700px;
+  }
+
+  .doc-header .subtitle {
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--ft-wheat);
+    line-height: 1.55;
+    max-width: 620px;
+    margin-bottom: 48px;
+  }
+
+  .doc-header .meta {
+    font-size: 14px;
+    color: var(--ft-slate);
+    border-top: 1px solid rgba(206,198,185,0.2);
+    padding-top: 16px;
+  }
+
+  /* ---- ADDRESSEE BLOCK ---- */
+  .addressee {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 48px 60px 0;
+  }
+
+  .addressee .date {
+    font-size: 16px;
+    color: var(--ft-dark);
+    margin-bottom: 24px;
+  }
+
+  .addressee .recipient {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ft-dark);
+    margin-bottom: 24px;
+  }
+
+  .addressee .re-line {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ft-claret);
+    line-height: 1.4;
+    padding: 20px 0;
+    border-top: 1px solid var(--ft-rule);
+    border-bottom: 1px solid var(--ft-rule);
+    margin-bottom: 32px;
+  }
+
+  .addressee .salutation {
+    font-size: 17px;
+    color: var(--ft-dark);
+    margin-bottom: 16px;
+  }
+
+  /* ---- CONTENT AREA ---- */
+  .doc-body {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 60px 80px;
+  }
+
+  /* ---- INTRO (no section number) ---- */
+  .doc-intro {
+    padding: 0 0 8px;
+  }
+
+  .doc-intro p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ft-dark);
+    margin-bottom: 16px;
+    max-width: 640px;
+  }
+
+  /* ---- SECTION ---- */
+  .doc-section {
+    padding: 56px 0 0;
+  }
+
+  .doc-section + .doc-section {
+    border-top: 1px solid var(--ft-rule);
+  }
+
+  .section-number {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ft-claret);
+    margin-bottom: 12px;
+  }
+
+  .doc-section h2 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--ft-black);
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .doc-section h3 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ft-black);
+    line-height: 1.25;
+    margin-top: 36px;
+    margin-bottom: 12px;
+  }
+
+  .doc-section h4 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ft-black);
+    line-height: 1.3;
+    margin-top: 28px;
+    margin-bottom: 8px;
+  }
+
+  .doc-section p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ft-dark);
+    margin-bottom: 16px;
+    max-width: 640px;
+  }
+
+  .doc-section p.lead {
+    font-size: 19px;
+    font-weight: 300;
+    color: var(--ft-slate);
+    max-width: 640px;
+    margin-bottom: 24px;
+  }
+
+  .doc-section ul.body-list,
+  .doc-section ol.body-list {
+    margin: 0 0 20px 24px;
+    max-width: 640px;
+  }
+
+  .doc-section ul.body-list li,
+  .doc-section ol.body-list li {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ft-dark);
+    margin-bottom: 6px;
+  }
+
+  .doc-section ul.body-list li strong,
+  .doc-section ol.body-list li strong {
+    color: var(--ft-black);
+  }
+
+  /* ---- HIGHLIGHT BOX ---- */
+  .highlight-box {
+    background: var(--ft-black);
+    color: var(--ft-pink);
+    padding: 40px 44px;
+    margin: 32px 0;
+    border-left: 4px solid var(--ft-claret);
+  }
+
+  .highlight-box p {
+    color: var(--ft-wheat);
+    max-width: 100%;
+  }
+
+  .highlight-box strong {
+    color: var(--ft-pink);
+  }
+
+  /* ---- GOAL BOX ---- */
+  .goal-box {
+    background: var(--ft-paper);
+    border-top: 3px solid var(--ft-claret);
+    padding: 32px 36px;
+    margin: 32px 0;
+  }
+
+  .goal-box .goal-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ft-claret);
+    margin-bottom: 12px;
+  }
+
+  .goal-box p {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 18px;
+    color: var(--ft-black);
+    line-height: 1.5;
+    max-width: 100%;
+  }
+
+  /* ---- COMPARISON TABLE ---- */
+  .comparison-table {
+    width: 100%;
+    margin: 32px 0;
+    border-collapse: collapse;
+    border-top: 3px solid var(--ft-black);
+  }
+
+  .comparison-table thead th {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--ft-claret);
+    text-align: left;
+    padding: 16px 16px 12px;
+    border-bottom: 1px solid var(--ft-black);
+  }
+
+  .comparison-table tbody td {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ft-dark);
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--ft-rule);
+    vertical-align: top;
+  }
+
+  .comparison-table tbody td:first-child {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ft-black);
+    white-space: nowrap;
+    padding-left: 0;
+  }
+
+  .comparison-table tbody tr:hover {
+    background: var(--ft-paper);
+  }
+
+  /* ---- CHECKLIST ---- */
+  .checklist {
+    list-style: none;
+    margin: 24px 0;
+    padding: 0;
+    border-top: 1px solid var(--ft-rule);
+  }
+
+  .checklist li {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ft-dark);
+    padding: 12px 0;
+    border-bottom: 1px solid var(--ft-rule);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .checklist .dot {
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--ft-claret);
+    margin-top: 8px;
+  }
+
+  .checklist strong {
+    color: var(--ft-black);
+  }
+
+  /* ---- STEP FLOW ---- */
+  .step-flow {
+    margin: 28px 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step-counter;
+  }
+
+  .step-flow li {
+    counter-increment: step-counter;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 14px 0;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ft-dark);
+  }
+
+  .step-flow li + li {
+    border-top: 1px solid var(--ft-rule);
+  }
+
+  .step-flow li::before {
+    content: counter(step-counter);
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--ft-claret);
+    color: var(--ft-white);
+    font-family: 'Libre Baskerville', serif;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+
+  /* ---- GAP GRID ---- */
+  .gap-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 48px;
+    margin: 32px 0;
+    border-top: 3px solid var(--ft-black);
+  }
+
+  .gap-col h4 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ft-black);
+    padding: 20px 0 12px;
+    border-bottom: 1px solid var(--ft-rule);
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+
+  .gap-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .gap-col li {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ft-dark);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--ft-rule);
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .gap-col li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 16px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--ft-claret);
+  }
+
+  /* ---- PILLAR GRID ---- */
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    margin: 32px 0;
+    border-top: 3px solid var(--ft-black);
+  }
+
+  .pillar-grid.cols-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .pillar {
+    padding: 24px 20px 24px 0;
+    border-bottom: 1px solid var(--ft-rule);
+  }
+
+  .pillar:not(:last-child) {
+    border-right: 1px solid var(--ft-rule);
+    padding-right: 20px;
+  }
+
+  .pillar:not(:first-child) {
+    padding-left: 20px;
+  }
+
+  .pillar h4 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ft-black);
+    margin-bottom: 6px;
+    margin-top: 0;
+  }
+
+  .pillar p {
+    font-size: 14px;
+    color: var(--ft-slate);
+    line-height: 1.5;
+    max-width: 100%;
+  }
+
+  /* ---- SUMMARY TABLE (dark variant) ---- */
+  .summary-table {
+    width: 100%;
+    margin: 32px 0;
+    border-collapse: collapse;
+    border-top: 3px solid var(--ft-wheat);
+  }
+
+  .summary-table td {
+    font-size: 15px;
+    line-height: 1.55;
+    padding: 16px 16px;
+    border-bottom: 1px solid rgba(206,198,185,0.15);
+    vertical-align: top;
+  }
+
+  .summary-table td:first-child {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ft-pink);
+    white-space: nowrap;
+    padding-left: 0;
+    width: 140px;
+  }
+
+  .summary-table td:last-child {
+    color: var(--ft-wheat);
+  }
+
+  /* ---- DARK SECTION ---- */
+  .doc-section-dark {
+    background: var(--ft-black);
+    color: var(--ft-pink);
+    margin: 56px -60px 0;
+    padding: 56px 60px 56px;
+  }
+
+  .doc-section-dark h2 { color: var(--ft-pink); }
+  .doc-section-dark h3 { color: var(--ft-pink); }
+  .doc-section-dark h4 { color: var(--ft-pink); }
+  .doc-section-dark .section-number { color: var(--ft-mandarin); }
+  .doc-section-dark p { color: var(--ft-wheat); }
+  .doc-section-dark .body-list li { color: var(--ft-wheat); }
+  .doc-section-dark .body-list li strong { color: var(--ft-pink); }
+  .doc-section-dark .checklist { border-top-color: rgba(206,198,185,0.2); }
+  .doc-section-dark .checklist li { color: var(--ft-wheat); border-bottom-color: rgba(206,198,185,0.15); }
+  .doc-section-dark .checklist .dot { background: var(--ft-mandarin); }
+  .doc-section-dark .checklist strong { color: var(--ft-pink); }
+  .doc-section-dark .step-flow li { color: var(--ft-wheat); }
+  .doc-section-dark .step-flow li + li { border-top-color: rgba(206,198,185,0.15); }
+  .doc-section-dark .step-flow li::before { background: var(--ft-mandarin); color: var(--ft-black); }
+  .doc-section-dark .comparison-table { border-top-color: var(--ft-wheat); }
+  .doc-section-dark .comparison-table thead th { color: var(--ft-mandarin); border-bottom-color: rgba(206,198,185,0.3); }
+  .doc-section-dark .comparison-table tbody td { color: var(--ft-wheat); border-bottom-color: rgba(206,198,185,0.15); }
+  .doc-section-dark .comparison-table tbody td:first-child { color: var(--ft-pink); }
+  .doc-section-dark .comparison-table tbody tr:hover { background: rgba(255,255,255,0.04); }
+
+  /* ---- TAKEAWAY ---- */
+  .takeaway {
+    background: var(--ft-claret);
+    color: var(--ft-white);
+    margin: 56px -60px 0;
+    padding: 56px 60px;
+  }
+
+  .takeaway .section-number { color: var(--ft-wheat); opacity: 0.7; }
+  .takeaway h2 { font-family: 'Libre Baskerville', Georgia, serif; font-size: 32px; font-weight: 700; color: var(--ft-white); line-height: 1.25; margin-bottom: 24px; }
+  .takeaway p { font-size: 18px; color: rgba(255,255,255,0.85); line-height: 1.65; max-width: 640px; }
+  .takeaway p strong { color: var(--ft-white); }
+
+  /* ---- CLOSING BLOCK ---- */
+  .closing-block {
+    padding: 48px 0 0;
+    border-top: 1px solid var(--ft-rule);
+    margin-top: 48px;
+  }
+
+  .closing-block p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ft-dark);
+    margin-bottom: 16px;
+    max-width: 640px;
+  }
+
+  .signature {
+    margin-top: 40px;
+    padding-top: 24px;
+  }
+
+  .signature .sig-line {
+    width: 200px;
+    border-bottom: 1px solid var(--ft-rule);
+    margin-bottom: 16px;
+    height: 40px;
+  }
+
+  .signature .company {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ft-black);
+    margin-bottom: 4px;
+  }
+
+  .signature .contact {
+    font-size: 14px;
+    color: var(--ft-slate);
+  }
+
+  .enclosures {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--ft-rule);
+  }
+
+  .enclosures .enc-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ft-claret);
+    margin-bottom: 12px;
+  }
+
+  .enclosures ol {
+    margin: 0 0 0 20px;
+  }
+
+  .enclosures li {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ft-slate);
+    margin-bottom: 4px;
+  }
+
+  .enclosures em {
+    color: var(--ft-slate);
+    opacity: 0.7;
+  }
+
+  /* ---- FOOTER ---- */
+  .doc-footer {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 32px 60px 64px;
+    font-size: 14px;
+    color: var(--ft-slate);
+    border-top: 1px solid var(--ft-rule);
+  }
+
+  .doc-footer a {
+    color: var(--ft-claret);
+    text-decoration: none;
+  }
+
+  .doc-footer .draft-note {
+    font-style: italic;
+    margin-top: 8px;
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 768px) {
+    .doc-header { padding: 48px 28px 40px; }
+    .doc-header h1 { font-size: 32px; }
+    .addressee { padding: 32px 28px 0; }
+    .doc-body { padding: 0 28px 48px; }
+    .pillar-grid { grid-template-columns: 1fr; }
+    .gap-grid { grid-template-columns: 1fr; gap: 0; }
+    .comparison-table { font-size: 14px; }
+    .comparison-table tbody td:first-child { white-space: normal; }
+    .doc-section-dark { margin: 40px -28px 0; padding: 40px 28px; }
+    .takeaway { margin: 40px -28px 0; padding: 40px 28px; }
+  }
+
+  @media print {
+    body { background: white; }
+    .doc-header { background: var(--ft-black); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .doc-section-dark { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .takeaway { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .doc-section { break-inside: avoid; }
+    .comparison-table { break-inside: avoid; }
+    .step-flow { break-inside: avoid; }
+    .highlight-box { break-inside: avoid; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .goal-box { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="doc-header">
+  <div class="doc-header-inner">
+    <div class="eyebrow">Centime &middot; Bond Reinstatement Proposal</div>
+    <h1>Financial Institutions Bond B1230FC</h1>
+    <div class="subtitle">Proposal for reinstatement with amended coverage &mdash; extending from system-breach protection to social engineering and vendor impersonation fraud, backed by Centime Exchange verification.</div>
+    <div class="meta">February 20, 2026 &middot; To: HUB International New England / Certain Underwriters at Lloyd&rsquo;s &middot; Confidential</div>
+  </div>
+</header>
+
+<!-- ADDRESSEE -->
+<div class="addressee">
+  <div class="date">February 20, 2026</div>
+  <div class="recipient">
+    HUB International New England, LLC<br>
+    CA License #0F79381<br>
+    600 Longwater Dr.<br>
+    Norwell, MA 02061
+  </div>
+  <div class="re-line">Re: Financial Institutions Bond B1230FC &mdash; Proposal for Reinstatement with Amended Coverage</div>
+  <div class="salutation">Dear HUB International Team,</div>
+</div>
+
+<div class="doc-body">
+
+  <!-- INTRO -->
+  <div class="doc-intro">
+    <p>We are writing to propose the reinstatement and amendment of Financial Institutions Bond B1230FC, previously underwritten by Certain Underwriters at Lloyd&rsquo;s on behalf of Centime, Inc.</p>
+    <p>Centime is a financial process automation company that provides mid-market finance teams with an integrated suite of solutions &mdash; accounts payable automation, accounts receivable automation, expense management, business banking, and cash flow forecasting &mdash; embedded directly within their ERP systems (NetSuite, Sage Intacct, QuickBooks, and Microsoft Dynamics).</p>
+    <p>On the payables side, Centime offers two complementary solutions: <strong>AP Automation</strong> (invoice-to-pay, covering invoice capture, coding, PO matching, approvals, and supplier management) and <strong>Payments Automation</strong> (integrated payables, covering payment execution via ACH, virtual card, and check, with reconciliation back to the ERP).</p>
+    <p>The coverage requested in this letter applies to payments made through either payables solution.</p>
+    <p>This letter provides context on the existing policy, the gap between what it covers and the risk we need to insure against, the competitive landscape that creates urgency for this coverage, and a specific proposal for amended terms. We recognize this is a more detailed submission than is typical for a reinstatement request, but the strategic context is important to understanding both the opportunity for the underwriter and the risk profile we bring to the table.</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1: THE EXISTING POLICY -->
+  <!-- ============================================================ -->
+  <div class="doc-section">
+    <div class="section-number">01 &mdash; The Existing Policy</div>
+    <h2>What the bond covers</h2>
+    <p class="lead">Bond B1230FC is a Financial Institutions Bond with a single insuring agreement covering Unauthorized Electronic Funds Transfer (UEFT).</p>
+
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Term</th>
+          <th>Detail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Aggregate Limit</td><td>USD 5,000,000 (bond period)</td></tr>
+        <tr><td>Single Loss Limit</td><td>USD 100,000</td></tr>
+        <tr><td>Deductible</td><td>USD 10,000 per loss</td></tr>
+        <tr><td>Annual Premium</td><td>USD 30,000 minimum and deposit</td></tr>
+        <tr><td>Scaling</td><td>USD 90/client (301&ndash;400); USD 80/client (401&ndash;500)</td></tr>
+        <tr><td>Insured Class</td><td>Commercial account customers of Centime</td></tr>
+        <tr><td>Territory</td><td>Worldwide</td></tr>
+      </tbody>
+    </table>
+
+    <p>The insuring agreement covers loss resulting directly from an Insured having transferred, paid, or delivered any Money as the direct result of an Unauthorized Electronic Fund Transfer while using the Centime system as authorized for Check, ACH, or credit card payments.</p>
+    <p>The definition of &ldquo;Unauthorized Electronic Funds Transfer&rdquo; is specific: <em>an Electronic Funds Transfer from an Account initiated by a person other than the Insured without the actual authority to initiate the transfer and from which the Insured receives no benefit, and which arises out of a failure or violation of the security of an Insured&rsquo;s Computer System.</em></p>
+    <p>This is a system-breach coverage. It covers the scenario in which a bad actor compromises a customer&rsquo;s computer system, gains unauthorized access to the Centime platform, and initiates a fraudulent payment. The customer did not authorize the transfer. The transfer arose from a security failure of the customer&rsquo;s systems.</p>
+
+    <div class="goal-box">
+      <div class="goal-label">Claims History</div>
+      <p>The policy performed exactly as designed. During the period it was in force, Centime had zero claims. The controls embedded in our platform &mdash; multi-factor authentication, role-based access, payment approval workflows &mdash; prevented the covered loss scenario from occurring.</p>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2: THE GAP -->
+  <!-- ============================================================ -->
+  <div class="doc-section">
+    <div class="section-number">02 &mdash; The Coverage Gap</div>
+    <h2>What the policy does not cover</h2>
+    <p class="lead">The fastest-growing category of B2B payment fraud is not system breach. It is supplier impersonation and business email compromise (BEC).</p>
+
+    <p>In these scenarios, no system is breached. No unauthorized access occurs. Instead, a bad actor impersonates a legitimate supplier &mdash; or compromises a supplier&rsquo;s email account &mdash; and submits fraudulent banking information to the buyer. The buyer, acting in good faith on what it believes is verified supplier data, initiates a payment to the wrong account. The buyer authorized the transfer. They were simply deceived about the destination.</p>
+
+    <p>This is the fraud vector that the current bond explicitly does not cover. The UEFT definition requires that the transfer be &ldquo;initiated by a person other than the Insured without the actual authority&rdquo; and that it &ldquo;arise out of a failure or violation of the security of an Insured&rsquo;s Computer System.&rdquo; In a BEC/vendor impersonation scenario, neither condition is met.</p>
+
+    <div class="gap-grid">
+      <div class="gap-col">
+        <h4>Covered (Agreement A)</h4>
+        <ul>
+          <li>Bad actor hacks customer system</li>
+          <li>Gains unauthorized access to Centime</li>
+          <li>Initiates payment without customer knowledge</li>
+          <li>Customer did not authorize the transfer</li>
+        </ul>
+      </div>
+      <div class="gap-col">
+        <h4>Not Covered (The Gap)</h4>
+        <ul>
+          <li>Bad actor impersonates a supplier</li>
+          <li>Submits fraudulent bank details</li>
+          <li>Customer authorizes payment in good faith</li>
+          <li>No system breach occurred</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>The scale of the problem</h3>
+
+    <div class="highlight-box">
+      <p><strong>Business email compromise is the single largest category of cybercrime loss in the United States.</strong> The FBI&rsquo;s Internet Crime Complaint Center (IC3) has consistently reported BEC losses exceeding $2.7 billion annually, dwarfing ransomware, data breaches, and traditional wire fraud combined. The median BEC loss for a mid-market company is approximately $50,000&ndash;$125,000 per incident, with tail events reaching seven figures.</p>
+    </div>
+
+    <p>The reason is structural: traditional AP processes rely on supplier-provided banking information that is verified through manual processes &mdash; voided checks, email confirmations, phone callbacks to numbers the supplier provided. These controls are routinely defeated by sophisticated social engineering. The buyer&rsquo;s AP team believes it has verified the account. It has not.</p>
+    <p>This is the risk our platform is specifically designed to mitigate, and the risk we need insurance to backstop.</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3: WHAT HAS CHANGED (dark) -->
+  <!-- ============================================================ -->
+  <div class="doc-section-dark">
+    <div class="section-number">03 &mdash; What Has Changed</div>
+    <h2>Centime Exchange &mdash; Supplier Verification Layer</h2>
+    <p>Since the bond lapsed, Centime has developed and deployed a capability called <strong style="color: var(--ft-pink);">Centime Exchange</strong>, which is a supplier enrollment and verification platform that fundamentally changes the risk profile for the fraud vector described above.</p>
+    <p>Exchange is a supplier onboarding and management platform that serves as the verification layer for Centime&rsquo;s payables solutions &mdash; both AP Automation and Payments Automation. Before a supplier can receive any payment through the Centime platform, it must complete Exchange verification. The key controls:</p>
+
+    <ul class="checklist">
+      <li>
+        <span class="dot"></span>
+        <span><strong>Real-Time Bank Account Ownership Verification (CAS).</strong> Our proprietary Centime Account Services technology verifies bank account ownership in real time through browser-based bank authentication. The supplier logs into their own bank account through a secure session, and we confirm that the account number provided matches an account to which the supplier has authenticated access. This is not a micro-deposit. It is not a third-party database lookup. It is real-time proof of ownership.</span>
+      </li>
+      <li>
+        <span class="dot"></span>
+        <span><strong>Comprehensive Document Collection and Verification.</strong> Exchange collects and validates supplier documentation across three tiers of increasing scrutiny: Micro/Individual suppliers (W-9, basic business verification), Domestic Business suppliers (W-9, Articles of Incorporation, Certificate of Good Standing, insurance certificates with automated parsing and expiration tracking), and International suppliers (W-8 series, SWIFT/IBAN validation).</span>
+      </li>
+      <li>
+        <span class="dot"></span>
+        <span><strong>KYB and Compliance Screening.</strong> Through our integration with Middesk, Exchange can perform Secretary of State verification, TIN validation, sanctions screening, PEP checks, and adverse media monitoring. Available per-supplier and can be made mandatory at any verification tier.</span>
+      </li>
+      <li>
+        <span class="dot"></span>
+        <span><strong>Configurable Outreach and Enrollment Campaigns.</strong> Automated outreach with configurable follow-up sequences, deadline-driven enrollment windows, and real-time completion tracking. This drives enrollment velocity &mdash; the percentage of a buyer&rsquo;s supplier base that has been verified &mdash; which directly correlates to the percentage of payments flowing to verified accounts.</span>
+      </li>
+      <li>
+        <span class="dot"></span>
+        <span><strong>Mobile-Responsive Supplier Portal.</strong> Suppliers complete registration, upload documents, and manage their profiles from any device. Mobile access increases completion rates, which increases verification coverage, which reduces the residual unverified population.</span>
+      </li>
+    </ul>
+
+    <div class="highlight-box" style="border-left-color: var(--ft-mandarin); background: rgba(255,255,255,0.06);">
+      <p style="font-family: 'Libre Baskerville', Georgia, serif; font-size: 18px; color: var(--ft-pink); line-height: 1.5;"><strong>The net effect:</strong> when a payment is made through the Centime platform to an Exchange-verified supplier, the bank account receiving that payment has been proven to belong to the supplier through real-time ownership verification. The primary attack vector for BEC/vendor impersonation fraud &mdash; substituting a fraudulent bank account for a legitimate one &mdash; is closed.</p>
+    </div>
+
+    <p>This is a materially stronger risk posture than existed when the original bond was written. The original bond covered system breach risk with platform-level access controls. We are now asking to extend coverage to supplier impersonation risk with a dedicated verification infrastructure that did not exist at the time of original underwriting.</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 4: COMPETITIVE CONTEXT -->
+  <!-- ============================================================ -->
+  <div class="doc-section">
+    <div class="section-number">04 &mdash; Competitive Context</div>
+    <h2>Why this coverage matters</h2>
+    <p class="lead">We are not requesting this coverage solely as a risk transfer mechanism. Fraud indemnification has become a competitive requirement in the B2B payments market.</p>
+
+    <h3>PaymentWorks: The benchmark</h3>
+    <p>PaymentWorks is a supplier onboarding platform that has been in market since 2013. They serve approximately 200 customers, primarily in higher education and public sector, with estimated annual revenue of $12M. Their marquee relationship is with J.P. Morgan.</p>
+    <p>PaymentWorks&rsquo; primary competitive differentiator is not their software. It is their fraud indemnification. They offer coverage of up to <strong>$2 million per fraudulent payment</strong>, included automatically in every customer contract. No separate purchase decision. No opt-in. It is bundled.</p>
+    <p>Their sales motion leads with this. In competitive evaluations, particularly with procurement committees and risk-conscious finance teams, the indemnification is frequently the deciding factor. The software capabilities &mdash; supplier onboarding, document collection, bank account validation &mdash; are table stakes. The insurance is the close.</p>
+
+    <h3>Tier 2 AP platforms: No indemnification</h3>
+
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Platform</th>
+          <th>Revenue</th>
+          <th>Fraud Indemnification</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Tipalti</td><td>$300M+</td><td>None</td></tr>
+        <tr><td>BILL</td><td>~$1.3B (public)</td><td>None</td></tr>
+        <tr><td>Stampli</td><td>~$60M</td><td>None</td></tr>
+        <tr><td>AvidXchange</td><td>~$400M (public)</td><td>None</td></tr>
+        <tr><td style="color: var(--ft-claret);">PaymentWorks</td><td>~$12M</td><td style="color: var(--ft-claret); font-weight: 600;">Up to $2M/payment</td></tr>
+      </tbody>
+    </table>
+
+    <p>This creates a specific competitive opportunity for Centime: we can offer PaymentWorks-caliber indemnification with a full-lifecycle payables platform &mdash; spanning invoice capture through payment execution and reconciliation &mdash; that none of the Tier 2 competitors can match. Exchange gives us the verification foundation. Our payables solutions give us the transaction layer. The combination is unique in the market.</p>
+
+    <h3>Centime&rsquo;s distribution model</h3>
+    <p>Centime distributes through bank partnerships. We currently partner with six banks, including M&T Bank, City National, and First National Bank of Omaha, with additional partnerships in active development. Banks white-label Centime&rsquo;s payables platform and offer it to their commercial banking clients.</p>
+    <p>Bank partners are highly receptive to fraud indemnification as a differentiator. It strengthens their commercial banking relationship, reduces the risk of payment fraud flowing through their rails, and gives their relationship managers a concrete value proposition when presenting AP automation to commercial clients.</p>
+    <p>No Tier 2 AP platform distributes through bank channels. This is a structural advantage for Centime, and fraud indemnification makes the bank channel pitch significantly stronger.</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 5: THE PROPOSAL (dark) -->
+  <!-- ============================================================ -->
+  <div class="doc-section-dark">
+    <div class="section-number">05 &mdash; The Proposal</div>
+    <h2>Our proposal</h2>
+    <p>We are requesting reinstatement of Bond B1230FC with the following amendments.</p>
+
+    <h3>5a. Amended insuring agreement</h3>
+    <p>We propose adding a second insuring agreement &mdash; <strong style="color: var(--ft-pink);">Insuring Agreement (B)</strong> &mdash; to cover loss resulting from Social Engineering and Vendor Impersonation fraud. This would sit alongside the existing Insuring Agreement (A) for Unauthorized Electronic Funds Transfer.</p>
+    <p>The new insuring agreement would cover:</p>
+
+    <ul class="checklist">
+      <li>
+        <span class="dot"></span>
+        <span>Loss resulting directly from an Insured having transferred, paid, or delivered any Money to a person, account, or entity that is not the intended recipient, where such transfer was induced by fraudulent instruction, fraudulent impersonation of a supplier, or fraudulent alteration of banking or payment routing information</span>
+      </li>
+      <li>
+        <span class="dot"></span>
+        <span><strong>Provided that</strong> the payment was made through the Centime platform (via either AP Automation or Payments Automation) to a supplier that had been enrolled and verified through the Centime Exchange platform at the time of the transfer</span>
+      </li>
+    </ul>
+
+    <div class="highlight-box" style="border-left-color: var(--ft-mandarin); background: rgba(255,255,255,0.06);">
+      <p><strong style="color: var(--ft-pink);">The critical underwriting control:</strong> coverage applies only to payments made to Exchange-verified suppliers. This means every covered payment has gone through real-time bank account ownership verification (CAS), document collection and validation, and any applicable KYB/compliance screening. The underwriter&rsquo;s exposure is limited to the population of payments where Centime&rsquo;s full verification stack has been applied. <strong style="color: var(--ft-pink);">Verified = covered. Unverified = not covered.</strong></p>
+    </div>
+
+    <h3>5b. Proposed limits</h3>
+
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Agreement (A): UEFT</th>
+          <th>Agreement (B): Social Engineering</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Aggregate Limit</td><td>USD 5,000,000</td><td>USD 5,000,000</td></tr>
+        <tr><td>Single Loss Limit</td><td>USD 100,000</td><td>USD 500,000</td></tr>
+        <tr><td>Deductible</td><td>USD 10,000</td><td>USD 25,000</td></tr>
+      </tbody>
+    </table>
+
+    <p>We recognize that Agreement (B) represents a different risk profile than Agreement (A) and have proposed a higher single loss limit ($500,000 vs. $100,000) with a correspondingly higher deductible ($25,000 vs. $10,000) to reflect both the typical loss severity for vendor impersonation incidents and Centime&rsquo;s willingness to retain meaningful first-dollar exposure.</p>
+    <p>We are open to discussion on these figures. Our competitive requirement is a single loss limit that is credible in the market &mdash; high enough to be meaningful in sales conversations with mid-market finance teams. The $500,000 figure is our starting position; we would welcome the underwriter&rsquo;s perspective on the appropriate limit given the Exchange verification controls described above.</p>
+
+    <h3>5c. Premium and funding structure</h3>
+    <p>We are proposing a structure in which Centime acts as the distribution channel for a master insurance facility, rather than purchasing a traditional lump-sum annual policy.</p>
+
+    <p><strong style="color: var(--ft-pink);">How this would work:</strong> Centime and the underwriter agree on a master facility that covers all Centime payables customers &mdash; whether using AP Automation, Payments Automation, or both &mdash; who meet the Exchange verification requirements. The premium is calculated on a per-customer basis and scales automatically as Centime&rsquo;s customer base grows. Centime collects the per-customer premium through its platform billing and remits to the underwriter on an agreed schedule (monthly or quarterly).</p>
+
+    <ul class="checklist">
+      <li><span class="dot"></span><span><strong>No lump-sum premium outlay.</strong> Premium is funded by the customers it covers, collected through existing billing infrastructure, and remitted to the underwriter. Self-funding from day one.</span></li>
+      <li><span class="dot"></span><span><strong>Predictable, growing premium stream.</strong> Per-customer premium grows automatically as Centime adds customers and bank partners. Currently 150+ customers across six banks; projecting 250+ by end of 2026.</span></li>
+      <li><span class="dot"></span><span><strong>Automatic enrollment, no adverse selection.</strong> Every payables customer is enrolled automatically. No opt-in decision eliminates adverse selection risk.</span></li>
+      <li><span class="dot"></span><span><strong>Alignment of incentives.</strong> Centime is incentivized to drive Exchange enrollment velocity, which simultaneously reduces the underwriter&rsquo;s residual risk exposure.</span></li>
+    </ul>
+
+    <h4>Illustrative economics (for discussion, not a binding proposal)</h4>
+
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Current</th>
+          <th>End of 2026 (Projected)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Payables Customers</td><td>150+</td><td>250+</td></tr>
+        <tr><td style="white-space: normal;">Per-customer annual premium</td><td>$150&ndash;$300</td><td>$150&ndash;$300</td></tr>
+        <tr><td style="white-space: normal;">Total annual premium</td><td>$22,500&ndash;$45,000</td><td>$37,500&ndash;$75,000</td></tr>
+        <tr><td>Bank partners</td><td>6</td><td>8&ndash;10</td></tr>
+      </tbody>
+    </table>
+
+    <p><strong style="color: var(--ft-pink);">Optional: Tiered coverage.</strong> We are also open to discussing a base coverage tier included for all customers (e.g., $250,000 per incident) with an optional upgrade tier (e.g., $500,000 or $1,000,000) at additional per-customer premium.</p>
+
+    <h3>5d. Underwriting information we can provide</h3>
+
+    <ol class="step-flow">
+      <li>Updated application with current business profile, customer count, transaction volume, and payment processing figures</li>
+      <li>Technical documentation on Exchange verification controls, including CAS bank account ownership verification, document management workflows, and KYB/compliance screening processes</li>
+      <li>Claims history confirmation (zero claims during prior bond period)</li>
+      <li>Enrollment velocity data showing the percentage of each customer&rsquo;s supplier base that has completed Exchange verification</li>
+      <li>Platform security documentation, including SOC 2 compliance status, multi-factor authentication requirements, and role-based access controls</li>
+      <li>Bank partnership documentation demonstrating the institutional distribution channel and the regulatory environment in which Centime operates</li>
+      <li>Sample Exchange verification workflow showing the end-to-end supplier journey from initial outreach through bank account verification and document collection</li>
+    </ol>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 6: THE UNDERWRITER'S PERSPECTIVE -->
+  <!-- ============================================================ -->
+  <div class="doc-section">
+    <div class="section-number">06 &mdash; The Underwriter&rsquo;s Perspective</div>
+    <h2>Why this is an attractive risk</h2>
+    <p class="lead">We want to be direct about why we believe this is an attractive risk for the underwriter, not just a good outcome for Centime.</p>
+
+    <div class="pillar-grid cols-2">
+      <div class="pillar">
+        <h4>Superior verification controls</h4>
+        <p>Most B2B payment platforms rely on third-party database lookups, micro-deposits, or manual document review. Centime&rsquo;s CAS technology performs real-time bank account ownership verification through direct bank authentication &mdash; a fundamentally stronger control than anything else in market.</p>
+      </div>
+      <div class="pillar">
+        <h4>Binary, auditable trigger</h4>
+        <p>A supplier is either Exchange-verified or it is not. This is a system state that is timestamped, logged, and auditable. The underwriter can define minimum verification requirements and Centime enforces them programmatically.</p>
+      </div>
+      <div class="pillar">
+        <h4>Self-funding, no adverse selection</h4>
+        <p>Every payables customer contributes to the premium pool automatically. No opt-in eliminates adverse selection. Premium income grows as the customer base grows. Low-friction, predictable revenue stream for the underwriter.</p>
+      </div>
+      <div class="pillar">
+        <h4>Clean claims history</h4>
+        <p>Zero fraudulent payment losses since inception. The prior bond period produced zero claims. Platform controls and customer base represent a well-managed risk.</p>
+      </div>
+    </div>
+
+    <p><strong>The competitive precedent exists.</strong> PaymentWorks has offered bundled fraud indemnification to its customer base for years, also through specialty insurance underwriting. Their model has proven commercially viable and, to our knowledge, has not produced significant claims activity. The market has established that B2B payment platform indemnification is an insurable risk when backed by appropriate verification controls. Centime&rsquo;s verification controls, particularly CAS, are more rigorous than PaymentWorks&rsquo; validation methods.</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 7: SUMMARY (dark) -->
+  <!-- ============================================================ -->
+  <div class="doc-section-dark">
+    <div class="section-number">07 &mdash; Summary</div>
+    <h2>Summary and next steps</h2>
+
+    <table class="summary-table">
+      <tr><td>What we have</td><td>A fully underwritten Lloyd&rsquo;s Financial Institutions Bond (B1230FC) covering Unauthorized Electronic Funds Transfer through the Centime platform, with zero claims history and a premium model designed for scalable distribution.</td></tr>
+      <tr><td>What we need</td><td>Broadened coverage to include Social Engineering and Vendor Impersonation fraud, with a single loss limit of $500,000 per incident, applicable only to payments made to Exchange-verified suppliers.</td></tr>
+      <tr><td>What&rsquo;s changed</td><td>Since the original bond, Centime has built and deployed Exchange &mdash; a supplier enrollment and verification platform with real-time bank account ownership verification &mdash; which directly mitigates the fraud vector we are asking to insure against.</td></tr>
+      <tr><td>Why it matters</td><td>Fraud indemnification has become a competitive requirement in B2B payments. Our primary competitor bundles it. The Tier 2 platforms cannot offer it. This coverage, combined with our bank-channel distribution and full-lifecycle payables platform, creates a market position no competitor can replicate.</td></tr>
+      <tr><td>What we&rsquo;re asking</td><td>A conversation with the underwriting team to discuss amended terms. We are prepared to provide all documentation needed to support the assessment and are flexible on structure, limits, and premium within the framework described above.</td></tr>
+    </table>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- CLOSING -->
+  <!-- ============================================================ -->
+  <div class="closing-block">
+    <p>We would welcome the opportunity to schedule a call with the underwriting team to walk through the Exchange platform, demonstrate the CAS verification technology, and discuss the amended coverage in detail. We believe the combination of Centime&rsquo;s zero-claims history, the Exchange verification infrastructure, and the bundled distribution model presents an underwriting opportunity that is both well-controlled and commercially attractive.</p>
+    <p>Thank you for your time and consideration. We look forward to your response.</p>
+
+    <div class="signature">
+      <p style="margin-bottom: 4px;">Sincerely,</p>
+      <div class="sig-line"></div>
+      <div class="company">Centime, Inc.</div>
+      <div class="contact">617 250 7251 &nbsp;|&nbsp; www.centime.com</div>
+    </div>
+
+    <div class="enclosures">
+      <div class="enc-label">Enclosures</div>
+      <ol>
+        <li>Original Bond B1230FC &mdash; Final Wording</li>
+        <li>Original Bond B1230FC &mdash; Market Reform Contract (December Version)</li>
+        <li>Centime Exchange &mdash; Platform Overview and Verification Methodology <em>(to follow)</em></li>
+        <li>Updated Application <em>(to follow)</em></li>
+      </ol>
+    </div>
+  </div>
+
+</div>
+
+<div class="doc-footer">
+  <a href="../../">Back to presentations</a>
+  <div class="draft-note">Confidential. Prepared for HUB International New England, LLC and Certain Underwriters at Lloyd&rsquo;s.</div>
+</div>
+
+</body>
+</html>
