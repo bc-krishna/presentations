@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bond Reinstatement Proposal &mdash; Centime Exchange</title>
+
+  <!-- Reveal.js 5.x -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+
+  <!-- Centime Editorial Theme -->
+  <link rel="stylesheet" href="../../../css/theme/centime-editorial.css?v=4">
+
+  <!-- Deck-specific styles -->
+  <style>
+    /* Two-column contrast layout */
+    .reveal .position-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin: 1em 0;
+      border-top: 3px solid var(--ft-black);
+    }
+    .reveal .position-col {
+      padding: 1.2em 0;
+      border-bottom: 1px solid var(--ft-rule);
+    }
+    .reveal .position-col:first-child {
+      padding-right: 1.5em;
+      border-right: 1px solid var(--ft-rule);
+    }
+    .reveal .position-col:last-child {
+      padding-left: 1.5em;
+    }
+    .reveal .position-col h3 {
+      font-size: 0.9em;
+      color: var(--ft-black);
+      margin-bottom: 0.4em;
+    }
+    .reveal .position-col p {
+      font-family: var(--r-main-font);
+      font-size: 0.62em;
+      color: var(--ft-slate);
+      line-height: 1.55;
+    }
+
+    /* Dark variant for position grid */
+    .slide-dark .position-grid { border-top-color: var(--ft-mandarin); }
+    .slide-dark .position-col { border-bottom-color: rgba(206,198,185,0.15); }
+    .slide-dark .position-col:first-child { border-right-color: rgba(206,198,185,0.15); }
+    .slide-dark .position-col h3 { color: var(--ft-pink); }
+    .slide-dark .position-col p { color: var(--ft-wheat); opacity: 0.85; }
+
+    /* Revenue stack / comparison rows */
+    .reveal .revenue-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin: 0.8em 0;
+      border-top: 3px solid var(--ft-black);
+    }
+    .reveal .revenue-layer {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.7em 0;
+      border-bottom: 1px solid var(--ft-rule);
+      font-family: var(--r-main-font);
+      font-size: 0.62em;
+      color: var(--ft-dark);
+      line-height: 1.5;
+    }
+    .reveal .revenue-layer .rev-label { flex: 1; }
+    .reveal .revenue-layer .rev-amount {
+      font-family: var(--r-heading-font);
+      font-weight: 700;
+      font-size: 1.2em;
+      color: var(--ft-claret);
+      text-align: right;
+      flex-shrink: 0;
+      margin-left: 1em;
+    }
+
+    /* Dark revenue stack */
+    .slide-dark .revenue-stack { border-top-color: var(--ft-mandarin); }
+    .slide-dark .revenue-layer { border-bottom-color: rgba(206,198,185,0.15); color: var(--ft-wheat); }
+    .slide-dark .revenue-layer .rev-amount { color: var(--ft-mandarin); }
+    .slide-dark .revenue-layer strong { color: var(--ft-pink); }
+
+    /* Dark func-grid overrides */
+    .slide-dark .func-grid { border-top-color: var(--ft-mandarin); }
+    .slide-dark .func-item { border-bottom-color: rgba(206,198,185,0.15); }
+    .slide-dark .func-item:nth-child(odd) { border-right-color: rgba(206,198,185,0.15); }
+    .slide-dark .func-num { color: var(--ft-mandarin); }
+    .slide-dark .func-item h3 { color: var(--ft-pink); }
+    .slide-dark .func-item p { color: var(--ft-wheat); opacity: 0.85; }
+
+    /* Question list (claret slide numbered points) */
+    .reveal .question-list {
+      list-style: none;
+      margin: 0.8em 0;
+      padding: 0;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+    .reveal .question-list li {
+      font-family: var(--r-main-font);
+      font-size: 0.6em;
+      color: rgba(255,255,255,0.9);
+      padding: 0.6em 0;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      display: flex;
+      align-items: baseline;
+      gap: 0.7em;
+      line-height: 1.45;
+    }
+    .reveal .question-list .q-num {
+      font-family: var(--r-heading-font);
+      font-size: 1em;
+      font-weight: 700;
+      color: var(--ft-wheat);
+      flex-shrink: 0;
+      width: 1.6em;
+    }
+
+    /* Stat callout — large inline figure */
+    .reveal .stat-callout {
+      font-family: var(--r-heading-font);
+      font-weight: 700;
+      font-size: 2.4em;
+      color: var(--ft-claret);
+      line-height: 1;
+      margin: 0.3em 0 0.15em;
+    }
+    .reveal .stat-label {
+      font-family: var(--r-main-font);
+      font-size: 0.58em;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--ft-slate);
+      margin-bottom: 0.6em;
+    }
+
+    /* Compact terms grid (3-col for proposal terms) */
+    .reveal .terms-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin: 0.8em 0;
+      border-top: 3px solid var(--ft-black);
+    }
+    .reveal .terms-item {
+      padding: 0.8em 0;
+      border-bottom: 1px solid var(--ft-rule);
+    }
+    .reveal .terms-item:nth-child(odd) {
+      padding-right: 1.5em;
+      border-right: 1px solid var(--ft-rule);
+    }
+    .reveal .terms-item:nth-child(even) {
+      padding-left: 1.5em;
+    }
+    .reveal .terms-item .terms-label {
+      font-family: var(--r-main-font);
+      font-size: 0.48em;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--ft-slate);
+      margin-bottom: 0.2em;
+    }
+    .reveal .terms-item .terms-value {
+      font-family: var(--r-heading-font);
+      font-size: 1.1em;
+      font-weight: 700;
+      color: var(--ft-claret);
+      line-height: 1.2;
+    }
+    .reveal .terms-item .terms-note {
+      font-family: var(--r-main-font);
+      font-size: 0.55em;
+      color: var(--ft-slate);
+      margin-top: 0.15em;
+      line-height: 1.4;
+    }
+
+    /* Dark terms grid */
+    .slide-dark .terms-grid { border-top-color: var(--ft-mandarin); }
+    .slide-dark .terms-item { border-bottom-color: rgba(206,198,185,0.15); }
+    .slide-dark .terms-item:nth-child(odd) { border-right-color: rgba(206,198,185,0.15); }
+    .slide-dark .terms-item .terms-label { color: var(--ft-mandarin); }
+    .slide-dark .terms-item .terms-value { color: var(--ft-pink); }
+    .slide-dark .terms-item .terms-note { color: var(--ft-wheat); opacity: 0.8; }
+
+    /* Salmon terms override */
+    .slide-salmon .terms-item .terms-value { color: var(--ft-claret); }
+
+    /* Summary table — five-row stacked */
+    .reveal .summary-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin: 0.6em 0;
+      border-top: 3px solid var(--ft-black);
+    }
+    .reveal .summary-row {
+      display: flex;
+      align-items: baseline;
+      padding: 0.55em 0;
+      border-bottom: 1px solid var(--ft-rule);
+      font-family: var(--r-main-font);
+      font-size: 0.58em;
+      color: var(--ft-dark);
+      line-height: 1.45;
+    }
+    .reveal .summary-row .sum-label {
+      flex: 0 0 110px;
+      font-weight: 700;
+      color: var(--ft-claret);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.85em;
+    }
+    .reveal .summary-row .sum-value {
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+  <!-- SLIDE 1: TITLE (dark) -->
+  <section data-background-color="#1A1817" class="slide-dark">
+    <div class="eyebrow">Centime &middot; Bond Reinstatement Proposal</div>
+    <h1>Financial Institutions Bond B1230FC</h1>
+    <div class="subtitle">A proposal to reinstate and amend coverage with social engineering / vendor impersonation protection tied to Exchange-verified suppliers.</div>
+    <div class="meta">February 2026 &middot; HUB International / Lloyd's Underwriters</div>
+  </section>
+
+  <!-- SLIDE 2: THE ASK (salmon) -->
+  <section data-background-color="#FFF1E5">
+    <div class="section-label">The Ask</div>
+    <h2>Reinstate B1230FC with amended coverage</h2>
+    <p class="body" style="margin-bottom: 0.8em;">We held a Financial Institutions Bond (Agreement A) covering unauthorized electronic funds transfer. It lapsed &mdash; we couldn't justify the premium with no recovery mechanism and zero claims. Since then, we built Centime Exchange, a supplier verification platform that fundamentally changes the risk profile.</p>
+    <p class="body">We're proposing to reinstate the bond and add a new Agreement (B) covering social engineering and vendor impersonation fraud &mdash; the category the original bond never addressed, and the one that causes the most damage. Coverage applies only to payments routed to Exchange-verified suppliers.</p>
+  </section>
+
+  <!-- SLIDE 3: EXISTING COVERAGE GAP (dark) -->
+  <section data-background-color="#1A1817" class="slide-dark">
+    <div class="section-label">The Coverage Gap</div>
+    <h2>System breach is covered. Social engineering is not.</h2>
+    <div class="position-grid">
+      <div class="position-col">
+        <h3>Agreement A &mdash; UEFT</h3>
+        <p>Covers unauthorized electronic funds transfer: someone hacks into the system and initiates a payment without authorization. $5M aggregate, $100K single loss, $10K deductible, $30K annual premium. Zero claims filed during the active period.</p>
+      </div>
+      <div class="position-col">
+        <h3>The gap &mdash; BEC</h3>
+        <p>Does not cover business email compromise or supplier impersonation. In BEC, the buyer authorizes the transfer &mdash; they're just deceived about the destination. The payment is "authorized" by policy definition, so the bond doesn't respond. This is where the actual losses happen.</p>
+      </div>
+    </div>
+    <p class="body" style="margin-top: 0.6em;">The bond covered the scenario that didn't happen. The scenario that happens every day was never covered.</p>
+  </section>
+
+  <!-- SLIDE 4: THE BEC PROBLEM (paper) -->
+  <section data-background-color="#FFF7EF" class="slide-paper">
+    <div class="section-label">The Threat</div>
+    <h2>BEC is the #1 cybercrime category</h2>
+    <div class="stat-callout">$2.7B+</div>
+    <div class="stat-label">Annual losses reported to FBI &mdash; business email compromise</div>
+    <p class="body" style="margin-bottom: 0.6em;">The attack is simple: an adversary impersonates a supplier and sends updated banking details. The AP team processes the change. The next payment goes to a fraudulent account. By the time anyone notices, the money is gone.</p>
+    <p class="body" style="margin-bottom: 0.6em;">Median mid-market loss per incident: <strong>$50K&ndash;$125K</strong>. The buyer authorized every step. No system was breached. No credential was stolen. The vulnerability is the process, not the perimeter.</p>
+    <p class="body" style="font-style: italic; color: var(--ft-slate);">Traditional fidelity bonds and cyber policies exclude this scenario because the transfer was "authorized." That's the gap we're asking to close.</p>
+  </section>
+
+  <!-- SLIDE 5: WHAT'S CHANGED (dark) -->
+  <section data-background-color="#1A1817" class="slide-dark">
+    <div class="section-label">What's Changed</div>
+    <h2>Centime Exchange closes the primary attack vector</h2>
+    <p class="body" style="margin-bottom: 0.8em;">Since the bond lapsed, Centime built Exchange &mdash; a supplier verification and onboarding platform. The critical capability is CAS: Centime Account Services.</p>
+    <div class="func-grid">
+      <div class="func-item">
+        <div class="func-num">CAS</div>
+        <h3>Real-time bank account ownership verification</h3>
+        <p>Browser-based bank authentication that proves account ownership in real time. Not micro-deposits (days to settle, easily spoofed). Not database lookups (stale data). Real-time proof that the person submitting bank details owns the account.</p>
+      </div>
+      <div class="func-item">
+        <div class="func-num">Net Effect</div>
+        <h3>The BEC vector is closed</h3>
+        <p>For Exchange-verified suppliers, the primary BEC attack &mdash; substituting a fraudulent bank account &mdash; cannot succeed. The adversary would need to pass real-time bank authentication on an account they don't own. That's the verification standard no other platform matches.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 6: EXCHANGE CAPABILITIES (salmon) -->
+  <section data-background-color="#FFF1E5">
+    <div class="section-label">Verification Controls</div>
+    <h2>Five layers of supplier verification</h2>
+    <div class="func-grid">
+      <div class="func-item">
+        <div class="func-num">01</div>
+        <h3>CAS &mdash; bank account ownership</h3>
+        <p>Real-time, browser-based bank authentication. Proof of ownership, not approximation.</p>
+      </div>
+      <div class="func-item">
+        <div class="func-num">02</div>
+        <h3>Document collection (3 tiers)</h3>
+        <p>W-9, COI, trade licenses &mdash; tiered by risk profile with automated parsing and expiration tracking.</p>
+      </div>
+      <div class="func-item">
+        <div class="func-num">03</div>
+        <h3>KYB / compliance via Middesk</h3>
+        <p>Business identity verification, beneficial ownership, OFAC/watchlist screening &mdash; integrated at enrollment.</p>
+      </div>
+      <div class="func-item">
+        <div class="func-num">04</div>
+        <h3>Automated outreach campaigns</h3>
+        <p>Configurable multi-touch campaigns with escalation logic. No manual chasing of supplier responses.</p>
+      </div>
+      <div class="func-item func-item-full">
+        <div class="func-num">05</div>
+        <h3>Mobile supplier portal</h3>
+        <p>Suppliers complete verification from any device without creating an account. Reduces abandonment and accelerates enrollment velocity.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 7: COMPETITIVE CONTEXT (dark) -->
+  <section data-background-color="#1A1817" class="slide-dark">
+    <div class="section-label">Competitive Context</div>
+    <h2>The indemnification landscape</h2>
+    <div class="revenue-stack">
+      <div class="revenue-layer">
+        <span class="rev-label"><strong>PaymentWorks</strong> &mdash; $2M/payment fraud indemnification, bundled. Primary sales differentiator. J.P. Morgan partnership.</span>
+        <span class="rev-amount">$2M</span>
+      </div>
+      <div class="revenue-layer">
+        <span class="rev-label"><strong>Tier 2 platforms</strong> &mdash; Tipalti, BILL, Stampli, AvidXchange. No indemnification offered. Zero fraud coverage.</span>
+        <span class="rev-amount">$0</span>
+      </div>
+      <div class="revenue-layer">
+        <span class="rev-label"><strong>Centime (proposed)</strong> &mdash; PaymentWorks-caliber indemnification + full-lifecycle payables platform + bank distribution (6 partners).</span>
+        <span class="rev-amount">$500K</span>
+      </div>
+    </div>
+    <p class="body" style="margin-top: 0.6em;">No Tier 2 competitor offers indemnification. No pure-play verification vendor offers a full payables platform. Centime with bond coverage occupies the only position that combines both &mdash; and distributes through bank channels that no competitor has.</p>
+  </section>
+
+  <!-- SLIDE 8: PROPOSED TERMS (paper) -->
+  <section data-background-color="#FFF7EF" class="slide-paper">
+    <div class="section-label">The Proposal</div>
+    <h2>Agreement B &mdash; Social Engineering coverage</h2>
+    <div class="terms-grid">
+      <div class="terms-item">
+        <div class="terms-label">Aggregate Limit</div>
+        <div class="terms-value">$5M</div>
+        <div class="terms-note">Matching Agreement A structure</div>
+      </div>
+      <div class="terms-item">
+        <div class="terms-label">Single Loss Limit</div>
+        <div class="terms-value">$500K</div>
+        <div class="terms-note">Per incident per customer</div>
+      </div>
+      <div class="terms-item">
+        <div class="terms-label">Deductible</div>
+        <div class="terms-value">$25K</div>
+        <div class="terms-note">Per occurrence</div>
+      </div>
+      <div class="terms-item">
+        <div class="terms-label">Coverage Trigger</div>
+        <div class="terms-value">Binary</div>
+        <div class="terms-note">Exchange-verified suppliers only</div>
+      </div>
+    </div>
+    <p class="body" style="margin-top: 0.6em;">Coverage applies exclusively to payments made to suppliers who have completed Exchange verification including CAS bank authentication. Unverified suppliers are excluded &mdash; no ambiguity, no gray area. The trigger is binary and auditable.</p>
+  </section>
+
+  <!-- SLIDE 9: PREMIUM STRUCTURE (salmon) -->
+  <section data-background-color="#FFF1E5">
+    <div class="section-label">Premium Economics</div>
+    <h2>Self-funding, per-customer, no adverse selection</h2>
+    <p class="body" style="margin-bottom: 0.6em;">Premium is collected per customer through platform billing and remitted to the underwriter. No lump-sum outlay from Centime. Every customer auto-enrolled &mdash; eliminating adverse selection risk.</p>
+    <div class="revenue-stack">
+      <div class="revenue-layer">
+        <span class="rev-label"><strong>Per-customer premium</strong> &mdash; $150&ndash;$300 annually, collected through platform billing</span>
+        <span class="rev-amount">$150&ndash;$300</span>
+      </div>
+      <div class="revenue-layer">
+        <span class="rev-label"><strong>Current base</strong> &mdash; 150+ customers enrolled today</span>
+        <span class="rev-amount">$22.5K&ndash;$45K</span>
+      </div>
+      <div class="revenue-layer">
+        <span class="rev-label"><strong>Projected (end 2026)</strong> &mdash; 250+ customers at current growth rate</span>
+        <span class="rev-amount">$37.5K&ndash;$75K</span>
+      </div>
+      <div class="revenue-layer">
+        <span class="rev-label"><strong>Optional upgrade</strong> &mdash; base $250K included; $500K&ndash;$1M at additional premium per customer</span>
+        <span class="rev-amount">Tiered</span>
+      </div>
+    </div>
+    <p class="body" style="margin-top: 0.4em; font-style: italic; color: var(--ft-slate);">Premium scales with enrollment. The underwriter's exposure grows only as the premium pool grows.</p>
+  </section>
+
+  <!-- SLIDE 10: WHY SAY YES (dark) -->
+  <section data-background-color="#1A1817" class="slide-dark">
+    <div class="section-label">The Underwriter's Case</div>
+    <h2>Five reasons this risk profile is attractive</h2>
+    <div class="func-grid">
+      <div class="func-item">
+        <div class="func-num">01</div>
+        <h3>Superior verification controls</h3>
+        <p>CAS is real-time bank authentication &mdash; not micro-deposits, not database lookups. The industry's strongest proof of account ownership.</p>
+      </div>
+      <div class="func-item">
+        <div class="func-num">02</div>
+        <h3>Binary, auditable trigger</h3>
+        <p>Coverage is either on or off. Verified in Exchange, or not. No subjective claims adjudication. Clean, defensible underwriting.</p>
+      </div>
+      <div class="func-item">
+        <div class="func-num">03</div>
+        <h3>Self-funding premium</h3>
+        <p>No adverse selection &mdash; every customer auto-enrolled. Premium scales with customer count. No lump-sum risk for Centime.</p>
+      </div>
+      <div class="func-item">
+        <div class="func-num">04</div>
+        <h3>Zero claims history</h3>
+        <p>Agreement A was active with zero claims filed. Centime's operational controls and customer base have produced no losses.</p>
+      </div>
+      <div class="func-item func-item-full">
+        <div class="func-num">05</div>
+        <h3>Competitive precedent validates the model</h3>
+        <p>PaymentWorks successfully underwrites $2M/payment indemnification. The model works. We're proposing lower per-incident limits with stronger verification technology.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 11: SUMMARY TABLE (paper) -->
+  <section data-background-color="#FFF7EF" class="slide-paper">
+    <div class="section-label">At a Glance</div>
+    <h2>What we have, what we need, and why</h2>
+    <div class="summary-stack">
+      <div class="summary-row">
+        <span class="sum-label">Have</span>
+        <span class="sum-value">Active bond (Agreement A &mdash; UEFT), zero claims history, Exchange platform with real-time CAS verification, 150+ customers, 6 bank distribution partners.</span>
+      </div>
+      <div class="summary-row">
+        <span class="sum-label">Need</span>
+        <span class="sum-value">Agreement B covering social engineering / vendor impersonation for payments to Exchange-verified suppliers. $5M aggregate, $500K single loss, $25K deductible.</span>
+      </div>
+      <div class="summary-row">
+        <span class="sum-label">Changed</span>
+        <span class="sum-value">Built Exchange since bond lapsed. CAS closes the primary BEC attack vector. Per-customer premium model eliminates adverse selection. Coverage trigger is binary and auditable.</span>
+      </div>
+      <div class="summary-row">
+        <span class="sum-label">Why It Works</span>
+        <span class="sum-value">Verification controls exceed market standard. Premium is self-funding and scales with enrollment. PaymentWorks precedent proves underwriting model. Zero claims track record.</span>
+      </div>
+      <div class="summary-row">
+        <span class="sum-label">Asking</span>
+        <span class="sum-value">A conversation with the underwriting team. We'll provide updated application, Exchange technical documentation, claims history, enrollment data, SOC 2, and bank partnership documentation.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 12: CLOSING (claret) -->
+  <section data-background-color="#990F3D" class="slide-claret">
+    <div class="section-label">Next Steps</div>
+    <h2>Requesting a conversation with underwriting</h2>
+    <ul class="question-list">
+      <li>
+        <span class="q-num">1</span>
+        <span>Updated bond application reflecting the proposed Agreement B terms and Exchange-verified coverage trigger.</span>
+      </li>
+      <li>
+        <span class="q-num">2</span>
+        <span>Exchange technical documentation &mdash; CAS verification workflow, supplier onboarding architecture, and audit trail capabilities.</span>
+      </li>
+      <li>
+        <span class="q-num">3</span>
+        <span>Claims history and loss data from Agreement A period. Enrollment velocity and customer growth projections through 2027.</span>
+      </li>
+      <li>
+        <span class="q-num">4</span>
+        <span>SOC 2 documentation, bank partnership agreements, and a live demonstration of the Exchange verification workflow.</span>
+      </li>
+    </ul>
+    <div class="closing-line">The controls exist. The economics work. The precedent is proven. We're ready to make the case.</div>
+  </section>
+
+</div>
+</div>
+
+<!-- Reveal.js 5.x -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<!-- Menu plugin -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/menu.css">
+<script src="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/menu.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    center: true,
+    transition: 'fade',
+    transitionSpeed: 'default',
+    width: 680,
+    height: 500,
+    margin: 0.06,
+    controls: true,
+    progress: true,
+    slideNumber: true,
+    overview: true,
+    menu: {
+      side: 'left',
+      titleSelector: 'h1, h2, .section-label',
+      hideMissingTitles: true,
+      markers: true,
+      themes: false,
+      transitions: false,
+      openButton: true,
+      openSlideNumber: false,
+    },
+    plugins: [ RevealMenu ],
+  });
+</script>
+</body>
+</html>
