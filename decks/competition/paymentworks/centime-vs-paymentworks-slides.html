@@ -12,737 +12,452 @@
   <!-- Centime Editorial Theme -->
   <link rel="stylesheet" href="../../../css/theme/centime-editorial.css?v=4">
 
-  <!-- Deck-specific overrides for larger canvas -->
   <style>
-    /* Override base theme for 1280x720 canvas */
-    .reveal { --r-main-font-size: 28px; }
-    .reveal h2 { font-size: 1.6em; margin-bottom: 0.3em; }
-    .reveal .eyebrow { font-size: 0.6em; }
-    .reveal .lead { font-size: 0.75em; }
-    .reveal .subtitle { font-size: 0.7em; }
-
-    /* Constrain content width for readability */
-    .reveal .slides section {
-      text-align: left;
-      max-width: 1100px;
-      margin: 0 auto;
+    /* Force large base font on small canvas = big text when Reveal scales up */
+    :root {
+      --r-main-font-size: 38px;
     }
+    .reveal h2 { font-size: 1.5em; margin-bottom: 0.25em; }
+    .reveal .eyebrow { font-size: 0.5em; margin-bottom: 0.4em; }
+    .reveal .lead { font-size: 0.65em; line-height: 1.5; margin-bottom: 0.4em; }
+    .reveal .subtitle { font-size: 0.62em; line-height: 1.5; }
 
-    /* Versus grid — two-column comparison */
-    .reveal .vs-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      margin: 0.6em 0;
+    .reveal .slides section { text-align: left; }
+
+    /* Body text */
+    .reveal .body { font-size: 0.6em; line-height: 1.55; color: var(--ft-slate); }
+    .reveal .body strong { color: var(--ft-black); }
+    .reveal .meta { font-size: 0.45em; color: var(--ft-slate); }
+
+    /* Bullet list */
+    .reveal ul.pts {
+      list-style: none; padding: 0; margin: 0.3em 0;
       border-top: 3px solid var(--ft-black);
     }
-    .reveal .vs-col {
-      padding: 0.8em 0;
+    .reveal ul.pts li {
+      font-size: 0.58em; line-height: 1.5; color: var(--ft-dark);
+      padding: 0.35em 0 0.35em 1.2em; position: relative;
       border-bottom: 1px solid var(--ft-rule);
     }
-    .reveal .vs-col:first-child {
-      padding-right: 1.2em;
-      border-right: 1px solid var(--ft-rule);
+    .reveal ul.pts li::before {
+      content: '\2192'; position: absolute; left: 0;
+      font-weight: 700; color: var(--ft-claret);
     }
-    .reveal .vs-col:last-child {
-      padding-left: 1.2em;
-    }
-    .reveal .vs-col h4 {
-      font-family: var(--r-heading-font);
-      font-size: 0.8em;
-      font-weight: 700;
-      margin-bottom: 0.3em;
-    }
-    .reveal .vs-col p,
-    .reveal .vs-col li {
-      font-family: var(--r-main-font);
-      font-size: 0.68em;
-      color: var(--ft-slate);
-      line-height: 1.5;
-    }
-    .reveal .vs-col ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .reveal .vs-col li {
-      padding: 0.15em 0;
-      padding-left: 1.2em;
-      position: relative;
-    }
-    .reveal .vs-col li::before {
-      content: '\2192';
-      position: absolute;
-      left: 0;
-      font-weight: 700;
-      color: var(--ft-claret);
-    }
-    .reveal .vs-col.them h4 { color: var(--ft-slate); }
-    .reveal .vs-col.us h4 { color: var(--ft-claret); }
+    .reveal ul.pts li strong { color: var(--ft-black); }
 
-    /* Dark variant */
-    .slide-dark .vs-grid { border-top-color: var(--ft-mandarin); }
-    .slide-dark .vs-col { border-bottom-color: rgba(206,198,185,0.15); }
-    .slide-dark .vs-col p,
-    .slide-dark .vs-col li { color: var(--ft-wheat); }
-    .slide-dark .vs-col.us h4 { color: var(--ft-mandarin); }
-    .slide-dark .vs-col.them h4 { color: var(--ft-wheat); opacity: 0.6; }
-    .slide-dark .vs-col li::before { color: var(--ft-mandarin); }
+    /* Dark variant bullets */
+    .slide-dark ul.pts { border-top-color: var(--ft-mandarin); }
+    .slide-dark ul.pts li { color: var(--ft-wheat); border-bottom-color: rgba(206,198,185,0.15); }
+    .slide-dark ul.pts li::before { color: var(--ft-mandarin); }
+    .slide-dark ul.pts li strong { color: var(--ft-pink); }
+
+    /* Two-column comparison */
+    .reveal .vs {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      margin: 0.3em 0; border-top: 3px solid var(--ft-black);
+    }
+    .reveal .vs-l, .reveal .vs-r {
+      padding: 0.5em 0;
+      border-bottom: 1px solid var(--ft-rule);
+    }
+    .reveal .vs-l { padding-right: 0.8em; border-right: 1px solid var(--ft-rule); }
+    .reveal .vs-r { padding-left: 0.8em; }
+    .reveal .vs h4 {
+      font-family: var(--r-heading-font); font-size: 0.62em; font-weight: 700; margin-bottom: 0.2em;
+    }
+    .reveal .vs p {
+      font-size: 0.52em; color: var(--ft-slate); line-height: 1.5;
+    }
+    .reveal .vs p strong { color: var(--ft-black); }
+    .reveal .vs-l h4 { color: var(--ft-claret); }
+    .reveal .vs-r h4 { color: var(--ft-slate); }
+    .reveal .vs-r p { opacity: 0.75; }
+
+    /* Dark variant vs */
+    .slide-dark .vs { border-top-color: var(--ft-mandarin); }
+    .slide-dark .vs-l, .slide-dark .vs-r { border-color: rgba(206,198,185,0.15); }
+    .slide-dark .vs p { color: var(--ft-wheat); }
+    .slide-dark .vs p strong { color: var(--ft-pink); }
+    .slide-dark .vs-l h4 { color: var(--ft-mandarin); }
+    .slide-dark .vs-r h4 { color: var(--ft-wheat); opacity: 0.6; }
 
     /* Tag badges */
     .reveal .tag {
-      display: inline-block;
-      font-family: var(--r-main-font);
-      font-size: 0.52em;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-      padding: 0.15em 0.5em;
-      border-radius: 2px;
+      display: inline-block; font-family: var(--r-main-font);
+      font-size: 0.42em; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; padding: 0.1em 0.4em; border-radius: 2px;
       vertical-align: middle;
     }
-    .reveal .tag-lead { background: #1e7a3a; color: white; }
-    .reveal .tag-parity { background: #2563eb; color: white; }
-    .reveal .tag-choice { background: #b8860b; color: white; }
-    .reveal .tag-na { background: #475569; color: white; }
+    .tag-lead { background: #1e7a3a; color: white; }
+    .tag-parity { background: #2563eb; color: white; }
+    .tag-choice { background: #b8860b; color: white; }
 
-    /* Scorecard grid */
-    .reveal .score-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0.8em;
-      margin: 0.8em 0;
+    /* Scorecard */
+    .reveal .scores {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5em; margin: 0.5em 0;
     }
-    .reveal .score-card {
-      text-align: center;
-      padding: 0.8em 0.5em;
-      border-radius: 4px;
-    }
-    .reveal .score-card .num {
-      font-family: var(--r-heading-font);
-      font-size: 2.2em;
-      line-height: 1.1;
-    }
-    .reveal .score-card .lbl {
-      font-family: var(--r-main-font);
-      font-size: 0.55em;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-top: 0.3em;
-    }
-    .reveal .sc-lead { background: #e8f5ec; }
-    .reveal .sc-lead .num, .reveal .sc-lead .lbl { color: #1e7a3a; }
-    .reveal .sc-parity { background: #eff3ff; }
-    .reveal .sc-parity .num, .reveal .sc-parity .lbl { color: #2563eb; }
-    .reveal .sc-choice { background: #fef7e6; }
-    .reveal .sc-choice .num, .reveal .sc-choice .lbl { color: #b8860b; }
-    .reveal .sc-na { background: #f1f5f9; }
-    .reveal .sc-na .num, .reveal .sc-na .lbl { color: #475569; }
+    .reveal .sc { text-align: center; padding: 0.5em 0.3em; border-radius: 4px; }
+    .reveal .sc .n { font-family: var(--r-heading-font); font-size: 1.8em; line-height: 1; }
+    .reveal .sc .l { font-size: 0.4em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 0.2em; }
+    .sc-g { background: #e8f5ec; } .sc-g .n, .sc-g .l { color: #1e7a3a; }
+    .sc-b { background: #eff3ff; } .sc-b .n, .sc-b .l { color: #2563eb; }
+    .sc-a { background: #fef7e6; } .sc-a .n, .sc-a .l { color: #b8860b; }
+    .sc-s { background: #f1f5f9; } .sc-s .n, .sc-s .l { color: #475569; }
 
-    /* Capability row — inline comparison */
-    .reveal .cap-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0 1.5em;
-      margin: 0.4em 0;
-      padding: 0.6em 0;
-      border-bottom: 1px solid var(--ft-rule);
+    /* Side-by-side cards */
+    .reveal .cards {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.5em; margin: 0.4em 0;
     }
-    .reveal .cap-row:first-of-type {
-      border-top: 3px solid var(--ft-black);
+    .reveal .card {
+      padding: 0.5em 0.6em; border-radius: 4px;
     }
-    .reveal .cap-row h4 {
-      grid-column: 1 / -1;
-      font-family: var(--r-heading-font);
-      font-size: 0.78em;
-      font-weight: 700;
-      color: var(--ft-black);
-      margin-bottom: 0.2em;
+    .reveal .card h4 {
+      font-family: var(--r-main-font); font-size: 0.45em; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3em;
     }
-    .reveal .cap-row p {
-      font-size: 0.62em;
-      color: var(--ft-slate);
-      line-height: 1.45;
-    }
-    .reveal .cap-row p strong {
-      color: var(--ft-black);
-    }
-    .reveal .cap-row p.them {
-      opacity: 0.65;
-    }
+    .reveal .card p { font-size: 0.5em; line-height: 1.5; }
+    .card-green { background: #e8f5ec; } .card-green h4 { color: #1e7a3a; }
+    .card-amber { background: #fef7e6; } .card-amber h4 { color: #b8860b; }
 
-    /* Indemnification cards */
-    .reveal .indem-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1em;
-      margin: 0.6em 0;
+    /* Rate comparison */
+    .reveal .rates {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      border: 2px solid var(--ft-black); margin: 0.4em 0;
     }
-    .reveal .indem-card {
-      padding: 0.8em 1em;
-      border-radius: 4px;
+    .reveal .rates > div { padding: 0.5em 0.7em; }
+    .reveal .rates > div:first-child { border-right: 1px solid var(--ft-rule); }
+    .reveal .rates h4 {
+      font-family: var(--r-main-font); font-size: 0.42em; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 0.2em;
     }
-    .reveal .indem-card h4 {
-      font-family: var(--r-main-font);
-      font-size: 0.58em;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 0.4em;
-    }
-    .reveal .indem-card p {
-      font-size: 0.62em;
-      line-height: 1.5;
-    }
-    .reveal .indem-them { background: #e8f5ec; }
-    .reveal .indem-them h4 { color: #1e7a3a; }
-    .reveal .indem-them p { color: var(--ft-dark); }
-    .reveal .indem-us { background: #fef7e6; }
-    .reveal .indem-us h4 { color: #b8860b; }
-    .reveal .indem-us p { color: var(--ft-dark); }
+    .reveal .rates .num { font-family: var(--r-heading-font); font-size: 1.2em; line-height: 1.1; margin-bottom: 0.15em; }
+    .reveal .rates p { font-size: 0.45em; color: var(--ft-slate); line-height: 1.45; }
+    .reveal .rates p strong { color: var(--ft-black); }
 
-    /* Early pay comparison */
-    .reveal .ep-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      margin: 0.6em 0;
-      border: 2px solid var(--ft-black);
+    /* Callout box */
+    .reveal .callout {
+      background: var(--ft-paper); border-top: 3px solid var(--ft-claret);
+      padding: 0.5em 0.7em; margin: 0.3em 0;
     }
-    .reveal .ep-col {
-      padding: 0.8em 1em;
-    }
-    .reveal .ep-col:first-child {
-      border-right: 1px solid var(--ft-rule);
-    }
-    .reveal .ep-col h4 {
-      font-family: var(--r-main-font);
-      font-size: 0.58em;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      margin-bottom: 0.3em;
-    }
-    .reveal .ep-col .rate {
-      font-family: var(--r-heading-font);
-      font-size: 1.5em;
-      line-height: 1.1;
-      margin-bottom: 0.2em;
-    }
-    .reveal .ep-col p {
-      font-size: 0.6em;
-      color: var(--ft-slate);
-      line-height: 1.45;
-    }
-    .reveal .ep-col p strong { color: var(--ft-black); }
-    .reveal .rate-them { color: #c0392b; }
-    .reveal .rate-us { color: #1e7a3a; }
+    .reveal .callout h4 { font-family: var(--r-heading-font); font-size: 0.6em; color: var(--ft-black); margin-bottom: 0.15em; }
+    .reveal .callout p { font-size: 0.5em; color: var(--ft-slate); line-height: 1.5; }
+    .reveal .callout p strong { color: var(--ft-black); }
 
-    /* Feature list for transaction lifecycle */
-    .reveal .feat-list {
-      list-style: none;
-      padding: 0;
-      margin: 0.5em 0;
-      border-top: 3px solid var(--ft-black);
+    /* Feature comparison rows */
+    .reveal .feats { list-style: none; padding: 0; margin: 0.3em 0; border-top: 3px solid var(--ft-black); }
+    .reveal .feats li {
+      display: grid; grid-template-columns: 1fr 2fr;
+      gap: 0.6em; padding: 0.3em 0; border-bottom: 1px solid var(--ft-rule);
+      font-size: 0.52em; line-height: 1.45;
     }
-    .reveal .feat-list li {
-      display: grid;
-      grid-template-columns: 1.5fr 3fr 1.5fr;
-      gap: 0.8em;
-      padding: 0.5em 0;
-      border-bottom: 1px solid var(--ft-rule);
-      font-size: 0.62em;
-      line-height: 1.4;
-      align-items: baseline;
-    }
-    .reveal .feat-list .feat-name {
-      font-family: var(--r-heading-font);
-      font-size: 1em;
-      font-weight: 700;
-      color: var(--ft-black);
-    }
-    .reveal .feat-list .feat-us {
-      color: var(--ft-dark);
-    }
-    .reveal .feat-list .feat-them {
-      color: var(--ft-slate);
-      opacity: 0.6;
-    }
-
-    /* Concession / where they win */
-    .reveal .concession-box {
-      background: var(--ft-paper);
-      border-top: 3px solid var(--ft-claret);
-      padding: 0.8em 1em;
-      margin: 0.5em 0;
-    }
-    .reveal .concession-box h4 {
-      font-family: var(--r-heading-font);
-      font-size: 0.8em;
-      color: var(--ft-black);
-      margin-bottom: 0.2em;
-    }
-    .reveal .concession-box p {
-      font-size: 0.62em;
-      color: var(--ft-slate);
-      line-height: 1.5;
-    }
-
-    /* Body text helper */
-    .reveal .body-text {
-      font-size: 0.68em;
-      color: var(--ft-slate);
-      line-height: 1.5;
-    }
-    .reveal .body-sm {
-      font-size: 0.6em;
-      color: var(--ft-slate);
-      line-height: 1.5;
-    }
-    .reveal .accent-text {
-      font-size: 0.62em;
-      color: var(--ft-claret);
-      font-weight: 600;
-    }
-    .reveal .date-text {
-      font-size: 0.55em;
-      color: var(--ft-slate);
-    }
+    .reveal .feats .fn { font-family: var(--r-heading-font); font-weight: 700; color: var(--ft-black); }
+    .reveal .feats .fd { color: var(--ft-dark); }
   </style>
 </head>
 <body>
 <div class="reveal">
 <div class="slides">
 
-<!-- ============================================================ -->
 <!-- SLIDE 1: TITLE -->
-<!-- ============================================================ -->
 <section data-background-color="#1A1817">
   <div class="slide-dark">
     <p class="eyebrow" style="color: var(--ft-mandarin);">Centime &middot; Competitive Analysis</p>
-    <h1 style="font-size: 1.8em; color: var(--ft-pink); margin-bottom: 0.15em;">Centime Exchange<br>vs. PaymentWorks</h1>
-    <p class="subtitle" style="color: var(--ft-wheat);">Feature-by-feature competitive analysis &mdash; supplier management, payment execution, fraud indemnification, and the full payables lifecycle.</p>
-    <p class="date-text" style="margin-top: 1.5em;">Internal &middot; February 2026 &middot; Confidential</p>
+    <h1 style="font-size: 1.6em; color: var(--ft-pink);">Centime Exchange<br>vs. PaymentWorks</h1>
+    <p class="subtitle" style="color: var(--ft-wheat);">Supplier management, payment execution, fraud indemnification, and the full payables lifecycle.</p>
+    <p class="meta" style="margin-top: 1em;">Internal &middot; February 2026 &middot; Confidential</p>
   </div>
 </section>
 
-<!-- ============================================================ -->
 <!-- SLIDE 2: WHO IS PAYMENTWORKS -->
-<!-- ============================================================ -->
 <section data-background-color="#FFF1E5">
   <p class="eyebrow">The Competitor</p>
   <h2>Who is PaymentWorks?</h2>
-  <p class="lead">A supplier onboarding and identity verification platform. In market since 2013. Their competitive weapon is insurance, not software.</p>
-
-  <div class="vs-grid" style="grid-template-columns: 1fr;">
-    <div class="vs-col" style="padding-left: 0; border-right: none;">
-      <ul>
-        <li><strong style="color: var(--ft-black);">~200 customers</strong> &mdash; primarily higher education and public sector</li>
-        <li><strong style="color: var(--ft-black);">~$12M annual revenue</strong> &mdash; estimated</li>
-        <li><strong style="color: var(--ft-black);">Marquee relationship:</strong> J.P. Morgan</li>
-        <li><strong style="color: var(--ft-black);">Primary differentiator:</strong> Up to $2M fraud indemnification per payment, bundled into every contract</li>
-        <li><strong style="color: var(--ft-black);">In competitive evaluations,</strong> the indemnification is frequently the deciding factor</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- SLIDE 3: WHO IS CENTIME -->
-<!-- ============================================================ -->
-<section data-background-color="#FFF1E5">
-  <p class="eyebrow">Our Position</p>
-  <h2>Who is Centime?</h2>
-  <p class="lead">Full-lifecycle financial process automation for mid-market finance teams, embedded directly in the ERP.</p>
-
-  <div class="vs-grid">
-    <div class="vs-col us">
-      <h4>AP Automation (Invoice-to-Pay)</h4>
-      <ul>
-        <li>AI-powered invoice capture &amp; coding</li>
-        <li>PO matching (2- and 3-way)</li>
-        <li>Approval workflows</li>
-        <li>Supplier management</li>
-      </ul>
-    </div>
-    <div class="vs-col us">
-      <h4>Payments Automation (Integrated Payables)</h4>
-      <ul>
-        <li>Payment execution: ACH, virtual card, check</li>
-        <li>ERP reconciliation</li>
-        <li>Transaction monitoring</li>
-        <li>Dynamic discounting &amp; supply chain finance</li>
-      </ul>
-    </div>
-  </div>
-  <p class="body-text" style="margin-top: 0.3em;"><strong style="color: var(--ft-black);">Centime Exchange</strong> is the supplier verification layer that serves both solutions. Deployable standalone or integrated.</p>
-</section>
-
-<!-- ============================================================ -->
-<!-- SLIDE 4: THE OXYMORON -->
-<!-- ============================================================ -->
-<section data-background-color="#1A1817">
-  <div class="slide-dark">
-    <p class="eyebrow" style="color: var(--ft-mandarin);">The Core Positioning</p>
-    <h2 style="color: var(--ft-pink); font-size: 1.4em;">A company called <span style="color: #f59e0b;">&ldquo;PaymentWorks&rdquo;</span><br>that processes no payments.</h2>
-    <p class="body-text" style="color: var(--ft-wheat); margin-top: 0.8em;">PaymentWorks collects supplier data and hands it off. They have no invoice processing, no payment execution, no ERP integration, no reconciliation. The name implies a payables platform. The product is a supplier form.</p>
-    <p class="body-text" style="color: var(--ft-wheat); margin-top: 0.4em;">Centime delivers the full lifecycle &mdash; from supplier verification through invoice capture, approval, payment, and remittance &mdash; that &ldquo;PaymentWorks&rdquo; suggests but cannot provide.</p>
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- SLIDE 5: SCORECARD -->
-<!-- ============================================================ -->
-<section data-background-color="#FFF1E5">
-  <p class="eyebrow">Competitive Scorecard</p>
-  <h2>16 capabilities compared</h2>
-  <p class="lead">Across supplier management, payment execution, transaction lifecycle, and market position.</p>
-
-  <div class="score-grid">
-    <div class="score-card sc-lead">
-      <div class="num">12</div>
-      <div class="lbl">Centime Leads</div>
-    </div>
-    <div class="score-card sc-parity">
-      <div class="num">1</div>
-      <div class="lbl">At Parity</div>
-    </div>
-    <div class="score-card sc-choice">
-      <div class="num">2</div>
-      <div class="lbl">Biz Model Choice</div>
-    </div>
-    <div class="score-card sc-na">
-      <div class="num">1</div>
-      <div class="lbl">Not Competing</div>
-    </div>
-  </div>
-  <p class="body-sm" style="margin-top: 0.4em;">Exchange standalone already leads on most supplier management capabilities. Paired with AP Automation and Payments Automation, Centime extends into territory PaymentWorks cannot reach.</p>
-</section>
-
-<!-- ============================================================ -->
-<!-- SLIDE 6: ARGUMENT 1 — EXCHANGE STANDALONE -->
-<!-- ============================================================ -->
-<section data-background-color="#FFF1E5">
-  <p class="eyebrow">Argument 1</p>
-  <h2>Exchange standalone is already better</h2>
-  <p class="lead">Even without Centime&rsquo;s payables solutions, Exchange leads on most supplier management capabilities.</p>
-
-  <div class="vs-grid" style="grid-template-columns: 1fr;">
-    <div class="vs-col" style="padding-left: 0; border-right: none;">
-      <ul>
-        <li><strong style="color: var(--ft-black);">CAS</strong> proves bank account ownership in real time &mdash; not micro-deposits, not database lookups</li>
-        <li><strong style="color: var(--ft-black);">Outreach engine</strong> runs configurable campaigns with automated follow-ups and deadline-driven enrollment</li>
-        <li><strong style="color: var(--ft-black);">Document management</strong> handles core business docs, insurance certs with automated parsing and expiration tracking</li>
-        <li><strong style="color: var(--ft-black);">Fully mobile-responsive</strong> portal &mdash; theirs is desktop-only</li>
-      </ul>
-    </div>
-  </div>
-  <p class="accent-text" style="margin-top: 0.3em;">The customer who only wants supplier verification gets a better product with Exchange.</p>
-</section>
-
-<!-- ============================================================ -->
-<!-- SLIDE 7: BANK ACCOUNT VERIFICATION -->
-<!-- ============================================================ -->
-<section data-background-color="#FFF1E5">
-  <p class="eyebrow">Supplier Verification</p>
-  <h2>Bank Account Verification</h2>
-  <p style="margin-bottom: 0.4em;"><span class="tag tag-lead">We Lead</span> <span class="body-sm">&mdash; Strongest anti-fraud differentiator</span></p>
-
-  <div class="vs-grid">
-    <div class="vs-col us">
-      <h4>Centime Exchange</h4>
-      <p>Real-time ownership proof via <strong style="color: var(--ft-black);">CAS</strong> (Centime Account Services). Supplier logs into their own bank through a secure browser session. We confirm the account number matches an account they control.</p>
-      <p style="margin-top: 0.4em;"><strong style="color: var(--ft-black);">Not a micro-deposit. Not a database lookup. Real-time proof of ownership.</strong></p>
-    </div>
-    <div class="vs-col them">
-      <h4>PaymentWorks</h4>
-      <p>Third-party validation services, micro-deposits (2&ndash;3 day delay), and supplier self-attestation.</p>
-      <p style="margin-top: 0.4em;">Multiple fallback methods, none of which prove the supplier actually controls the account in real time.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- SLIDE 8: OUTREACH & ENROLLMENT -->
-<!-- ============================================================ -->
-<section data-background-color="#FFF1E5">
-  <p class="eyebrow">Supplier Management</p>
-  <h2>Outreach &amp; Enrollment</h2>
-  <p style="margin-bottom: 0.4em;"><span class="tag tag-lead">We Lead</span> <span class="body-sm">&mdash; Drives enrollment velocity</span></p>
-
-  <div class="vs-grid">
-    <div class="vs-col us">
-      <h4>Centime Exchange</h4>
-      <p>Configurable campaigns with automated follow-ups, reminders, deadline-driven enrollment windows, and real-time completion tracking.</p>
-      <p style="margin-top: 0.3em;">Enrollment velocity &mdash; the percentage of a buyer&rsquo;s supplier base that has been verified &mdash; directly correlates to risk reduction.</p>
-    </div>
-    <div class="vs-col them">
-      <h4>PaymentWorks</h4>
-      <p>Single email invitation. No follow-up automation. No campaign management.</p>
-      <p style="margin-top: 0.3em;">Supplier completion depends entirely on manual follow-up by the buyer&rsquo;s AP team.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- SLIDE 9: DOCUMENT MANAGEMENT & MOBILE -->
-<!-- ============================================================ -->
-<section data-background-color="#FFF1E5">
-  <p class="eyebrow">Supplier Management</p>
-  <h2>Documents &amp; Mobile Access</h2>
-
-  <div class="cap-row">
-    <h4>Document Management <span class="tag tag-lead" style="margin-left: 0.5em;">We Lead</span></h4>
-    <p><strong>Centime:</strong> W-9, Articles of Inc., Cert of Good Standing, insurance certs with automated parsing, metadata extraction, expiration badges, industry-specific categories</p>
-    <p class="them"><strong>PaymentWorks:</strong> W-9, W-8 series collection at registration only</p>
-  </div>
-  <div class="cap-row">
-    <h4>Mobile Access <span class="tag tag-lead" style="margin-left: 0.5em;">We Lead</span></h4>
-    <p><strong>Centime:</strong> Fully mobile-responsive &mdash; suppliers register, upload docs, manage profiles from any device</p>
-    <p class="them"><strong>PaymentWorks:</strong> Desktop only. No mobile access</p>
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- SLIDE 10: SELF-REGISTRATION & KYB -->
-<!-- ============================================================ -->
-<section data-background-color="#FFF1E5">
-  <p class="eyebrow">Supplier Management</p>
-  <h2>Self-Registration &amp; Compliance</h2>
-
-  <div class="cap-row">
-    <h4>Supplier Self-Registration <span class="tag tag-parity" style="margin-left: 0.5em;">Parity</span></h4>
-    <p><strong>Centime:</strong> Email invite &rarr; OTP &rarr; payment profile &rarr; instant verification</p>
-    <p class="them"><strong>PaymentWorks:</strong> Email invite &rarr; form &rarr; internal review (3&ndash;5 business days)</p>
-  </div>
-  <div class="cap-row">
-    <h4>KYB / Compliance Screening <span class="tag tag-choice" style="margin-left: 0.5em;">Biz Model Choice</span></h4>
-    <p><strong>Centime:</strong> Available via Middesk &mdash; SOS verification, TIN validation, sanctions, PEP screening. Per-report ($25) or bundleable. More flexible for mid-market</p>
-    <p class="them"><strong>PaymentWorks:</strong> Bundled into platform fee &mdash; buyer pays whether needed or not</p>
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- SLIDE 11: ARGUMENT 2 — WITH PAYABLES -->
-<!-- ============================================================ -->
-<section data-background-color="#1A1817">
-  <div class="slide-dark">
-    <p class="eyebrow" style="color: var(--ft-mandarin);">Argument 2</p>
-    <h2 style="color: var(--ft-pink);">With Centime&rsquo;s payables solutions,<br>the gap becomes a chasm</h2>
-
-    <div class="vs-grid">
-      <div class="vs-col us">
-        <h4>Centime delivers</h4>
-        <ul>
-          <li>Native ERP integration (NetSuite, Intacct, QB, Dynamics)</li>
-          <li>PO posting and invoice matching</li>
-          <li>Born-digital invoicing &mdash; no OCR needed</li>
-          <li>Payment execution (ACH, virtual card, check)</li>
-          <li>Remittance detail to supplier portal</li>
-          <li>Dynamic discounting via bank partner capital</li>
-        </ul>
-      </div>
-      <div class="vs-col them">
-        <h4>PaymentWorks cannot</h4>
-        <ul>
-          <li>No invoice processing of any kind</li>
-          <li>No payment execution</li>
-          <li>No ERP integration (flat-file upload only)</li>
-          <li>No reconciliation</li>
-          <li>No remittance detail</li>
-          <li>No dynamic discounting with bank capital</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- SLIDE 12: ERP INTEGRATION -->
-<!-- ============================================================ -->
-<section data-background-color="#FFF1E5">
-  <p class="eyebrow">ERP &amp; Payments</p>
-  <h2>ERP Integration</h2>
-  <p style="margin-bottom: 0.4em;"><span class="tag tag-lead">We Lead</span> <span class="body-sm">&mdash; Native + file + API covers any ERP</span></p>
-
-  <div class="vs-grid">
-    <div class="vs-col us">
-      <h4>Centime</h4>
-      <p>Native connectors for QuickBooks, NetSuite, Sage Intacct, Microsoft Dynamics. File-based and API-based for all other ERPs.</p>
-      <p style="margin-top: 0.3em;"><strong style="color: var(--ft-black);">Embeds directly within the ERP</strong> with real-time sync. No context switching.</p>
-    </div>
-    <div class="vs-col them">
-      <h4>PaymentWorks</h4>
-      <p>Flat-file upload + custom API mapping. Often requires paid consultants to implement.</p>
-      <p style="margin-top: 0.3em;">No native ERP connectors. Integration is a professional services engagement, not a product feature.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- SLIDE 13: PAYMENT EXECUTION -->
-<!-- ============================================================ -->
-<section data-background-color="#FFF1E5">
-  <p class="eyebrow">ERP &amp; Payments</p>
-  <h2>Payment Execution</h2>
-  <p style="margin-bottom: 0.4em;"><span class="tag tag-lead">We Lead</span> <span class="body-sm">&mdash; End-to-end vs. data handoff</span></p>
-
-  <div class="vs-grid">
-    <div class="vs-col us">
-      <h4>Centime</h4>
-      <p>Native ACH, virtual card, and check via Payments Automation with full ERP reconciliation.</p>
-      <p style="margin-top: 0.3em;">End-to-end payment lifecycle &mdash; from verified supplier through executed and reconciled payment. One platform.</p>
-    </div>
-    <div class="vs-col them">
-      <h4>PaymentWorks</h4>
-      <p><strong style="color: #c0392b;">&ldquo;PaymentWorks&rdquo; processes no payments.</strong></p>
-      <p style="margin-top: 0.3em;">Buyer must use a separate payment provider. PaymentWorks collects supplier data and hands it off. That&rsquo;s where their product ends.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- SLIDE 14: TRANSACTION LIFECYCLE -->
-<!-- ============================================================ -->
-<section data-background-color="#FFF1E5">
-  <p class="eyebrow">Transaction Lifecycle</p>
-  <h2>Where PaymentWorks does not play</h2>
-  <p class="lead">Four capabilities that require a real payables platform.</p>
-
-  <ul class="feat-list">
-    <li>
-      <span class="feat-name">PO Posting &amp; Matching</span>
-      <span class="feat-us"><strong>Centime:</strong> Buyer posts POs via API. Supplier submits invoices. Auto-match. Supplier corrects mismatches</span>
-      <span class="feat-them"><em>PW:</em> Not supported</span>
-    </li>
-    <li>
-      <span class="feat-name">Born-Digital Invoices</span>
-      <span class="feat-us"><strong>Centime:</strong> Supplier enters structured data directly &mdash; no OCR, capture, or conversion</span>
-      <span class="feat-them"><em>PW:</em> Not supported</span>
-    </li>
-    <li>
-      <span class="feat-name">Remittance Detail</span>
-      <span class="feat-us"><strong>Centime:</strong> Remittance detail available to suppliers via portal</span>
-      <span class="feat-them"><em>PW:</em> Not supported</span>
-    </li>
-    <li>
-      <span class="feat-name">Supplier Status</span>
-      <span class="feat-us"><strong>Centime:</strong> Real-time invoice status, payment status, remittance &mdash; all in one portal</span>
-      <span class="feat-them"><em>PW:</em> Onboarding tracker only</span>
-    </li>
+  <p class="lead">Supplier onboarding and identity verification. In market since 2013. Their weapon is insurance, not software.</p>
+  <ul class="pts">
+    <li><strong>~200 customers</strong> &mdash; primarily higher education and public sector</li>
+    <li><strong>~$12M annual revenue</strong> (estimated) &mdash; marquee relationship with J.P. Morgan</li>
+    <li><strong>Primary differentiator:</strong> Up to $2M fraud indemnification per payment, bundled into every contract</li>
+    <li><strong>In competitive evaluations,</strong> the indemnification is frequently the deciding factor</li>
   </ul>
 </section>
 
-<!-- ============================================================ -->
+<!-- SLIDE 3: WHO IS CENTIME -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">Our Position</p>
+  <h2>Who is Centime?</h2>
+  <p class="lead">Full-lifecycle financial process automation for mid-market finance teams, embedded in the ERP.</p>
+  <div class="vs">
+    <div class="vs-l">
+      <h4>AP Automation</h4>
+      <p>AI-powered invoice capture, PO matching, approval workflows, supplier management</p>
+    </div>
+    <div class="vs-r" style="border-right: none;">
+      <h4 style="color: var(--ft-claret);">Payments Automation</h4>
+      <p>ACH, virtual card, check execution, ERP reconciliation, dynamic discounting &amp; SCF</p>
+    </div>
+  </div>
+  <p class="body" style="margin-top: 0.3em;"><strong>Centime Exchange</strong> is the supplier verification layer serving both. Standalone or integrated.</p>
+</section>
+
+<!-- SLIDE 4: THE OXYMORON -->
+<section data-background-color="#1A1817">
+  <div class="slide-dark">
+    <p class="eyebrow" style="color: var(--ft-mandarin);">The Core Positioning</p>
+    <h2 style="color: var(--ft-pink); font-size: 1.3em;">A company called <span style="color: #f59e0b;">&ldquo;PaymentWorks&rdquo;</span><br>that processes no payments.</h2>
+    <p class="body" style="color: var(--ft-wheat); margin-top: 0.6em;">No invoice processing. No payment execution. No ERP integration. No reconciliation. The name implies a payables platform. The product is a supplier form.</p>
+    <p class="body" style="color: var(--ft-wheat); margin-top: 0.3em;">Centime delivers the full lifecycle &mdash; verification through payment and remittance &mdash; that &ldquo;PaymentWorks&rdquo; suggests but cannot provide.</p>
+  </div>
+</section>
+
+<!-- SLIDE 5: SCORECARD -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">Competitive Scorecard</p>
+  <h2>16 capabilities compared</h2>
+  <div class="scores">
+    <div class="sc sc-g"><div class="n">12</div><div class="l">Centime Leads</div></div>
+    <div class="sc sc-b"><div class="n">1</div><div class="l">At Parity</div></div>
+    <div class="sc sc-a"><div class="n">2</div><div class="l">Biz Model Choice</div></div>
+    <div class="sc sc-s"><div class="n">1</div><div class="l">Not Competing</div></div>
+  </div>
+  <p class="body">Exchange standalone leads on most supplier management capabilities. Paired with AP and Payments Automation, Centime extends into territory PaymentWorks cannot reach.</p>
+</section>
+
+<!-- SLIDE 6: ARGUMENT 1 -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">Argument 1</p>
+  <h2>Exchange standalone is already better</h2>
+  <ul class="pts">
+    <li><strong>CAS</strong> proves bank account ownership in real time &mdash; not micro-deposits, not database lookups</li>
+    <li><strong>Outreach engine</strong> with configurable campaigns, automated follow-ups, deadline-driven enrollment</li>
+    <li><strong>Document management</strong> with automated parsing, expiration tracking, industry-specific categories</li>
+    <li><strong>Fully mobile-responsive</strong> portal &mdash; theirs is desktop-only</li>
+  </ul>
+</section>
+
+<!-- SLIDE 7: BANK ACCOUNT VERIFICATION -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">Supplier Verification &nbsp; <span class="tag tag-lead">We Lead</span></p>
+  <h2>Bank Account Verification</h2>
+  <div class="vs">
+    <div class="vs-l">
+      <h4>Centime Exchange</h4>
+      <p>Real-time ownership proof via <strong>CAS</strong>. Supplier logs into their bank through a secure session. We confirm the account they provided is one they control.</p>
+      <p style="margin-top: 0.3em;"><strong>Not a micro-deposit. Not a lookup. Real-time proof.</strong></p>
+    </div>
+    <div class="vs-r">
+      <h4>PaymentWorks</h4>
+      <p>Third-party validation, micro-deposits (2&ndash;3 day delay), supplier self-attestation.</p>
+      <p style="margin-top: 0.3em;">Multiple fallback methods &mdash; none prove real-time account control.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 8: OUTREACH & ENROLLMENT -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">Supplier Management &nbsp; <span class="tag tag-lead">We Lead</span></p>
+  <h2>Outreach &amp; Enrollment</h2>
+  <div class="vs">
+    <div class="vs-l">
+      <h4>Centime Exchange</h4>
+      <p>Configurable campaigns with automated follow-ups, reminders, deadline-driven enrollment, real-time completion tracking.</p>
+      <p style="margin-top: 0.3em;"><strong>Enrollment velocity directly correlates to risk reduction.</strong></p>
+    </div>
+    <div class="vs-r">
+      <h4>PaymentWorks</h4>
+      <p>Single email invitation. No follow-up automation. No campaign management.</p>
+      <p style="margin-top: 0.3em;">Completion depends on manual follow-up by the buyer&rsquo;s AP team.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 9: DOCS & MOBILE -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">Supplier Management &nbsp; <span class="tag tag-lead">We Lead</span></p>
+  <h2>Documents &amp; Mobile Access</h2>
+  <div class="vs">
+    <div class="vs-l">
+      <h4>Centime Exchange</h4>
+      <p>W-9, Articles of Inc., Cert of Good Standing, insurance certs with automated parsing, expiration badges, industry-specific categories. <strong>Fully mobile-responsive.</strong></p>
+    </div>
+    <div class="vs-r">
+      <h4>PaymentWorks</h4>
+      <p>W-9 and W-8 series collection at registration only. No document lifecycle management. <strong>Desktop only.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 10: SELF-REG & KYB -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">Supplier Management</p>
+  <h2>Registration &amp; Compliance</h2>
+  <div class="vs">
+    <div class="vs-l">
+      <h4>Self-Registration &nbsp; <span class="tag tag-parity">Parity</span></h4>
+      <p><strong>Centime:</strong> Email &rarr; OTP &rarr; payment profile &rarr; instant verification</p>
+      <p style="margin-top: 0.2em;"><strong>PaymentWorks:</strong> Email &rarr; form &rarr; internal review (3&ndash;5 days)</p>
+    </div>
+    <div class="vs-r">
+      <h4>KYB / Compliance &nbsp; <span class="tag tag-choice">Biz Model</span></h4>
+      <p><strong>Centime:</strong> Via Middesk &mdash; SOS, TIN, sanctions, PEP. Per-report ($25) or bundleable</p>
+      <p style="margin-top: 0.2em;"><strong>PaymentWorks:</strong> Bundled into platform fee whether needed or not</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 11: ARGUMENT 2 -->
+<section data-background-color="#1A1817">
+  <div class="slide-dark">
+    <p class="eyebrow" style="color: var(--ft-mandarin);">Argument 2</p>
+    <h2 style="color: var(--ft-pink);">With our payables platform,<br>the gap becomes a chasm</h2>
+    <div class="vs">
+      <div class="vs-l">
+        <h4>Centime delivers</h4>
+        <p>Native ERP integration &bull; PO matching &bull; Born-digital invoicing &bull; Payment execution &bull; Remittance detail &bull; Dynamic discounting via bank capital</p>
+      </div>
+      <div class="vs-r">
+        <h4>PaymentWorks cannot</h4>
+        <p>No invoicing &bull; No payments &bull; No ERP integration &bull; No reconciliation &bull; No remittance &bull; No discounting</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 12: ERP INTEGRATION -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">ERP &amp; Payments &nbsp; <span class="tag tag-lead">We Lead</span></p>
+  <h2>ERP Integration</h2>
+  <div class="vs">
+    <div class="vs-l">
+      <h4>Centime</h4>
+      <p>Native connectors for QuickBooks, NetSuite, Sage Intacct, Microsoft Dynamics. File-based and API-based for all other ERPs.</p>
+      <p style="margin-top: 0.3em;"><strong>Embeds directly within the ERP</strong> with real-time sync.</p>
+    </div>
+    <div class="vs-r">
+      <h4>PaymentWorks</h4>
+      <p>Flat-file upload + custom API mapping.</p>
+      <p style="margin-top: 0.3em;">Often requires paid consultants. No native ERP connectors.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 13: PAYMENT EXECUTION -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">ERP &amp; Payments &nbsp; <span class="tag tag-lead">We Lead</span></p>
+  <h2>Payment Execution</h2>
+  <div class="vs">
+    <div class="vs-l">
+      <h4>Centime</h4>
+      <p>Native ACH, virtual card, and check via Payments Automation with full ERP reconciliation.</p>
+      <p style="margin-top: 0.3em;"><strong>End-to-end:</strong> verified supplier &rarr; executed payment &rarr; reconciled in ERP.</p>
+    </div>
+    <div class="vs-r">
+      <h4>PaymentWorks</h4>
+      <p style="color: #c0392b; opacity: 1;"><strong>&ldquo;PaymentWorks&rdquo; processes no payments.</strong></p>
+      <p style="margin-top: 0.3em;">Collects supplier data and hands it off. That&rsquo;s where the product ends.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 14: TRANSACTION LIFECYCLE -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">Transaction Lifecycle &nbsp; <span class="tag tag-lead">We Lead</span></p>
+  <h2>Where PaymentWorks does not play</h2>
+  <ul class="feats">
+    <li><span class="fn">PO Matching</span><span class="fd">Buyer posts POs. Supplier submits invoices. Auto-match. Supplier corrects mismatches.</span></li>
+    <li><span class="fn">Born-Digital Invoices</span><span class="fd">Supplier enters structured data directly &mdash; no OCR, no capture, no conversion.</span></li>
+    <li><span class="fn">Remittance Detail</span><span class="fd">Remittance detail available to suppliers via portal after payment.</span></li>
+    <li><span class="fn">Supplier Status</span><span class="fd">Real-time invoice status, payment status, remittance &mdash; all in one portal.</span></li>
+  </ul>
+  <p class="body" style="margin-top: 0.2em; opacity: 0.6;">PaymentWorks supports none of the above. Onboarding tracker only.</p>
+</section>
+
 <!-- SLIDE 15: FRAUD INDEMNIFICATION -->
-<!-- ============================================================ -->
 <section data-background-color="#FFF1E5">
   <p class="eyebrow">Fraud Indemnification</p>
   <h2>Their lead, our path</h2>
-  <p class="lead">PaymentWorks leads today on fraud indemnification. The gap is timing, not capability.</p>
-
-  <div class="indem-grid">
-    <div class="indem-card indem-them">
+  <p class="lead">PaymentWorks leads today. The gap is timing, not capability.</p>
+  <div class="cards">
+    <div class="card card-green">
       <h4>PaymentWorks &mdash; Today</h4>
-      <p>Up to <strong>$2M per fraudulent payment</strong>, bundled into platform fee. Underwritten by specialty insurer. No separate purchase decision. Their primary sales weapon.</p>
+      <p>Up to <strong>$2M per payment</strong>, bundled. Underwritten by specialty insurer. Their primary sales weapon.</p>
     </div>
-    <div class="indem-card indem-us">
+    <div class="card card-amber">
       <h4>Centime &mdash; In Progress</h4>
-      <p>Lapsed Lloyd&rsquo;s Financial Institutions Bond (B1230FC) with <strong>zero claims history</strong>. Actively pursuing reinstatement with broadened social engineering and vendor impersonation coverage.</p>
+      <p>Lapsed Lloyd&rsquo;s bond (B1230FC), <strong>zero claims</strong>. Pursuing reinstatement with broadened social engineering coverage. CAS is the underwriting control.</p>
     </div>
   </div>
-  <p class="body-sm" style="margin-top: 0.3em;">CAS provides real-time bank account ownership verification more rigorous than PaymentWorks&rsquo; methods. Our bundled distribution model eliminates adverse selection.</p>
 </section>
 
-<!-- ============================================================ -->
 <!-- SLIDE 16: EARLY PAY -->
-<!-- ============================================================ -->
 <section data-background-color="#FFF1E5">
   <p class="eyebrow">Early Pay</p>
   <h2>Fundamentally different models</h2>
-
-  <div class="ep-grid">
-    <div class="ep-col">
+  <div class="rates">
+    <div>
       <h4 style="color: var(--ft-slate);">PaymentWorks EarlyPay</h4>
-      <div class="rate rate-them">0% &ndash; 3.0%</div>
-      <p><strong style="color: #c0392b;">Third-party funded SCF only.</strong> Anonymous funder pays supplier early; buyer pays funder on due date. Supplier pays 1.0% even at day 20. PaymentWorks doesn&rsquo;t process the payment.</p>
+      <div class="num" style="color: #c0392b;">0% &ndash; 3.0%</div>
+      <p><strong style="color: #c0392b;">Third-party funded SCF only.</strong> Supplier pays 1.0% even at day 20. PaymentWorks doesn&rsquo;t process the payment.</p>
     </div>
-    <div class="ep-col">
-      <h4 style="color: var(--ft-claret);">Centime (via Payments Automation)</h4>
-      <div class="rate rate-us">0% &ndash; 2.75%</div>
-      <p><strong style="color: #1e7a3a;">Dynamic discounting + SCF, powered by bank partner capital.</strong> $0 fee from day 20&ndash;30. Capital stays in existing banking relationship. Buyer earns card rebates.</p>
+    <div>
+      <h4 style="color: var(--ft-claret);">Centime</h4>
+      <div class="num" style="color: #1e7a3a;">0% &ndash; 2.75%</div>
+      <p><strong style="color: #1e7a3a;">Dynamic discounting + SCF via bank partner capital.</strong> $0 fee from day 20&ndash;30. Buyer earns card rebates.</p>
     </div>
   </div>
 </section>
 
-<!-- ============================================================ -->
 <!-- SLIDE 17: WHERE THEY WIN -->
-<!-- ============================================================ -->
 <section data-background-color="#FFF1E5">
   <p class="eyebrow">Honest Assessment</p>
   <h2>Where they win</h2>
   <p class="lead">And why it doesn&rsquo;t matter much for our market.</p>
-
-  <div class="concession-box">
-    <h4>Higher-ed &amp; public sector compliance</h4>
-    <p>PaymentWorks has deep penetration in universities and government agencies. <strong style="color: var(--ft-black);">We are not targeting this segment.</strong> Our distribution is through bank partnerships serving mid-market commercial banking clients. Different buyer, different channel.</p>
+  <div class="callout">
+    <h4>Higher-ed &amp; public sector</h4>
+    <p>Deep penetration in universities and government. <strong>We are not targeting this segment.</strong> Our distribution is bank partnerships serving mid-market commercial clients.</p>
   </div>
-  <div class="concession-box">
-    <h4>KYB/compliance bundled into platform fee</h4>
-    <p>PaymentWorks includes KYC/KYB in their base price; we offer per-report ($25 via Middesk). <strong style="color: var(--ft-black);">Business model choice, not a capability gap</strong> &mdash; more flexible for mid-market buyers.</p>
+  <div class="callout">
+    <h4>Bundled KYB/compliance</h4>
+    <p>They include KYC/KYB in base price; we offer per-report ($25). <strong>Business model choice, not capability gap.</strong></p>
   </div>
 </section>
 
-<!-- ============================================================ -->
-<!-- SLIDE 18: DISTRIBUTION ADVANTAGE -->
-<!-- ============================================================ -->
+<!-- SLIDE 18: BANK DISTRIBUTION -->
 <section data-background-color="#1A1817">
   <div class="slide-dark">
     <p class="eyebrow" style="color: var(--ft-mandarin);">Distribution</p>
     <h2 style="color: var(--ft-pink);">Bank channel distribution</h2>
-    <p class="body-text" style="color: var(--ft-wheat); margin-top: 0.5em;">Centime distributes through bank partnerships. Six banks today, including M&amp;T Bank, City National, and First National Bank of Omaha.</p>
-
-    <div class="vs-grid" style="grid-template-columns: 1fr;">
-      <div class="vs-col" style="padding-left: 0; border-right: none;">
-        <ul>
-          <li>Banks white-label Centime&rsquo;s payables platform for commercial banking clients</li>
-          <li>Fraud indemnification strengthens the bank channel pitch</li>
-          <li>Reduces payment fraud risk flowing through bank rails</li>
-          <li><strong style="color: var(--ft-pink);">No Tier 2 AP platform distributes through bank channels</strong> &mdash; structural advantage</li>
-        </ul>
-      </div>
-    </div>
+    <p class="body" style="color: var(--ft-wheat); margin-bottom: 0.3em;">Six bank partners today: M&amp;T Bank, City National, First National Bank of Omaha, and more in development.</p>
+    <ul class="pts">
+      <li>Banks white-label Centime&rsquo;s payables platform for commercial clients</li>
+      <li>Fraud indemnification strengthens the bank channel pitch</li>
+      <li><strong>No Tier 2 AP platform distributes through bank channels</strong> &mdash; structural advantage</li>
+    </ul>
   </div>
 </section>
 
-<!-- ============================================================ -->
-<!-- SLIDE 19: THE BOTTOM LINE -->
-<!-- ============================================================ -->
+<!-- SLIDE 19: BOTTOM LINE -->
 <section data-background-color="#990F3D">
   <div class="slide-dark">
     <p class="eyebrow" style="color: var(--ft-wheat); opacity: 0.7;">The Bottom Line</p>
-    <h2 style="color: white; font-size: 1.3em; line-height: 1.25; margin-bottom: 0.5em;">Exchange standalone beats PaymentWorks.<br>With our payables platform, they can&rsquo;t compete.</h2>
-    <p class="body-text" style="color: rgba(255,255,255,0.85); margin-bottom: 0.5em;">The customer who wants supplier management gets a better product. The customer who wants the full payables lifecycle gets something PaymentWorks cannot compete with at all.</p>
-    <p class="body-text" style="color: rgba(255,255,255,0.85);">Their fraud indemnification leads today. We are actively closing that gap with stronger verification controls, a zero-claims underwriting history, and a self-funding distribution model.</p>
-    <p class="date-text" style="color: var(--ft-wheat); margin-top: 1.5em;">Centime, Inc. &middot; Confidential &middot; February 2026</p>
+    <h2 style="color: white; font-size: 1.2em; line-height: 1.3;">Exchange standalone beats PaymentWorks.<br>With our payables platform, they can&rsquo;t compete.</h2>
+    <p class="body" style="color: rgba(255,255,255,0.85); margin-top: 0.5em;">The customer who wants supplier management gets a better product. The customer who wants the full payables lifecycle gets something PaymentWorks cannot compete with at all.</p>
+    <p class="body" style="color: rgba(255,255,255,0.85); margin-top: 0.3em;">Their indemnification leads today. We are closing that gap with stronger controls and a zero-claims history.</p>
+    <p class="meta" style="color: var(--ft-wheat); margin-top: 1em;">Centime, Inc. &middot; Confidential &middot; February 2026</p>
   </div>
 </section>
 
 </div>
 </div>
 
-<!-- Reveal.js -->
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
-<!-- Menu Plugin -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/menu.css">
 <script src="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/menu.js"></script>
 
 <script>
   Reveal.initialize({
-    width: 1280,
-    height: 720,
-    margin: 0.08,
+    width: 960,
+    height: 600,
+    margin: 0.07,
     center: true,
     hash: true,
     transition: 'fade',
