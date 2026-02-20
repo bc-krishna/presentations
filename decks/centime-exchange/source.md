@@ -100,13 +100,25 @@ A fully realized Centime platform relationship — AP + IP + Exchange — genera
 
 This is why PaymentWorks is stuck at $12M. They have the front door but no house behind it.
 
-### The bank channel proves it
+### The ad valorem thesis
 
-Our distribution is through bank partners — FNBO, and others in the pipeline. Banks will not white-label a standalone supplier onboarding tool. There's no revenue in it for them, no transaction volume to report, no payment economics to share.
+Here's a hypothesis we haven't fully proven yet but believe is directionally right: Exchange may be most valuable as a driver of ad valorem transactions — dynamic discounting and virtual card payments — where Centime earns a percentage of every dollar that moves.
 
-Banks *will* white-label a financial process automation platform that drives commercial payment volume through their rails. That's Centime: AP Automation + IP + Exchange. The supplier enrollment layer is what makes the platform defensible and the onboarding frictionless, but the invoice and payment volume is what makes the bank say yes.
+The logic: Exchange verifies a supplier's bank account, collects their payment preferences, and confirms they're transaction-ready. That's the foundation for enrolling suppliers into dynamic discounting programs and virtual card acceptance. Without verified enrollment, those programs don't launch. With it, the buyer can offer early pay terms or route payments to virtual cards from day one.
 
-No Tier 2 AP competitor — not Tipalti, not BILL, not Stampli — distributes through bank channels. They all sell direct. Our bank-channel distribution is a structural advantage, and it only works because we sell the full stack, not just the enrollment layer.
+This probably matters more for IP customers than AP customers. AP Automation generates subscription revenue regardless of payment method — invoices flow, approvals happen, postings land in the ERP. But IP revenue is transaction-driven, and the highest-margin transactions are virtual card (rebate revenue) and dynamic discounting (discount share). Exchange is the enrollment engine that feeds those programs.
+
+We haven't proven this yet. The data will come as we scale platform customers and measure which transaction types Exchange-verified suppliers adopt. But if the thesis holds, Exchange isn't just a competitive differentiator — it's the revenue accelerator for our highest-margin products.
+
+### Distribution: direct and bank
+
+We sell two ways: direct to mid-market finance teams, and through bank partners — FNBO, and others in the pipeline. Exchange strengthens both motions differently.
+
+**In direct sales**, Exchange is the differentiator that separates Centime from every other AP and payments platform in the demo. When a prospect is evaluating Tipalti, BILL, Stampli, and Centime side by side, Exchange is the capability none of the others can match. "We start before the first invoice" is a positioning statement only Centime can make. In a direct sale, Exchange is what gets us on the shortlist and what closes the deal.
+
+**In bank-channel sales**, Exchange amplifies the economics. Banks will not white-label a standalone supplier onboarding tool — there's no revenue in it for them, no transaction volume to report, no payment economics to share. But banks *will* white-label a financial process automation platform that drives commercial payment volume through their rails. That's Centime: AP Automation + IP + Exchange. The supplier enrollment layer is what makes the platform defensible and the onboarding frictionless, but the invoice and payment volume is what makes the bank say yes.
+
+No Tier 2 AP competitor — not Tipalti, not BILL, not Stampli — distributes through bank channels. They all sell direct. Our dual distribution — direct sales where Exchange differentiates, plus bank channels where Exchange amplifies — is a structural advantage that compounds as we add partners.
 
 ---
 
@@ -128,21 +140,21 @@ Exchange has a name because the enrollment capability needs an identity that tra
 
 ---
 
-## The fraud indemnification angle
+## The fraud indemnification question
 
-One more piece that sharpens this positioning.
+One more piece worth exploring — though we haven't committed to it and may not be able to offer it through Exchange.
 
-We have a lapsed insurance policy — a specialty umbrella that indemnified customers against loss from fraudulent payments to Exchange-verified suppliers. It lapsed because we couldn't justify the $30K annual premium when we had no mechanism to recover the cost.
+We previously held a specialty insurance policy that indemnified customers against loss from fraudulent payments to Exchange-verified suppliers. It lapsed because we couldn't justify the $30K annual premium when we had no mechanism to recover the cost.
 
-The model that works: bundle indemnification into the base platform price. Raise the base fee $500–$800 per customer. Across 50+ platform customers, we recover the premium. The buyer never makes a buy/no-buy decision on indemnification — it's just a feature of the platform.
+PaymentWorks offers something similar — fraud indemnification up to $2M per payment, bundled automatically into their platform. It's not sold separately. It's the thing their sales team leads with, and it's the thing that makes procurement committees comfortable signing off.
 
-This is exactly how PaymentWorks does it. Their fraud indemnification (up to $2M per payment) is included automatically. It's not sold separately. It's the thing their sales team leads with, and it's the thing that makes procurement committees comfortable signing off.
+In theory, the model could work for us: bundle indemnification into the base platform price, raise the base fee $500–$800 per customer, and across 50+ platform customers, recover the premium. The buyer never makes a buy/no-buy decision on indemnification — it's just a feature of the platform.
 
-If we resurrect this policy with bundled distribution and our zero-claims history, we can credibly say: "Every payment to an Exchange-verified supplier is indemnified up to $X." That's a sentence no Tier 2 AP competitor can match. Not Tipalti. Not BILL. Not Stampli. Not AvidXchange.
+But there are open questions. Can we underwrite this through Exchange specifically, or does it need to attach to the broader platform? Is the $30K premium still accurate, or has our risk profile changed? Do we have the claims infrastructure to support it? And does our zero-claims history actually help us renegotiate terms, or has the insurance market moved?
 
-And it only works because Exchange verification is the underwriting foundation. The insurer's risk is lower when every supplier has gone through real-time bank account ownership proof, document verification, and compliance screening. The stronger the Exchange verification, the better the indemnification terms.
+If the answers come back favorably, the competitive impact would be significant. "Every payment to an Exchange-verified supplier is indemnified" is a sentence no Tier 2 AP competitor can match. And the logic is sound: Exchange verification — real-time bank account ownership proof, document verification, compliance screening — is exactly the kind of underwriting foundation that lowers insurer risk.
 
-This creates a flywheel: better verification → lower insurance risk → higher indemnification limits → stronger competitive positioning → more platform sales → more suppliers on the Exchange → better verification data.
+This is worth investigating. It's not part of our current positioning, but it could sharpen it considerably if the economics and logistics work out.
 
 ---
 
@@ -166,6 +178,6 @@ We are not building a supplier onboarding company. The market has shown us the c
 
 We are building a financial process automation company — AP Automation and Integrated Payables — with the best supplier enrollment layer in the market. Exchange is that layer. It's named, it's real, it's defensible, and it's the single biggest reason we win against platforms that are better funded and more established.
 
-But the business is the platform. The revenue is in invoice processing and payment transactions. The distribution is through banks. And Exchange is the engine underneath all of it.
+But the business is the platform. The revenue is in invoice processing and payment transactions. The distribution is direct and through banks. And Exchange is the engine underneath all of it.
 
 That's why we position it the way we position it.
