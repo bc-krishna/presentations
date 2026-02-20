@@ -13,10 +13,9 @@
   <link rel="stylesheet" href="../../../css/theme/centime-editorial.css?v=4">
 
   <style>
-    /* Override theme's 24px base — must target .reveal to beat theme specificity */
-    .reveal {
-      --r-main-font-size: 38px;
-    }
+    /* Force large base font — bypass CSS variable entirely */
+    .reveal .slides { font-size: 38px !important; }
+
     .reveal h2 { font-size: 1.5em; margin-bottom: 0.25em; }
     .reveal .eyebrow { font-size: 0.5em; margin-bottom: 0.4em; }
     .reveal .lead { font-size: 0.65em; line-height: 1.5; margin-bottom: 0.4em; }
