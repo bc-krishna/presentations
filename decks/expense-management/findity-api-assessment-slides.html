@@ -350,7 +350,46 @@
   <p class="body">The answer is clear &mdash; and it&rsquo;s good news.</p>
 </section>
 
-<!-- SLIDE 3: FINDITY ARCHITECTURE (dark) -->
+<!-- SLIDE 3: WHAT WE SPECIFIED (dark) -->
+<section data-background-color="#1A1817" class="slide-dark">
+  <div class="section-label">The Spec</div>
+  <h2>What we designed &mdash; before we had the API docs</h2>
+  <div class="func-grid func-grid-sm">
+    <div class="func-item">
+      <div class="func-num">Policy Engine</div>
+      <h3>4 card mandate levels</h3>
+      <p>Company &rarr; dept &rarr; role &rarr; project hierarchy. Per-category spend limits. Soft/hard/block violations. Policy visibility at every stage.</p>
+    </div>
+    <div class="func-item">
+      <div class="func-num">T&amp;E Expenses</div>
+      <h3>Card-first with receipt OCR</h3>
+      <p>Corporate card auto-ingestion, MCC categorization. Personal card exception path. Mileage (IRS/GPS). Per-diem (GSA). Trip &amp; period reports.</p>
+    </div>
+    <div class="func-item">
+      <div class="func-num">Purchasing</div>
+      <h3>Pre-approved spend</h3>
+      <p>Purchase requests, PO generation, three-way matching (request &rarr; approval &rarr; card transaction). Unplanned spend flagging.</p>
+    </div>
+    <div class="func-item">
+      <div class="func-num">Approvals</div>
+      <h3>Multi-dimensional routing</h3>
+      <p>Amount, category, department, violation triggers. Auto-approval. Delegation. Escalation. Batch approve. Return for correction.</p>
+    </div>
+    <div class="func-item">
+      <div class="func-num">Finance Ops</div>
+      <h3>Reconciliation to GL</h3>
+      <p>5-status reconciliation workspace. Period close with reminders. Reimbursement batches. GL auto-coding. Split coding. Full reporting suite.</p>
+    </div>
+    <div class="func-item">
+      <div class="func-num">Integrations</div>
+      <h3>ERP, HRIS, SSO, Mobile</h3>
+      <p>QBO, NetSuite, Sage, Dynamics. BambooHR, ADP, Workday. Okta, Azure AD. US Bank/FNBO card feeds. Full mobile for employees &amp; managers.</p>
+    </div>
+  </div>
+  <p class="body" style="margin-top: 0.3em; font-size: 0.5em;"><a href="document.html" style="color: var(--ft-wheat); text-decoration: underline;">Full product specification</a> &mdash; 12-section document covering all features, personas, release schedule, and open questions.</p>
+</section>
+
+<!-- SLIDE 4: FINDITY ARCHITECTURE (dark) -->
 <section data-background-color="#1A1817" class="slide-dark">
   <div class="section-label">Platform Architecture</div>
   <h2>Four APIs, headless by design</h2>

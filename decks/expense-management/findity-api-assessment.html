@@ -630,6 +630,73 @@
 <div class="doc-body">
 
   <!-- ============================================================ -->
+  <!-- SECTION 00: WHAT WE SPECIFIED -->
+  <!-- ============================================================ -->
+  <div class="doc-section">
+    <div class="section-number">00 &mdash; What We Specified</div>
+    <h2>The product we designed</h2>
+    <p class="lead">Before mapping the Findity API, a summary of what we set out to build. The full product specification is available as a <a href="document.html" style="color: var(--ft-claret);">scrollable document</a> and a <a href="index.html" style="color: var(--ft-claret);">slide deck</a>.</p>
+
+    <p>Centime Expense Management is a policy-driven expense and lightweight purchasing platform for US mid-market finance teams (200&ndash;2,000 employees), built on Findity&rsquo;s white-label T&amp;E engine. We own the UX and workflows; Findity provides the expense processing engine. The platform enforces corporate card usage as the default, provides configurable policy guardrails, and delivers a streamlined experience across three personas: employee (submitter), manager (approver), and finance (controller).</p>
+
+    <h3>Design Principles</h3>
+    <div class="pillar-grid cols-4">
+      <div class="pillar">
+        <h4>Corporate Card First</h4>
+        <p>US Bank (primary) and FNBO (backup). Every UX nudge favors our card. Card-agnostic acceptance, but pricing rewards our programs.</p>
+      </div>
+      <div class="pillar">
+        <h4>Policy at the Center</h4>
+        <p>Rules shape the interface, the options available, and the approval routing. Not bolted on after the fact.</p>
+      </div>
+      <div class="pillar">
+        <h4>Built on Findity</h4>
+        <p>Findity provides the expense engine. We bring UX, workflows, card partnerships, and Centime platform integration.</p>
+      </div>
+      <div class="pillar">
+        <h4>Accountability Without Friction</h4>
+        <p>Capture what finance needs for audit and GL coding without making employees hate the process.</p>
+      </div>
+    </div>
+
+    <h3>Feature Summary</h3>
+    <ul class="checklist">
+      <li><span class="dot"></span><span><strong>Policy engine:</strong> Four corporate card mandate levels (Encouraged, Preferred, Required, Mandatory). Policy hierarchy (company &rarr; department &rarr; role &rarr; project). Per-category spend limits, receipt thresholds, per-diem and mileage rules. Three violation responses: soft warning, hard warning, block.</span></li>
+      <li><span class="dot"></span><span><strong>T&amp;E expense management:</strong> Corporate card transaction auto-ingestion with MCC categorization. Personal card exception path with justification. Mobile receipt capture with OCR. Mileage (IRS rates, Google Maps, commute offsets). Per-diem (GSA rates, custom rates, partial-day). Trip-based and period-based expense reports.</span></li>
+      <li><span class="dot"></span><span><strong>Basic purchasing:</strong> Pre-approved purchase request workflow for operational spend below a configurable threshold. PO generation, corporate card purchase, three-way matching (request &rarr; approval &rarr; card transaction). Unplanned spend flagging.</span></li>
+      <li><span class="dot"></span><span><strong>Approval workflows:</strong> Multi-dimensional routing by amount, category, department, and violation status. Auto-approval for clean, in-policy expenses. Delegation with date ranges. Aging escalation. Batch approval. Return for correction and approve with modification.</span></li>
+      <li><span class="dot"></span><span><strong>Finance operations:</strong> Five-status card reconciliation workspace. Period close with automated reminders and manager escalation. Reimbursement batch processing via ACH or payroll. GL auto-coding (MCC-to-GL mapping), split coding, GL validation. Full reporting suite: compliance scorecard, card ratio, unreconciled aging, spend analysis, cycle time, duplicate detection.</span></li>
+      <li><span class="dot"></span><span><strong>Integrations:</strong> ERP/GL push (QuickBooks, NetSuite, Sage Intacct, Dynamics). HRIS sync (BambooHR, ADP, Workday). SSO (Okta, Azure AD, Google). Visa/MC card feeds from US Bank and FNBO. Slack/Teams approval notifications. Calendar expense association.</span></li>
+      <li><span class="dot"></span><span><strong>Mobile:</strong> Full employee workflow (receipt capture, quick-submit, mileage, status tracking, purchase requests). Full manager workflow (swipe approve/reject, policy flags, batch approve, delegation). Finance operations are desktop-only.</span></li>
+      <li><span class="dot"></span><span><strong>Security &amp; compliance:</strong> Five RBAC roles. Tamper-evident audit trail on every action. SOC 2 Type II. PCI compliance via tokenized card feeds. Encrypted receipt storage with configurable retention.</span></li>
+    </ul>
+
+    <h3>Release Schedule</h3>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Release</th>
+          <th>Timeline</th>
+          <th>Scope</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>V1.0 MVP</td><td>Baseline</td><td>Core expense loop: Findity integration, US Bank card feeds, basic policy, single-level approval, receipt capture</td></tr>
+        <tr><td>V1.1</td><td>+4 weeks</td><td>Full policy engine, all 4 card mandate levels, multi-level approvals, auto-approval, delegation</td></tr>
+        <tr><td>V1.2</td><td>+8 weeks</td><td>Finance operations: reconciliation workspace, period close, GL coding, core reports</td></tr>
+        <tr><td>V1.3</td><td>+10 weeks</td><td>Personal card flow, reimbursement processing, card-agnostic pricing enforcement</td></tr>
+        <tr><td>V1.5</td><td>+14 weeks</td><td>Full mobile app, receipt intelligence, mileage engine, per-diem engine</td></tr>
+        <tr><td>V2.0</td><td>+18&ndash;22 weeks</td><td>Basic purchasing, three-way matching, ERP/HRIS/SSO integrations, advanced reporting</td></tr>
+      </tbody>
+    </table>
+
+    <div class="goal-box">
+      <div class="goal-label">The Question This Document Answers</div>
+      <p>Does the Findity API surface support what we specified? Where does Findity end and Centime begin? What do we need to build ourselves, and what gaps require resolution before engineering starts?</p>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
   <!-- SECTION 01: PLATFORM ARCHITECTURE -->
   <!-- ============================================================ -->
   <div class="doc-section">
