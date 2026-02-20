@@ -857,15 +857,15 @@
   <!-- ============================================================ -->
   <div class="doc-section">
     <div class="section-number">05 &mdash; Mapping to the Spec: Purchasing</div>
-    <h2>Full lifecycle is ours; invoices hand off to AP</h2>
-    <p class="lead">Spec section 05. The purchasing module manages the complete lifecycle: request, routing, approval, virtual card creation, tracking, reissue, and cancellation. Purchases may or may not be PO-based. When a purchase results in an invoice, that invoice is processed and paid through Centime AP.</p>
+    <h2>No Findity role &mdash; but it belongs here</h2>
+    <p class="lead">Spec section 05. Findity is a T&amp;E expense engine. It has no purchase request concept, no virtual card issuance, no PO workflow. The purchasing module is entirely ours and does not touch the Findity API.</p>
 
-    <p>Findity has no purchase request concept. Its role is limited to the card transaction layer: when the employee uses the virtual card, the transaction flows into Findity via the Connect API. Our layer matches the Findity expense to the approved purchase request and inherits GL coding.</p>
+    <p>So why is purchasing in this product? Because the overlap between T&amp;E and purchase control is strong. Same employees submitting. Same managers approving. Same policy engine enforcing spend limits. Same finance team reviewing. Same GL coding and cost center structure. Building purchasing alongside T&amp;E means one product, one set of workflows, one place for employees and approvers to go.</p>
 
-    <p>The virtual card is the control mechanism. Instead of giving employees access to a shared corporate card, the system issues a vendor-locked, amount-limited virtual card for each approved purchase. This gives finance real-time visibility and control &mdash; and the card can be reissued, cancelled, or tracked at any point.</p>
+    <p>The purchasing module manages the full lifecycle: request, routing, approval, virtual card creation (vendor-locked, amount-limited), tracking, reissue, and cancellation. Purchases may or may not be PO-based. When a purchase results in an invoice, it flows to Centime AP for processing and payment.</p>
 
     <div class="highlight-box">
-      <p><strong>The purchasing module owns the full purchase lifecycle. Findity processes the card transaction. Centime AP processes any resulting invoices.</strong> Three systems, clean boundaries: purchasing (request &rarr; virtual card &rarr; tracking), Findity (card transaction), AP (invoice &rarr; payment).</p>
+      <p><strong>Findity has no role in purchasing.</strong> The module exists in this product because T&amp;E and purchase control share the same personas, workflows, policy engine, and GL structure. Two spending processes, one product.</p>
     </div>
   </div>
 

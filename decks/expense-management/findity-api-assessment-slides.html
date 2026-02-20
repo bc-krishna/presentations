@@ -599,9 +599,9 @@
 <!-- SLIDE 10: PURCHASING (paper) -->
 <section data-background-color="#FFF7EF" class="slide-paper">
   <div class="section-label">Spec Section 05</div>
-  <h2>Purchasing: full lifecycle, virtual card control</h2>
-  <p class="body" style="margin-bottom: 0.4em;">The purchasing module manages the complete lifecycle. Findity has no purchase request concept &mdash; its role is the card transaction layer. Invoices from purchases flow to Centime AP for processing and payment.</p>
-  <p class="body" style="margin-bottom: 0.5em;">The virtual card is the control mechanism: vendor-locked, amount-limited, with real-time tracking, reissue, and cancellation.</p>
+  <h2>Purchasing: no Findity role &mdash; but it belongs here</h2>
+  <p class="body" style="margin-bottom: 0.4em;">Findity is a T&amp;E expense engine. It has no purchase request concept, no virtual card issuance, no PO workflow. The purchasing module is entirely ours and does not touch the Findity API.</p>
+  <p class="body" style="margin-bottom: 0.5em;">It belongs in this product because T&amp;E and purchase control share the same personas, workflows, policy engine, and GL structure. Two spending processes, one product.</p>
   <div class="flow-chain">
     <div class="flow-step">
       <div class="flow-num">01</div>
@@ -625,16 +625,11 @@
     </div>
     <div class="flow-step">
       <div class="flow-num">05</div>
-      <div class="flow-label">Card Txn</div>
-      <div class="flow-owner">Findity</div>
-    </div>
-    <div class="flow-step">
-      <div class="flow-num">06</div>
       <div class="flow-label">Track + Match</div>
       <div class="flow-owner">Ours</div>
     </div>
     <div class="flow-step">
-      <div class="flow-num">07</div>
+      <div class="flow-num">06</div>
       <div class="flow-label">Invoice &rarr; AP</div>
       <div class="flow-owner">Centime AP</div>
     </div>
