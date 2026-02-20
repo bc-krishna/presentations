@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Findity API Assessment &mdash; Mapping to the Expense Management Specification</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ft-pink:     #FFF1E5;
+    --ft-dark:     #33302E;
+    --ft-black:    #1A1817;
+    --ft-claret:   #990F3D;
+    --ft-oxford:   #0F5499;
+    --ft-teal:     #0D7680;
+    --ft-wheat:    #F2DFCE;
+    --ft-white:    #FFFFFF;
+    --ft-slate:    #66605C;
+    --ft-light:    #F6E9D8;
+    --ft-paper:    #FFF7EF;
+    --ft-rule:     #CEC6B9;
+    --ft-mandarin: #FF8833;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--ft-pink);
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--ft-dark);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---- HEADER ---- */
+  .doc-header {
+    background: var(--ft-black);
+    color: var(--ft-pink);
+    padding: 80px 60px 72px;
+  }
+
+  .doc-header-inner {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  .doc-header .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--ft-mandarin);
+    margin-bottom: 32px;
+  }
+
+  .doc-header h1 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--ft-pink);
+    margin-bottom: 20px;
+    max-width: 700px;
+  }
+
+  .doc-header .subtitle {
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--ft-wheat);
+    line-height: 1.55;
+    max-width: 620px;
+    margin-bottom: 48px;
+  }
+
+  .doc-header .meta {
+    font-size: 14px;
+    color: var(--ft-slate);
+    border-top: 1px solid rgba(206,198,185,0.2);
+    padding-top: 16px;
+  }
+
+  /* ---- CONTENT AREA ---- */
+  .doc-body {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 60px 80px;
+  }
+
+  /* ---- SECTION ---- */
+  .doc-section {
+    padding: 56px 0 0;
+  }
+
+  .doc-section + .doc-section {
+    border-top: 1px solid var(--ft-rule);
+  }
+
+  .section-number {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ft-claret);
+    margin-bottom: 12px;
+  }
+
+  .doc-section h2 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--ft-black);
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .doc-section h3 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ft-black);
+    line-height: 1.25;
+    margin-top: 36px;
+    margin-bottom: 12px;
+  }
+
+  .doc-section h4 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ft-black);
+    line-height: 1.3;
+    margin-top: 28px;
+    margin-bottom: 8px;
+  }
+
+  .doc-section p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ft-dark);
+    margin-bottom: 16px;
+    max-width: 640px;
+  }
+
+  .doc-section p.lead {
+    font-size: 19px;
+    font-weight: 300;
+    color: var(--ft-slate);
+    max-width: 640px;
+    margin-bottom: 24px;
+  }
+
+  .doc-section ul.body-list,
+  .doc-section ol.body-list {
+    margin: 0 0 20px 24px;
+    max-width: 640px;
+  }
+
+  .doc-section ul.body-list li,
+  .doc-section ol.body-list li {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ft-dark);
+    margin-bottom: 6px;
+  }
+
+  .doc-section ul.body-list li strong,
+  .doc-section ol.body-list li strong {
+    color: var(--ft-black);
+  }
+
+  /* ---- HIGHLIGHT BOX ---- */
+  .highlight-box {
+    background: var(--ft-black);
+    color: var(--ft-pink);
+    padding: 40px 44px;
+    margin: 32px 0;
+    border-left: 4px solid var(--ft-claret);
+  }
+
+  .highlight-box p {
+    color: var(--ft-wheat);
+    max-width: 100%;
+  }
+
+  .highlight-box strong {
+    color: var(--ft-pink);
+  }
+
+  /* ---- GOAL BOX ---- */
+  .goal-box {
+    background: var(--ft-paper);
+    border-top: 3px solid var(--ft-claret);
+    padding: 32px 36px;
+    margin: 32px 0;
+  }
+
+  .goal-box .goal-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ft-claret);
+    margin-bottom: 12px;
+  }
+
+  .goal-box p {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 18px;
+    color: var(--ft-black);
+    line-height: 1.5;
+    max-width: 100%;
+  }
+
+  /* ---- COMPARISON TABLE ---- */
+  .comparison-table {
+    width: 100%;
+    margin: 32px 0;
+    border-collapse: collapse;
+    border-top: 3px solid var(--ft-black);
+  }
+
+  .comparison-table thead th {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--ft-claret);
+    text-align: left;
+    padding: 16px 16px 12px;
+    border-bottom: 1px solid var(--ft-black);
+  }
+
+  .comparison-table tbody td {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ft-dark);
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--ft-rule);
+    vertical-align: top;
+  }
+
+  .comparison-table tbody td:first-child {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ft-black);
+    white-space: nowrap;
+    padding-left: 0;
+  }
+
+  .comparison-table tbody tr:hover {
+    background: var(--ft-paper);
+  }
+
+  /* ---- CHECKLIST ---- */
+  .checklist {
+    list-style: none;
+    margin: 24px 0;
+    padding: 0;
+    border-top: 1px solid var(--ft-rule);
+  }
+
+  .checklist li {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ft-dark);
+    padding: 12px 0;
+    border-bottom: 1px solid var(--ft-rule);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .checklist .dot {
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--ft-claret);
+    margin-top: 8px;
+  }
+
+  .checklist .check {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--ft-teal);
+    color: var(--ft-white);
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+
+  .checklist .build {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--ft-mandarin);
+    color: var(--ft-white);
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+
+  .checklist strong {
+    color: var(--ft-black);
+  }
+
+  /* ---- STEP FLOW ---- */
+  .step-flow {
+    margin: 28px 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step-counter;
+  }
+
+  .step-flow li {
+    counter-increment: step-counter;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 14px 0;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ft-dark);
+  }
+
+  .step-flow li + li {
+    border-top: 1px solid var(--ft-rule);
+  }
+
+  .step-flow li::before {
+    content: counter(step-counter);
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--ft-claret);
+    color: var(--ft-white);
+    font-family: 'Libre Baskerville', serif;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+
+  /* ---- GAP GRID ---- */
+  .gap-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 48px;
+    margin: 32px 0;
+    border-top: 3px solid var(--ft-black);
+  }
+
+  .gap-col h4 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ft-black);
+    padding: 20px 0 12px;
+    border-bottom: 1px solid var(--ft-rule);
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+
+  .gap-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .gap-col li {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ft-dark);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--ft-rule);
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .gap-col li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 16px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--ft-claret);
+  }
+
+  /* ---- PILLAR GRID ---- */
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    margin: 32px 0;
+    border-top: 3px solid var(--ft-black);
+  }
+
+  .pillar-grid.cols-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .pillar-grid.cols-4 {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .pillar {
+    padding: 24px 20px 24px 0;
+    border-bottom: 1px solid var(--ft-rule);
+  }
+
+  .pillar:not(:last-child) {
+    border-right: 1px solid var(--ft-rule);
+    padding-right: 20px;
+  }
+
+  .pillar:not(:first-child) {
+    padding-left: 20px;
+  }
+
+  .pillar h4 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ft-black);
+    margin-bottom: 6px;
+    margin-top: 0;
+  }
+
+  .pillar p {
+    font-size: 14px;
+    color: var(--ft-slate);
+    line-height: 1.5;
+    max-width: 100%;
+  }
+
+  /* ---- DARK SECTION ---- */
+  .doc-section-dark {
+    background: var(--ft-black);
+    color: var(--ft-pink);
+    margin: 56px -60px 0;
+    padding: 56px 60px 56px;
+  }
+
+  .doc-section-dark h2 { color: var(--ft-pink); }
+  .doc-section-dark h3 { color: var(--ft-pink); }
+  .doc-section-dark h4 { color: var(--ft-pink); }
+  .doc-section-dark .section-number { color: var(--ft-mandarin); }
+  .doc-section-dark p { color: var(--ft-wheat); }
+  .doc-section-dark p.lead { color: var(--ft-wheat); opacity: 0.8; }
+  .doc-section-dark .body-list li { color: var(--ft-wheat); }
+  .doc-section-dark .body-list li strong { color: var(--ft-pink); }
+  .doc-section-dark .checklist { border-top-color: rgba(206,198,185,0.2); }
+  .doc-section-dark .checklist li { color: var(--ft-wheat); border-bottom-color: rgba(206,198,185,0.15); }
+  .doc-section-dark .checklist .dot { background: var(--ft-mandarin); }
+  .doc-section-dark .checklist .check { background: var(--ft-teal); }
+  .doc-section-dark .checklist .build { background: var(--ft-mandarin); }
+  .doc-section-dark .checklist strong { color: var(--ft-pink); }
+  .doc-section-dark .step-flow li { color: var(--ft-wheat); }
+  .doc-section-dark .step-flow li + li { border-top-color: rgba(206,198,185,0.15); }
+  .doc-section-dark .step-flow li::before { background: var(--ft-mandarin); color: var(--ft-black); }
+  .doc-section-dark .step-flow li strong { color: var(--ft-pink); }
+  .doc-section-dark .comparison-table { border-top-color: var(--ft-wheat); }
+  .doc-section-dark .comparison-table thead th { color: var(--ft-mandarin); border-bottom-color: rgba(206,198,185,0.3); }
+  .doc-section-dark .comparison-table tbody td { color: var(--ft-wheat); border-bottom-color: rgba(206,198,185,0.15); }
+  .doc-section-dark .comparison-table tbody td:first-child { color: var(--ft-pink); }
+  .doc-section-dark .comparison-table tbody tr:hover { background: rgba(255,255,255,0.04); }
+  .doc-section-dark .gap-grid { border-top-color: var(--ft-wheat); }
+  .doc-section-dark .gap-col h4 { color: var(--ft-pink); border-bottom-color: rgba(206,198,185,0.2); }
+  .doc-section-dark .gap-col li { color: var(--ft-wheat); border-bottom-color: rgba(206,198,185,0.15); }
+  .doc-section-dark .gap-col li::before { background: var(--ft-mandarin); }
+  .doc-section-dark .highlight-box { background: rgba(255,255,255,0.06); border-left-color: var(--ft-mandarin); }
+  .doc-section-dark .highlight-box p { color: var(--ft-wheat); }
+  .doc-section-dark .highlight-box strong { color: var(--ft-pink); }
+  .doc-section-dark .goal-box { background: rgba(255,255,255,0.06); border-top-color: var(--ft-mandarin); }
+  .doc-section-dark .goal-box .goal-label { color: var(--ft-mandarin); }
+  .doc-section-dark .goal-box p { color: var(--ft-pink); }
+
+  /* ---- TAKEAWAY ---- */
+  .takeaway {
+    background: var(--ft-claret);
+    color: var(--ft-white);
+    margin: 56px -60px 0;
+    padding: 56px 60px;
+  }
+
+  .takeaway .section-number { color: var(--ft-wheat); opacity: 0.7; }
+  .takeaway h2 { font-family: 'Libre Baskerville', Georgia, serif; font-size: 32px; font-weight: 700; color: var(--ft-white); line-height: 1.25; margin-bottom: 24px; }
+  .takeaway p { font-size: 18px; color: rgba(255,255,255,0.85); line-height: 1.65; max-width: 640px; }
+  .takeaway p strong { color: var(--ft-white); }
+  .takeaway .checklist { border-top-color: rgba(255,255,255,0.2); }
+  .takeaway .checklist li { color: rgba(255,255,255,0.85); border-bottom-color: rgba(255,255,255,0.15); }
+  .takeaway .checklist .dot { background: var(--ft-wheat); }
+  .takeaway .checklist strong { color: var(--ft-white); }
+  .takeaway .goal-box { background: rgba(255,255,255,0.1); border-top-color: var(--ft-wheat); }
+  .takeaway .goal-box .goal-label { color: var(--ft-wheat); }
+  .takeaway .goal-box p { color: var(--ft-white); }
+
+  /* ---- CLOSING BLOCK ---- */
+  .closing-block {
+    padding: 48px 0 0;
+    border-top: 1px solid var(--ft-rule);
+    margin-top: 48px;
+  }
+
+  .closing-block p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ft-dark);
+    margin-bottom: 16px;
+    max-width: 640px;
+  }
+
+  /* ---- FOOTER ---- */
+  .doc-footer {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 32px 60px 64px;
+    font-size: 14px;
+    color: var(--ft-slate);
+    border-top: 1px solid var(--ft-rule);
+  }
+
+  .doc-footer a {
+    color: var(--ft-claret);
+    text-decoration: none;
+  }
+
+  .doc-footer .draft-note {
+    font-style: italic;
+    margin-top: 8px;
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 768px) {
+    .doc-header { padding: 48px 28px 40px; }
+    .doc-header h1 { font-size: 32px; }
+    .doc-body { padding: 0 28px 48px; }
+    .pillar-grid { grid-template-columns: 1fr; }
+    .pillar-grid.cols-4 { grid-template-columns: 1fr 1fr; }
+    .gap-grid { grid-template-columns: 1fr; gap: 0; }
+    .comparison-table { font-size: 14px; }
+    .comparison-table tbody td:first-child { white-space: normal; }
+    .doc-section-dark { margin: 40px -28px 0; padding: 40px 28px; }
+    .takeaway { margin: 40px -28px 0; padding: 40px 28px; }
+  }
+
+  @media print {
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+
+    body { background: var(--ft-pink) !important; }
+
+    .doc-header { background: var(--ft-black) !important; }
+    .doc-section-dark { background: var(--ft-black) !important; }
+    .takeaway { background: var(--ft-claret) !important; }
+    .highlight-box { background: var(--ft-black) !important; }
+    .goal-box { background: var(--ft-paper) !important; }
+
+    .step-flow li::before { background: var(--ft-claret) !important; }
+    .doc-section-dark .step-flow li::before { background: var(--ft-mandarin) !important; }
+    .checklist .dot { background: var(--ft-claret) !important; }
+    .checklist .check { background: var(--ft-teal) !important; }
+    .checklist .build { background: var(--ft-mandarin) !important; }
+    .doc-section-dark .checklist .dot { background: var(--ft-mandarin) !important; }
+    .gap-col li::before { background: var(--ft-claret) !important; }
+
+    .doc-section { page-break-inside: auto; }
+    .doc-section h2 { page-break-after: avoid; }
+    .doc-section h3 { page-break-after: avoid; }
+    .doc-section h4 { page-break-after: avoid; }
+    .section-number { page-break-after: avoid; }
+    .comparison-table { page-break-inside: avoid; }
+    .pillar-grid { page-break-inside: avoid; }
+    .gap-grid { page-break-inside: avoid; }
+    .highlight-box { page-break-inside: avoid; }
+    .goal-box { page-break-inside: avoid; }
+    .step-flow { page-break-inside: auto; }
+    .step-flow li { page-break-inside: avoid; }
+    .checklist li { page-break-inside: avoid; }
+    .closing-block { page-break-inside: avoid; }
+
+    .doc-footer { display: none; }
+
+    .doc-section-dark,
+    .takeaway {
+      margin-left: -60px !important;
+      margin-right: -60px !important;
+      padding-left: 60px !important;
+      padding-right: 60px !important;
+    }
+
+    @page {
+      size: letter;
+      margin: 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="doc-header">
+  <div class="doc-header-inner">
+    <div class="eyebrow">Centime &middot; Technical Assessment</div>
+    <h1>Findity API Assessment &mdash; Mapping to the Expense Management Specification</h1>
+    <div class="subtitle">A detailed evaluation of Findity&rsquo;s headless expense platform APIs mapped against every section of the Centime Expense Management product specification.</div>
+    <div class="meta">February 2026 &middot; Product &amp; Engineering &middot; Internal &middot; v0.1</div>
+  </div>
+</header>
+
+<div class="doc-body">
+
+  <!-- ============================================================ -->
+  <!-- SECTION 01: PLATFORM ARCHITECTURE -->
+  <!-- ============================================================ -->
+  <div class="doc-section">
+    <div class="section-number">01 &mdash; Platform Architecture</div>
+    <h2>Findity&rsquo;s headless expense engine</h2>
+    <p class="lead">Findity is a headless expense management platform. It exposes four APIs that collectively cover expense creation, organizational administration, card transaction ingestion, and customer onboarding.</p>
+
+    <p>The architecture is REST-based, with OAuth 2.0 authentication and JSON request/response throughout. Findity&rsquo;s positioning statement captures the relationship precisely: <em>&ldquo;We provide the engine; you define the user experience.&rdquo;</em></p>
+    <p>This matches our spec&rsquo;s architecture exactly. Findity handles expense processing &mdash; the data model, the storage, the calculation logic, the approval chain execution. We own the UX, the workflows, the policy enforcement, and all persona-specific experiences.</p>
+
+    <div class="pillar-grid cols-4">
+      <div class="pillar">
+        <h4>Expense API</h4>
+        <p>User-facing operations: create/edit expenses, mileage, per-diem, reports, approvals, content/receipt management, route calculation.</p>
+      </div>
+      <div class="pillar">
+        <h4>Admin API</h4>
+        <p>Org setup: users, roles, units/departments, dimensions/cost centers, approval chains, policies, categories, custom fields.</p>
+      </div>
+      <div class="pillar">
+        <h4>Connect API</h4>
+        <p>Inbound card transactions, outbound GL export vouchers, webhooks for event-driven integration.</p>
+      </div>
+      <div class="pillar">
+        <h4>Onboarding API</h4>
+        <p>Subset of Admin for customer provisioning &mdash; streamlined endpoints for initial organization and user setup.</p>
+      </div>
+    </div>
+
+    <div class="goal-box">
+      <div class="goal-label">Note on Stability</div>
+      <p>The API documentation notes that the platform is currently in &ldquo;Beta-stage.&rdquo; We need to understand the stability commitment, SLA guarantees, versioning policy, and breaking change notification process before committing to production integration.</p>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 02: OVERVIEW & PERSONAS (dark) -->
+  <!-- ============================================================ -->
+  <div class="doc-section-dark">
+    <div class="section-number">02 &mdash; Mapping to the Spec: Overview &amp; Personas</div>
+    <h2>Organizational hierarchy and user roles</h2>
+    <p>Spec sections 01&ndash;02. Findity&rsquo;s organizational hierarchy &mdash; Client App &rarr; Partner &rarr; Organization &rarr; Units &mdash; maps directly to our multi-tenant, multi-customer bank-channel model. The bank is the Partner. Each bank customer is an Organization. Departments within the customer are Units.</p>
+
+    <p>Findity supports five native user roles: <strong style="color: var(--ft-pink);">End User</strong>, <strong style="color: var(--ft-pink);">Approver</strong>, <strong style="color: var(--ft-pink);">Org Admin</strong>, <strong style="color: var(--ft-pink);">Partner Admin</strong>, and <strong style="color: var(--ft-pink);">Accounting Consultant</strong>. These map to our spec&rsquo;s personas: Employee, Manager, Finance Admin, Finance Viewer, and System Admin.</p>
+
+    <p>User lifecycle management is fully programmatic via the Admin API &mdash; create, update, and delete operations enable HRIS sync. External ID support throughout the data model enables SSO integration. Because the platform is headless, all persona-specific UX is entirely ours to design. Findity does not constrain the employee, manager, or finance experience in any way.</p>
+
+    <div class="gap-grid">
+      <div class="gap-col">
+        <h4>Findity Provides</h4>
+        <ul>
+          <li>Multi-level org hierarchy (Client App &rarr; Partner &rarr; Org &rarr; Units)</li>
+          <li>Five native user roles with RBAC</li>
+          <li>External ID support for SSO mapping</li>
+          <li>Programmatic user provisioning (CRUD via Admin API)</li>
+        </ul>
+      </div>
+      <div class="gap-col">
+        <h4>We Build</h4>
+        <ul>
+          <li>All persona-specific UX (employee, manager, finance admin)</li>
+          <li>Role-based dashboards and navigation</li>
+          <li>Mobile applications</li>
+          <li>Onboarding flows and guided setup</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 03: POLICY ENGINE -->
+  <!-- ============================================================ -->
+  <div class="doc-section">
+    <div class="section-number">03 &mdash; Mapping to the Spec: Policy Engine</div>
+    <h2>The biggest &ldquo;we build&rdquo; item</h2>
+    <p class="lead">Spec section 03. Findity provides the data substrate for policy configuration &mdash; categories, dimensions, custom fields. But the enforcement logic, the violation handling, and the graduated card mandate are entirely ours to build.</p>
+
+    <p>Findity has policy documents (CRUD per organization), categories with expense types, custom field definitions with value lists, and unlimited configurable dimensions. These are the building blocks.</p>
+    <p>Findity does <strong>not</strong> have our graduated card mandate levels (Encouraged / Preferred / Required / Mandatory), per-category spend limits, soft/hard/block violation handling, policy visibility at pre-trip/submission/rejection, or policy hierarchy evaluation (company &rarr; department &rarr; role &rarr; project).</p>
+
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Policy Feature</th>
+          <th>Findity</th>
+          <th>Our Layer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Policy documents</td><td>CRUD API</td><td>&mdash;</td></tr>
+        <tr><td>Card mandate levels</td><td>&mdash;</td><td>4-level enforcement</td></tr>
+        <tr><td style="white-space: normal;">Spend limits per category</td><td>&mdash;</td><td>Per-transaction, monthly, quarterly caps</td></tr>
+        <tr><td>Violation handling</td><td>&mdash;</td><td>Soft warning, hard warning, block</td></tr>
+        <tr><td>Policy hierarchy</td><td>&mdash;</td><td>Company &rarr; dept &rarr; role &rarr; project evaluation</td></tr>
+        <tr><td>Policy visibility</td><td>&mdash;</td><td>Pre-trip, at-submission, in-rejection UX</td></tr>
+        <tr><td style="white-space: normal;">Categories &amp; expense types</td><td>Full CRUD</td><td>&mdash;</td></tr>
+        <tr><td>Custom fields</td><td>Definitions + value lists</td><td>&mdash;</td></tr>
+        <tr><td>Dimensions</td><td>Unlimited, configurable</td><td>GL/cost center/project mapping</td></tr>
+      </tbody>
+    </table>
+
+    <div class="highlight-box">
+      <p><strong>The policy engine is the single largest piece of original business logic we need to build.</strong> Findity gives us the building blocks &mdash; categories, dimensions, custom fields &mdash; but the enforcement rules, violation handling, and graduated card mandate are entirely our intellectual property.</p>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 04: T&E EXPENSE MANAGEMENT (dark) -->
+  <!-- ============================================================ -->
+  <div class="doc-section-dark">
+    <div class="section-number">04 &mdash; Mapping to the Spec: T&amp;E Expense Management</div>
+    <h2>Expense types, card transactions, and receipts</h2>
+    <p>Spec section 04. Findity natively supports all three expense types in our specification: <strong style="color: var(--ft-pink);">ReceiptVerification</strong> (standard expense), <strong style="color: var(--ft-pink);">CarSpecification</strong> (mileage), and <strong style="color: var(--ft-pink);">SubsistenceAllowance</strong> (per-diem).</p>
+
+    <h3>Card transaction ingestion</h3>
+    <p>The Connect API accepts card transactions via POST /card-transactions. Supported event types include AUTHORIZATION_ACCEPTED, AUTHORIZATION_REJECTED, AUTHORIZATION_REVERSAL, CAPTURE, and REFUND. Transactions auto-create expenses and trigger push notifications. Three liability types map to our card models: <strong style="color: var(--ft-pink);">PRIVATE</strong> (personal card, reimbursable), <strong style="color: var(--ft-pink);">CORPORATE</strong> (company card, invoice-matched), and <strong style="color: var(--ft-pink);">DEBET</strong> (direct corporate charge).</p>
+
+    <h3>Receipt and content management</h3>
+    <p>Upload, retrieve, delete, and get-as-image endpoints are available. The platform claims &ldquo;advanced scanning&rdquo; with OCR. <strong style="color: var(--ft-pink);">Open question:</strong> Does the API return structured OCR data (amount, date, vendor, tax) or just store images?</p>
+
+    <h3>Mileage and per-diem</h3>
+    <p>Route calculation with map visualization, car type configurations, distance-based reimbursement, and vehicle type selection are built in. <strong style="color: var(--ft-pink);">Open questions:</strong> Are IRS standard rates, Google Maps integration, commute offsets, and recurring route templates native or do we configure them? For per-diem, are GSA rates pre-loaded for US cities, or do we configure?</p>
+
+    <h3>Dynamic fields</h3>
+    <p>The fields-format endpoints return which fields are relevant for each expense type per organization &mdash; this handles per-org customization dynamically. This is the recommended approach for form rendering.</p>
+
+    <h3>What Findity covers</h3>
+    <ul class="checklist">
+      <li><span class="check">&#10003;</span><span><strong>Card transaction ingestion</strong> with real-time event types (authorization, capture, refund)</span></li>
+      <li><span class="check">&#10003;</span><span><strong>Three liability models</strong> &mdash; personal, corporate, debit</span></li>
+      <li><span class="check">&#10003;</span><span><strong>Three expense types</strong> &mdash; standard (receipt), mileage, per-diem</span></li>
+      <li><span class="check">&#10003;</span><span><strong>Receipt upload and content management</strong> with image conversion</span></li>
+      <li><span class="check">&#10003;</span><span><strong>Expense reports</strong> with dynamic fields and grouping</span></li>
+      <li><span class="check">&#10003;</span><span><strong>Route calculation</strong> for mileage with map visualization</span></li>
+      <li><span class="check">&#10003;</span><span><strong>MCC auto-categorization</strong> for card transactions</span></li>
+      <li><span class="check">&#10003;</span><span><strong>Push notifications</strong> on card transaction events</span></li>
+    </ul>
+
+    <h3>What we build</h3>
+    <ul class="checklist">
+      <li><span class="build">+</span><span><strong>Card feed integration</strong> &mdash; US Bank/FNBO feed &rarr; Findity POST /card-transactions</span></li>
+      <li><span class="build">+</span><span><strong>Receipt OCR field extraction</strong> &mdash; confirm Findity capability or build our own pipeline</span></li>
+      <li><span class="build">+</span><span><strong>IRS mileage rates and commute offset logic</strong></span></li>
+      <li><span class="build">+</span><span><strong>GSA per-diem rate configuration</strong> for US cities</span></li>
+      <li><span class="build">+</span><span><strong>Email forwarding receipt capture</strong> (receipts@)</span></li>
+      <li><span class="build">+</span><span><strong>Match confidence scoring UX</strong> for card-to-receipt matching</span></li>
+      <li><span class="build">+</span><span><strong>Missing receipt affidavit workflow</strong></span></li>
+      <li><span class="build">+</span><span><strong>Trip-based vs. period-based report grouping UX</strong></span></li>
+    </ul>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 05: BASIC PURCHASING -->
+  <!-- ============================================================ -->
+  <div class="doc-section">
+    <div class="section-number">05 &mdash; Mapping to the Spec: Basic Purchasing</div>
+    <h2>Entirely our build</h2>
+    <p class="lead">Spec section 05. Findity is an expense platform, not a procurement platform. No purchase request workflow, no PO generation, no 3-way matching, no pre-approval routing. This module is 100% ours.</p>
+
+    <p>However, the integration point is clear: once a purchase is made on a corporate card, the card transaction flows into Findity normally via the Connect API. We can match the Findity expense to our purchase request in our layer.</p>
+
+    <p>The architecture is straightforward. The purchase request module lives entirely in our stack. When the card transaction arrives via Findity and auto-creates an expense, we perform the match &mdash; vendor name, amount &plusmn;10%, 30-day window &mdash; and link the Findity expense ID to our approved PO. The expense inherits the GL coding from the purchase request.</p>
+
+    <div class="highlight-box">
+      <p><strong>Basic purchasing is 100% our module.</strong> Findity never sees a purchase request. The integration point is post-purchase: when the card transaction creates a Findity expense, we match it to our approved PO and inherit the GL coding.</p>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 06: APPROVAL WORKFLOWS (dark) -->
+  <!-- ============================================================ -->
+  <div class="doc-section-dark">
+    <div class="section-number">06 &mdash; Mapping to the Spec: Approval Workflows</div>
+    <h2>Routing logic is ours; execution is Findity&rsquo;s</h2>
+    <p>Spec section 06. Findity has dimension-based approval chains. Approvers are assigned per dimension value (e.g., cost center 100 &rarr; Manager X). Multi-level chains are supported with sort-order sequencing. The Expense API supports approve/reject on reports via PUT /approvals/report/{reportId}.</p>
+
+    <p>What Findity does <strong style="color: var(--ft-pink);">not</strong> explicitly support &mdash; or what remains unclear from the documentation &mdash; includes amount-threshold routing ($500 &rarr; manager, $5K &rarr; VP), category-based routing, violation-triggered extra approvers, auto-approval, delegation with date ranges, aging escalation, batch approval, return-for-correction, and approve-with-modification.</p>
+
+    <p>Our layer builds the routing rules engine that evaluates amount, category, department, and violation status, then uses Findity&rsquo;s approval chain as the execution mechanism.</p>
+
+    <div class="gap-grid">
+      <div class="gap-col">
+        <h4>Findity Handles</h4>
+        <ul>
+          <li>Dimension-based approval chains</li>
+          <li>Multi-level sort-order sequencing</li>
+          <li>Approve/reject actions on reports</li>
+          <li>Approver assignment per dimension value</li>
+        </ul>
+      </div>
+      <div class="gap-col">
+        <h4>We Build</h4>
+        <ul>
+          <li>Amount-threshold routing</li>
+          <li>Category-based routing</li>
+          <li>Violation-triggered extra approvers</li>
+          <li>Auto-approval engine</li>
+          <li>Delegation with date ranges</li>
+          <li>Aging escalation rules</li>
+          <li>Batch approval UX</li>
+          <li>Return-for-correction workflow</li>
+          <li>Approve-with-modification with audit trail</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 07: FINANCE OPERATIONS -->
+  <!-- ============================================================ -->
+  <div class="doc-section">
+    <div class="section-number">07 &mdash; Mapping to the Spec: Finance Operations</div>
+    <h2>Export data from Findity; workflows from us</h2>
+    <p class="lead">Spec section 07. Findity&rsquo;s Connect API exports voucher data for GL/accounting integration. The Admin API provides report status management. The financial data substrate is there. The operational workflows are ours.</p>
+
+    <p>The Connect API provides export endpoints with status management &mdash; list, get, process, and get content. Card transaction data includes all the financial fields needed for reconciliation: billing amount/currency, merchant amount/currency, MCC, liability type, and invoice number for corporate cards. Report status management via the Admin API supports list, get, and update operations with report counters.</p>
+
+    <p>What we build entirely: the 5-status reconciliation workspace, period close workflow with T-5/T-3/T-1 reminders, reimbursement batch processing and ACH payment, GL auto-coding (MCC-to-GL mapping rules), split coding across cost centers, GL validation, period assignment for accrual accounting, and all finance dashboards and reports.</p>
+
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Finance Feature</th>
+          <th>Source</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="white-space: normal;">Voucher/export data</td><td>Findity Connect API</td><td>Structured export for GL journal entry</td></tr>
+        <tr><td style="white-space: normal;">Report status tracking</td><td>Findity Admin API</td><td>List/update report status</td></tr>
+        <tr><td style="white-space: normal;">Card transaction financial data</td><td>Findity Connect API</td><td>Amount, currency, MCC, liability, invoice</td></tr>
+        <tr><td style="white-space: normal;">Reconciliation workspace</td><td>Our build</td><td>5-status view: matched/pending/unsubmitted/disputed/personal</td></tr>
+        <tr><td style="white-space: normal;">Period close workflow</td><td>Our build</td><td>Automated reminders, manager escalation, force-close</td></tr>
+        <tr><td style="white-space: normal;">Reimbursement processing</td><td>Our build</td><td>Batch queue, ACH payment, payroll integration, status tracking</td></tr>
+        <tr><td>GL auto-coding</td><td>Our build</td><td>MCC-to-GL mapping with configurable rules</td></tr>
+        <tr><td style="white-space: normal;">Split coding</td><td>Our build &mdash; confirm gap</td><td>One expense &rarr; multiple cost centers</td></tr>
+        <tr><td style="white-space: normal;">Duplicate detection</td><td>Our build</td><td>Not in Findity</td></tr>
+        <tr><td style="white-space: normal;">All finance reports</td><td>Our build</td><td>Compliance, card ratio, aging, spend, cycle time, top spenders</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 08: INTEGRATIONS (dark) -->
+  <!-- ============================================================ -->
+  <div class="doc-section-dark">
+    <div class="section-number">08 &mdash; Mapping to the Spec: Integrations</div>
+    <h2>Primarily Nordic/EU; US connectors are ours</h2>
+    <p>Spec section 08. Findity has 30+ pre-built integrations &mdash; but primarily Nordic and EU accounting systems (Fortnox, Visma, Xero). QuickBooks is listed. NetSuite, Sage Intacct, and Microsoft Dynamics may or may not be available.</p>
+
+    <p>Card networks: Mastercard and Visa connections are referenced on the platform page. We push card transactions via the API rather than Findity pulling them &mdash; we need the US Bank and FNBO feed integration on our side.</p>
+
+    <p>What we definitively build: ERP/GL connectors (QuickBooks Online, NetSuite, Sage Intacct, Dynamics) using Findity&rsquo;s voucher export as the data source, transformed into ERP-specific journal entries. HRIS sync (BambooHR, ADP, Workday) pushed into Findity user management. SSO (Okta, Azure AD, Google) using Findity&rsquo;s external ID support. Plus Slack/Teams notifications and calendar integration.</p>
+
+    <div class="pillar-grid">
+      <div class="pillar">
+        <h4>Required</h4>
+        <p><strong style="color: var(--ft-pink);">Card feed:</strong> US Bank/FNBO &rarr; POST to Findity Connect API.<br><br><strong style="color: var(--ft-pink);">ERP/GL:</strong> Findity export &rarr; our transform &rarr; QBO, NetSuite, Sage Intacct, Dynamics.<br><br><strong style="color: var(--ft-pink);">HRIS:</strong> BambooHR/ADP/Workday &rarr; Findity Admin API.</p>
+      </div>
+      <div class="pillar">
+        <h4>Desired</h4>
+        <p>Slack/Teams approval notifications.<br><br>Calendar expense association.<br><br>Bank account verification for reimbursement.</p>
+      </div>
+      <div class="pillar">
+        <h4>Findity Native</h4>
+        <p>30+ pre-built connectors, primarily Nordic/EU.<br><br>Visa/Mastercard network references.<br><br>Webhook support for event-driven integration.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 09: MOBILE, SECURITY, RELEASE -->
+  <!-- ============================================================ -->
+  <div class="doc-section">
+    <div class="section-number">09 &mdash; Mapping to the Spec: Mobile, Security &amp; Release</div>
+    <h2>Infrastructure and phased rollout</h2>
+    <p class="lead">Spec sections 09&ndash;11. Findity provides the API infrastructure and data security layer. We build the client applications, the SSO integration, and maintain our phased release schedule.</p>
+
+    <h3>Mobile</h3>
+    <p>Findity has white-label mobile apps available, but we&rsquo;re building custom UX. The Expense API is fully mobile-capable &mdash; all endpoints work from any client. The route/directions API supports GPS mileage capture. Push notifications are available for card transaction events.</p>
+
+    <h3>Security</h3>
+    <p>Findity handles data storage, PCI compliance (tokenized card data), and provides RBAC with five role types. We own SSO integration, additional access controls, and the audit trail UX.</p>
+
+    <h3>Release schedule</h3>
+    <p>No changes to our phased approach. Findity integration is the V1.0 foundation. Each subsequent release layers our UX and business logic on top.</p>
+
+    <ul class="checklist">
+      <li><span class="dot"></span><span><strong>V1.0 MVP</strong> &mdash; Findity platform integration, card feed push, basic expense CRUD</span></li>
+      <li><span class="dot"></span><span><strong>V1.1</strong> &mdash; Policy engine (our build, uses Findity categories/dimensions)</span></li>
+      <li><span class="dot"></span><span><strong>V1.2</strong> &mdash; Finance ops (our build, uses Findity exports/reports)</span></li>
+      <li><span class="dot"></span><span><strong>V1.3</strong> &mdash; Personal cards (Findity PRIVATE liability type)</span></li>
+      <li><span class="dot"></span><span><strong>V1.5</strong> &mdash; Mobile (our app, Findity Expense API)</span></li>
+      <li><span class="dot"></span><span><strong>V2.0</strong> &mdash; Purchasing (entirely our module) + ERP connectors (Findity export &rarr; our transform)</span></li>
+    </ul>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 10: GAPS AND OPEN QUESTIONS (dark) -->
+  <!-- ============================================================ -->
+  <div class="doc-section-dark">
+    <div class="section-number">10 &mdash; Gaps and Open Questions</div>
+    <h2>Eight questions for Findity</h2>
+    <p>These questions must be answered during technical discovery. Each one has the potential to shift scope between &ldquo;Findity handles&rdquo; and &ldquo;we build.&rdquo; None of them require architectural changes to our spec &mdash; they determine implementation depth, not design direction.</p>
+
+    <ol class="step-flow">
+      <li><strong>OCR capability.</strong> Does the Expense API return structured receipt data (amount, date, vendor, tax) or just store images? This determines whether we build our own OCR pipeline.</li>
+      <li><strong>Amount-threshold approval.</strong> Is amount-based routing native or do we build it? The docs show dimension-based routing only.</li>
+      <li><strong>Expense splitting.</strong> Can one expense be coded to multiple cost centers/dimensions natively? Critical for split coding.</li>
+      <li><strong>US market configuration.</strong> Are GSA per-diem rates, IRS mileage rates, and US tax rules available? Findity&rsquo;s strongest markets are Nordic/EU.</li>
+      <li><strong>API stability.</strong> The docs note &ldquo;Beta-stage.&rdquo; What is the SLA, versioning policy, and breaking change commitment for production use?</li>
+      <li><strong>Pre-built ERP connectors.</strong> Do they have existing QuickBooks, NetSuite, Sage Intacct, or Dynamics connectors we can leverage, or do we build from voucher exports?</li>
+      <li><strong>Card feed format.</strong> What is the exact specification for the POST /card-transactions payload? Do US Bank and FNBO feeds map cleanly?</li>
+      <li><strong>White-label mobile.</strong> Can we use their white-label mobile app as V1.0 and replace with custom later, or is it all-or-nothing?</li>
+    </ol>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 11: THE ARCHITECTURE BOUNDARY (takeaway/claret) -->
+  <!-- ============================================================ -->
+  <div class="takeaway">
+    <div class="section-number">11 &mdash; The Architecture Boundary</div>
+    <h2>Findity is the engine. We are the experience.</h2>
+
+    <div class="goal-box">
+      <div class="goal-label">The Clear Line</div>
+      <p>Findity is the expense processing engine. We are the experience, enforcement, and integration layer.</p>
+    </div>
+
+    <p><strong>Findity owns:</strong></p>
+    <ul class="checklist">
+      <li><span class="dot"></span><span>Expense data storage and processing</span></li>
+      <li><span class="dot"></span><span>Card transaction ingestion and auto-expense creation</span></li>
+      <li><span class="dot"></span><span>Expense type management (standard/mileage/per-diem)</span></li>
+      <li><span class="dot"></span><span>Approval chain execution (dimension-based)</span></li>
+      <li><span class="dot"></span><span>Content/receipt storage</span></li>
+      <li><span class="dot"></span><span>Voucher export for GL</span></li>
+      <li><span class="dot"></span><span>User and org data model</span></li>
+      <li><span class="dot"></span><span>API infrastructure and uptime</span></li>
+    </ul>
+
+    <p style="margin-top: 32px;"><strong>We own:</strong></p>
+    <ul class="checklist">
+      <li><span class="dot"></span><span>Every pixel the user sees &mdash; all three personas</span></li>
+      <li><span class="dot"></span><span>Policy enforcement engine (4 mandate levels, spend limits, violations)</span></li>
+      <li><span class="dot"></span><span>Approval routing logic (amount, category, department, violation triggers)</span></li>
+      <li><span class="dot"></span><span>Auto-approval, delegation, escalation</span></li>
+      <li><span class="dot"></span><span>All finance workflows (reconciliation, reimbursement, period close)</span></li>
+      <li><span class="dot"></span><span>Basic purchasing module (entirely)</span></li>
+      <li><span class="dot"></span><span>ERP/GL connectors (QBO, NetSuite, Sage Intacct, Dynamics)</span></li>
+      <li><span class="dot"></span><span>HRIS sync, SSO, mobile applications</span></li>
+      <li><span class="dot"></span><span>Reporting and analytics</span></li>
+      <li><span class="dot"></span><span>Card feed integration (US Bank/FNBO &rarr; Findity)</span></li>
+    </ul>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- CLOSING -->
+  <!-- ============================================================ -->
+  <div class="closing-block">
+    <p>This assessment confirms that Findity&rsquo;s headless architecture is the right foundation for Centime Expense Management. The API surface covers the expense processing engine we need. The open questions are answerable &mdash; they require technical discovery conversations with Findity&rsquo;s team, not architectural changes to our spec. The critical path is: confirm OCR capability, validate US market support, and establish the API stability commitment.</p>
+  </div>
+
+</div>
+
+<div class="doc-footer">
+  <a href="../">Back to presentations</a>
+  <div class="draft-note">v0.1 &mdash; Technical assessment for internal product and engineering alignment. Not a vendor evaluation or procurement document.</div>
+</div>
+
+</body>
+</html>
