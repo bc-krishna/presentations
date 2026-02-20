@@ -707,6 +707,10 @@
     <p>The architecture is REST-based, with OAuth 2.0 authentication and JSON request/response throughout. Findity&rsquo;s positioning statement captures the relationship precisely: <em>&ldquo;We provide the engine; you define the user experience.&rdquo;</em></p>
     <p>This matches our spec&rsquo;s architecture exactly. Findity handles expense processing &mdash; the data model, the storage, the calculation logic, the approval chain execution. We own the UX, the workflows, the policy enforcement, and all persona-specific experiences.</p>
 
+    <div class="highlight-box">
+      <p><strong>Partnership framing.</strong> This assessment maps the current Findity API surface against our specification. Where gaps exist, we expect Findity to enhance their platform to close them. This is a partnership, not a one-way API consumption. Findity has an incentive to build what we need &mdash; our deployment drives meaningful volume through their platform. Capabilities listed as gaps are questions for the partnership discussion, not reasons to build our own.</p>
+    </div>
+
     <div class="pillar-grid cols-4">
       <div class="pillar">
         <h4>Expense API</h4>
@@ -833,11 +837,11 @@
       <li><span class="check">&#10003;</span><span><strong>Route calculation</strong> for mileage with map visualization</span></li>
       <li><span class="check">&#10003;</span><span><strong>MCC auto-categorization</strong> for card transactions</span></li>
       <li><span class="check">&#10003;</span><span><strong>Push notifications</strong> on card transaction events</span></li>
+      <li><span class="check">&#10003;</span><span><strong>Card feed integration</strong> &mdash; Findity builds and provides US Bank/FNBO card feed ingestion via POST /card-transactions</span></li>
     </ul>
 
     <h3>What we build</h3>
     <ul class="checklist">
-      <li><span class="build">+</span><span><strong>Card feed integration</strong> &mdash; US Bank/FNBO feed &rarr; Findity POST /card-transactions</span></li>
       <li><span class="build">+</span><span><strong>Receipt OCR field extraction</strong> &mdash; confirm Findity capability or build our own pipeline</span></li>
       <li><span class="build">+</span><span><strong>IRS mileage rates and commute offset logic</strong></span></li>
       <li><span class="build">+</span><span><strong>GSA per-diem rate configuration</strong> for US cities</span></li>
@@ -947,14 +951,14 @@
     <h2>Primarily Nordic/EU; US connectors are ours</h2>
     <p>Spec section 08. Findity has 30+ pre-built integrations &mdash; but primarily Nordic and EU accounting systems (Fortnox, Visma, Xero). QuickBooks is listed. NetSuite, Sage Intacct, and Microsoft Dynamics may or may not be available.</p>
 
-    <p>Card networks: Mastercard and Visa connections are referenced on the platform page. We push card transactions via the API rather than Findity pulling them &mdash; we need the US Bank and FNBO feed integration on our side.</p>
+    <p>Card networks: Mastercard and Visa connections are referenced on the platform page. Findity ingests card transactions via the Connect API &mdash; building and providing the US Bank and FNBO card feed integration is Findity&rsquo;s responsibility as part of the partnership.</p>
 
     <p>What we definitively build: ERP/GL connectors (QuickBooks Online, NetSuite, Sage Intacct, Dynamics) using Findity&rsquo;s voucher export as the data source, transformed into ERP-specific journal entries. HRIS sync (BambooHR, ADP, Workday) pushed into Findity user management. SSO (Okta, Azure AD, Google) using Findity&rsquo;s external ID support. Plus Slack/Teams notifications and calendar integration.</p>
 
     <div class="pillar-grid">
       <div class="pillar">
         <h4>Required</h4>
-        <p><strong style="color: var(--ft-pink);">Card feed:</strong> US Bank/FNBO &rarr; POST to Findity Connect API.<br><br><strong style="color: var(--ft-pink);">ERP/GL:</strong> Findity export &rarr; our transform &rarr; QBO, NetSuite, Sage Intacct, Dynamics.<br><br><strong style="color: var(--ft-pink);">HRIS:</strong> BambooHR/ADP/Workday &rarr; Findity Admin API.</p>
+        <p><strong style="color: var(--ft-pink);">Card feed:</strong> Findity builds US Bank/FNBO card feed integration for our programs.<br><br><strong style="color: var(--ft-pink);">ERP/GL:</strong> Findity export &rarr; our transform &rarr; QBO, NetSuite, Sage Intacct, Dynamics.<br><br><strong style="color: var(--ft-pink);">HRIS:</strong> BambooHR/ADP/Workday &rarr; Findity Admin API.</p>
       </div>
       <div class="pillar">
         <h4>Desired</h4>
@@ -985,7 +989,7 @@
     <p>No changes to our phased approach. Findity integration is the V1.0 foundation. Each subsequent release layers our UX and business logic on top.</p>
 
     <ul class="checklist">
-      <li><span class="dot"></span><span><strong>V1.0 MVP</strong> &mdash; Findity platform integration, card feed push, basic expense CRUD</span></li>
+      <li><span class="dot"></span><span><strong>V1.0 MVP</strong> &mdash; Findity platform integration, card feed (Findity-provided), basic expense CRUD</span></li>
       <li><span class="dot"></span><span><strong>V1.1</strong> &mdash; Policy engine (our build, uses Findity categories/dimensions)</span></li>
       <li><span class="dot"></span><span><strong>V1.2</strong> &mdash; Finance ops (our build, uses Findity exports/reports)</span></li>
       <li><span class="dot"></span><span><strong>V1.3</strong> &mdash; Personal cards (Findity PRIVATE liability type)</span></li>
@@ -1009,7 +1013,7 @@
       <li><strong>US market configuration.</strong> Are GSA per-diem rates, IRS mileage rates, and US tax rules available? Findity&rsquo;s strongest markets are Nordic/EU.</li>
       <li><strong>API stability.</strong> The docs note &ldquo;Beta-stage.&rdquo; What is the SLA, versioning policy, and breaking change commitment for production use?</li>
       <li><strong>Pre-built ERP connectors.</strong> Do they have existing QuickBooks, NetSuite, Sage Intacct, or Dynamics connectors we can leverage, or do we build from voucher exports?</li>
-      <li><strong>Card feed format.</strong> What is the exact specification for the POST /card-transactions payload? Do US Bank and FNBO feeds map cleanly?</li>
+      <li><strong>Card feed integration.</strong> What is the timeline and scope for Findity to build US Bank and FNBO card feed integrations? What data format and onboarding steps are required from the card issuers?</li>
       <li><strong>White-label mobile.</strong> Can we use their white-label mobile app as V1.0 and replace with custom later, or is it all-or-nothing?</li>
     </ol>
   </div>
@@ -1036,6 +1040,7 @@
       <li><span class="dot"></span><span>Voucher export for GL</span></li>
       <li><span class="dot"></span><span>User and org data model</span></li>
       <li><span class="dot"></span><span>API infrastructure and uptime</span></li>
+      <li><span class="dot"></span><span>US Bank/FNBO card feed integration</span></li>
     </ul>
 
     <p style="margin-top: 32px;"><strong>We own:</strong></p>
@@ -1049,7 +1054,6 @@
       <li><span class="dot"></span><span>ERP/GL connectors (QBO, NetSuite, Sage Intacct, Dynamics)</span></li>
       <li><span class="dot"></span><span>HRIS sync, SSO, mobile applications</span></li>
       <li><span class="dot"></span><span>Reporting and analytics</span></li>
-      <li><span class="dot"></span><span>Card feed integration (US Bank/FNBO &rarr; Findity)</span></li>
     </ul>
   </div>
 
