@@ -366,9 +366,9 @@
       <p>Corporate card auto-ingestion, MCC categorization. Personal card exception path. Mileage (IRS/GPS). Per-diem (GSA). Trip &amp; period reports.</p>
     </div>
     <div class="func-item">
-      <div class="func-num">Purchase Req</div>
-      <h3>Capture &rarr; AP approval</h3>
-      <p>Employee-facing purchase request capture. Requests route into Centime&rsquo;s existing AP approval workflow. Card-to-request matching. Unplanned spend flagging.</p>
+      <div class="func-num">Purchasing</div>
+      <h3>Virtual card lifecycle</h3>
+      <p>Request, routing, approval, virtual card creation, tracking, reissue, cancellation. PO and non-PO. Invoices &rarr; Centime AP.</p>
     </div>
     <div class="func-item">
       <div class="func-num">Approvals</div>
@@ -477,8 +477,8 @@
     </div>
     <div class="func-item">
       <div class="func-num">04</div>
-      <h3>Purchase request capture</h3>
-      <p>Employee-facing purchase request form. Requests route into Centime&rsquo;s existing AP approval workflow. Card-to-request matching. Unplanned spend flagging.</p>
+      <h3>Purchasing module</h3>
+      <p>Full purchase lifecycle: request, routing, approval, virtual card creation, tracking, reissue, cancellation. Invoices flow to Centime AP.</p>
     </div>
     <div class="func-item">
       <div class="func-num">05</div>
@@ -596,31 +596,31 @@
   </div>
 </section>
 
-<!-- SLIDE 10: PURCHASE REQUESTS (paper) -->
+<!-- SLIDE 10: PURCHASING (paper) -->
 <section data-background-color="#FFF7EF" class="slide-paper">
   <div class="section-label">Spec Section 05</div>
-  <h2>Purchase requests: capture here, approve in AP</h2>
-  <p class="body" style="margin-bottom: 0.4em;">Purchase-to-pay approval is part of Centime&rsquo;s existing AP process. The expense platform provides the employee-facing capture point; approval routing, PO generation, and three-way matching are handled by AP.</p>
-  <p class="body" style="margin-bottom: 0.5em;">Findity&rsquo;s role: when the employee makes the purchase on a corporate card, the card transaction flows into Findity. Our layer matches it to the AP-approved request and inherits GL coding.</p>
+  <h2>Purchasing: full lifecycle, virtual card control</h2>
+  <p class="body" style="margin-bottom: 0.4em;">The purchasing module manages the complete lifecycle. Findity has no purchase request concept &mdash; its role is the card transaction layer. Invoices from purchases flow to Centime AP for processing and payment.</p>
+  <p class="body" style="margin-bottom: 0.5em;">The virtual card is the control mechanism: vendor-locked, amount-limited, with real-time tracking, reissue, and cancellation.</p>
   <div class="flow-chain">
     <div class="flow-step">
       <div class="flow-num">01</div>
       <div class="flow-label">Purchase Request</div>
-      <div class="flow-owner">Expense Platform</div>
+      <div class="flow-owner">Ours</div>
     </div>
     <div class="flow-step">
       <div class="flow-num">02</div>
-      <div class="flow-label">Policy Pre-Check</div>
-      <div class="flow-owner">Expense Platform</div>
+      <div class="flow-label">Route + Approve</div>
+      <div class="flow-owner">Ours</div>
     </div>
     <div class="flow-step">
       <div class="flow-num">03</div>
-      <div class="flow-label">AP Approval + PO</div>
-      <div class="flow-owner">Centime AP</div>
+      <div class="flow-label">Virtual Card</div>
+      <div class="flow-owner">Ours</div>
     </div>
     <div class="flow-step">
       <div class="flow-num">04</div>
-      <div class="flow-label">Card Purchase</div>
+      <div class="flow-label">Purchase</div>
       <div class="flow-owner">&nbsp;</div>
     </div>
     <div class="flow-step">
@@ -630,13 +630,13 @@
     </div>
     <div class="flow-step">
       <div class="flow-num">06</div>
-      <div class="flow-label">Match to Request</div>
-      <div class="flow-owner">Expense Platform</div>
+      <div class="flow-label">Track + Match</div>
+      <div class="flow-owner">Ours</div>
     </div>
     <div class="flow-step">
       <div class="flow-num">07</div>
-      <div class="flow-label">GL Inherit + Close</div>
-      <div class="flow-owner">Expense Platform</div>
+      <div class="flow-label">Invoice &rarr; AP</div>
+      <div class="flow-owner">Centime AP</div>
     </div>
   </div>
 </section>
@@ -700,7 +700,7 @@
     </div>
     <div class="position-col">
       <h3>Centime Owns</h3>
-      <p>Every pixel the user sees. Policy enforcement engine. Approval routing logic. All finance workflows. Purchase request capture (approval via existing AP). ERP/HRIS/SSO connectors. Mobile applications. Reporting &amp; analytics. Card feed integration. The business.</p>
+      <p>Every pixel the user sees. Policy enforcement engine. Approval routing logic. All finance workflows. Purchasing module (virtual card lifecycle; invoices &rarr; Centime AP). ERP/HRIS/SSO connectors. Mobile applications. Reporting &amp; analytics. Card feed integration. The business.</p>
     </div>
   </div>
 </section>
@@ -732,7 +732,7 @@
     </div>
     <div class="summary-row">
       <span class="sum-label">V2.0 +18wk</span>
-      <span class="sum-value">Purchase request capture (AP integration) + ERP connectors (Findity export &rarr; our transform).</span>
+      <span class="sum-value">Purchasing (virtual card lifecycle; invoices &rarr; Centime AP) + ERP connectors (Findity export &rarr; our transform).</span>
     </div>
   </div>
 </section>

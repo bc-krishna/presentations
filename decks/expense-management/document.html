@@ -843,7 +843,7 @@
   <div class="doc-header-inner">
     <div class="eyebrow">Centime · Product Specification</div>
     <h1>Centime Expense Management</h1>
-    <div class="subtitle">A policy-driven expense platform for US mid-market finance teams, built on Findity's white-label T&E engine.</div>
+    <div class="subtitle">A policy-driven expense and purchasing platform for US mid-market finance teams, built on Findity's white-label T&E engine.</div>
     <div class="meta">Version 0.3 · Draft · February 2026 · US Market · Internal</div>
   </div>
 </header>
@@ -856,7 +856,7 @@
   <div class="doc-section">
     <div class="section-number">01 — Overview</div>
     <h2>What we are building</h2>
-    <p class="lead">Centime Expense Management is a policy-driven expense platform for US mid-market finance teams, built on Findity's white-label T&E engine. We own the UX and workflows; Findity provides the expense processing engine. The first objective is to build a differentiated user experience and workflow layer. The system enforces corporate card usage as the default payment method, provides configurable policy guardrails, and delivers a streamlined experience across three core personas.</p>
+    <p class="lead">Centime Expense Management is a policy-driven expense and purchasing platform for US mid-market finance teams, built on Findity's white-label T&E engine. We own the UX and workflows; Findity provides the expense processing engine. The first objective is to build a differentiated user experience and workflow layer. The system enforces corporate card usage as the default payment method, provides configurable policy guardrails, and delivers a streamlined experience across three core personas.</p>
 
     <div class="gap-grid">
       <div class="gap-col">
@@ -866,9 +866,9 @@
         </ul>
       </div>
       <div class="gap-col">
-        <h4>Purchase Requests</h4>
+        <h4>Purchasing</h4>
         <ul>
-          <li>Employee-facing purchase request capture that feeds into Centime's existing AP approval workflow for operational spend</li>
+          <li>Full purchase lifecycle: request, routing, approval, virtual card creation, tracking, reissue, cancellation. Invoices flow to Centime AP for payment.</li>
         </ul>
       </div>
     </div>
@@ -1187,28 +1187,37 @@
   <!-- SECTION 5: BASIC PURCHASING -->
   <!-- ============================================================ -->
   <div class="doc-section">
-    <div class="section-number">05 — Purchase Requests</div>
-    <h2>Purchase requests flow through existing AP</h2>
-    <p class="lead">Purchase-to-pay approval is part of Centime's existing accounts payable process. The expense platform provides the employee-facing capture point; everything downstream &mdash; approval routing, PO generation, three-way matching &mdash; is handled by the AP workflow that already exists.</p>
+    <div class="section-number">05 — Purchasing</div>
+    <h2>Full purchase lifecycle with virtual card control</h2>
+    <p class="lead">The purchasing module manages the complete lifecycle: request, routing, approval, virtual card creation, tracking, reissue, and cancellation. Purchases may or may not be PO-based. When a purchase results in an invoice, that invoice is processed and paid through Centime AP.</p>
 
-    <h3>Why This Isn't a Separate Module</h3>
-    <p>Centime already has AP with configurable approval routing, vendor management, and payment processing. Building a parallel purchasing workflow inside the expense product would duplicate that infrastructure and create two sources of truth for spend approval. Instead, the expense platform acts as an entry point: the employee submits a purchase request, and it enters the AP pipeline like any other payable.</p>
+    <h3>The Boundary</h3>
+    <p>Everything up to and including the purchase lives in this module. Everything after &mdash; invoice processing and payment &mdash; is handled by Centime AP. This is a clean separation: the purchasing module controls <em>what</em> gets bought and <em>how</em> it&rsquo;s paid for at the point of sale (virtual card); AP handles the downstream financial processing.</p>
 
-    <h3>What the Expense Platform Provides</h3>
+    <h3>Purchase Request Flow</h3>
+    <ol class="step-flow">
+      <li>Employee creates a purchase request with category, vendor, estimated amount, cost center, and business justification</li>
+      <li>Request is routed to the appropriate approver(s) based on amount, category, and department</li>
+      <li>Approver reviews and approves (or rejects / returns for correction)</li>
+      <li>On approval, a virtual card is created &mdash; locked to vendor, amount, and expiration</li>
+      <li>Employee uses the virtual card to make the purchase</li>
+      <li>Purchase is tracked: status, delivery, completion</li>
+      <li>If the purchase results in an invoice, it flows to Centime AP for processing and payment</li>
+    </ol>
+
+    <h3>Virtual Card Controls</h3>
     <ul class="body-list">
-      <li><strong>Purchase request form</strong> &mdash; employee creates a request with category, vendor, estimated amount, cost center, and business justification</li>
-      <li><strong>Policy pre-check</strong> &mdash; flags requests that exceed category limits, require additional documentation, or fall outside approved vendor lists before they enter AP</li>
-      <li><strong>Mobile capture</strong> &mdash; employees can create purchase requests from their phone with the same fields available on desktop</li>
-      <li><strong>Card transaction linking</strong> &mdash; when the corporate card transaction arrives (via Findity), the expense platform matches it to the approved request and inherits GL coding</li>
-      <li><strong>Unplanned spend flagging</strong> &mdash; card transactions without a prior approved request are flagged for compliance reporting</li>
+      <li><strong>Creation</strong> &mdash; virtual card issued on approval with vendor lock, amount limit, and configurable expiration</li>
+      <li><strong>Tracking</strong> &mdash; real-time visibility into whether the card has been used, for what amount, and the transaction status</li>
+      <li><strong>Reissue</strong> &mdash; if the purchase amount changes, the card expires before use, or a replacement is needed</li>
+      <li><strong>Cancellation</strong> &mdash; revoke the virtual card if the purchase is no longer needed or the request is withdrawn</li>
     </ul>
 
-    <h3>What Centime AP Handles</h3>
+    <h3>PO-Based vs. Non-PO Purchases</h3>
+    <p>Not all purchases require a purchase order. The system supports both models:</p>
     <ul class="body-list">
-      <li><strong>Approval routing</strong> &mdash; amount-threshold, department, category-based routing through the existing AP approval engine</li>
-      <li><strong>PO generation</strong> &mdash; approved requests generate PO numbers through the existing AP process</li>
-      <li><strong>Three-way matching</strong> &mdash; request, approval, and card transaction reconciliation</li>
-      <li><strong>Vendor management</strong> &mdash; approved vendor lists, payment terms, and supplier onboarding</li>
+      <li><strong>PO-based</strong> &mdash; approved request generates a PO number. Invoice matched to PO in AP.</li>
+      <li><strong>Non-PO</strong> &mdash; approved request issues a virtual card directly. No invoice expected &mdash; the card transaction is the record.</li>
     </ul>
 
     <h3>Scope</h3>
@@ -1244,6 +1253,9 @@
     </table>
 
     <p>The dollar threshold for "operational" vs. "formal procurement" is company-configurable (e.g., purchases under $5,000).</p>
+
+    <h3>Handoff to Centime AP</h3>
+    <p>When a purchase results in an invoice &mdash; whether PO-based or not &mdash; the invoice enters Centime AP for processing and payment. The purchasing module passes the approved request context (vendor, amount, GL coding, cost center) so AP has everything it needs without re-keying.</p>
   </div>
 
   <!-- ============================================================ -->
@@ -1642,13 +1654,14 @@
       <li><span class="dot"></span><span>Push notifications for approvals and status changes</span></li>
     </ul>
 
-    <h3>V2.0 — Purchase Requests &amp; Integrations (+18–22 Weeks)</h3>
-    <p>Purchase request capture integrated with Centime AP, ERP connectors, and the integrations that make the platform sticky in the customer's stack.</p>
+    <h3>V2.0 — Purchasing &amp; Integrations (+18–22 Weeks)</h3>
+    <p>Full purchase lifecycle with virtual card control, ERP connectors, and the integrations that make the platform sticky in the customer&rsquo;s stack.</p>
     <ul class="checklist">
-      <li><span class="dot"></span><span>Purchase request capture: employee-facing form with category, vendor, amount, cost center, justification</span></li>
-      <li><span class="dot"></span><span>AP integration: requests route into Centime's existing P2P approval workflow</span></li>
-      <li><span class="dot"></span><span>Card-to-request matching: link Findity card transactions to approved AP requests</span></li>
-      <li><span class="dot"></span><span>Unplanned spend flagging: card transactions without prior approved requests surface in compliance reporting</span></li>
+      <li><span class="dot"></span><span>Purchase request workflow: create, route, approve, with PO-based and non-PO paths</span></li>
+      <li><span class="dot"></span><span>Virtual card creation on approval: vendor-locked, amount-limited, configurable expiration</span></li>
+      <li><span class="dot"></span><span>Purchase tracking, virtual card reissue, and cancellation</span></li>
+      <li><span class="dot"></span><span>Invoices from purchases flow to Centime AP for processing and payment</span></li>
+      <li><span class="dot"></span><span>Unplanned spend flagging and compliance reporting</span></li>
       <li><span class="dot"></span><span>Duplicate detection</span></li>
       <li><span class="dot"></span><span>ERP/GL connectors: QuickBooks, NetSuite, Sage Intacct, Microsoft Dynamics</span></li>
       <li><span class="dot"></span><span>HRIS integration: BambooHR, ADP, Workday</span></li>
