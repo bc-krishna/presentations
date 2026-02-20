@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Centime Exchange vs PaymentWorks — Competitive Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --paper: #faf8f5;
+    --accent: #c0392b;
+    --muted: #6b6b6b;
+    --border: #d4cfc8;
+    --green: #1e7a3a;
+    --green-bg: #e8f5ec;
+    --red: #c0392b;
+    --red-bg: #fdeaea;
+    --amber: #b8860b;
+    --amber-bg: #fef7e6;
+    --blue: #2563eb;
+    --blue-bg: #eff3ff;
+    --slate: #475569;
+    --slate-bg: #f1f5f9;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  @page { size: letter; margin: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    width: 8.5in;
+    margin: 0 auto;
+    font-size: 9pt;
+    line-height: 1.45;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page {
+    width: 8.5in;
+    min-height: 11in;
+    padding: 0.5in 0.6in 0.4in;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: avoid; }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 3px solid var(--ink);
+    padding-bottom: 6px;
+    margin-bottom: 14px;
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20pt;
+    font-weight: 400;
+    letter-spacing: -0.3px;
+    line-height: 1.1;
+  }
+  .header .subtitle {
+    font-size: 7.5pt;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.3;
+  }
+  .header .subtitle strong { color: var(--ink); }
+  .page-label {
+    font-size: 6.5pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  /* NARRATIVE */
+  .narrative h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 13pt;
+    font-weight: 400;
+    color: var(--ink);
+    margin: 16px 0 6px;
+    padding-bottom: 3px;
+    border-bottom: 1.5px solid var(--border);
+  }
+  .narrative h2:first-of-type { margin-top: 0; }
+  .narrative h3 {
+    font-size: 9.5pt;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 10px 0 3px;
+  }
+  .narrative p { margin-bottom: 7px; font-size: 9pt; line-height: 1.5; }
+
+  .oxymoron-box {
+    background: var(--ink);
+    color: white;
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 2px;
+  }
+  .oxymoron-box .big {
+    font-family: 'DM Serif Display', serif;
+    font-size: 14pt;
+    line-height: 1.2;
+    margin-bottom: 5px;
+  }
+  .oxymoron-box .big em { color: #f59e0b; font-style: normal; }
+  .oxymoron-box p { font-size: 8.5pt; line-height: 1.45; color: #ccc; margin-bottom: 0; }
+
+  .two-track {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin: 12px 0;
+    border: 1.5px solid var(--ink);
+    background: white;
+  }
+  .track { padding: 10px 14px; }
+  .track:first-child { border-right: 1px solid var(--border); }
+  .track h4 {
+    font-size: 8pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 5px;
+  }
+  .track.standalone h4 { color: var(--blue); }
+  .track.payables h4 { color: var(--green); }
+  .track ul { list-style: none; font-size: 8pt; line-height: 1.45; }
+  .track ul li { padding-left: 12px; position: relative; margin-bottom: 2px; }
+  .track ul li::before { content: "→"; position: absolute; left: 0; font-weight: 700; }
+  .track.standalone ul li::before { color: var(--blue); }
+  .track.payables ul li::before { color: var(--green); }
+
+  .indem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 10px 0;
+  }
+  .indem-card { padding: 10px 12px; border-radius: 2px; }
+  .indem-card h4 {
+    font-size: 8pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .indem-card p { font-size: 8.5pt; line-height: 1.4; margin-bottom: 0; }
+  .indem-them { background: var(--green-bg); }
+  .indem-them h4 { color: var(--green); }
+  .indem-us { background: var(--amber-bg); }
+  .indem-us h4 { color: var(--amber); }
+
+  /* MATRIX */
+  .summary-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+  .summary-item { text-align: center; padding: 4px 3px; border-radius: 3px; }
+  .summary-item .count { font-family: 'DM Serif Display', serif; font-size: 16pt; line-height: 1.1; }
+  .summary-item .label { font-size: 6pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; }
+  .s-lead { background: var(--green-bg); }
+  .s-lead .count, .s-lead .label { color: var(--green); }
+  .s-parity { background: var(--blue-bg); }
+  .s-parity .count, .s-parity .label { color: var(--blue); }
+  .s-choice { background: var(--amber-bg); }
+  .s-choice .count, .s-choice .label { color: var(--amber); }
+  .s-na { background: var(--slate-bg); }
+  .s-na .count, .s-na .label { color: var(--slate); }
+
+  table { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
+  thead th {
+    text-align: left; font-size: 6.5pt; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.8px; color: var(--muted); padding: 4px 5px; border-bottom: 2px solid var(--ink);
+  }
+  thead th:first-child { width: 18%; }
+  thead th:nth-child(2) { width: 30%; }
+  thead th:nth-child(3) { width: 28%; }
+  thead th:nth-child(4) { width: 24%; }
+  tbody tr { border-bottom: 1px solid var(--border); }
+  tbody td { padding: 3px 5px; vertical-align: top; font-size: 7.5pt; line-height: 1.3; }
+  tbody td:first-child { font-weight: 700; font-size: 7.5pt; }
+  .row-lead { background: var(--green-bg); }
+  .row-parity { background: var(--blue-bg); }
+  .row-choice { background: var(--amber-bg); }
+  .row-na { background: var(--slate-bg); }
+  .tag {
+    display: inline-block; font-size: 5.5pt; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.5px; padding: 1px 3px; border-radius: 2px; margin-top: 1px;
+  }
+  .tag-lead { background: var(--green); color: white; }
+  .tag-parity { background: var(--blue); color: white; }
+  .tag-choice { background: var(--amber); color: white; }
+  .tag-na { background: var(--slate); color: white; }
+  .section-label {
+    font-size: 6pt; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px;
+    color: var(--accent); padding: 3px 5px; background: #f0ece6; border-bottom: 1px solid var(--border);
+  }
+  .section-label .scope { font-weight: 400; color: var(--muted); text-transform: none; letter-spacing: 0; font-style: italic; }
+
+  .ep-box {
+    border: 1.5px solid var(--ink); background: white; padding: 8px 12px; margin-bottom: 8px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px;
+  }
+  .ep-box h3 {
+    font-family: 'DM Serif Display', serif; font-size: 10pt; font-weight: 400;
+    grid-column: 1 / -1; border-bottom: 1px solid var(--border); padding-bottom: 3px;
+  }
+  .ep-col h4 { font-size: 6.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); margin-bottom: 2px; }
+  .ep-col .big { font-family: 'DM Serif Display', serif; font-size: 15pt; line-height: 1.1; }
+  .ep-col .detail { font-size: 7pt; color: var(--muted); margin-top: 2px; line-height: 1.3; }
+  .hl { color: var(--green); font-weight: 700; }
+  .neg { color: var(--red); font-weight: 600; }
+
+  .bottom-line { border: 2px solid var(--green); background: var(--green-bg); padding: 7px 10px; margin-bottom: 6px; }
+  .bottom-line h3 { font-family: 'DM Serif Display', serif; font-size: 10pt; color: var(--green); margin-bottom: 3px; }
+  .bottom-line p { font-size: 7.5pt; line-height: 1.35; }
+
+  .footer {
+    display: flex; justify-content: space-between; border-top: 2px solid var(--ink);
+    padding-top: 4px; font-size: 6pt; color: var(--muted);
+  }
+  .footer strong { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- PAGE 1: NARRATIVE                                             -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="header">
+    <h1>Centime Exchange vs. PaymentWorks</h1>
+    <div class="subtitle"><strong>Competitive Analysis</strong><br>Internal — February 2026</div>
+  </div>
+  <div class="page-label">Part I — Strategic Narrative</div>
+  <div class="narrative">
+
+    <h2>Who They Are</h2>
+    <p>PaymentWorks is a supplier onboarding and identity verification platform, in market since 2013. They serve approximately 200 customers — primarily higher education institutions and public sector organizations — with estimated annual revenue of ~$12M. Their marquee relationship is with J.P. Morgan.</p>
+    <p>PaymentWorks' primary competitive differentiator is not their software. It is their fraud indemnification — up to $2M per fraudulent payment, bundled into every customer contract. In competitive evaluations, the indemnification is frequently the deciding factor. The software capabilities are table stakes. The insurance is the close.</p>
+
+    <h2>Who We Are</h2>
+    <p>Centime is a financial process automation company providing mid-market finance teams with AP automation, AR automation, expense management, business banking, and cash flow forecasting — embedded directly within their ERP (NetSuite, Sage Intacct, QuickBooks, Microsoft Dynamics). On the payables side, Centime offers two complementary solutions:</p>
+
+    <div class="two-track">
+      <div class="track standalone">
+        <h4>AP Automation (Invoice-to-Pay)</h4>
+        <ul>
+          <li>AI-powered invoice capture & coding</li>
+          <li>PO matching (2- and 3-way)</li>
+          <li>Approval workflows</li>
+          <li>Supplier management</li>
+        </ul>
+      </div>
+      <div class="track payables">
+        <h4>Payments Automation (Integrated Payables)</h4>
+        <ul>
+          <li>Payment execution: ACH, virtual card, check</li>
+          <li>ERP reconciliation</li>
+          <li>Transaction monitoring</li>
+          <li>Dynamic discounting & supply chain finance</li>
+        </ul>
+      </div>
+    </div>
+
+    <p><strong>Centime Exchange</strong> is the supplier enrollment and verification layer that serves both payables solutions. Exchange can be deployed standalone — for buyers who have existing AP systems but need verified supplier onboarding — or integrated with Centime's payables solutions, where its value compounds across the full invoice-to-payment lifecycle.</p>
+
+    <div class="oxymoron-box">
+      <div class="big">A company called <em>"PaymentWorks"</em> that processes no payments.</div>
+      <p>PaymentWorks collects supplier data and hands it off. They have no invoice processing, no payment execution, no ERP integration, no reconciliation. The name implies a payables platform. The product is a supplier form. Centime delivers the full lifecycle — from supplier verification through invoice capture, approval, payment, and remittance — that "PaymentWorks" suggests but cannot provide.</p>
+    </div>
+
+    <h2>Why We Win: Two Arguments</h2>
+
+    <h3>Argument 1: Exchange standalone is already better</h3>
+    <p>Even without Centime's payables solutions, Exchange leads PaymentWorks on most supplier management capabilities. CAS (Centime Account Services) proves bank account ownership in real time through browser-based bank authentication — not micro-deposits, not third-party database lookups, not self-attestation. Our outreach engine runs configurable campaigns with automated follow-ups and deadline-driven enrollment. Our document management handles core business docs, insurance certificates with automated parsing and expiration tracking, and industry-specific document categories. Our portal is fully mobile-responsive. Theirs is desktop-only.</p>
+    <p>The customer who only wants supplier verification — because they already have an AP system — gets a better product with Exchange than with PaymentWorks.</p>
+
+    <h3>Argument 2: With Centime's payables solutions, the gap becomes a chasm</h3>
+    <p>When Exchange is paired with AP Automation and Payments Automation, Centime extends into territory PaymentWorks cannot reach: native ERP integration, PO posting and invoice matching (with supplier-side exception handling), born-digital invoicing that eliminates OCR entirely, payment execution across ACH/virtual card/check, remittance detail back to the supplier portal, and dynamic discounting powered by the buyer's own bank partner — not anonymous third-party funders.</p>
+    <p>PaymentWorks competes with Exchange standalone. They have no answer for Exchange integrated with Centime's payables solutions. None.</p>
+
+    <h2>Fraud Indemnification: Their Lead, Our Path</h2>
+    <p>We are direct about this: PaymentWorks leads today on fraud indemnification. Their $2M bundled coverage is a real competitive advantage, particularly with risk-averse procurement committees.</p>
+
+    <div class="indem-grid">
+      <div class="indem-card indem-them">
+        <h4>PaymentWorks — Today</h4>
+        <p>Up to $2M per fraudulent payment, bundled into platform fee. Underwritten by specialty insurer. No separate purchase decision. Their primary sales weapon.</p>
+      </div>
+      <div class="indem-card indem-us">
+        <h4>Centime — In Progress</h4>
+        <p>Centime holds a lapsed Lloyd's Financial Institutions Bond (B1230FC) with zero claims history. We are actively pursuing reinstatement with broadened coverage for social engineering and vendor impersonation fraud — the fraud vector Exchange verification is specifically designed to prevent. We are evaluating multiple structures including a master facility with per-customer premium.</p>
+      </div>
+    </div>
+
+    <p>The underwriting case is strong: CAS provides real-time bank account ownership verification that is more rigorous than PaymentWorks' validation methods, we have a zero-claims track record, and our bundled distribution model (every payables customer automatically enrolled) eliminates adverse selection. The gap is timing, not capability.</p>
+
+    <h2>Where They Win (and Why It Doesn't Matter Much)</h2>
+    <p><strong>Higher-ed and public sector compliance.</strong> PaymentWorks has deep penetration in universities and government agencies where compliance-heavy onboarding and fraud indemnification are procurement requirements. We are not targeting this segment. Our distribution is through bank partnerships — six today, including M&T Bank and City National — serving mid-market commercial banking clients. Different buyer, different channel, different economics.</p>
+    <p><strong>KYB/compliance bundled into platform fee.</strong> PaymentWorks includes KYC/KYB screening in their base price; Centime offers it as a per-report option ($25 via Middesk). This is a business model choice, not a capability gap — and our approach is more flexible for mid-market buyers who don't need compliance reports on every supplier.</p>
+  </div>
+  <div class="footer"><div><strong>Centime, Inc.</strong> — Confidential</div><div>Page 1 of 2 — February 2026</div></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 2: DETAILED MATRIX                                       -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="header">
+    <h1>Centime Exchange vs. PaymentWorks</h1>
+    <div class="subtitle"><strong>Competitive Analysis</strong><br>Internal — February 2026</div>
+  </div>
+  <div class="page-label">Part II — Feature-by-Feature Competitive Matrix</div>
+
+  <div class="summary-bar">
+    <div class="summary-item s-lead"><div class="count">12</div><div class="label">Centime Leads</div></div>
+    <div class="summary-item s-parity"><div class="count">1</div><div class="label">At Parity</div></div>
+    <div class="summary-item s-choice"><div class="count">2</div><div class="label">Biz Model Choice</div></div>
+    <div class="summary-item s-na"><div class="count">1</div><div class="label">Not Competing</div></div>
+  </div>
+
+  <table>
+    <thead><tr><th>Capability</th><th>Centime Exchange</th><th>PaymentWorks</th><th>Assessment</th></tr></thead>
+    <tbody>
+      <tr><td colspan="4" class="section-label">Supplier Onboarding & Verification <span class="scope">— Exchange (Standalone or Integrated)</span></td></tr>
+      <tr class="row-lead">
+        <td>Bank Account Verification</td>
+        <td>Real-time ownership proof via CAS (browser-based bank login)</td>
+        <td>Third-party validation, micro-deposits, self-attestation</td>
+        <td><span class="tag tag-lead">We Lead</span><br>Strongest anti-fraud differentiator</td>
+      </tr>
+      <tr class="row-lead">
+        <td>Outreach & Enrollment</td>
+        <td>Configurable campaigns, automated follow-ups, reminders, flexible monitoring</td>
+        <td>Single email invitation, no follow-up automation</td>
+        <td><span class="tag tag-lead">We Lead</span><br>Drives enrollment velocity</td>
+      </tr>
+      <tr class="row-lead">
+        <td>Mobile-Responsive</td>
+        <td>Fully mobile-responsive — suppliers register, upload docs, manage profiles from any device</td>
+        <td>Desktop only. No mobile access</td>
+        <td><span class="tag tag-lead">We Lead</span><br>Critical for micro supplier completion rates</td>
+      </tr>
+      <tr class="row-parity">
+        <td>Supplier Self-Registration</td>
+        <td>Email invite → OTP → payment profile → instant verification</td>
+        <td>Email invite → form → internal review (3–5 business days)</td>
+        <td><span class="tag tag-parity">Parity</span><br>Our flow is faster</td>
+      </tr>
+      <tr class="row-lead">
+        <td>Document Management</td>
+        <td>Core docs (W-9, Articles of Inc., Cert of Good Standing), insurance with automated parsing, metadata extraction, expiration badges. Industry-specific document categories</td>
+        <td>W-9, W-8 series collection at registration</td>
+        <td><span class="tag tag-lead">We Lead</span><br>Full document lifecycle vs. basic collection</td>
+      </tr>
+      <tr class="row-choice">
+        <td>KYB / Compliance</td>
+        <td>Available via Middesk: SOS, TIN, sanctions, PEP. Per-report ($25) or bundleable into base</td>
+        <td>Bundled into platform fee — buyer pays whether needed or not</td>
+        <td><span class="tag tag-choice">Biz Model Choice</span><br>More flexible for mid-market</td>
+      </tr>
+
+      <tr><td colspan="4" class="section-label">ERP & Payment Integration <span class="scope">— Exchange + AP Automation + Payments Automation</span></td></tr>
+      <tr class="row-lead">
+        <td>ERP Integration</td>
+        <td>Native connectors: QB, NetSuite, Intacct, Dynamics. File-based and API-based for all other ERPs. Embeds directly within the ERP — real-time sync</td>
+        <td>Flat-file upload + custom API mapping. Often requires paid consultants</td>
+        <td><span class="tag tag-lead">We Lead</span><br>Native + file + API covers any ERP</td>
+      </tr>
+      <tr class="row-lead">
+        <td>Payment Execution</td>
+        <td>Native: ACH, virtual card, check — via Payments Automation with full ERP reconciliation</td>
+        <td>None. "PaymentWorks" processes no payments. Requires separate provider</td>
+        <td><span class="tag tag-lead">We Lead</span><br>End-to-end vs. data handoff</td>
+      </tr>
+
+      <tr><td colspan="4" class="section-label">Transaction Lifecycle <span class="scope">— Exchange + AP Automation + Payments Automation (PaymentWorks does not play here)</span></td></tr>
+      <tr class="row-lead">
+        <td>PO Posting & Matching</td>
+        <td>Buyer posts POs via API. Supplier submits invoices. Auto-match. Supplier corrects mismatches — not buyer AP</td>
+        <td>Not supported</td>
+        <td><span class="tag tag-lead">We Lead</span></td>
+      </tr>
+      <tr class="row-lead">
+        <td>Born-Digital Invoices</td>
+        <td>Supplier enters structured data directly — no OCR, capture, or conversion</td>
+        <td>Not supported</td>
+        <td><span class="tag tag-lead">We Lead</span></td>
+      </tr>
+      <tr class="row-lead">
+        <td>Remittance Detail</td>
+        <td>Remittance detail available to suppliers via portal</td>
+        <td>Not supported</td>
+        <td><span class="tag tag-lead">We Lead</span></td>
+      </tr>
+      <tr class="row-lead">
+        <td>Supplier Status Visibility</td>
+        <td>Real-time: invoice status, payment status, remittance receipt — all in one portal</td>
+        <td>Onboarding tracker only</td>
+        <td><span class="tag tag-lead">We Lead</span></td>
+      </tr>
+
+      <tr><td colspan="4" class="section-label">Fraud Indemnification & Market Position</td></tr>
+      <tr class="row-choice">
+        <td>Fraud Indemnification</td>
+        <td>In development. Lapsed Lloyd's bond (zero claims) being pursued for reinstatement with broadened social engineering coverage. CAS provides underwriting control</td>
+        <td>Up to $2M per payment, bundled. Their primary differentiator</td>
+        <td><span class="tag tag-choice">Biz Model Choice</span><br>They lead today. We have the foundation to match or exceed</td>
+      </tr>
+      <tr class="row-na">
+        <td>Higher-Ed / Public Sector</td>
+        <td>Not targeting this segment</td>
+        <td>Strong in universities and large enterprise AP fraud</td>
+        <td><span class="tag tag-na">Not Competing</span><br>We win mid-market via bank channel</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="ep-box">
+    <h3>Early Pay — Fundamentally Different Models</h3>
+    <div class="ep-col">
+      <h4>PaymentWorks EarlyPay</h4>
+      <div class="big" style="color: var(--red);">0% – 3.0%</div>
+      <div class="detail"><span class="neg">Third-party funded SCF only.</span> Anonymous funder pays supplier early; buyer pays funder on due date. 30-day sliding scale — supplier pays 1.0% even at day 20. PaymentWorks doesn't process the payment.</div>
+    </div>
+    <div class="ep-col">
+      <h4>Centime (via Payments Automation)</h4>
+      <div class="big" style="color: var(--green);">0% – 2.75%</div>
+      <div class="detail"><span class="hl">Dynamic discounting + SCF, powered by bank partner capital.</span> <span class="hl">$0 fee from day 20–30.</span> Capital stays in the existing banking relationship. Buyer earns card rebates.</div>
+    </div>
+  </div>
+
+  <div class="bottom-line">
+    <h3>The Bottom Line</h3>
+    <p>Exchange standalone already beats PaymentWorks on most supplier management capabilities — verification, outreach, document management, mobile access. Paired with AP Automation and Payments Automation, Centime extends into the full invoice-to-payment lifecycle — ERP integration, PO matching, payment execution, remittance, early pay — territory that a company called "PaymentWorks" has never entered. Their fraud indemnification leads today; we are actively closing that gap with stronger verification controls and a zero-claims underwriting history. The customer who wants supplier management gets a better product. The customer who wants the full payables lifecycle gets something PaymentWorks cannot compete with at all.</p>
+  </div>
+
+  <div class="footer"><div><strong>Centime, Inc.</strong> — Confidential</div><div>Page 2 of 2 — February 2026</div></div>
+</div>
+
+</body>
+</html>
