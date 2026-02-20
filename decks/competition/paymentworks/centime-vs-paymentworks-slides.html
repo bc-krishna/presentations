@@ -13,8 +13,8 @@
   <link rel="stylesheet" href="../../../css/theme/centime-editorial.css?v=4">
 
   <style>
-    /* Force large base font on small canvas = big text when Reveal scales up */
-    :root {
+    /* Override theme's 24px base — must target .reveal to beat theme specificity */
+    .reveal {
       --r-main-font-size: 38px;
     }
     .reveal h2 { font-size: 1.5em; margin-bottom: 0.25em; }
