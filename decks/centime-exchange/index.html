@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centime Exchange — Internal Position Paper</title>
+
+  <!-- Reveal.js 5.x -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+
+  <!-- Centime Editorial Theme -->
+  <link rel="stylesheet" href="../../css/theme/centime-editorial.css?v=4">
+
+  <!-- Deck-specific styles -->
+  <style>
+    /* Two-column contrast layout for positioning slide */
+    .reveal .position-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin: 1em 0;
+      border-top: 3px solid var(--ft-black);
+    }
+    .reveal .position-col {
+      padding: 1.2em 0;
+      border-bottom: 1px solid var(--ft-rule);
+    }
+    .reveal .position-col:first-child {
+      padding-right: 1.5em;
+      border-right: 1px solid var(--ft-rule);
+    }
+    .reveal .position-col:last-child {
+      padding-left: 1.5em;
+    }
+    .reveal .position-col h3 {
+      font-size: 0.9em;
+      color: var(--ft-black);
+      margin-bottom: 0.4em;
+    }
+    .reveal .position-col p {
+      font-family: var(--r-main-font);
+      font-size: 0.62em;
+      color: var(--ft-slate);
+      line-height: 1.55;
+    }
+
+    /* Dark variant for position grid */
+    .slide-dark .position-grid { border-top-color: var(--ft-mandarin); }
+    .slide-dark .position-col { border-bottom-color: rgba(206,198,185,0.15); }
+    .slide-dark .position-col:first-child { border-right-color: rgba(206,198,185,0.15); }
+    .slide-dark .position-col h3 { color: var(--ft-pink); }
+    .slide-dark .position-col p { color: var(--ft-wheat); opacity: 0.85; }
+
+    /* Revenue stack visual */
+    .reveal .revenue-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin: 0.8em 0;
+      border-top: 3px solid var(--ft-black);
+    }
+    .reveal .revenue-layer {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.7em 0;
+      border-bottom: 1px solid var(--ft-rule);
+      font-family: var(--r-main-font);
+      font-size: 0.62em;
+      color: var(--ft-dark);
+      line-height: 1.5;
+    }
+    .reveal .revenue-layer .rev-label { flex: 1; }
+    .reveal .revenue-layer .rev-amount {
+      font-family: var(--r-heading-font);
+      font-weight: 700;
+      font-size: 1.2em;
+      color: var(--ft-claret);
+      text-align: right;
+      flex-shrink: 0;
+      margin-left: 1em;
+    }
+
+    /* Dark func-grid overrides */
+    .slide-dark .func-grid { border-top-color: var(--ft-mandarin); }
+    .slide-dark .func-item { border-bottom-color: rgba(206,198,185,0.15); }
+    .slide-dark .func-item:nth-child(odd) { border-right-color: rgba(206,198,185,0.15); }
+    .slide-dark .func-num { color: var(--ft-mandarin); }
+    .slide-dark .func-item h3 { color: var(--ft-pink); }
+    .slide-dark .func-item p { color: var(--ft-wheat); opacity: 0.85; }
+
+    /* Flywheel narrative block */
+    .reveal .flywheel-chain {
+      font-family: var(--r-main-font);
+      font-size: 0.6em;
+      color: var(--ft-dark);
+      line-height: 1.7;
+      border-left: 3px solid var(--ft-claret);
+      padding-left: 1em;
+      margin: 0.8em 0;
+      max-width: 800px;
+    }
+    .reveal .flywheel-chain .fw-arrow {
+      color: var(--ft-claret);
+      font-weight: 700;
+      margin: 0 0.2em;
+    }
+  </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+  <!-- SLIDE 1: TITLE (dark) -->
+  <section data-background-color="#1A1817" class="slide-dark">
+    <div class="eyebrow">Centime &middot; Internal Position Paper</div>
+    <h1>Centime Exchange</h1>
+    <div class="subtitle">Why we position it the way we do. Not the pitch. The reasoning.</div>
+    <div class="meta">February 2026 &middot; Internal</div>
+  </section>
+
+  <!-- SLIDE 2: THE CORE QUESTION (salmon) -->
+  <section data-background-color="#FFF1E5">
+    <div class="section-label">The Question</div>
+    <h2>Is Exchange a product or a feature?</h2>
+    <p class="body">It's both, and the way we talk about it depends on who's in the room. But behind the scenes, we need to be precise &mdash; because positioning choices affect pricing, packaging, sales motion, and how our bank partners present us. This document lays out the reasoning so everyone on the team argues from the same set of facts.</p>
+  </section>
+
+  <!-- SLIDE 3: PAYMENTWORKS CASE STUDY (paper) -->
+  <section data-background-color="#FFF7EF" class="slide-paper">
+    <div class="section-label">The Cautionary Tale</div>
+    <h2>Standalone supplier management has a ceiling</h2>
+    <div class="func-grid">
+      <div class="func-item">
+        <div class="func-num">PaymentWorks</div>
+        <h3>The Facts</h3>
+        <p>Founded 2013. Roughly $12M in revenue after twelve years. Around 100 employees. A J.P. Morgan partnership that validates the category but hasn't changed the growth curve. They do one thing &mdash; supplier onboarding and verification &mdash; and they do it well.</p>
+      </div>
+      <div class="func-item">
+        <div class="func-num">The Lesson</div>
+        <h3>Good Product, Small Market</h3>
+        <p>PaymentWorks proves the capability matters. It also proves that selling supplier onboarding as a standalone product creates a low ceiling. The buyer values it, but not enough to build a large business around it. The category is real. The standalone economics are not.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 4: FOUR STRUCTURAL PROBLEMS (dark) -->
+  <section data-background-color="#1A1817" class="slide-dark">
+    <div class="section-label">Why Pure-Play Doesn't Scale</div>
+    <h2>Four structural problems we'd inherit</h2>
+    <div class="func-grid">
+      <div class="func-item">
+        <div class="func-num">Problem 01</div>
+        <h3>Onboarding is a feature, not a destination</h3>
+        <p>Nobody logs in every morning to onboard suppliers. It's a task that happens when needed, not a daily workflow. Products that get used occasionally have weaker retention and lower willingness to pay.</p>
+      </div>
+      <div class="func-item">
+        <div class="func-num">Problem 02</div>
+        <h3>The buyer doesn't wake up thinking about it</h3>
+        <p>CFOs and AP leaders think about cash, payments, and reconciliation every day. Supplier onboarding surfaces when there's a problem &mdash; a new vendor, a compliance gap, a fraud scare. Reactive demand is harder to sell into than daily pain.</p>
+      </div>
+      <div class="func-item">
+        <div class="func-num">Problem 03</div>
+        <h3>There's no lock-in</h3>
+        <p>Supplier data is portable. If a competitor offers onboarding bundled with their AP platform, switching costs are low. There's no transaction stream, no network effect, no compounding data asset that makes leaving painful.</p>
+      </div>
+      <div class="func-item">
+        <div class="func-num">Problem 04</div>
+        <h3>The network never materializes</h3>
+        <p>Every supplier management company pitches a network: "onboard once, share everywhere." It never works. Buyers want their own verification standards. Suppliers don't trust shared networks. The promised efficiency doesn't arrive.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 5: EXCHANGE CAPABILITIES (salmon) -->
+  <section data-background-color="#FFF1E5">
+    <div class="section-label">What We've Built</div>
+    <h2>Exchange has everything PaymentWorks has &mdash; and more</h2>
+    <p class="body">Real-time bank account ownership verification. Configurable outreach campaigns with automated follow-up. Comprehensive document management with automated parsing and expiration tracking. Mobile-responsive supplier registration that works without a login. Industry-specific document categories. Tiered onboarding workflows that scale from a quick bank verification to a full compliance package.</p>
+    <p class="body" style="margin-top: 0.6em;">The capability is strong. The question was never whether we could compete with PaymentWorks on features. The question is whether we should compete with them on positioning. If we sold Exchange standalone, we'd inherit all four structural problems. So we don't.</p>
+  </section>
+
+  <!-- SLIDE 6: THE PLAY (dark) -->
+  <section data-background-color="#1A1817" class="slide-dark">
+    <div class="section-label">The Strategic Play</div>
+    <h2>Exchange is what makes Integrated Payables win</h2>
+    <p class="body" style="margin-bottom: 0.8em;">Every AP platform handles invoices and payments &mdash; that's table stakes. None have solved what happens before the first invoice: verifying the supplier, collecting their banking details, confirming their tax and compliance documents, and creating a clean master record. That gap is where errors start, where fraud enters, and where the whole downstream process breaks.</p>
+    <p class="body">Exchange fills that gap. It turns Integrated Payables from "another AP automation tool" into something structurally different. The pitch writes itself: "We're the only platform that starts before the first invoice and runs through the last payment." That's not a tagline. That's an architectural advantage that no Tier 2 competitor can replicate without building what we've already built.</p>
+  </section>
+
+  <!-- SLIDE 7: REVENUE MATH (salmon) -->
+  <section data-background-color="#FFF1E5">
+    <div class="section-label">The Economics</div>
+    <h2>The front door vs. the house</h2>
+    <p class="body" style="margin-bottom: 0.6em;">Exchange standalone might command $3,500 per year &mdash; a respectable SaaS contract but a small one. The value isn't in the subscription. It's in what Exchange unlocks downstream.</p>
+    <div class="revenue-stack">
+      <div class="revenue-layer">
+        <span class="rev-label"><strong>Exchange standalone</strong> &mdash; supplier onboarding and verification</span>
+        <span class="rev-amount">~$3,500</span>
+      </div>
+      <div class="revenue-layer">
+        <span class="rev-label"><strong>Integrated Payables base</strong> &mdash; AP automation, approvals, GL sync</span>
+        <span class="rev-amount">$8K&ndash;$12K</span>
+      </div>
+      <div class="revenue-layer">
+        <span class="rev-label"><strong>Transaction revenue</strong> &mdash; virtual card rebates, ACH fees, cross-border</span>
+        <span class="rev-amount">$5K&ndash;$18K+</span>
+      </div>
+      <div class="revenue-layer">
+        <span class="rev-label"><strong>Full stack per customer</strong> &mdash; Exchange + IP + transactions</span>
+        <span class="rev-amount">$15K&ndash;$30K+</span>
+      </div>
+    </div>
+    <p class="body">PaymentWorks has the front door but no house behind it. We have the house. Exchange is the front door that gets people inside.</p>
+  </section>
+
+  <!-- SLIDE 8: BANK CHANNEL (paper) -->
+  <section data-background-color="#FFF7EF" class="slide-paper">
+    <div class="section-label">Distribution</div>
+    <h2>The bank channel only works with the full stack</h2>
+    <p class="body" style="margin-bottom: 0.8em;">Banks will not white-label standalone supplier onboarding. The value proposition is too narrow, the revenue share too small, and the integration effort not worth it for a feature that doesn't drive commercial payment volume. They will white-label integrated payables &mdash; because it drives commercial card adoption, increases deposit activity, and gives their treasury sales team something tangible to sell.</p>
+    <p class="body" style="margin-bottom: 0.8em;">No Tier 2 AP competitor distributes through bank channels. Not Tipalti, not Stampli, not AvidXchange at our scale. That is our structural advantage, and it only exists because we offer the full stack: onboard the supplier, process the invoice, execute the payment. Exchange is what makes the first step credible to a bank's compliance team.</p>
+    <p class="body">Take Exchange out of the bundle and the bank channel advantage disappears. Keep it in, and we have a distribution moat that no pure-play competitor can cross.</p>
+  </section>
+
+  <!-- SLIDE 9: PRODUCT OR FEATURE? (dark) -->
+  <section data-background-color="#1A1817" class="slide-dark">
+    <div class="section-label">The Answer</div>
+    <h2>A named capability with a standalone option</h2>
+    <div class="position-grid">
+      <div class="position-col">
+        <h3>When we sell Integrated Payables</h3>
+        <p>Exchange is included. One product, one price, one contract. We don't itemize it, we don't charge separately, and we don't give the buyer a reason to think they can skip it. It's the supplier layer of the platform &mdash; the reason everything downstream works cleanly.</p>
+      </div>
+      <div class="position-col">
+        <h3>When someone only needs enrollment</h3>
+        <p>Exchange is available standalone. Priced modestly. Positioned as a foot in the door. Every standalone Exchange customer is a future IP upsell &mdash; they've already onboarded their suppliers on our platform. The switching cost to our full stack drops to near zero.</p>
+      </div>
+    </div>
+    <p class="body" style="margin-top: 0.6em;">The bottom line: we don't lead with standalone Exchange. We lead with Integrated Payables and let Exchange be the differentiator that closes the deal. Standalone is the exception, not the strategy.</p>
+  </section>
+
+  <!-- SLIDE 10: FRAUD INDEMNIFICATION (salmon) -->
+  <section data-background-color="#FFF1E5">
+    <div class="section-label">The Competitive Moat</div>
+    <h2>Fraud indemnification creates a flywheel</h2>
+    <p class="body" style="margin-bottom: 0.6em;">Bundle indemnification into the base Integrated Payables price. Every payment to an Exchange-verified supplier is indemnified up to a defined limit. The customer doesn't pay extra. They don't file claims. They pay a vendor through our platform, and if that vendor turns out to be fraudulent, we cover the loss. No Tier 2 competitor can match this because none of them own the verification layer.</p>
+    <div class="flywheel-chain">
+      Better verification <span class="fw-arrow">&rarr;</span> lower fraud risk <span class="fw-arrow">&rarr;</span> higher indemnification limits <span class="fw-arrow">&rarr;</span> stronger sales positioning <span class="fw-arrow">&rarr;</span> more customers <span class="fw-arrow">&rarr;</span> more suppliers verified <span class="fw-arrow">&rarr;</span> better data <span class="fw-arrow">&rarr;</span> better verification
+    </div>
+    <p class="body" style="margin-top: 0.6em;">This is the flywheel. Each turn makes the next turn easier. Indemnification is not a feature &mdash; it's the commercial expression of Exchange's verification quality. It turns a technical capability into a financial guarantee that procurement teams and CFOs understand immediately.</p>
+  </section>
+
+  <!-- SLIDE 11: MATERIALS STRATEGY (paper) -->
+  <section data-background-color="#FFF7EF" class="slide-paper">
+    <div class="section-label">Go-to-Market</div>
+    <h2>80/20: IP-led with Exchange featured</h2>
+    <p class="body" style="margin-bottom: 0.8em;">Eighty percent of our sales and marketing materials lead with Integrated Payables. Exchange appears as the featured capability that differentiates us &mdash; the reason a buyer picks Centime over Stampli or Tipalti. It gets a named section in every deck, a dedicated page on the website, and a clear explanation of why starting before the first invoice matters.</p>
+    <p class="body" style="margin-bottom: 0.8em;">Twenty percent of materials are Exchange-standalone. These target a specific use case: companies that aren't ready for full AP automation but need to solve supplier onboarding and verification now. The standalone materials are designed to land the account and create the conditions for an IP upsell within twelve months.</p>
+    <p class="body">Internally, the sales team gets competitive battle cards against PaymentWorks and Trustpair. These are not customer-facing. They exist so our reps can handle objections when a prospect says "we're also looking at a dedicated supplier management tool." The answer is always: we do everything they do, and we do everything that comes after.</p>
+  </section>
+
+  <!-- SLIDE 12: BOTTOM LINE (claret) -->
+  <section data-background-color="#990F3D" class="slide-claret">
+    <div class="section-label">The Bottom Line</div>
+    <h2>We're building an integrated payables company</h2>
+    <ul class="question-list">
+      <li>
+        <span class="q-num">1</span>
+        <span>Not a supplier onboarding company. Exchange is the best enrollment layer in the market, but it's an engine, not the vehicle.</span>
+      </li>
+      <li>
+        <span class="q-num">2</span>
+        <span>The business is Integrated Payables. The revenue is in transactions &mdash; virtual card rebates, ACH volume, cross-border fees. SaaS subscriptions get us in the door; payments build the business.</span>
+      </li>
+      <li>
+        <span class="q-num">3</span>
+        <span>The distribution is through banks. No Tier 2 competitor has this channel. It only works because we offer the full stack, and Exchange is what makes that stack start before the first invoice.</span>
+      </li>
+      <li>
+        <span class="q-num">4</span>
+        <span>Fraud indemnification is the commercial moat. It turns verification quality into a financial guarantee that no pure-play can match.</span>
+      </li>
+    </ul>
+    <div class="closing-line">Exchange is the engine underneath. Build the company on top of it.</div>
+  </section>
+
+</div>
+</div>
+
+<!-- Reveal.js 5.x -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<!-- Menu plugin -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/menu.css">
+<script src="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/menu.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    center: true,
+    transition: 'fade',
+    transitionSpeed: 'default',
+    width: 680,
+    height: 500,
+    margin: 0.06,
+    controls: true,
+    progress: true,
+    slideNumber: true,
+    overview: true,
+    menu: {
+      side: 'left',
+      titleSelector: 'h1, h2, .section-label',
+      hideMissingTitles: true,
+      markers: true,
+      themes: false,
+      transitions: false,
+      openButton: true,
+      openSlideNumber: false,
+    },
+    plugins: [ RevealMenu ],
+  });
+</script>
+</body>
+</html>
