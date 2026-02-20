@@ -116,7 +116,7 @@
   <section data-background-color="#1A1817" class="slide-dark">
     <div class="eyebrow">Centime &middot; Internal Position Paper</div>
     <h1>Centime Exchange</h1>
-    <div class="subtitle">Why we position it the way we do. Not the pitch. The reasoning.</div>
+    <div class="subtitle">How Exchange fits inside Centime's Financial Process Automation platform. Not the pitch. The reasoning.</div>
     <div class="meta">February 2026 &middot; Internal</div>
   </section>
 
@@ -127,7 +127,28 @@
     <p class="body">It's both, and the way we talk about it depends on who's in the room. But behind the scenes, we need to be precise &mdash; because positioning choices affect pricing, packaging, sales motion, and how our bank partners present us. This document lays out the reasoning so everyone on the team argues from the same set of facts.</p>
   </section>
 
-  <!-- SLIDE 3: PAYMENTWORKS CASE STUDY (paper) -->
+  <!-- SLIDE 3: WHAT IS CENTIME (dark) -->
+  <section data-background-color="#1A1817" class="slide-dark">
+    <div class="section-label">The Platform</div>
+    <h2>Centime is a Financial Process Automation platform</h2>
+    <p class="body" style="margin-bottom: 0.8em;">Before we talk about Exchange, we need to be clear about what it plugs into. Centime is not a single product &mdash; it's a platform with two core solutions that cover the full procure-to-pay lifecycle.</p>
+    <div class="func-grid">
+      <div class="func-item">
+        <div class="func-num">Solution 01</div>
+        <h3>AP Automation (Invoice-to-Pay)</h3>
+        <p>Invoice capture, coding, approval workflows, GL sync, and audit-ready records. This is where the daily work happens &mdash; the system of record for every invoice that enters the organization. Revenue is subscription-based: predictable, recurring, and tied to invoice volume.</p>
+      </div>
+      <div class="func-item">
+        <div class="func-num">Solution 02</div>
+        <h3>Payments Automation (Integrated Payables)</h3>
+        <p>Payment execution across virtual card, ACH, check, and cross-border rails. This is where the transaction economics live &mdash; rebates, processing fees, and float. Revenue is transaction-based: it scales with payment volume and mix.</p>
+      </div>
+    </div>
+    <p class="body" style="margin-top: 0.6em;">Exchange complements both. It sits upstream of AP Automation and Integrated Payables &mdash; ensuring that every supplier entering either system is verified, bankable, and compliant before the first invoice or payment is processed.</p>
+  </section>
+
+  <!-- SLIDE 4: PAYMENTWORKS CASE STUDY (paper) -->
+  <!-- (was slide 3) -->
   <section data-background-color="#FFF7EF" class="slide-paper">
     <div class="section-label">The Cautionary Tale</div>
     <h2>Standalone supplier management has a ceiling</h2>
@@ -145,7 +166,7 @@
     </div>
   </section>
 
-  <!-- SLIDE 4: FOUR STRUCTURAL PROBLEMS (dark) -->
+  <!-- SLIDE 5: FOUR STRUCTURAL PROBLEMS (dark) -->
   <section data-background-color="#1A1817" class="slide-dark">
     <div class="section-label">Why Pure-Play Doesn't Scale</div>
     <h2>Four structural problems we'd inherit</h2>
@@ -173,7 +194,7 @@
     </div>
   </section>
 
-  <!-- SLIDE 5: EXCHANGE CAPABILITIES (salmon) -->
+  <!-- SLIDE 6: EXCHANGE CAPABILITIES (salmon) -->
   <section data-background-color="#FFF1E5">
     <div class="section-label">What We've Built</div>
     <h2>Exchange has everything PaymentWorks has &mdash; and more</h2>
@@ -181,15 +202,15 @@
     <p class="body" style="margin-top: 0.6em;">The capability is strong. The question was never whether we could compete with PaymentWorks on features. The question is whether we should compete with them on positioning. If we sold Exchange standalone, we'd inherit all four structural problems. So we don't.</p>
   </section>
 
-  <!-- SLIDE 6: THE PLAY (dark) -->
+  <!-- SLIDE 7: THE PLAY (dark) -->
   <section data-background-color="#1A1817" class="slide-dark">
     <div class="section-label">The Strategic Play</div>
-    <h2>Exchange is what makes Integrated Payables win</h2>
-    <p class="body" style="margin-bottom: 0.8em;">Every AP platform handles invoices and payments &mdash; that's table stakes. None have solved what happens before the first invoice: verifying the supplier, collecting their banking details, confirming their tax and compliance documents, and creating a clean master record. That gap is where errors start, where fraud enters, and where the whole downstream process breaks.</p>
-    <p class="body">Exchange fills that gap. It turns Integrated Payables from "another AP automation tool" into something structurally different. The pitch writes itself: "We're the only platform that starts before the first invoice and runs through the last payment." That's not a tagline. That's an architectural advantage that no Tier 2 competitor can replicate without building what we've already built.</p>
+    <h2>Exchange is what makes Centime's platform win</h2>
+    <p class="body" style="margin-bottom: 0.8em;">Centime has two core solutions: AP Automation for processing invoices and Integrated Payables for executing payments. Every competitor has one or the other. None have solved what happens before the first invoice: verifying the supplier, collecting their banking details, confirming their tax and compliance documents, and creating a clean master record. That gap is where errors start, where fraud enters, and where both the AP and payment workflows break.</p>
+    <p class="body">Exchange fills that gap for both solutions. It turns the Centime platform from "another AP automation tool" into something structurally different &mdash; a system that covers supplier verification, invoice processing, and payment execution end to end. The pitch writes itself: "We're the only platform that starts before the first invoice and runs through the last payment." That's not a tagline. That's an architectural advantage that no Tier 2 competitor can replicate without building what we've already built.</p>
   </section>
 
-  <!-- SLIDE 7: REVENUE MATH (salmon) -->
+  <!-- SLIDE 8: REVENUE MATH (salmon) -->
   <section data-background-color="#FFF1E5">
     <div class="section-label">The Economics</div>
     <h2>The front door vs. the house</h2>
@@ -200,71 +221,75 @@
         <span class="rev-amount">~$3,500</span>
       </div>
       <div class="revenue-layer">
-        <span class="rev-label"><strong>Integrated Payables base</strong> &mdash; AP automation, approvals, GL sync</span>
-        <span class="rev-amount">$8K&ndash;$12K</span>
+        <span class="rev-label"><strong>AP Automation subscription</strong> &mdash; invoice capture, coding, approvals, GL sync</span>
+        <span class="rev-amount">$5K&ndash;$10K</span>
+      </div>
+      <div class="revenue-layer">
+        <span class="rev-label"><strong>Integrated Payables base</strong> &mdash; payment execution, routing, reconciliation</span>
+        <span class="rev-amount">$4K&ndash;$8K</span>
       </div>
       <div class="revenue-layer">
         <span class="rev-label"><strong>Transaction revenue</strong> &mdash; virtual card rebates, ACH fees, cross-border</span>
         <span class="rev-amount">$5K&ndash;$18K+</span>
       </div>
       <div class="revenue-layer">
-        <span class="rev-label"><strong>Full stack per customer</strong> &mdash; Exchange + IP + transactions</span>
+        <span class="rev-label"><strong>Full Centime platform relationship</strong> &mdash; Exchange + AP + IP + transactions</span>
         <span class="rev-amount">$15K&ndash;$30K+</span>
       </div>
     </div>
     <p class="body">PaymentWorks has the front door but no house behind it. We have the house. Exchange is the front door that gets people inside.</p>
   </section>
 
-  <!-- SLIDE 8: BANK CHANNEL (paper) -->
+  <!-- SLIDE 9: BANK CHANNEL (paper) -->
   <section data-background-color="#FFF7EF" class="slide-paper">
     <div class="section-label">Distribution</div>
-    <h2>The bank channel only works with the full stack</h2>
-    <p class="body" style="margin-bottom: 0.8em;">Banks will not white-label standalone supplier onboarding. The value proposition is too narrow, the revenue share too small, and the integration effort not worth it for a feature that doesn't drive commercial payment volume. They will white-label integrated payables &mdash; because it drives commercial card adoption, increases deposit activity, and gives their treasury sales team something tangible to sell.</p>
-    <p class="body" style="margin-bottom: 0.8em;">No Tier 2 AP competitor distributes through bank channels. Not Tipalti, not Stampli, not AvidXchange at our scale. That is our structural advantage, and it only exists because we offer the full stack: onboard the supplier, process the invoice, execute the payment. Exchange is what makes the first step credible to a bank's compliance team.</p>
+    <h2>The bank channel only works with the full platform</h2>
+    <p class="body" style="margin-bottom: 0.8em;">Banks will not white-label standalone supplier onboarding. The value proposition is too narrow, the revenue share too small, and the integration effort not worth it for a feature that doesn't drive commercial payment volume. They will white-label a financial process automation platform &mdash; because it drives commercial card adoption, increases deposit activity, and gives their treasury sales team something tangible to sell. That means AP Automation, Integrated Payables, and Exchange together.</p>
+    <p class="body" style="margin-bottom: 0.8em;">No Tier 2 AP competitor distributes through bank channels. Not Tipalti, not Stampli, not AvidXchange at our scale. That is our structural advantage, and it only exists because we offer the full platform: onboard the supplier, process the invoice, execute the payment. Exchange is what makes the first step credible to a bank's compliance team.</p>
     <p class="body">Take Exchange out of the bundle and the bank channel advantage disappears. Keep it in, and we have a distribution moat that no pure-play competitor can cross.</p>
   </section>
 
-  <!-- SLIDE 9: PRODUCT OR FEATURE? (dark) -->
+  <!-- SLIDE 10: PRODUCT OR FEATURE? (dark) -->
   <section data-background-color="#1A1817" class="slide-dark">
     <div class="section-label">The Answer</div>
     <h2>A named capability with a standalone option</h2>
     <div class="position-grid">
       <div class="position-col">
-        <h3>When we sell Integrated Payables</h3>
-        <p>Exchange is included. One product, one price, one contract. We don't itemize it, we don't charge separately, and we don't give the buyer a reason to think they can skip it. It's the supplier layer of the platform &mdash; the reason everything downstream works cleanly.</p>
+        <h3>When we sell the Centime platform</h3>
+        <p>Exchange is included. One platform, one price, one contract. We don't itemize it, we don't charge separately, and we don't give the buyer a reason to think they can skip it. It's the supplier layer of the platform &mdash; the reason everything downstream in AP Automation and Integrated Payables works cleanly.</p>
       </div>
       <div class="position-col">
         <h3>When someone only needs enrollment</h3>
-        <p>Exchange is available standalone. Priced modestly. Positioned as a foot in the door. Every standalone Exchange customer is a future IP upsell &mdash; they've already onboarded their suppliers on our platform. The switching cost to our full stack drops to near zero.</p>
+        <p>Exchange is available standalone. Priced modestly. Positioned as a foot in the door. Every standalone Exchange customer is a future platform upsell &mdash; they've already onboarded their suppliers on our platform. The switching cost to the full Centime stack drops to near zero.</p>
       </div>
     </div>
-    <p class="body" style="margin-top: 0.6em;">The bottom line: we don't lead with standalone Exchange. We lead with Integrated Payables and let Exchange be the differentiator that closes the deal. Standalone is the exception, not the strategy.</p>
+    <p class="body" style="margin-top: 0.6em;">The bottom line: we don't lead with standalone Exchange. We lead with the Centime platform and let Exchange be the differentiator that closes the deal. Standalone is the exception, not the strategy.</p>
   </section>
 
-  <!-- SLIDE 10: FRAUD INDEMNIFICATION (salmon) -->
+  <!-- SLIDE 11: FRAUD INDEMNIFICATION (salmon) -->
   <section data-background-color="#FFF1E5">
     <div class="section-label">The Competitive Moat</div>
     <h2>Fraud indemnification creates a flywheel</h2>
-    <p class="body" style="margin-bottom: 0.6em;">Bundle indemnification into the base Integrated Payables price. Every payment to an Exchange-verified supplier is indemnified up to a defined limit. The customer doesn't pay extra. They don't file claims. They pay a vendor through our platform, and if that vendor turns out to be fraudulent, we cover the loss. No Tier 2 competitor can match this because none of them own the verification layer.</p>
+    <p class="body" style="margin-bottom: 0.6em;">Bundle indemnification into the platform price. Every payment to an Exchange-verified supplier is indemnified up to a defined limit. The customer doesn't pay extra. They don't file claims. They pay a vendor through our platform, and if that vendor turns out to be fraudulent, we cover the loss. No Tier 2 competitor can match this because none of them own the verification layer.</p>
     <div class="flywheel-chain">
-      Better verification <span class="fw-arrow">&rarr;</span> lower fraud risk <span class="fw-arrow">&rarr;</span> higher indemnification limits <span class="fw-arrow">&rarr;</span> stronger sales positioning <span class="fw-arrow">&rarr;</span> more customers <span class="fw-arrow">&rarr;</span> more suppliers verified <span class="fw-arrow">&rarr;</span> better data <span class="fw-arrow">&rarr;</span> better verification
+      Better verification <span class="fw-arrow">&rarr;</span> lower fraud risk <span class="fw-arrow">&rarr;</span> higher indemnification limits <span class="fw-arrow">&rarr;</span> stronger sales positioning <span class="fw-arrow">&rarr;</span> more platform sales <span class="fw-arrow">&rarr;</span> more suppliers verified <span class="fw-arrow">&rarr;</span> better data <span class="fw-arrow">&rarr;</span> better verification
     </div>
     <p class="body" style="margin-top: 0.6em;">This is the flywheel. Each turn makes the next turn easier. Indemnification is not a feature &mdash; it's the commercial expression of Exchange's verification quality. It turns a technical capability into a financial guarantee that procurement teams and CFOs understand immediately.</p>
   </section>
 
-  <!-- SLIDE 11: MATERIALS STRATEGY (paper) -->
+  <!-- SLIDE 12: MATERIALS STRATEGY (paper) -->
   <section data-background-color="#FFF7EF" class="slide-paper">
     <div class="section-label">Go-to-Market</div>
-    <h2>80/20: IP-led with Exchange featured</h2>
-    <p class="body" style="margin-bottom: 0.8em;">Eighty percent of our sales and marketing materials lead with Integrated Payables. Exchange appears as the featured capability that differentiates us &mdash; the reason a buyer picks Centime over Stampli or Tipalti. It gets a named section in every deck, a dedicated page on the website, and a clear explanation of why starting before the first invoice matters.</p>
-    <p class="body" style="margin-bottom: 0.8em;">Twenty percent of materials are Exchange-standalone. These target a specific use case: companies that aren't ready for full AP automation but need to solve supplier onboarding and verification now. The standalone materials are designed to land the account and create the conditions for an IP upsell within twelve months.</p>
+    <h2>80/20: Platform-led with Exchange featured</h2>
+    <p class="body" style="margin-bottom: 0.8em;">Eighty percent of our sales and marketing materials lead with the Centime Financial Process Automation platform. Exchange appears as the featured capability that differentiates us &mdash; the reason a buyer picks Centime over Stampli or Tipalti. It gets a named section in every deck, a dedicated page on the website, and a clear explanation of why starting before the first invoice matters.</p>
+    <p class="body" style="margin-bottom: 0.8em;">Twenty percent of materials are Exchange-standalone. These target a specific use case: companies that aren't ready for the full platform but need to solve supplier onboarding and verification now. The standalone materials are designed to land the account and create the conditions for a platform upsell within twelve months.</p>
     <p class="body">Internally, the sales team gets competitive battle cards against PaymentWorks and Trustpair. These are not customer-facing. They exist so our reps can handle objections when a prospect says "we're also looking at a dedicated supplier management tool." The answer is always: we do everything they do, and we do everything that comes after.</p>
   </section>
 
-  <!-- SLIDE 12: BOTTOM LINE (claret) -->
+  <!-- SLIDE 13: BOTTOM LINE (claret) -->
   <section data-background-color="#990F3D" class="slide-claret">
     <div class="section-label">The Bottom Line</div>
-    <h2>We're building an integrated payables company</h2>
+    <h2>We're building a financial process automation company</h2>
     <ul class="question-list">
       <li>
         <span class="q-num">1</span>
@@ -272,11 +297,11 @@
       </li>
       <li>
         <span class="q-num">2</span>
-        <span>The business is Integrated Payables. The revenue is in transactions &mdash; virtual card rebates, ACH volume, cross-border fees. SaaS subscriptions get us in the door; payments build the business.</span>
+        <span>The business is the platform &mdash; AP Automation and Integrated Payables together. Revenue comes from invoice processing subscriptions and payment transactions: virtual card rebates, ACH volume, cross-border fees. Both streams compound as customers grow.</span>
       </li>
       <li>
         <span class="q-num">3</span>
-        <span>The distribution is through banks. No Tier 2 competitor has this channel. It only works because we offer the full stack, and Exchange is what makes that stack start before the first invoice.</span>
+        <span>The distribution is through banks. No Tier 2 competitor has this channel. It only works because we offer the full platform, and Exchange is what makes that platform start before the first invoice.</span>
       </li>
       <li>
         <span class="q-num">4</span>
