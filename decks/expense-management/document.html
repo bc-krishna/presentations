@@ -868,7 +868,7 @@
       <div class="gap-col">
         <h4>Purchasing</h4>
         <ul>
-          <li>Full purchase lifecycle: request, routing, approval, virtual card creation, tracking, reissue, cancellation. Invoices flow to Centime AP for payment.</li>
+          <li>Purchase request, routing, approval. Card-based purchases tracked by Findity; invoice-based purchases processed by Centime AP.</li>
         </ul>
       </div>
     </div>
@@ -1188,37 +1188,43 @@
   <!-- ============================================================ -->
   <div class="doc-section">
     <div class="section-number">05 — Purchasing</div>
-    <h2>Full purchase lifecycle with virtual card control</h2>
-    <p class="lead">The purchasing module manages the complete lifecycle: request, routing, approval, virtual card creation, tracking, reissue, and cancellation. Purchases may or may not be PO-based. When a purchase results in an invoice, that invoice is processed and paid through Centime AP.</p>
+    <h2>Two paths, one front door</h2>
+    <p class="lead">Every purchase starts the same way: employee raises a request, it routes through approval. What happens after approval depends on the type of purchase. Card-based purchases are tracked by Findity. Invoice-based purchases are processed by Centime AP.</p>
 
-    <h3>The Boundary</h3>
-    <p>Everything up to and including the purchase lives in this module. Everything after &mdash; invoice processing and payment &mdash; is handled by Centime AP. This is a clean separation: the purchasing module controls <em>what</em> gets bought and <em>how</em> it&rsquo;s paid for at the point of sale (virtual card); AP handles the downstream financial processing.</p>
-
-    <h3>Purchase Request Flow</h3>
+    <h3>Common Front End</h3>
     <ol class="step-flow">
       <li>Employee creates a purchase request with category, vendor, estimated amount, cost center, and business justification</li>
       <li>Request is routed to the appropriate approver(s) based on amount, category, and department</li>
       <li>Approver reviews and approves (or rejects / returns for correction)</li>
-      <li>On approval, a virtual card is created &mdash; locked to vendor, amount, and expiration</li>
-      <li>Employee uses the virtual card to make the purchase</li>
-      <li>Purchase is tracked: status, delivery, completion</li>
-      <li>If the purchase results in an invoice, it flows to Centime AP for processing and payment</li>
+    </ol>
+
+    <h3>Path 1: Card-Based Purchases (Ad-Hoc, Non-Invoice)</h3>
+    <p>The typical path for ad-hoc operational spend that doesn&rsquo;t generate an invoice.</p>
+    <ol class="step-flow">
+      <li>On approval, employee makes the purchase using a virtual card (if generated), corporate card, or personal card (based on policy)</li>
+      <li>Card transaction is tracked and reported by Findity via Visa/Mastercard integration &mdash; the same pipeline that handles T&amp;E transactions</li>
+      <li>We reconcile the card transaction against the approved purchase request</li>
+      <li>GL coding inherited from the purchase request &mdash; posted to the ledger</li>
+    </ol>
+
+    <h3>Path 2: Invoice-Based Purchases</h3>
+    <p>For purchases that result in a vendor invoice &mdash; typically generates a PO.</p>
+    <ol class="step-flow">
+      <li>On approval, a PO is generated (may or may not be required, but likely always generated)</li>
+      <li>Employee places the order, referencing the PO</li>
+      <li>Resulting invoice is tracked, processed, and paid through Centime AP</li>
+      <li>AP matches invoice to PO and approved request</li>
     </ol>
 
     <h3>Virtual Card Controls</h3>
+    <p>When a virtual card is generated for a card-based purchase:</p>
     <ul class="body-list">
-      <li><strong>Creation</strong> &mdash; virtual card issued on approval with vendor lock, amount limit, and configurable expiration</li>
-      <li><strong>Tracking</strong> &mdash; real-time visibility into whether the card has been used, for what amount, and the transaction status</li>
-      <li><strong>Reissue</strong> &mdash; if the purchase amount changes, the card expires before use, or a replacement is needed</li>
-      <li><strong>Cancellation</strong> &mdash; revoke the virtual card if the purchase is no longer needed or the request is withdrawn</li>
+      <li><strong>Creation</strong> &mdash; vendor-locked, amount-limited, configurable expiration</li>
+      <li><strong>Tracking</strong> &mdash; real-time visibility into usage, amount, and transaction status</li>
+      <li><strong>Reissue</strong> &mdash; if the amount changes, the card expires before use, or a replacement is needed</li>
+      <li><strong>Cancellation</strong> &mdash; revoke the virtual card if the purchase is no longer needed</li>
     </ul>
-
-    <h3>PO-Based vs. Non-PO Purchases</h3>
-    <p>Not all purchases require a purchase order. The system supports both models:</p>
-    <ul class="body-list">
-      <li><strong>PO-based</strong> &mdash; approved request generates a PO number. Invoice matched to PO in AP.</li>
-      <li><strong>Non-PO</strong> &mdash; approved request issues a virtual card directly. No invoice expected &mdash; the card transaction is the record.</li>
-    </ul>
+    <p>If no virtual card is generated, the employee uses their corporate card (or personal card per policy). The card transaction is still tracked by Findity and reconciled against the purchase request.</p>
 
     <h3>Scope</h3>
     <table class="comparison-table">
@@ -1253,9 +1259,6 @@
     </table>
 
     <p>The dollar threshold for "operational" vs. "formal procurement" is company-configurable (e.g., purchases under $5,000).</p>
-
-    <h3>Handoff to Centime AP</h3>
-    <p>When a purchase results in an invoice &mdash; whether PO-based or not &mdash; the invoice enters Centime AP for processing and payment. The purchasing module passes the approved request context (vendor, amount, GL coding, cost center) so AP has everything it needs without re-keying.</p>
   </div>
 
   <!-- ============================================================ -->
@@ -1655,12 +1658,12 @@
     </ul>
 
     <h3>V2.0 — Purchasing &amp; Integrations (+18–22 Weeks)</h3>
-    <p>Full purchase lifecycle with virtual card control, ERP connectors, and the integrations that make the platform sticky in the customer&rsquo;s stack.</p>
+    <p>Purchase request lifecycle, virtual card controls, and the integrations that make the platform sticky in the customer&rsquo;s stack.</p>
     <ul class="checklist">
-      <li><span class="dot"></span><span>Purchase request workflow: create, route, approve, with PO-based and non-PO paths</span></li>
-      <li><span class="dot"></span><span>Virtual card creation on approval: vendor-locked, amount-limited, configurable expiration</span></li>
-      <li><span class="dot"></span><span>Purchase tracking, virtual card reissue, and cancellation</span></li>
-      <li><span class="dot"></span><span>Invoices from purchases flow to Centime AP for processing and payment</span></li>
+      <li><span class="dot"></span><span>Purchase request workflow: create, route, approve</span></li>
+      <li><span class="dot"></span><span>Card-based path: virtual card creation (vendor-locked, amount-limited), tracking, reissue, cancellation. Corporate/personal card fallback per policy. Findity tracks transaction via Visa/MC</span></li>
+      <li><span class="dot"></span><span>Invoice-based path: PO generation, invoice handoff to Centime AP for processing and payment</span></li>
+      <li><span class="dot"></span><span>Reconciliation: card transactions matched against approved purchase requests, GL posted</span></li>
       <li><span class="dot"></span><span>Unplanned spend flagging and compliance reporting</span></li>
       <li><span class="dot"></span><span>Duplicate detection</span></li>
       <li><span class="dot"></span><span>ERP/GL connectors: QuickBooks, NetSuite, Sage Intacct, Microsoft Dynamics</span></li>

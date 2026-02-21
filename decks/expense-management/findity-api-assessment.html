@@ -663,7 +663,7 @@
     <ul class="checklist">
       <li><span class="dot"></span><span><strong>Policy engine:</strong> Four corporate card mandate levels (Encouraged, Preferred, Required, Mandatory). Policy hierarchy (company &rarr; department &rarr; role &rarr; project). Per-category spend limits, receipt thresholds, per-diem and mileage rules. Three violation responses: soft warning, hard warning, block.</span></li>
       <li><span class="dot"></span><span><strong>T&amp;E expense management:</strong> Corporate card transaction auto-ingestion with MCC categorization. Personal card exception path with justification. Mobile receipt capture with OCR. Mileage (IRS rates, Google Maps, commute offsets). Per-diem (GSA rates, custom rates, partial-day). Trip-based and period-based expense reports.</span></li>
-      <li><span class="dot"></span><span><strong>Purchasing:</strong> Full purchase lifecycle &mdash; request, routing, approval, virtual card creation, tracking, reissue, cancellation. PO-based and non-PO paths. Virtual card as control mechanism (vendor-locked, amount-limited). Invoices flow to Centime AP for payment.</span></li>
+      <li><span class="dot"></span><span><strong>Purchasing:</strong> Purchase request, routing, approval. Card-based path: virtual card / corporate card / personal card, Findity tracks the transaction, reconcile and post to GL. Invoice-based path: PO generation, invoice to Centime AP.</span></li>
       <li><span class="dot"></span><span><strong>Approval workflows:</strong> Multi-dimensional routing by amount, category, department, and violation status. Auto-approval for clean, in-policy expenses. Delegation with date ranges. Aging escalation. Batch approval. Return for correction and approve with modification.</span></li>
       <li><span class="dot"></span><span><strong>Finance operations:</strong> Five-status card reconciliation workspace. Period close with automated reminders and manager escalation. Reimbursement batch processing via ACH or payroll. GL auto-coding (MCC-to-GL mapping), split coding, GL validation. Full reporting suite: compliance scorecard, card ratio, unreconciled aging, spend analysis, cycle time, duplicate detection.</span></li>
       <li><span class="dot"></span><span><strong>Integrations:</strong> ERP/GL push (QuickBooks, NetSuite, Sage Intacct, Dynamics). HRIS sync (BambooHR, ADP, Workday). SSO (Okta, Azure AD, Google). Visa/MC card feeds from US Bank and FNBO. Slack/Teams approval notifications. Calendar expense association.</span></li>
@@ -686,7 +686,7 @@
         <tr><td>V1.2</td><td>+8 weeks</td><td>Finance operations: reconciliation workspace, period close, GL coding, core reports</td></tr>
         <tr><td>V1.3</td><td>+10 weeks</td><td>Personal card flow, reimbursement processing, card-agnostic pricing enforcement</td></tr>
         <tr><td>V1.5</td><td>+14 weeks</td><td>Full mobile app, receipt intelligence, mileage engine, per-diem engine</td></tr>
-        <tr><td>V2.0</td><td>+18&ndash;22 weeks</td><td>Purchasing (virtual card lifecycle), ERP/HRIS/SSO integrations, advanced reporting</td></tr>
+        <tr><td>V2.0</td><td>+18&ndash;22 weeks</td><td>Purchasing (card-based + invoice-based paths), ERP/HRIS/SSO integrations, advanced reporting</td></tr>
       </tbody>
     </table>
 
@@ -857,15 +857,18 @@
   <!-- ============================================================ -->
   <div class="doc-section">
     <div class="section-number">05 &mdash; Mapping to the Spec: Purchasing</div>
-    <h2>No Findity role &mdash; but it belongs here</h2>
-    <p class="lead">Spec section 05. Findity is a T&amp;E expense engine. It has no purchase request concept, no virtual card issuance, no PO workflow. The purchasing module is entirely ours and does not touch the Findity API.</p>
+    <h2>Findity&rsquo;s role: reporting the card transaction</h2>
+    <p class="lead">Spec section 05. Findity has no purchase request concept, no virtual card issuance, no PO workflow. But it plays the same role it plays in T&amp;E: when a card-based purchase happens, Findity reports the transaction to us via its Visa/Mastercard integration.</p>
 
-    <p>So why is purchasing in this product? Because the overlap between T&amp;E and purchase control is strong. Same employees submitting. Same managers approving. Same policy engine enforcing spend limits. Same finance team reviewing. Same GL coding and cost center structure. Building purchasing alongside T&amp;E means one product, one set of workflows, one place for employees and approvers to go.</p>
+    <p>Purchasing belongs in this product because the overlap with T&amp;E is strong. Same employees submitting. Same managers approving. Same policy engine enforcing spend limits. Same finance team reviewing. Same GL coding and cost center structure. Two spending processes, one product.</p>
 
-    <p>The purchasing module manages the full lifecycle: request, routing, approval, virtual card creation (vendor-locked, amount-limited), tracking, reissue, and cancellation. Purchases may or may not be PO-based. When a purchase results in an invoice, it flows to Centime AP for processing and payment.</p>
+    <h3>Two paths after approval</h3>
+    <p><strong>Card-based (ad-hoc, non-invoice):</strong> employee purchases via virtual card (if generated), corporate card, or personal card per policy. Findity tracks the card transaction via Visa/MC integration &mdash; the same pipeline that handles T&amp;E. We reconcile against the purchase request and post to GL.</p>
+
+    <p><strong>Invoice-based:</strong> likely generates a PO. The resulting invoice is tracked, processed, and paid through Centime AP. AP matches invoice to PO and approved request.</p>
 
     <div class="highlight-box">
-      <p><strong>Findity has no role in purchasing.</strong> The module exists in this product because T&amp;E and purchase control share the same personas, workflows, policy engine, and GL structure. Two spending processes, one product.</p>
+      <p><strong>Findity&rsquo;s role in purchasing is the same as in T&amp;E: it tells us about the card transaction.</strong> The purchase request lifecycle (request, routing, approval, virtual card, tracking, reissue, cancellation) is entirely ours. Invoice processing is Centime AP.</p>
     </div>
   </div>
 
@@ -994,7 +997,7 @@
       <li><span class="dot"></span><span><strong>V1.2</strong> &mdash; Finance ops (our build, uses Findity exports/reports)</span></li>
       <li><span class="dot"></span><span><strong>V1.3</strong> &mdash; Personal cards (Findity PRIVATE liability type)</span></li>
       <li><span class="dot"></span><span><strong>V1.5</strong> &mdash; Mobile (our app, Findity Expense API)</span></li>
-      <li><span class="dot"></span><span><strong>V2.0</strong> &mdash; Purchasing (virtual card lifecycle, invoices &rarr; Centime AP) + ERP connectors (Findity export &rarr; our transform)</span></li>
+      <li><span class="dot"></span><span><strong>V2.0</strong> &mdash; Purchasing (card path: Findity tracks txn; invoice path: Centime AP) + ERP connectors (Findity export &rarr; our transform)</span></li>
     </ul>
   </div>
 
@@ -1050,7 +1053,7 @@
       <li><span class="dot"></span><span>Approval routing logic (amount, category, department, violation triggers)</span></li>
       <li><span class="dot"></span><span>Auto-approval, delegation, escalation</span></li>
       <li><span class="dot"></span><span>All finance workflows (reconciliation, reimbursement, period close)</span></li>
-      <li><span class="dot"></span><span>Purchasing module (request &rarr; virtual card &rarr; tracking; invoices &rarr; Centime AP)</span></li>
+      <li><span class="dot"></span><span>Purchasing module (card-based: Findity tracks txn; invoice-based: Centime AP)</span></li>
       <li><span class="dot"></span><span>ERP/GL connectors (QBO, NetSuite, Sage Intacct, Dynamics)</span></li>
       <li><span class="dot"></span><span>HRIS sync, SSO, mobile applications</span></li>
       <li><span class="dot"></span><span>Reporting and analytics</span></li>

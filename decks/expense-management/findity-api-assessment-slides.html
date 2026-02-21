@@ -367,8 +367,8 @@
     </div>
     <div class="func-item">
       <div class="func-num">Purchasing</div>
-      <h3>Virtual card lifecycle</h3>
-      <p>Request, routing, approval, virtual card creation, tracking, reissue, cancellation. PO and non-PO. Invoices &rarr; Centime AP.</p>
+      <h3>Two paths after approval</h3>
+      <p>Request, routing, approval. Card-based: Findity tracks txn. Invoice-based: Centime AP processes invoice. Virtual card controls where applicable.</p>
     </div>
     <div class="func-item">
       <div class="func-num">Approvals</div>
@@ -478,7 +478,7 @@
     <div class="func-item">
       <div class="func-num">04</div>
       <h3>Purchasing module</h3>
-      <p>Full purchase lifecycle: request, routing, approval, virtual card creation, tracking, reissue, cancellation. Invoices flow to Centime AP.</p>
+      <p>Request, routing, approval. Card-based path: Findity tracks card txn, we reconcile &amp; post to GL. Invoice-based path: Centime AP.</p>
     </div>
     <div class="func-item">
       <div class="func-num">05</div>
@@ -599,40 +599,21 @@
 <!-- SLIDE 10: PURCHASING (paper) -->
 <section data-background-color="#FFF7EF" class="slide-paper">
   <div class="section-label">Spec Section 05</div>
-  <h2>Purchasing: no Findity role &mdash; but it belongs here</h2>
-  <p class="body" style="margin-bottom: 0.4em;">Findity is a T&amp;E expense engine. It has no purchase request concept, no virtual card issuance, no PO workflow. The purchasing module is entirely ours and does not touch the Findity API.</p>
-  <p class="body" style="margin-bottom: 0.5em;">It belongs in this product because T&amp;E and purchase control share the same personas, workflows, policy engine, and GL structure. Two spending processes, one product.</p>
-  <div class="flow-chain">
-    <div class="flow-step">
-      <div class="flow-num">01</div>
-      <div class="flow-label">Purchase Request</div>
-      <div class="flow-owner">Ours</div>
+  <h2>Purchasing: two paths, one front door</h2>
+  <p class="body" style="margin-bottom: 0.4em;">Every purchase starts the same way: request &rarr; routing &rarr; approval. What happens after depends on the type. Findity&rsquo;s role is the same as in T&amp;E: it tells us about the card transaction.</p>
+  <div class="func-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 0.3em;">
+    <div class="func-item">
+      <div class="func-num">Card-Based</div>
+      <h3>Ad-hoc, non-invoice</h3>
+      <p>Virtual card (if generated), corporate card, or personal card per policy. Findity tracks the transaction via Visa/MC. We reconcile against the purchase request and post to GL.</p>
     </div>
-    <div class="flow-step">
-      <div class="flow-num">02</div>
-      <div class="flow-label">Route + Approve</div>
-      <div class="flow-owner">Ours</div>
+    <div class="func-item">
+      <div class="func-num">Invoice-Based</div>
+      <h3>PO-driven</h3>
+      <p>Likely generates a PO. Resulting invoice tracked, processed, and paid through Centime AP. AP matches invoice to PO and approved request.</p>
     </div>
-    <div class="flow-step">
-      <div class="flow-num">03</div>
-      <div class="flow-label">Virtual Card</div>
-      <div class="flow-owner">Ours</div>
-    </div>
-    <div class="flow-step">
-      <div class="flow-num">04</div>
-      <div class="flow-label">Purchase</div>
-      <div class="flow-owner">&nbsp;</div>
-    </div>
-    <div class="flow-step">
-      <div class="flow-num">05</div>
-      <div class="flow-label">Track + Match</div>
-      <div class="flow-owner">Ours</div>
-    </div>
-    <div class="flow-step">
-      <div class="flow-num">06</div>
-      <div class="flow-label">Invoice &rarr; AP</div>
-      <div class="flow-owner">Centime AP</div>
-    </div>
+  </div>
+  <p class="body" style="font-size: 0.55em;">Virtual card controls: creation (vendor-locked, amount-limited), tracking, reissue, cancellation. If no virtual card, standard corporate/personal card per policy.</p>
   </div>
 </section>
 
@@ -695,7 +676,7 @@
     </div>
     <div class="position-col">
       <h3>Centime Owns</h3>
-      <p>Every pixel the user sees. Policy enforcement engine. Approval routing logic. All finance workflows. Purchasing module (virtual card lifecycle; invoices &rarr; Centime AP). ERP/HRIS/SSO connectors. Mobile applications. Reporting &amp; analytics. Card feed integration. The business.</p>
+      <p>Every pixel the user sees. Policy enforcement engine. Approval routing logic. All finance workflows. Purchasing module (card path: Findity tracks txn; invoice path: Centime AP). ERP/HRIS/SSO connectors. Mobile applications. Reporting &amp; analytics. Card feed integration. The business.</p>
     </div>
   </div>
 </section>
@@ -727,7 +708,7 @@
     </div>
     <div class="summary-row">
       <span class="sum-label">V2.0 +18wk</span>
-      <span class="sum-value">Purchasing (virtual card lifecycle; invoices &rarr; Centime AP) + ERP connectors (Findity export &rarr; our transform).</span>
+      <span class="sum-value">Purchasing (card path: Findity tracks txn; invoice path: Centime AP) + ERP connectors (Findity export &rarr; our transform).</span>
     </div>
   </div>
 </section>
