@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Centime Exchange: The Supplier Enrollment Advantage — Competitive Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --paper: #faf8f5;
+    --accent: #c0392b;
+    --muted: #6b6b6b;
+    --border: #d4cfc8;
+    --green: #1e7a3a;
+    --green-bg: #e8f5ec;
+    --red: #c0392b;
+    --red-bg: #fdeaea;
+    --amber: #b8860b;
+    --amber-bg: #fef7e6;
+    --blue: #2563eb;
+    --blue-bg: #eff3ff;
+    --slate: #475569;
+    --slate-bg: #f1f5f9;
+    --centime: #1a5276;
+    --centime-bg: #eaf2f8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    max-width: 920px;
+    margin: 0 auto;
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page {
+    max-width: 920px;
+    padding: 48px 56px 40px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 32px;
+  }
+  .page:last-child { border-bottom: none; }
+  @media print {
+    @page { size: letter; margin: 0; }
+    body { font-size: 9pt; line-height: 1.45; width: 8.5in; }
+    .page { width: 8.5in; min-height: 11in; padding: 0.5in 0.6in 0.4in; page-break-after: always; border-bottom: none; margin-bottom: 0; }
+    .page:last-child { page-break-after: avoid; }
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 3px solid var(--ink);
+    padding-bottom: 6px;
+    margin-bottom: 14px;
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: -0.3px;
+    line-height: 1.1;
+  }
+  .header .subtitle {
+    font-size: 14px;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.4;
+  }
+  .header .subtitle strong { color: var(--ink); }
+  .page-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  /* NARRATIVE */
+  .narrative h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--ink);
+    margin: 32px 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1.5px solid var(--border);
+  }
+  .narrative h2:first-of-type { margin-top: 0; }
+  .narrative h3 {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 20px 0 6px;
+  }
+  .narrative p { margin-bottom: 12px; font-size: 17px; line-height: 1.6; }
+
+  .insight-box {
+    background: var(--ink);
+    color: white;
+    padding: 24px 28px;
+    margin: 24px 0;
+    border-radius: 3px;
+  }
+  .insight-box .big {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .insight-box .big em { color: #7dd3fc; font-style: normal; }
+  .insight-box p { font-size: 16px; line-height: 1.55; color: #ccc; margin-bottom: 0; }
+
+  .landscape-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    margin: 16px 0;
+    border: 1.5px solid var(--ink);
+    background: white;
+  }
+  .ls-card { padding: 20px 22px; }
+  .ls-card:not(:last-child) { border-right: 1px solid var(--border); }
+  .ls-card h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .ls-card .meta {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .ls-card p { font-size: 15px; line-height: 1.5; margin-bottom: 0; }
+  .ls-card .strength { color: var(--green); font-weight: 600; font-size: 14px; }
+  .ls-card .gap { color: var(--accent); font-weight: 600; font-size: 14px; }
+
+  .wedge-box {
+    background: var(--centime-bg);
+    border-left: 4px solid var(--centime);
+    padding: 18px 22px;
+    margin: 16px 0;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  .wedge-box strong { color: var(--centime); }
+
+  .roadmap-box {
+    background: white;
+    border: 1.5px solid var(--centime);
+    padding: 18px 22px;
+    margin: 16px 0;
+  }
+  .roadmap-box h4 {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--centime);
+    margin-bottom: 8px;
+  }
+  .roadmap-box p { font-size: 16px; line-height: 1.55; margin-bottom: 0; }
+
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin: 14px 0;
+  }
+  .adv-card {
+    padding: 16px 18px;
+    border-radius: 3px;
+  }
+  .adv-card h4 {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .adv-card p { font-size: 15px; line-height: 1.5; margin-bottom: 0; }
+  .adv-exchange { background: var(--centime-bg); }
+  .adv-exchange h4 { color: var(--centime); }
+  .adv-bank { background: var(--green-bg); }
+  .adv-bank h4 { color: var(--green); }
+  .adv-indem { background: var(--amber-bg); }
+  .adv-indem h4 { color: var(--amber); }
+
+  .indem-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin: 14px 0;
+  }
+  .indem-card { padding: 20px 24px; border-radius: 3px; }
+  .indem-card h4 {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+  .indem-card p { font-size: 16px; line-height: 1.5; margin-bottom: 0; }
+  .indem-us { background: var(--amber-bg); }
+  .indem-us h4 { color: var(--amber); }
+
+  /* MATRIX */
+  table { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
+  table.matrix th {
+    background: var(--ink);
+    color: white;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  table.matrix th.centime-col { background: var(--centime); }
+  table.matrix td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    font-size: 15px;
+    line-height: 1.45;
+  }
+  table.matrix td:first-child { font-weight: 600; font-size: 15px; }
+  table.matrix td.centime-cell { background: var(--centime-bg); }
+  table.matrix .category-row td {
+    background: #f0ece6;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--centime);
+    padding: 8px 12px;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .badge-full { background: var(--green-bg); color: var(--green); }
+  .badge-partial { background: var(--amber-bg); color: var(--amber); }
+  .badge-none { background: var(--red-bg); color: var(--red); }
+  .badge-leader { background: var(--centime-bg); color: var(--centime); border: 1px solid var(--centime); }
+  .badge-planned { background: #f3e8ff; color: #7c3aed; }
+
+  /* DOWNSTREAM TABLE */
+  table.downstream th {
+    background: var(--ink);
+    color: white;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  table.downstream td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    font-size: 15px;
+    line-height: 1.45;
+  }
+  table.downstream td:first-child { font-weight: 600; }
+
+  /* VERDICT */
+  .verdict-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin: 14px 0;
+  }
+  .verdict-box {
+    padding: 18px 20px;
+    border-radius: 3px;
+    background: white;
+    border: 1px solid var(--border);
+  }
+  .verdict-box h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .verdict-box p { font-size: 15px; color: var(--muted); line-height: 1.5; }
+  .verdict-box .score {
+    font-family: 'DM Serif Display', serif;
+    font-size: 30px;
+    color: var(--centime);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .bottom-line {
+    border: 2px solid var(--centime);
+    background: var(--centime-bg);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .bottom-line h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--centime);
+    margin-bottom: 6px;
+  }
+  .bottom-line p { font-size: 15px; line-height: 1.5; }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    border-top: 2px solid var(--ink);
+    padding-top: 8px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .footer strong { color: var(--ink); }
+
+  .footnote {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 12px;
+    line-height: 1.45;
+  }
+
+  .hl { color: var(--green); font-weight: 700; }
+  .neg { color: var(--red); font-weight: 600; }
+
+  @media print {
+    .header h1 { font-size: 19pt; }
+    .header .subtitle { font-size: 7.5pt; }
+    .page-label { font-size: 6.5pt; }
+    .narrative h2 { font-size: 13pt; margin: 16px 0 6px; }
+    .narrative h3 { font-size: 9.5pt; margin: 10px 0 3px; }
+    .narrative p { font-size: 9pt; margin-bottom: 7px; }
+    .insight-box { padding: 12px 16px; margin: 12px 0; }
+    .insight-box .big { font-size: 13pt; }
+    .insight-box p { font-size: 8.5pt; }
+    .landscape-strip { margin: 12px 0; }
+    .ls-card { padding: 10px 12px; }
+    .ls-card h4 { font-size: 9pt; }
+    .ls-card .meta { font-size: 7pt; }
+    .ls-card p { font-size: 8pt; }
+    .ls-card .strength { font-size: 7.5pt; }
+    .ls-card .gap { font-size: 7.5pt; }
+    .wedge-box { padding: 10px 14px; margin: 10px 0; font-size: 8.5pt; }
+    .roadmap-box { padding: 10px 14px; margin: 10px 0; }
+    .roadmap-box h4 { font-size: 8pt; }
+    .roadmap-box p { font-size: 8.5pt; }
+    .adv-card { padding: 8px 10px; }
+    .adv-card h4 { font-size: 8pt; }
+    .adv-card p { font-size: 8pt; }
+    .indem-card { padding: 10px 14px; }
+    .indem-card h4 { font-size: 8pt; }
+    .indem-card p { font-size: 8pt; }
+    table.matrix th { padding: 5px 6px; font-size: 7pt; }
+    table.matrix td { padding: 4px 6px; font-size: 7.5pt; }
+    table.matrix .category-row td { font-size: 7pt; padding: 3px 6px; }
+    .badge { font-size: 6pt; padding: 1px 5px; }
+    table.downstream th { padding: 5px 6px; font-size: 7pt; }
+    table.downstream td { padding: 4px 6px; font-size: 7.5pt; }
+    .verdict-grid { gap: 8px; margin: 8px 0; }
+    .verdict-box { padding: 8px 10px; }
+    .verdict-box h4 { font-size: 8pt; }
+    .verdict-box p { font-size: 7.5pt; }
+    .verdict-box .score { font-size: 16pt; }
+    .bottom-line { padding: 8px 12px; margin-bottom: 6px; }
+    .bottom-line h3 { font-size: 10pt; }
+    .bottom-line p { font-size: 7.5pt; }
+    .footer { font-size: 6pt; }
+    .footnote { font-size: 6.5pt; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- PART I: STRATEGIC NARRATIVE                                    -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="header">
+    <h1>Centime Exchange: The Supplier Enrollment Advantage</h1>
+    <div class="subtitle">
+      <strong>Competitive Analysis</strong><br>
+      Internal — February 2026
+    </div>
+  </div>
+  <div class="page-label">Part I — Strategic Narrative</div>
+  <div class="narrative">
+
+    <h2>Context</h2>
+    <p>Centime competes well on AP automation and payment execution against Tipalti, Stampli, and BILL. We win when we're in the deal. But mid-market AP automation adoption remains low, the competitive landscape is crowded, and we are not yet in all the deals we'd like to be in.</p>
+    <p>Our strategy has been to stack blocks of differentiation — bank partnerships, ERP-native deployment, breadth of platform (AP, AR, expense management, cash forecasting). Exchange is the latest block, and it adds something none of our competitors offer: purpose-built supplier enrollment and management that drives electronic payment adoption, optimizes working capital, and reduces fraud risk.</p>
+    <p>This document focuses on Exchange — what it does, what competitors don't, and why it matters to customers and bank partners.</p>
+
+    <h2>What Competitors Offer (and Don't) for Supplier Enrollment</h2>
+    <div class="landscape-strip">
+      <div class="ls-card">
+        <h4>Tipalti</h4>
+        <div class="meta">$350M+ ARR — Our closest competitor</div>
+        <p>Self-service supplier hub, brandable. Strong global payments. But onboarding is a gateway to payments, not a managed process.</p>
+        <p class="gap" style="margin-top: 8px;">No real-time bank verification. No outreach campaigns. No document auto-parse. No fraud indemnification.</p>
+      </div>
+      <div class="ls-card">
+        <h4>Stampli</h4>
+        <div class="meta">$100M+ ARR est. — Direct competitor</div>
+        <p>Advanced Vendor Management (AVM) is a paid add-on with customizable forms and a vendor portal. Shows they know it matters.</p>
+        <p class="gap" style="margin-top: 8px;">No bank verification at all — trusts vendor-submitted data. No early pay. No auto-parse. AVM is bolt-on, not foundational.</p>
+      </div>
+      <div class="ls-card">
+        <h4>BILL</h4>
+        <div class="meta">$1.2B+ ARR — Less direct at mid-market</div>
+        <p>Massive vendor network. Distribution through accounting firms. Increasingly moving upmarket.</p>
+        <p class="gap" style="margin-top: 8px;">No supplier portal. No onboarding workflow. No verification beyond $1 test payments. No document collection. Nothing.</p>
+      </div>
+    </div>
+
+    <p>The pattern is clear: every competitor treats supplier enrollment as secondary. A form to fill out on the way to the "real" product. None of them have invested in making it a managed, outcome-driven process.</p>
+
+    <h2>What Exchange Delivers</h2>
+    <p>Exchange is a supplier enrollment and management platform — available standalone or integrated with Centime's payables solutions. It drives three outcomes that no competing AP platform can deliver:</p>
+
+    <div class="wedge-box">
+      <strong>1. Electronic payment adoption.</strong> Suppliers enrolled through Exchange have verified bank accounts and active payment profiles from day one. More enrolled suppliers means more payments move electronically — ACH and virtual card instead of checks — which means more rebate revenue and lower processing costs. Outreach campaigns with automated follow-ups push enrollment velocity from the 30% typical of single-email invitations to 80%+. Competitors send one email and hope.
+    </div>
+
+    <p><strong>2. Working capital optimization.</strong> Exchange-enrolled suppliers with verified payment profiles are immediately eligible for early pay programs — dynamic discounting and supply chain finance powered by bank partner capital. You can't offer early pay to suppliers you haven't verified. Exchange makes the supplier base early-pay-ready at enrollment, not months later.</p>
+
+    <p><strong>3. Fraud risk reduction.</strong> Real-time bank account verification proves bank account ownership in real time through browser-based bank authentication. Not micro-deposits (Tipalti: 1-3 days). Not $1 test payments (BILL). Not vendor self-attestation (Stampli: no verification at all). Every payment to a verified supplier goes to a bank account with proven ownership. This is the single strongest anti-fraud control in the mid-market AP space.</p>
+
+    <h2>The Capabilities Behind These Outcomes</h2>
+    <p><strong>Real-time bank account ownership verification.</strong> Supplier authenticates via their own bank login. Cryptographic proof of ownership in seconds. No competitor offers anything comparable.</p>
+    <p><strong>Configurable outreach campaigns.</strong> Multi-step campaigns with automated reminders, escalation paths, and deadline tracking. Buyers control the enrollment experience. Competitors offer a single email invitation.</p>
+    <p><strong>Document management.</strong> Auto-parsed insurance certificates (carrier, policy, limits, expiration dates) with visual badges and renewal alerts. Industry-specific document categories (construction, healthcare, IT/SaaS, food, transport). Core business docs (W-9/W-8, Articles of Incorporation, Certificate of Good Standing). Competitors collect a W-9 at registration and stop.</p>
+    <p><strong>Tiered onboarding.</strong> Micro, domestic, and international tiers with different requirements by supplier complexity. Reduces friction for small vendors, enforces compliance for complex ones.</p>
+    <p><strong>Mobile-responsive supplier portal.</strong> Full application on any device. Critical for micro-supplier completion rates. Stampli is desktop-optimized. BILL has no portal.</p>
+
+    <div class="roadmap-box">
+      <h4>The Next Block (Planned): Supplier-Side Invoice Submission</h4>
+      <p>Exchange is evolving from enrollment and verification into a transaction hub. Suppliers will submit born-digital invoices directly through Exchange, matched to POs posted by the buyer via API. Suppliers handle their own exceptions before submission. The buyer's AP team receives clean, structured, pre-matched invoices — no OCR, no capture, no conversion. This deepens the value of every enrolled supplier and extends Exchange further into the payables lifecycle.</p>
+    </div>
+
+    <h2>Why This Matters to Bank Partners</h2>
+    <p>Centime distributes through six bank partners today (M&T Bank, City National, FNBO, and others). No competitor distributes through banks — Tipalti, Stampli, and BILL all sell direct. Exchange strengthens the bank channel pitch in three specific ways:</p>
+    <p><strong>Fraud controls banks can stand behind.</strong> Real-time bank account verification and (when reinstated) fraud indemnification on verified payments. Banks are cautious about what they put their name on. Verified bank account ownership gives them a fraud prevention story backed by real technology, not checkbox compliance.</p>
+    <p><strong>Electronic payment volume.</strong> More enrolled suppliers means more payments flowing through the bank's rails. That's deposit retention, transaction revenue, and commercial client stickiness.</p>
+    <p><strong>Early pay powered by bank capital.</strong> Dynamic discounting and SCF funded through the bank partnership — not anonymous third-party funders. The bank's capital stays in the relationship. Exchange makes the supplier base eligible from day one.</p>
+
+    <h2>Fraud Indemnification: In Progress</h2>
+    <p>Centime holds a lapsed Lloyd's Financial Institutions Bond (B1230FC) with zero claims history. We are actively pursuing reinstatement with broadened coverage for social engineering and vendor impersonation fraud. No competing AP automation platform offers any form of fraud indemnification on supplier verification. When active, this becomes the capstone of Exchange's value — for customers and bank partners alike.</p>
+
+  </div>
+  <div class="footer"><div><strong>Centime, Inc.</strong> — Confidential</div><div>February 2026</div></div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- PART II: CAPABILITY MATRIX                                    -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="header">
+    <h1>Centime Exchange: The Supplier Enrollment Advantage</h1>
+    <div class="subtitle"><strong>Competitive Analysis</strong><br>Internal — February 2026</div>
+  </div>
+  <div class="page-label">Part II — Exchange Capability Matrix vs. Tipalti, Stampli & BILL</div>
+
+  <table class="matrix">
+    <thead>
+      <tr>
+        <th style="width: 20%;">Capability</th>
+        <th class="centime-col" style="width: 22%;">Centime Exchange</th>
+        <th style="width: 20%;">Tipalti</th>
+        <th style="width: 18%;">BILL</th>
+        <th style="width: 20%;">Stampli</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="category-row"><td colspan="5">Enrollment & Outreach</td></tr>
+      <tr>
+        <td>Self-service supplier portal</td>
+        <td class="centime-cell"><span class="badge badge-leader">Leader</span> Branded, mobile-responsive, multi-mode</td>
+        <td><span class="badge badge-partial">Partial</span> Brandable iFrame or hosted</td>
+        <td><span class="badge badge-none">None</span> No portal — buyer manually adds</td>
+        <td><span class="badge badge-partial">Partial</span> With AVM add-on</td>
+      </tr>
+      <tr>
+        <td>Configurable outreach campaigns</td>
+        <td class="centime-cell"><span class="badge badge-leader">Leader</span> Multi-step, automated reminders, escalation paths, deadline tracking</td>
+        <td><span class="badge badge-none">None</span> Single email invitation</td>
+        <td><span class="badge badge-none">None</span> No outreach capability</td>
+        <td><span class="badge badge-none">Basic</span> Remittance-email invite only</td>
+      </tr>
+      <tr>
+        <td>ERP vendor record pull</td>
+        <td class="centime-cell"><span class="badge badge-leader">Leader</span> Auto-pull from QB, NetSuite, Intacct, Dynamics at enrollment</td>
+        <td><span class="badge badge-none">None</span> Supplier enters data fresh</td>
+        <td><span class="badge badge-none">None</span> Buyer manually enters</td>
+        <td><span class="badge badge-none">None</span> Syncs post-onboarding only</td>
+      </tr>
+      <tr>
+        <td>Tiered onboarding by complexity</td>
+        <td class="centime-cell"><span class="badge badge-leader">Leader</span> Micro / Domestic / International tiers</td>
+        <td>Uniform process</td>
+        <td>Uniform manual entry</td>
+        <td>Customizable forms, no built-in tiers</td>
+      </tr>
+      <tr>
+        <td>Mobile-responsive enrollment</td>
+        <td class="centime-cell"><span class="badge badge-full">Full</span> Complete application on any device</td>
+        <td><span class="badge badge-full">Full</span> Responsive portal</td>
+        <td>N/A — no portal</td>
+        <td><span class="badge badge-partial">Partial</span> Desktop-optimized</td>
+      </tr>
+      <tr>
+        <td>Multi-language support</td>
+        <td class="centime-cell"><span class="badge badge-planned">Planned</span> Priority languages based on U.S. trade volume</td>
+        <td><span class="badge badge-full">Full</span> 27 languages</td>
+        <td>English only</td>
+        <td>English only</td>
+      </tr>
+
+      <tr class="category-row"><td colspan="5">Bank Account Verification & Fraud Prevention</td></tr>
+      <tr>
+        <td>Verification method</td>
+        <td class="centime-cell"><span class="badge badge-leader">Leader</span> <strong>Real-time bank login.</strong> Proves ownership at source. Instantaneous.</td>
+        <td><span class="badge badge-partial">Partial</span> Micro-deposits (1-3 days) + 26,000-rule validation engine</td>
+        <td><span class="badge badge-none">Basic</span> $1 test payment or voided check. Manual phone call recommended</td>
+        <td><span class="badge badge-none">None</span> Vendor self-reports. No independent verification</td>
+      </tr>
+      <tr>
+        <td>Ownership proof</td>
+        <td class="centime-cell"><strong>Yes — cryptographic proof of account ownership</strong></td>
+        <td>No — validates format, not ownership</td>
+        <td>No — manual confirmation only</td>
+        <td>No — trusts vendor input</td>
+      </tr>
+      <tr>
+        <td>Time to verify</td>
+        <td class="centime-cell"><strong>Real-time</strong> (seconds)</td>
+        <td>1-3 business days</td>
+        <td>1-3 business days + manual steps</td>
+        <td>N/A — no verification</td>
+      </tr>
+      <tr>
+        <td>OFAC / sanctions screening</td>
+        <td class="centime-cell">Yes — via Middesk</td>
+        <td><span class="badge badge-full">Full</span> Built-in, runs before every payment</td>
+        <td>Limited</td>
+        <td>No native screening</td>
+      </tr>
+      <tr>
+        <td>Fraud indemnification</td>
+        <td class="centime-cell"><span class="badge badge-planned">In Progress</span> Lapsed Lloyd's bond (zero claims), reinstatement being pursued*</td>
+        <td>No</td>
+        <td>No</td>
+        <td>No</td>
+      </tr>
+
+      <tr class="category-row"><td colspan="5">Document Management & Compliance</td></tr>
+      <tr>
+        <td>Tax form collection</td>
+        <td class="centime-cell"><span class="badge badge-leader">Leader</span> W-9 + all W-8 variants, auto-detect by entity type, expiration tracking</td>
+        <td><span class="badge badge-full">Full</span> W-9/W-8, OCR scan agent, TIN matching</td>
+        <td><span class="badge badge-none">None</span> No tax form collection</td>
+        <td><span class="badge badge-partial">Partial</span> W-9 via AVM. Manual W-8</td>
+      </tr>
+      <tr>
+        <td>Insurance certificate management</td>
+        <td class="centime-cell"><span class="badge badge-leader">Leader</span> Auto-parse: carrier, policy, limits, dates. Expiration badges. Renewal alerts</td>
+        <td>Collection available. No auto-parse. No expiration badges</td>
+        <td><span class="badge badge-none">None</span></td>
+        <td>Collection + reminders via AVM. No auto-parse</td>
+      </tr>
+      <tr>
+        <td>Industry-specific document groups</td>
+        <td class="centime-cell"><span class="badge badge-leader">Leader</span> Construction, Healthcare, IT/SaaS, Food, Transport</td>
+        <td>Configurable per entity. No pre-built groups</td>
+        <td><span class="badge badge-none">None</span></td>
+        <td>Custom forms per vendor type. No pre-built groups</td>
+      </tr>
+      <tr>
+        <td>KYB / entity verification</td>
+        <td class="centime-cell">Via Middesk ($25/report or bundled)</td>
+        <td>TIN matching at onboarding</td>
+        <td>No</td>
+        <td>No</td>
+      </tr>
+
+      <tr class="category-row"><td colspan="5">Transaction Lifecycle (Supplier-Side)</td></tr>
+      <tr>
+        <td>PO receipt / posting</td>
+        <td class="centime-cell"><span class="badge badge-full">Full</span> Suppliers receive and acknowledge POs in portal</td>
+        <td><span class="badge badge-full">Full</span> PO delivery with ERP sync</td>
+        <td><span class="badge badge-none">None</span></td>
+        <td>2/3-way PO matching (buyer-side only)</td>
+      </tr>
+      <tr>
+        <td>Supplier invoice submission</td>
+        <td class="centime-cell"><span class="badge badge-planned">Planned</span> Born-digital invoices, auto-matched to POs, supplier handles exceptions</td>
+        <td>No — invoices from buyer side (email, scan, EDI)</td>
+        <td>No — buyer enters or forwards</td>
+        <td>Vendors upload invoices via AVM add-on</td>
+      </tr>
+      <tr>
+        <td>Payment visibility (supplier)</td>
+        <td class="centime-cell"><span class="badge badge-full">Full</span> Payment status, remittance detail, history</td>
+        <td><span class="badge badge-full">Full</span> Notifications + portal status</td>
+        <td>No supplier portal</td>
+        <td><span class="badge badge-full">Full</span> Invoice and payment status in vendor portal</td>
+      </tr>
+      <tr>
+        <td>Early Pay (supplier)</td>
+        <td class="centime-cell"><span class="badge badge-full">Full</span> Dynamic discounting + bank-partner SCF. 0-2.75%</td>
+        <td><span class="badge badge-full">Full</span> NetNow, per-payment opt-in</td>
+        <td><span class="badge badge-none">None</span></td>
+        <td><span class="badge badge-none">None</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="footnote">* Fraud indemnification: Centime holds a lapsed Lloyd's Financial Institutions Bond (B1230FC) with zero claims history. Reinstatement with broadened social engineering / vendor impersonation coverage is actively being pursued. No competing AP automation platform offers any form of fraud indemnification on supplier verification.</p>
+
+  <div class="footer"><div><strong>Centime, Inc.</strong> — Confidential</div><div>February 2026</div></div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- PART III: DOWNSTREAM EFFECTS & COMPETITIVE POSITIONING         -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="header">
+    <h1>Centime Exchange: The Supplier Enrollment Advantage</h1>
+    <div class="subtitle"><strong>Competitive Analysis</strong><br>Internal — February 2026</div>
+  </div>
+  <div class="page-label">Part III — Downstream Effects & Competitive Positioning</div>
+
+  <div class="narrative">
+    <p style="color: var(--muted);">Supplier enrollment quality compounds through every step of the AP lifecycle. The three outcomes Exchange drives — electronic payment adoption, working capital optimization, and fraud risk reduction — create downstream benefits that multiply over time.</p>
+  </div>
+
+  <table class="downstream">
+    <thead>
+      <tr>
+        <th style="width: 16%;">AP Problem</th>
+        <th style="width: 18%;">Root Cause</th>
+        <th style="width: 34%;">How Exchange Prevents It</th>
+        <th style="width: 32%;">What Tipalti / BILL / Stampli Do</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Payment to wrong account</td>
+        <td>Unverified bank details. BEC scam. Vendor impersonation.</td>
+        <td>Real-time bank account verification proves ownership at enrollment. Any bank detail change triggers re-verification. Fraud indemnification (in progress) covers remaining risk.</td>
+        <td>Tipalti: micro-deposits + Detect. BILL: $1 test or phone call. Stampli: trusts vendor data.</td>
+      </tr>
+      <tr>
+        <td>Supplier won't complete onboarding</td>
+        <td>Single email lost in spam. No follow-up. Process too complex for small vendor.</td>
+        <td>Multi-step outreach campaigns. Tiered complexity (micro suppliers get minimal form). Mobile-responsive. Automated escalation.</td>
+        <td>Tipalti: single invite. BILL: buyer enters data. Stampli: remittance-email only.</td>
+      </tr>
+      <tr>
+        <td>Expired insurance / lapsed compliance</td>
+        <td>No tracking system. Manual spreadsheet. Missed renewal.</td>
+        <td>Auto-parsed COI with expiration badges. Automated renewal alerts 30/60/90 days. Configurable payment block on expired docs.</td>
+        <td>Tipalti: no auto-parse. BILL: none. Stampli: reminders, no auto-parse.</td>
+      </tr>
+      <tr>
+        <td>Duplicate vendor records</td>
+        <td>Same supplier entered multiple times. Slight name variations.</td>
+        <td>ERP vendor record pull at enrollment populates existing data. Exchange-verified bank account serves as unique identifier.</td>
+        <td>Tipalti: de-dup in supplier hub. BILL: none. Stampli: ERP sync reduces but doesn't prevent.</td>
+      </tr>
+      <tr>
+        <td>Invoice exceptions / PO mismatch</td>
+        <td>Paper invoice with wrong PO reference. Buyer manually reconciles.</td>
+        <td>Supplier creates born-digital invoice matched to PO in portal (planned). Supplier resolves own exceptions before submission.</td>
+        <td>Tipalti: buyer-side PO matching. BILL: manual. Stampli: buyer-side matching + Billy AI.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="narrative">
+    <h2>Competitor-Specific Positioning</h2>
+  </div>
+
+  <div class="verdict-grid">
+    <div class="verdict-box">
+      <h4>vs. Tipalti</h4>
+      <div class="score">Closest</div>
+      <p>Our closest competitor. Strong global payments, NetNow early pay, Detect fraud module. But their supplier onboarding is a gateway, not a managed process. No real-time ownership verification. No outreach campaigns. No document auto-parse. Priced for enterprise ($150K+ implementations). <strong style="color: var(--ink);">We win on:</strong> verification depth, enrollment workflow, document management, bank channel, mid-market accessibility.</p>
+    </div>
+    <div class="verdict-box">
+      <h4>vs. BILL</h4>
+      <div class="score">Widest Gap</div>
+      <p>A bill-pay platform, not a supplier management platform. No portal, no onboarding, no document management, no verification beyond manual checks. Strength is network scale (millions of vendors) and SMB distribution through accounting firms. <strong style="color: var(--ink);">We win on:</strong> everything supplier-facing. <strong style="color: var(--ink);">BILL wins on:</strong> network size and SMB volume.</p>
+    </div>
+    <div class="verdict-box">
+      <h4>vs. Stampli</h4>
+      <div class="score">AP vs. AP+</div>
+      <p>Best invoice-processing UX in market. Billy AI is genuinely impressive for coding, routing, and duplicate detection. AVM add-on shows they know vendor management matters — but it's a bolt-on that lacks verification, auto-parse, and early pay. <strong style="color: var(--ink);">We win on:</strong> verification, early pay, supplier-side transactions, document depth. <strong style="color: var(--ink);">Stampli wins on:</strong> invoice AI, ERP breadth.</p>
+    </div>
+  </div>
+
+  <div class="bottom-line">
+    <h3>The Bottom Line</h3>
+    <p>Exchange adds a layer of differentiation that no competing AP platform offers. It drives electronic payment adoption through verified enrollment and outreach automation. It enables working capital optimization by making the supplier base early-pay-ready from day one. It reduces fraud risk through real-time bank account ownership verification that no competitor can match. With planned supplier-side invoice submission, Exchange extends further into the payables lifecycle. With bank distribution that no competitor has and fraud indemnification that no competitor offers, Exchange doesn't just differentiate Centime's payables platform — it strengthens the entire bank channel proposition.</p>
+  </div>
+
+  <p class="footnote"><strong>Sources & methodology:</strong> Competitive capabilities assessed via published product documentation, help center articles, press releases, and analyst coverage as of February 2026. Revenue estimates from public filings (BILL) and industry sources (Tipalti, Stampli). Centime capabilities reflect current production; items marked "planned" are on active roadmap. This document is confidential and intended for internal use and bank partner discussions.</p>
+
+  <div class="footer"><div><strong>Centime, Inc.</strong> — Confidential</div><div>February 2026</div></div>
+</div>
+
+</body>
+</html>
