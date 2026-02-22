@@ -92,7 +92,7 @@ Exchange collects and validates supplier documentation across three tiers of inc
 
 **KYB and Compliance Screening**
 
-Through our integration with Middesk, Exchange can perform Secretary of State verification, TIN validation, sanctions screening, PEP checks, and adverse media monitoring. These are available per-supplier and can be made mandatory at any verification tier.
+Exchange performs Secretary of State verification and TIN validation through Middesk, and AML/sanctions/PEP screening through Didit (OFAC SDN, UN, EU, and 1,300+ global watchlists with real-time checks and ongoing daily monitoring). These are available per-supplier and can be made mandatory at any verification tier.
 
 **Configurable Outreach and Enrollment Campaigns**
 

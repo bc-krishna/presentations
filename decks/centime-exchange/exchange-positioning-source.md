@@ -94,7 +94,7 @@ Standalone Exchange at $3,500 per year is a fine product. But the revenue compou
 - Virtual card rebates back to the buyer
 - Early Pay / dynamic discounting fees
 - Document management and compliance add-ons
-- Per-supplier Middesk reports
+- Per-supplier KYB (Middesk) and AML/sanctions screening (Didit)
 
 A fully realized Centime platform relationship — AP + IP + Exchange — generates $15K–$30K+ per customer annually. The enrollment fee is the front door. The invoice and payment transactions are the house.
 
