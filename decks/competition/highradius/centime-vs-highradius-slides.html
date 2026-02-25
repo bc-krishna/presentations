@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centime AP Automation vs. HighRadius AP &mdash; Competitive Analysis</title>
+
+  <!-- Reveal.js 5.x -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+
+  <!-- Centime Editorial Theme -->
+  <link rel="stylesheet" href="../../../css/theme/centime-editorial.css?v=4">
+
+  <style>
+    /* Force large base font */
+    .reveal .slides { font-size: 27px !important; }
+
+    .reveal h2 { font-size: 1.5em; margin-bottom: 0.25em; }
+    .reveal .eyebrow { font-size: 0.5em; margin-bottom: 0.4em; }
+    .reveal .lead { font-size: 0.65em; line-height: 1.5; margin-bottom: 0.4em; }
+    .reveal .subtitle { font-size: 0.62em; line-height: 1.5; }
+
+    .reveal .slides section { text-align: left; }
+
+    /* Body text */
+    .reveal .body { font-size: 0.6em; line-height: 1.55; color: var(--ft-slate); }
+    .reveal .body strong { color: var(--ft-black); }
+    .reveal .meta { font-size: 0.45em; color: var(--ft-slate); }
+
+    /* Bullet list */
+    .reveal ul.pts {
+      list-style: none; padding: 0; margin: 0.3em 0;
+      border-top: 3px solid var(--ft-black);
+    }
+    .reveal ul.pts li {
+      font-size: 0.58em; line-height: 1.5; color: var(--ft-dark);
+      padding: 0.35em 0 0.35em 1.2em; position: relative;
+      border-bottom: 1px solid var(--ft-rule);
+    }
+    .reveal ul.pts li::before {
+      content: '\2192'; position: absolute; left: 0;
+      font-weight: 700; color: var(--ft-claret);
+    }
+    .reveal ul.pts li strong { color: var(--ft-black); }
+
+    /* Dark variant bullets */
+    .slide-dark ul.pts { border-top-color: var(--ft-mandarin); }
+    .slide-dark ul.pts li { color: var(--ft-wheat); border-bottom-color: rgba(206,198,185,0.15); }
+    .slide-dark ul.pts li::before { color: var(--ft-mandarin); }
+    .slide-dark ul.pts li strong { color: var(--ft-pink); }
+
+    /* Two-column comparison */
+    .reveal .vs {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      margin: 0.3em 0; border-top: 3px solid var(--ft-black);
+    }
+    .reveal .vs-l, .reveal .vs-r {
+      padding: 0.5em 0;
+      border-bottom: 1px solid var(--ft-rule);
+    }
+    .reveal .vs-l { padding-right: 0.8em; border-right: 1px solid var(--ft-rule); }
+    .reveal .vs-r { padding-left: 0.8em; }
+    .reveal .vs h4 {
+      font-family: var(--r-heading-font); font-size: 0.62em; font-weight: 700; margin-bottom: 0.2em;
+    }
+    .reveal .vs p {
+      font-size: 0.52em; color: var(--ft-slate); line-height: 1.5;
+    }
+    .reveal .vs p strong { color: var(--ft-black); }
+    .reveal .vs-l h4 { color: var(--ft-claret); }
+    .reveal .vs-r h4 { color: var(--ft-slate); }
+    .reveal .vs-r p { opacity: 0.75; }
+
+    /* Dark variant vs */
+    .slide-dark .vs { border-top-color: var(--ft-mandarin); }
+    .slide-dark .vs-l, .slide-dark .vs-r { border-color: rgba(206,198,185,0.15); }
+    .slide-dark .vs p { color: var(--ft-wheat); }
+    .slide-dark .vs p strong { color: var(--ft-pink); }
+    .slide-dark .vs-l h4 { color: var(--ft-mandarin); }
+    .slide-dark .vs-r h4 { color: var(--ft-wheat); opacity: 0.6; }
+
+    /* Tag badges */
+    .reveal .tag {
+      display: inline-block; font-family: var(--r-main-font);
+      font-size: 0.42em; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; padding: 0.1em 0.4em; border-radius: 2px;
+      vertical-align: middle;
+    }
+    .tag-lead { background: #1a5276; color: white; }
+    .tag-parity { background: #2563eb; color: white; }
+    .tag-context { background: #b8860b; color: white; }
+    .tag-hr { background: #5b21b6; color: white; }
+
+    /* Scorecard */
+    .reveal .scores {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5em; margin: 0.5em 0;
+    }
+    .reveal .sc { text-align: center; padding: 0.5em 0.3em; border-radius: 4px; }
+    .reveal .sc .n { font-family: var(--r-heading-font); font-size: 1.8em; line-height: 1; }
+    .reveal .sc .l { font-size: 0.4em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 0.2em; }
+    .sc-centime { background: #eaf2f8; } .sc-centime .n, .sc-centime .l { color: #1a5276; }
+    .sc-parity { background: #eff3ff; } .sc-parity .n, .sc-parity .l { color: #2563eb; }
+    .sc-hr { background: #f5f0ff; } .sc-hr .n, .sc-hr .l { color: #5b21b6; }
+    .sc-ctx { background: #fef7e6; } .sc-ctx .n, .sc-ctx .l { color: #b8860b; }
+
+    /* Side-by-side cards */
+    .reveal .cards {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.5em; margin: 0.4em 0;
+    }
+    .reveal .card {
+      padding: 0.5em 0.6em; border-radius: 4px;
+    }
+    .reveal .card h4 {
+      font-family: var(--r-main-font); font-size: 0.45em; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3em;
+    }
+    .reveal .card p { font-size: 0.5em; line-height: 1.5; }
+    .card-centime { background: #eaf2f8; } .card-centime h4 { color: #1a5276; }
+    .card-hr { background: #f5f0ff; } .card-hr h4 { color: #5b21b6; }
+    .card-amber { background: #fef7e6; } .card-amber h4 { color: #b8860b; }
+    .card-green { background: #e8f5ec; } .card-green h4 { color: #1e7a3a; }
+
+    /* Three-column cards */
+    .reveal .three-cards {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.4em; margin: 0.4em 0;
+    }
+    .reveal .three-cards .card { padding: 0.4em 0.5em; }
+    .reveal .three-cards .card h4 { font-size: 0.4em; }
+    .reveal .three-cards .card p { font-size: 0.44em; line-height: 1.45; }
+
+    /* Rate comparison */
+    .reveal .rates {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      border: 2px solid var(--ft-black); margin: 0.4em 0;
+    }
+    .reveal .rates > div { padding: 0.5em 0.7em; }
+    .reveal .rates > div:first-child { border-right: 1px solid var(--ft-rule); }
+    .reveal .rates h4 {
+      font-family: var(--r-main-font); font-size: 0.42em; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 0.2em;
+    }
+    .reveal .rates .num { font-family: var(--r-heading-font); font-size: 1.2em; line-height: 1.1; margin-bottom: 0.15em; }
+    .reveal .rates p { font-size: 0.45em; color: var(--ft-slate); line-height: 1.45; }
+    .reveal .rates p strong { color: var(--ft-black); }
+
+    /* Callout box */
+    .reveal .callout {
+      background: var(--ft-paper); border-top: 3px solid var(--ft-claret);
+      padding: 0.5em 0.7em; margin: 0.3em 0;
+    }
+    .reveal .callout h4 { font-family: var(--r-heading-font); font-size: 0.6em; color: var(--ft-black); margin-bottom: 0.15em; }
+    .reveal .callout p { font-size: 0.5em; color: var(--ft-slate); line-height: 1.5; }
+    .reveal .callout p strong { color: var(--ft-black); }
+
+    /* Feature comparison rows */
+    .reveal .feats { list-style: none; padding: 0; margin: 0.3em 0; border-top: 3px solid var(--ft-black); }
+    .reveal .feats li {
+      display: grid; grid-template-columns: 1.2fr 2fr;
+      gap: 0.6em; padding: 0.3em 0; border-bottom: 1px solid var(--ft-rule);
+      font-size: 0.52em; line-height: 1.45;
+    }
+    .reveal .feats .fn { font-family: var(--r-heading-font); font-weight: 700; color: var(--ft-black); }
+    .reveal .feats .fd { color: var(--ft-dark); }
+
+    /* Stat row */
+    .reveal .stat-row {
+      display: flex; gap: 1em; margin-top: 0.3em;
+      font-size: 0.42em; color: var(--ft-slate);
+    }
+    .reveal .stat-row strong { color: var(--ft-black); font-size: 1.1em; }
+  </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- SLIDE 1: TITLE -->
+<section data-background-color="#1A1817">
+  <div class="slide-dark">
+    <p class="eyebrow" style="color: var(--ft-mandarin);">Centime &middot; Competitive Analysis</p>
+    <h1 style="font-size: 1.6em; color: var(--ft-pink);">Centime AP Automation<br>vs. HighRadius AP</h1>
+    <p class="subtitle" style="color: var(--ft-wheat);">Full platform comparison &mdash; invoice processing, supplier management, payments, early pay, distribution, and platform breadth.</p>
+    <p class="meta" style="margin-top: 1em;">Internal &middot; February 2026 &middot; Confidential</p>
+  </div>
+</section>
+
+<!-- SLIDE 2: WHO IS HIGHRADIUS -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">The Competitor</p>
+  <h2>Who is HighRadius?</h2>
+  <p class="lead">Enterprise autonomous finance platform. AR leader. AP is new.</p>
+  <ul class="pts">
+    <li><strong>$3.1B valuation, 4,500 employees</strong> &mdash; Houston, TX. Series C ($485M raised)</li>
+    <li><strong>AR-first:</strong> Gartner Magic Quadrant Leader 3 consecutive years. Customers: 3M, Unilever, Sanofi, Hershey&rsquo;s</li>
+    <li><strong>AP launched April 2024</strong> as &ldquo;GenAI-native&rdquo; extension &mdash; invoice processing, supplier portal, dynamic discounting</li>
+    <li><strong>Targets Fortune 500</strong> with direct sales, professional services-led deployments</li>
+  </ul>
+  <div class="stat-row">
+    <div><strong>$300M+</strong> revenue</div>
+    <div><strong>850+</strong> customers</div>
+    <div><strong>50+</strong> ERP integrations</div>
+  </div>
+</section>
+
+<!-- SLIDE 3: WHO IS CENTIME -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">Our Position</p>
+  <h2>Who is Centime?</h2>
+  <p class="lead">Full-featured AP Automation for mid-market finance teams &mdash; built by the team that built MineralTree.</p>
+  <div class="vs">
+    <div class="vs-l">
+      <h4>AP Automation</h4>
+      <p>GenAI-powered invoice capture &amp; coding, PO matching, approval workflows, ERP-embedded deployment</p>
+    </div>
+    <div class="vs-r" style="border-right: none;">
+      <h4 style="color: var(--ft-claret);">Beyond AP</h4>
+      <p>Payments Automation, Exchange (supplier enrollment), FlexPay (bank-funded early pay), Cash Flow Forecasting</p>
+    </div>
+  </div>
+  <p class="body" style="margin-top: 0.3em;"><strong>10+ years of AP experience.</strong> Bank-distributed to mid-market through 6 partner banks. Zero professional services deployment.</p>
+</section>
+
+<!-- SLIDE 4: THE CORE POSITIONING -->
+<section data-background-color="#1A1817">
+  <div class="slide-dark">
+    <p class="eyebrow" style="color: var(--ft-mandarin);">The Core Positioning</p>
+    <h2 style="color: var(--ft-pink); font-size: 1.2em;">HighRadius built AP for <span style="color: #7dd3fc;">enterprise AR customers who asked for it.</span></h2>
+    <h2 style="color: var(--ft-pink); font-size: 1.2em; margin-top: 0.15em;">Centime built AP for <span style="color: #7dd3fc;">mid-market finance teams</span> &mdash; and delivers it through the banks they already trust.</h2>
+    <p class="body" style="color: var(--ft-wheat); margin-top: 0.6em;">This shapes everything: product design, pricing, implementation, distribution. HighRadius optimizes for enterprise invoice volume with PS-led deployments. Centime delivers full AP embedded in mid-market ERPs, deployed without professional services, distributed through banks.</p>
+  </div>
+</section>
+
+<!-- SLIDE 5: SCORECARD -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">Competitive Scorecard</p>
+  <h2>23 capabilities compared</h2>
+  <div class="scores">
+    <div class="sc sc-centime"><div class="n">8</div><div class="l">Centime Leads</div></div>
+    <div class="sc sc-parity"><div class="n">9</div><div class="l">Competitive Parity</div></div>
+    <div class="sc sc-hr"><div class="n">2</div><div class="l">HighRadius Leads</div></div>
+    <div class="sc sc-ctx"><div class="n">4</div><div class="l">Context-Dependent</div></div>
+  </div>
+  <p class="body">On core AP capabilities &mdash; invoice capture, PO matching, approvals, GL coding, payments &mdash; we are at parity feature for feature. Where we separate is structural: Exchange, CAS, bank distribution, FlexPay.</p>
+</section>
+
+<!-- SLIDE 6: WHERE HIGHRADIUS IS STRONG -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">Honest Assessment</p>
+  <h2>Where HighRadius is strong</h2>
+  <ul class="pts">
+    <li><strong>Enterprise invoice volume at scale.</strong> &ldquo;Agentic AI&rdquo; with multi-channel intake (EDI, cXML, e-invoice). Claims 90%+ touchless processing</li>
+    <li><strong>Dynamic discounting marketplace.</strong> Suppliers propose terms, buyers counteroffer. 3x early payment discount capture. 98% capture rate</li>
+    <li><strong>Supplier Connect GenAI.</strong> Automated supplier communication, sentiment analysis, proactive task generation for exceptions</li>
+    <li><strong>Analyst recognition.</strong> Gartner Leader (3x), IDC MarketScape Leader, Forrester recognition. Carries weight in enterprise procurement</li>
+  </ul>
+</section>
+
+<!-- SLIDE 7: WHERE CENTIME WINS — CORE AP -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">Our Advantage</p>
+  <h2>Where Centime wins &mdash; core AP</h2>
+  <p class="lead">Full-featured AP Automation competitive with any platform on the market, including HighRadius.</p>
+  <ul class="pts">
+    <li><strong>GenAI-powered capture and coding.</strong> Invoice processing, automated GL coding, duplicate detection &mdash; competitive feature for feature</li>
+    <li><strong>2-way and 3-way PO matching.</strong> Configurable multi-level approval workflows with role-based routing and threshold rules</li>
+    <li><strong>Full payment execution.</strong> ACH, virtual card, check, cross-border local currency (Visa/Currencycloud). Bank-partner rails</li>
+    <li><strong>Built for mid-market.</strong> ERP-embedded, no professional services, up and running in days &mdash; not quarters</li>
+  </ul>
+</section>
+
+<!-- SLIDE 8: CRITICAL DIFFERENTIATORS -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">Structural Advantages &nbsp; <span class="tag tag-lead">Centime</span></p>
+  <h2>What HighRadius cannot replicate</h2>
+  <div class="three-cards">
+    <div class="card card-centime">
+      <h4>Exchange + CAS</h4>
+      <p>Purpose-built supplier enrollment with <strong>real-time bank account ownership verification</strong>. HighRadius validates bank details against databases. We prove ownership through browser-based bank authentication.</p>
+    </div>
+    <div class="card card-green">
+      <h4>Bank Distribution</h4>
+      <p>Six bank partners white-label Centime. HighRadius sells direct to enterprise. <strong>Banks don&rsquo;t resell HighRadius. They resell Centime.</strong></p>
+    </div>
+    <div class="card card-amber">
+      <h4>FlexPay: Bank-Funded Early Pay</h4>
+      <p>STP with early payment powered by <strong>bank partner capital &mdash; not the buyer&rsquo;s cash</strong>. 0&ndash;2.75% sliding scale. Serves a market HR dynamic discounting cannot reach.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 9: SUPPLIER VERIFICATION -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">Supplier Verification &nbsp; <span class="tag tag-lead">Centime</span></p>
+  <h2>The Supplier Portal Gap</h2>
+  <div class="vs">
+    <div class="vs-l">
+      <h4>Centime Exchange</h4>
+      <p><strong>CAS:</strong> Real-time bank account ownership proof via browser-based bank authentication. Seconds, not days.</p>
+      <p style="margin-top: 0.3em;"><strong>Outreach campaigns:</strong> Multi-step, automated follow-ups, escalation, deadline tracking. 30% &rarr; 80% completion rates.</p>
+      <p style="margin-top: 0.3em;"><strong>Document management:</strong> Auto-parse COI, expiration badges, industry groups, renewal alerts.</p>
+    </div>
+    <div class="vs-r">
+      <h4>HighRadius Supplier Connect</h4>
+      <p>Self-service onboarding, W-9/W-8 collection, invoice tracking, GenAI query resolution.</p>
+      <p style="margin-top: 0.3em;">Bank detail validation against databases &mdash; <strong>no ownership proof.</strong></p>
+      <p style="margin-top: 0.3em;">No campaign engine. No auto-parsed documents. No expiration tracking.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 10: FLEXPLAY VS DYNAMIC DISCOUNTING -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">Early Pay / Working Capital</p>
+  <h2>Fundamentally different models</h2>
+  <div class="rates">
+    <div>
+      <h4 style="color: #5b21b6;">HighRadius Dynamic Discounting</h4>
+      <div class="num" style="color: #5b21b6;">Buyer deploys cash</div>
+      <p>Marketplace: suppliers propose, buyers counteroffer. AI recommends based on cash surplus. <strong>Requires $100M+ AP spend and significant cash position.</strong></p>
+    </div>
+    <div>
+      <h4 style="color: #1a5276;">Centime FlexPay</h4>
+      <div class="num" style="color: #1e7a3a;">0% &ndash; 2.75%</div>
+      <p><strong style="color: #1e7a3a;">Bank-funded.</strong> STP + early pay powered by bank partner capital. Suppliers opt in per invoice. Mid-market buyers offer early pay <strong>without committing working capital.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 11: VIRTUAL CARD -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">Payment Execution &nbsp; <span class="tag tag-parity">Parity</span></p>
+  <h2>Virtual Card &amp; Payment Methods</h2>
+  <div class="vs">
+    <div class="vs-l">
+      <h4>Centime</h4>
+      <p>ACH, virtual card, check, cross-border local currency via Visa/Currencycloud. Bank-partner rails. ERP-reconciled.</p>
+      <p style="margin-top: 0.3em;"><strong>Exchange drives vCard adoption</strong> &mdash; when suppliers enroll with verified profiles, converting to virtual card becomes a structured outreach campaign, not a one-off request.</p>
+    </div>
+    <div class="vs-r">
+      <h4>HighRadius</h4>
+      <p>ACH, check, virtual card, cross-border. Consolidated payment file. 110+ bank connections. Multi-currency.</p>
+      <p style="margin-top: 0.3em;">Virtual card rebate programs. PCI-DSS compliant.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 12: ERP & DEPLOYMENT -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">Platform &amp; Distribution &nbsp; <span class="tag tag-lead">Centime</span></p>
+  <h2>ERP Integration &amp; Deployment</h2>
+  <div class="vs">
+    <div class="vs-l">
+      <h4>Centime &mdash; Two Tracks</h4>
+      <p><strong>AP Automation:</strong> Fully embedded in ERP (QB, Sage Intacct, NetSuite, Dynamics). No professional services. Up and running in days.</p>
+      <p style="margin-top: 0.3em;"><strong>Integrated Payables:</strong> ERP-agnostic, payables-only track for larger enterprises.</p>
+    </div>
+    <div class="vs-r">
+      <h4>HighRadius</h4>
+      <p>50+ ERPs (SAP, Oracle, NetSuite, Dynamics, Infor, Sage). API-first integration.</p>
+      <p style="margin-top: 0.3em;"><strong>Generally requires professional services engagement.</strong> SOWs, timelines, consulting. Works for Fortune 500. Does not work for mid-market or bank distribution.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 13: WHEN DO WE COMPETE -->
+<section data-background-color="#1A1817">
+  <div class="slide-dark">
+    <p class="eyebrow" style="color: var(--ft-mandarin);">Competitive Strategy</p>
+    <h2 style="color: var(--ft-pink);">When do we compete?</h2>
+    <p class="body" style="color: var(--ft-wheat); margin-bottom: 0.3em;">HighRadius and Centime rarely compete head-to-head. Different segments, different distribution, different price points. But awareness matters in four scenarios:</p>
+    <div class="cards">
+      <div class="card" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(206,198,185,0.2);">
+        <h4 style="color: var(--ft-mandarin);">Upmarket Mid-Market</h4>
+        <p style="color: var(--ft-wheat);">$300M&ndash;$500M company. Large enough for enterprise, small enough that HR&rsquo;s overhead hurts. <strong style="color: var(--ft-pink);">Lead with TCO, speed, and Exchange.</strong></p>
+      </div>
+      <div class="card" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(206,198,185,0.2);">
+        <h4 style="color: var(--ft-mandarin);">Bank Conversations</h4>
+        <p style="color: var(--ft-wheat);">HR may surface as a &ldquo;name brand&rdquo; ref. <strong style="color: var(--ft-pink);">HR doesn&rsquo;t distribute through banks. We do.</strong></p>
+      </div>
+      <div class="card" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(206,198,185,0.2);">
+        <h4 style="color: var(--ft-mandarin);">AR-to-AP Cross-Sell</h4>
+        <p style="color: var(--ft-wheat);">Existing HR AR customer considers their AP. <strong style="color: var(--ft-pink);">Their strongest position. Lead with Exchange and FlexPay.</strong></p>
+      </div>
+      <div class="card" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(206,198,185,0.2);">
+        <h4 style="color: var(--ft-mandarin);">Verification Evaluation</h4>
+        <p style="color: var(--ft-wheat);">Buyer specifically evaluating fraud prevention. <strong style="color: var(--ft-pink);">We win decisively. CAS has no HR equivalent.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 14: COMPETITIVE SUMMARY -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">Summary</p>
+  <h2>Competitive summary by dimension</h2>
+  <ul class="feats">
+    <li><span class="fn">Supplier verification</span><span class="fd"><strong style="color: #1a5276;">Centime wins</strong> &mdash; Exchange + CAS ownership proof. Structural gap on verification</span></li>
+    <li><span class="fn">Invoice processing</span><span class="fd"><strong style="color: #2563eb;">Parity</strong> &mdash; Both GenAI-powered. HR adds enterprise channels (EDI/cXML)</span></li>
+    <li><span class="fn">Early pay</span><span class="fd"><strong style="color: #b8860b;">Context</strong> &mdash; HR: enterprise cash deployment. Centime: bank-funded mid-market</span></li>
+    <li><span class="fn">Virtual card</span><span class="fd"><strong style="color: #2563eb;">Parity</strong> &mdash; Centime has adoption velocity edge via Exchange outreach</span></li>
+    <li><span class="fn">Fraud prevention</span><span class="fd"><strong style="color: #1a5276;">Centime wins</strong> &mdash; CAS is unique. Plus indemnification path</span></li>
+    <li><span class="fn">Distribution</span><span class="fd"><strong style="color: #b8860b;">Context</strong> &mdash; Bank distribution vs. direct enterprise sales. Different markets</span></li>
+    <li><span class="fn">Platform breadth</span><span class="fd"><strong style="color: #2563eb;">Parity</strong> &mdash; Both broad. Different emphasis for different segments</span></li>
+  </ul>
+</section>
+
+<!-- SLIDE 15: BOTTOM LINE -->
+<section data-background-color="#990F3D">
+  <div class="slide-dark">
+    <p class="eyebrow" style="color: var(--ft-wheat); opacity: 0.7;">The Bottom Line</p>
+    <h2 style="color: white; font-size: 1.15em; line-height: 1.3;">On core AP, we&rsquo;re competitive feature for feature.<br>On structural advantages, we win decisively.</h2>
+    <p class="body" style="color: rgba(255,255,255,0.85); margin-top: 0.5em;">Exchange and CAS deliver supplier verification HighRadius doesn&rsquo;t have. FlexPay offers bank-funded early payment without deploying buyer capital. Bank distribution gives us a channel HighRadius cannot access. Fraud indemnification, when reinstated, adds a layer no AP platform offers.</p>
+    <p class="body" style="color: rgba(255,255,255,0.85); margin-top: 0.3em;"><strong style="color: white;">The strategy:</strong> Lead with a complete AP platform built for how mid-market companies actually buy and deploy software &mdash; then win on supplier verification, bank distribution, and working capital innovation.</p>
+    <p class="body" style="color: rgba(255,255,255,0.7); margin-top: 0.8em;">For the full strategic narrative and capability matrix, see the <a href="centime-vs-highradius.html" style="color: var(--ft-wheat); text-decoration: underline;">detailed document</a>.</p>
+    <p class="meta" style="color: var(--ft-wheat); margin-top: 0.6em;">Centime, Inc. &middot; Confidential &middot; February 2026</p>
+  </div>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/menu.css">
+<script src="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/menu.js"></script>
+
+<script>
+  Reveal.initialize({
+    width: 960,
+    height: 600,
+    margin: 0.07,
+    center: true,
+    hash: true,
+    transition: 'fade',
+    transitionSpeed: 'default',
+    plugins: [ RevealMenu ],
+    menu: {
+      side: 'left',
+      width: 'normal',
+      numbers: true,
+      titleSelector: 'h1, h2',
+      useTextContentForMissingTitles: true,
+      hideMissingTitles: false,
+      markers: true,
+      themes: false,
+      transitions: false,
+      openButton: true,
+      keyboard: true,
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Centime AP Automation vs HighRadius AP &mdash; Competitive Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --paper: #faf8f5;
+    --accent: #c0392b;
+    --muted: #6b6b6b;
+    --border: #d4cfc8;
+    --green: #1e7a3a;
+    --green-bg: #e8f5ec;
+    --red: #c0392b;
+    --red-bg: #fdeaea;
+    --amber: #b8860b;
+    --amber-bg: #fef7e6;
+    --blue: #2563eb;
+    --blue-bg: #eff3ff;
+    --centime: #1a5276;
+    --centime-bg: #eaf2f8;
+    --hr-purple: #5b21b6;
+    --hr-bg: #f5f0ff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    max-width: 920px;
+    margin: 0 auto;
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page {
+    max-width: 920px;
+    padding: 48px 56px 40px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 32px;
+  }
+  .page:last-child { border-bottom: none; }
+  @media print {
+    @page { size: letter; margin: 0; }
+    body { font-size: 9pt; line-height: 1.45; width: 8.5in; }
+    .page { width: 8.5in; min-height: 11in; padding: 0.5in 0.6in 0.4in; page-break-after: always; border-bottom: none; margin-bottom: 0; }
+    .page:last-child { page-break-after: avoid; }
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 3px solid var(--ink);
+    padding-bottom: 6px;
+    margin-bottom: 14px;
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: -0.3px;
+    line-height: 1.1;
+  }
+  .header .subtitle {
+    font-size: 14px;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.4;
+  }
+  .header .subtitle strong { color: var(--ink); }
+  .page-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  /* NARRATIVE */
+  .narrative h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--ink);
+    margin: 32px 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1.5px solid var(--border);
+  }
+  .narrative h2:first-of-type { margin-top: 0; }
+  .narrative h3 {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 20px 0 6px;
+  }
+  .narrative p { margin-bottom: 12px; font-size: 17px; line-height: 1.6; }
+
+  .insight-box {
+    background: var(--ink);
+    color: white;
+    padding: 24px 28px;
+    margin: 24px 0;
+    border-radius: 3px;
+  }
+  .insight-box .big {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .insight-box .big em { color: #7dd3fc; font-style: normal; }
+  .insight-box p { font-size: 16px; line-height: 1.55; color: #ccc; margin-bottom: 0; }
+
+  /* PROFILE CARDS */
+  .profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin: 24px 0;
+    border: 1.5px solid var(--ink);
+    background: white;
+  }
+  .profile-card { padding: 20px 24px; }
+  .profile-card:first-child { border-right: 1px solid var(--border); }
+  .profile-card h4 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  .profile-card .meta { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+  .profile-card p { font-size: 15px; line-height: 1.5; margin-bottom: 0; }
+  .profile-card.centime-profile { background: var(--centime-bg); }
+  .profile-card.centime-profile h4 { color: var(--centime); }
+  .profile-card.hr-profile { background: var(--hr-bg); }
+  .profile-card.hr-profile h4 { color: var(--hr-purple); }
+  .stat-row {
+    display: flex;
+    gap: 16px;
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+  .stat-row .stat strong { color: var(--ink); font-size: 15px; }
+
+  /* WEDGE BOX */
+  .wedge-box {
+    background: var(--centime-bg);
+    border-left: 4px solid var(--centime);
+    padding: 20px 24px;
+    margin: 20px 0;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  .wedge-box strong { color: var(--centime); }
+
+  .hr-box {
+    background: var(--hr-bg);
+    border-left: 4px solid var(--hr-purple);
+    padding: 20px 24px;
+    margin: 20px 0;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  .hr-box strong { color: var(--hr-purple); }
+
+  /* THREE COLUMN */
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .adv-card { padding: 16px 20px; border-radius: 3px; }
+  .adv-card h4 { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .adv-card p { font-size: 15px; line-height: 1.5; margin-bottom: 0; }
+  .adv-centime { background: var(--centime-bg); }
+  .adv-centime h4 { color: var(--centime); }
+  .adv-green { background: var(--green-bg); }
+  .adv-green h4 { color: var(--green); }
+  .adv-amber { background: var(--amber-bg); }
+  .adv-amber h4 { color: var(--amber); }
+
+  /* MATRIX */
+  table { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
+  table.matrix th {
+    background: var(--ink);
+    color: white;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  table.matrix th.centime-col { background: var(--centime); }
+  table.matrix th.hr-col { background: var(--hr-purple); }
+  table.matrix td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    font-size: 15px;
+    line-height: 1.45;
+  }
+  table.matrix td:first-child { font-weight: 600; }
+  table.matrix td.centime-cell { background: var(--centime-bg); }
+  table.matrix td.hr-cell { background: var(--hr-bg); }
+  table.matrix .category-row td {
+    background: #f0ece6;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--centime);
+    padding: 8px 12px;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .badge-full { background: var(--green-bg); color: var(--green); }
+  .badge-partial { background: var(--amber-bg); color: var(--amber); }
+  .badge-leader { background: var(--centime-bg); color: var(--centime); border: 1px solid var(--centime); }
+  .badge-hr-lead { background: var(--hr-bg); color: var(--hr-purple); border: 1px solid var(--hr-purple); }
+  .badge-planned { background: #f3e8ff; color: #7c3aed; }
+  .badge-parity { background: var(--blue-bg); color: var(--blue); }
+
+  /* SUMMARY BAR */
+  .summary-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  .summary-item { text-align: center; padding: 12px 8px; border-radius: 4px; }
+  .summary-item .count { font-family: 'DM Serif Display', serif; font-size: 32px; line-height: 1.1; }
+  .summary-item .label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; }
+  .s-lead { background: var(--centime-bg); }
+  .s-lead .count, .s-lead .label { color: var(--centime); }
+  .s-parity { background: var(--blue-bg); }
+  .s-parity .count, .s-parity .label { color: var(--blue); }
+  .s-them { background: var(--hr-bg); }
+  .s-them .count, .s-them .label { color: var(--hr-purple); }
+  .s-context { background: var(--amber-bg); }
+  .s-context .count, .s-context .label { color: var(--amber); }
+
+  /* VERDICT */
+  .verdict-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .verdict-box {
+    padding: 20px 24px;
+    border-radius: 3px;
+    background: white;
+    border: 1px solid var(--border);
+  }
+  .verdict-box h4 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+  .verdict-box p { font-size: 15px; color: var(--muted); line-height: 1.5; }
+
+  .bottom-line {
+    border: 2px solid var(--centime);
+    background: var(--centime-bg);
+    padding: 20px 24px;
+    margin: 20px 0 16px;
+  }
+  .bottom-line h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--centime);
+    margin-bottom: 6px;
+  }
+  .bottom-line p { font-size: 15px; line-height: 1.5; }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    border-top: 2px solid var(--ink);
+    padding-top: 8px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .footer strong { color: var(--ink); }
+
+  .footnote {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 12px;
+    line-height: 1.4;
+  }
+
+  /* Print overrides */
+  @media print {
+    .header h1 { font-size: 19pt; }
+    .header .subtitle { font-size: 7.5pt; }
+    .page-label { font-size: 6.5pt; }
+    .narrative h2 { font-size: 13pt; margin: 16px 0 6px; }
+    .narrative h3 { font-size: 9.5pt; }
+    .narrative p { font-size: 9pt; margin-bottom: 7px; }
+    .insight-box { padding: 12px 16px; margin: 12px 0; }
+    .insight-box .big { font-size: 13pt; }
+    .insight-box p { font-size: 8.5pt; }
+    .profile-card { padding: 10px 14px; }
+    .profile-card h4 { font-size: 10pt; }
+    .profile-card .meta { font-size: 7pt; }
+    .profile-card p { font-size: 8pt; }
+    .stat-row { font-size: 7pt; }
+    .stat-row .stat strong { font-size: 8pt; }
+    .wedge-box, .hr-box { padding: 10px 14px; margin: 10px 0; font-size: 8.5pt; }
+    .adv-card { padding: 8px 10px; }
+    .adv-card h4 { font-size: 8pt; }
+    .adv-card p { font-size: 8pt; }
+    table.matrix th { padding: 5px 6px; font-size: 7pt; }
+    table.matrix td { padding: 4px 6px; font-size: 7.5pt; }
+    .badge { font-size: 6pt; padding: 1px 5px; }
+    .summary-item .count { font-size: 16pt; }
+    .summary-item .label { font-size: 6pt; }
+    .verdict-box { padding: 10px 12px; }
+    .verdict-box h4 { font-size: 8.5pt; }
+    .verdict-box p { font-size: 8pt; }
+    .bottom-line { padding: 10px 14px; }
+    .bottom-line h3 { font-size: 11pt; }
+    .bottom-line p { font-size: 8pt; }
+    .footer { font-size: 6pt; }
+    .footnote { font-size: 6.5pt; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- PAGE 1: NARRATIVE                                             -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="header">
+    <h1>Centime AP Automation<br>vs. HighRadius AP</h1>
+    <div class="subtitle">
+      <strong>Competitive Analysis</strong><br>
+      Full Platform Comparison<br>
+      Internal &mdash; February 2026
+    </div>
+  </div>
+  <div class="page-label">Part I &mdash; Strategic Narrative</div>
+  <div class="narrative">
+
+    <h2>Who They Are vs. Who We Are</h2>
+    <p>HighRadius is a $3.1B-valuation, 4,500-employee autonomous finance platform headquartered in Houston. They are known &mdash; correctly &mdash; as the market leader in accounts receivable automation, where they've held Gartner Magic Quadrant Leader status three consecutive years. Their customer base reads like the Fortune 500: 3M, Unilever, Anheuser-Busch InBev, Sanofi, Hershey's, Danone, Kellogg Company.</p>
+    <p>Their AP automation product is new. Launched in April 2024 as a &ldquo;GenAI-native&rdquo; solution, it extends their platform from O2C and Treasury into the payables lifecycle. The product suite includes invoice processing, supplier management (with a &ldquo;Supplier Connect&rdquo; GenAI portal), dynamic discounting, AP reporting, and ERP integration. It is well-engineered, heavily marketed, and backed by the resources of a company with 850+ enterprise customers.</p>
+    <p>Centime is a full-featured AP Automation and financial process automation platform serving mid-market finance teams through bank partnerships. We are a smaller company &mdash; but not a less experienced one. Centime's AP Automation has been in market for several years, and the founding team previously built MineralTree, itself a leading AP automation platform. That means the people designing, building, and delivering Centime's AP solution have been doing this for over a decade. We know where the inefficiencies hide, where implementations break down, and what mid-market finance teams actually need versus what enterprise vendors assume they need. HighRadius launched AP in April 2024. We've been solving these problems since before they started.</p>
+
+    <div class="profile-grid">
+      <div class="profile-card hr-profile">
+        <h4>HighRadius</h4>
+        <div class="meta">Houston, TX &middot; Founded 2006 &middot; Series C ($485M raised)</div>
+        <p>Enterprise autonomous finance platform. AR-first (Gartner Leader, 3x). AP launched April 2024 as GenAI-native. Targets Fortune 500 / large enterprise. Direct sales.</p>
+        <div class="stat-row">
+          <div class="stat"><strong>$300M+</strong> revenue</div>
+          <div class="stat"><strong>850+</strong> customers</div>
+          <div class="stat"><strong>4,500</strong> employees</div>
+          <div class="stat"><strong>50+</strong> ERP integrations</div>
+        </div>
+      </div>
+      <div class="profile-card centime-profile">
+        <h4>Centime</h4>
+        <div class="meta">Boston, MA &middot; $3M ARR &middot; Bank-distributed fintech &middot; Founded by MineralTree team</div>
+        <p>Full-featured AP Automation (invoice capture &amp; coding, PO matching, approvals, payment execution) plus Payments Automation, Exchange (supplier enrollment &amp; verification), FlexPay (STP/early pay), and Cash Flow Forecasting. Distributed through bank partners to mid-market finance teams.</p>
+        <div class="stat-row">
+          <div class="stat"><strong>6</strong> bank partners</div>
+          <div class="stat"><strong>10+ years</strong> AP experience</div>
+          <div class="stat"><strong>ERP-embedded</strong> deployment</div>
+          <div class="stat"><strong>Zero PS</strong> implementation</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <div class="big">HighRadius built AP automation <em>for enterprise AR customers who asked for it.</em> Centime built a complete AP automation platform <em>for mid-market finance teams &mdash; and delivers it through the banks they already trust.</em></div>
+      <p>This distinction shapes everything: product design, pricing, implementation, distribution, and what each platform optimizes for. HighRadius optimizes for enterprise invoice volume at scale with professional services-led deployments. Centime delivers full-featured AP automation &mdash; capture, coding, matching, approvals, payments &mdash; embedded in mid-market ERPs, deployed without professional services, distributed through bank partnerships, and extended by Exchange supplier enrollment and FlexPay bank-funded early pay.</p>
+    </div>
+
+    <h2>Where HighRadius Is Strong</h2>
+    <p>We are honest about what they do well. On several dimensions, HighRadius has advantages that reflect their scale and enterprise focus.</p>
+
+    <div class="hr-box">
+      <strong>Enterprise invoice volume at scale.</strong> HighRadius claims 90%+ touchless invoice processing through &ldquo;Agentic AI&rdquo; that evaluates vendor history, PO alignment, approval patterns, and freight thresholds. Their multi-channel intake includes EDI, cXML, and e-invoice network support &mdash; enterprise integration patterns that their Fortune 500 customers require. Centime's GenAI-powered capture and coding is fully competitive on the AI front; the difference is channel breadth for enterprise use cases (EDI/cXML), not AI capability.
+    </div>
+
+    <p><strong>Dynamic discounting with marketplace negotiation.</strong> HighRadius offers a dynamic discounting platform where suppliers propose terms and buyers counteroffer &mdash; a true negotiation model, not just a fixed discount schedule. They claim 3x early payment discount capture and 98% discount capture rate. This goes beyond standard early pay programs.</p>
+    <p><strong>Supplier Connect (GenAI).</strong> Their supplier portal uses GenAI for automated supplier communication &mdash; instant responses to payment inquiries, sentiment analysis, proactive task generation for exceptions. This reduces the AP team's supplier communication burden at scale.</p>
+    <p><strong>Analyst recognition.</strong> Gartner Magic Quadrant Leader (Invoice-to-Cash, 3x), IDC MarketScape Leader (AR Automation, Embedded Payments), Forrester recognition. This carries weight in enterprise procurement decisions.</p>
+
+    <h2>Where Centime Wins</h2>
+    <p>Start with the fundamentals: Centime is a full-featured AP Automation solution with everything a mid-market finance team needs to eliminate manual payables work &mdash; and it's part of a broader financial process automation suite that HighRadius doesn't offer for this market.</p>
+
+    <div class="wedge-box">
+      <strong>Complete AP Automation.</strong> GenAI-powered invoice capture and coding. 2-way and 3-way PO matching. Configurable multi-level approval workflows with role-based routing and threshold rules. Full payment execution &mdash; ACH, virtual card, check, and cross-border local currency payments via Visa/Currencycloud. This is not a partial solution or a niche tool &mdash; it covers the entire procure-to-pay lifecycle, and the core features are competitive with any platform on the market, including HighRadius.
+    </div>
+
+    <p><strong>Built for the mid-market.</strong> Every design decision &mdash; the ERP integration model, the pricing, the implementation approach, the bank distribution channel &mdash; is optimized for mid-market finance teams ($50M&ndash;$500M revenue). HighRadius is built for Fortune 500 enterprises with dedicated procurement departments, IT staff, and implementation budgets. These are fundamentally different products for fundamentally different buyers.</p>
+
+    <p><strong>Out-of-the-box ERP integration, rapid implementation.</strong> AP Automation is fully embedded in the ERP &mdash; QuickBooks, Sage Intacct, NetSuite, Microsoft Dynamics &mdash; as a native extension. No professional services. No multi-month implementation. Up and running in days, not quarters. For larger enterprises, Integrated Payables offers an ERP-agnostic, payables-only track. HighRadius lists 50+ ERP integrations, but each is a professional services engagement &mdash; SOWs, timelines, consulting. That model works for Fortune 500 companies. It does not work for mid-market buyers or for banks distributing AP to their commercial clients.</p>
+
+    <p><strong>Scalable pricing.</strong> Centime's pricing scales with mid-market budgets &mdash; not enterprise procurement cycles. No six-figure implementation fees. No multi-year enterprise contracts required to get started.</p>
+
+    <p><strong>Part of a financial process automation suite.</strong> Centime isn't just AP. It's AP Automation, Payments Automation, Cash Flow Forecasting, and Exchange &mdash; an integrated platform that gives mid-market CFOs and Controllers visibility across payables, receivables, cash position, and supplier relationships. HighRadius offers platform breadth too (O2C, Treasury, R2R, AP), but it's architected for enterprise &mdash; not for the mid-market finance team that needs the whole picture without enterprise complexity.</p>
+
+    <h3>Critical Differentiators</h3>
+    <p>Beyond the core AP platform, Centime has structural advantages that HighRadius cannot replicate &mdash; regardless of R&amp;D investment.</p>
+
+    <div class="three-col">
+      <div class="adv-card adv-centime">
+        <h4>Exchange + CAS</h4>
+        <p>Purpose-built supplier enrollment with real-time bank account ownership verification. HighRadius has a supplier portal with onboarding and tax validation &mdash; but no equivalent to CAS. They validate bank details against external databases. We prove ownership through browser-based bank authentication. That is a fundamentally different level of fraud prevention.</p>
+      </div>
+      <div class="adv-card adv-green">
+        <h4>Bank Distribution</h4>
+        <p>Six bank partners (FNBO, M&amp;T Bank, City National, Integro Bank, and others) white-label Centime's platform for commercial banking clients. HighRadius sells direct to enterprise. They have 110+ bank integrations for payment rails &mdash; but no bank distribution channel. Banks don't resell HighRadius. They resell Centime.</p>
+      </div>
+      <div class="adv-card adv-amber">
+        <h4>FlexPay: Bank-Funded Early Pay</h4>
+        <p>STP with early payment powered by bank partner capital &mdash; not the buyer's cash. Suppliers opt in per invoice. 0&ndash;2.75% sliding scale. HighRadius dynamic discounting requires buyers to deploy their own surplus capital. FlexPay serves a market segment that approach cannot reach.</p>
+      </div>
+    </div>
+
+    <h2>FlexPay vs. HighRadius Dynamic Discounting</h2>
+    <p>Both platforms offer early payment capabilities, but the mechanics differ fundamentally.</p>
+
+    <div class="verdict-grid">
+      <div class="verdict-box">
+        <h4 style="color: var(--hr-purple);">HighRadius Dynamic Discounting</h4>
+        <p>Marketplace model: suppliers propose discount terms, buyers counteroffer. AI recommends opportunities based on cash surplus. Supports due and past-due invoices. Integrates with Treasury for cash visibility. Strong for enterprises with $100M+ AP spend and significant cash positions.</p>
+      </div>
+      <div class="verdict-box">
+        <h4 style="color: var(--centime);">Centime FlexPay (STP + Early Pay)</h4>
+        <p>Straight-through processing with early payment powered by bank partner capital &mdash; not the buyer's cash. Suppliers opt in per invoice via Exchange. 0&ndash;2.75% sliding scale. Bank-funded model means mid-market buyers offer early pay without committing working capital. Generates revenue for the bank partner.</p>
+      </div>
+    </div>
+
+    <p><strong>The difference:</strong> HighRadius dynamic discounting is a cash deployment tool for large enterprises with surplus capital. FlexPay is a bank-funded early payment program that mid-market companies can offer without tying up their own cash.</p>
+
+    <h2>Virtual Card Support</h2>
+    <p>Both platforms support virtual card payments. HighRadius processes virtual cards within their integrated payables framework &mdash; one consolidated payment file supporting ACH, check, and virtual card, routed by supplier preference. They also discuss virtual card rebate programs as a way to turn AP into a revenue-generating function.</p>
+    <p>Centime's Payments Automation supports virtual card execution alongside ACH and check, integrated with ERP reconciliation. Virtual card adoption is driven by Exchange: when suppliers enroll through Exchange with verified payment profiles, transitioning them to virtual card from check becomes a structured outreach campaign &mdash; not a one-off request. This drives higher virtual card adoption rates and more rebate revenue for the buyer.</p>
+
+    <h2>The Supplier Portal Gap</h2>
+    <p>HighRadius has a supplier portal &mdash; and it's not trivial. Supplier Connect provides self-service onboarding, W-9/W-8 collection, bank detail submission, invoice status tracking, and GenAI-powered query resolution. Their claims of 70% faster onboarding and 3x fewer supplier queries reflect real investment in this area.</p>
+    <p>What they don't have:</p>
+    <p><strong>CAS &mdash; real-time bank account ownership verification.</strong> HighRadius validates bank details against external databases and flags discrepancies. That catches formatting errors and known-bad accounts. It does not prove that the person submitting the bank details owns the account. CAS does.</p>
+    <p><strong>Configurable outreach campaigns.</strong> HighRadius onboarding is portal-based: suppliers are invited, they register, data is validated. There's no multi-step outreach engine with automated follow-ups, escalation paths, and deadline tracking. For mid-market companies trying to get 500 suppliers enrolled without a dedicated procurement team, outreach automation is the difference between 30% and 80% completion rates.</p>
+    <p><strong>Comprehensive document management.</strong> HighRadius collects tax forms and compliance certificates at onboarding. They do not auto-parse insurance certificates, track expiration dates with visual badges, offer industry-specific document categories, or provide automated renewal alerts. Exchange does all of this.</p>
+
+  </div>
+  <div class="footer"><div><strong>Centime, Inc.</strong> &mdash; Confidential</div><div>Page 1 of 3 &mdash; February 2026</div></div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- PAGE 2: CAPABILITY MATRIX                                     -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="header">
+    <h1>Centime AP Automation vs. HighRadius AP</h1>
+    <div class="subtitle"><strong>Competitive Analysis</strong><br>Internal &mdash; February 2026</div>
+  </div>
+  <div class="page-label">Part II &mdash; Capability Matrix</div>
+
+  <div class="summary-bar">
+    <div class="summary-item s-lead"><div class="count">8</div><div class="label">Centime Leads</div></div>
+    <div class="summary-item s-parity"><div class="count">9</div><div class="label">Competitive Parity</div></div>
+    <div class="summary-item s-them"><div class="count">2</div><div class="label">HighRadius Leads</div></div>
+    <div class="summary-item s-context"><div class="count">4</div><div class="label">Context-Dependent</div></div>
+  </div>
+
+  <table class="matrix">
+    <thead>
+      <tr>
+        <th style="width: 22%;">Capability</th>
+        <th class="centime-col" style="width: 30%;">Centime</th>
+        <th class="hr-col" style="width: 30%;">HighRadius</th>
+        <th style="width: 18%;">Verdict</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="category-row"><td colspan="4">Invoice Processing</td></tr>
+      <tr>
+        <td>Invoice data capture</td>
+        <td class="centime-cell"><span class="badge badge-full">Full</span> GenAI-powered capture and coding. File and email upload. <strong>Plus:</strong> supplier-uploaded invoices via Exchange (planned) &mdash; born-digital, no OCR, no capture required</td>
+        <td class="hr-cell">GenAI multi-channel: email, EDI, cXML, portal, paper scan. Agentic AI with context-aware actions. Claims 90%+ touchless</td>
+        <td><span class="badge badge-parity">Parity</span> Both GenAI. HR adds enterprise channels (EDI, cXML). Centime adds supplier-uploaded invoices</td>
+      </tr>
+      <tr>
+        <td>PO / non-PO matching</td>
+        <td class="centime-cell">2/3-way PO matching. AI-assisted exception handling</td>
+        <td class="hr-cell">AI-driven PO and non-PO matching. Smart exception routing with diagnostic logs</td>
+        <td><span class="badge badge-parity">Parity</span></td>
+      </tr>
+      <tr>
+        <td>Approval workflows</td>
+        <td class="centime-cell">Configurable multi-level approvals, role-based routing, threshold rules. ERP-native</td>
+        <td class="hr-cell">Multi-level approval with contextual AI routing. Automated escalation</td>
+        <td><span class="badge badge-parity">Parity</span></td>
+      </tr>
+      <tr>
+        <td>GL coding</td>
+        <td class="centime-cell"><span class="badge badge-full">Full</span> GenAI auto-coding with automated capture. Learn-from-history</td>
+        <td class="hr-cell">AI auto-coding claims 80% auto-coded. Uses vendor history and proprietary embeddings</td>
+        <td><span class="badge badge-parity">Parity</span> Both GenAI-powered auto-coding</td>
+      </tr>
+      <tr>
+        <td>Duplicate detection</td>
+        <td class="centime-cell">Rule-based + AI detection across vendor name, invoice #, amount</td>
+        <td class="hr-cell">AI-powered cross-checking of vendor name, invoice number, amount, date</td>
+        <td><span class="badge badge-parity">Parity</span></td>
+      </tr>
+
+      <tr class="category-row"><td colspan="4">Supplier Management &amp; Enrollment</td></tr>
+      <tr>
+        <td>Supplier portal</td>
+        <td class="centime-cell"><span class="badge badge-leader">Leader</span> Exchange: branded, mobile-responsive, multi-mode. Enrollment + document mgmt + payment status + early pay &mdash; single portal</td>
+        <td class="hr-cell">Supplier Connect: self-service registration, invoice tracking, GenAI query resolution, payment status. Desktop-optimized</td>
+        <td><span class="badge badge-leader">Centime</span> Exchange is purpose-built enrollment platform, not a payment portal with onboarding</td>
+      </tr>
+      <tr>
+        <td>Bank account verification</td>
+        <td class="centime-cell"><span class="badge badge-leader">Leader</span> <strong>CAS: real-time ownership proof</strong> via browser-based bank authentication. Seconds</td>
+        <td class="hr-cell">Validates bank details against external databases. Flags discrepancies. No ownership proof</td>
+        <td><span class="badge badge-leader">Centime</span> CAS proves ownership. HR validates format</td>
+      </tr>
+      <tr>
+        <td>Outreach campaigns</td>
+        <td class="centime-cell"><span class="badge badge-leader">Leader</span> Multi-step campaigns, automated reminders, escalation, deadline tracking</td>
+        <td class="hr-cell">Email-based invitations. No configurable campaign engine</td>
+        <td><span class="badge badge-leader">Centime</span></td>
+      </tr>
+      <tr>
+        <td>Tax form collection</td>
+        <td class="centime-cell">W-9 + all W-8 variants, auto-detect by entity type, TIN validation via TINCheck, expiration tracking</td>
+        <td class="hr-cell">W-9/W-8BEN collection. Tax ID validation against government databases</td>
+        <td><span class="badge badge-parity">Parity</span> Both validate; Centime auto-detects entity type</td>
+      </tr>
+      <tr>
+        <td>Insurance / document management</td>
+        <td class="centime-cell"><span class="badge badge-leader">Leader</span> Auto-parse COI (carrier, limits, dates). Expiration badges. Industry-specific groups. Renewal alerts</td>
+        <td class="hr-cell">Document collection at onboarding. No auto-parse. No expiration tracking. No industry groups</td>
+        <td><span class="badge badge-leader">Centime</span></td>
+      </tr>
+      <tr>
+        <td>OFAC / sanctions screening</td>
+        <td class="centime-cell">TINCheck OFAC + Didit AML/PEP/adverse media/global sanctions</td>
+        <td class="hr-cell">Supplier screening listed on product page. Extent of coverage unclear from public docs</td>
+        <td><span class="badge badge-leader">Centime</span> Multi-layer stack (TINCheck + Didit)</td>
+      </tr>
+      <tr>
+        <td>Supplier communication AI</td>
+        <td class="centime-cell">Structured outreach campaigns. Human-managed communication</td>
+        <td class="hr-cell"><span class="badge badge-hr-lead">HR Leads</span> GenAI auto-response to supplier queries. Sentiment analysis. Proactive task generation</td>
+        <td><span class="badge badge-hr-lead">HR Leads</span> GenAI supplier comms is genuine innovation</td>
+      </tr>
+
+      <tr class="category-row"><td colspan="4">Payments &amp; Working Capital</td></tr>
+      <tr>
+        <td>Payment methods</td>
+        <td class="centime-cell"><span class="badge badge-full">Full</span> ACH, virtual card, check, cross-border local currency (Visa/Currencycloud). Bank-partner rails. ERP-reconciled</td>
+        <td class="hr-cell">ACH, check, virtual card, cross-border. Consolidated payment file. 110+ bank connections. Multi-currency</td>
+        <td><span class="badge badge-parity">Parity</span> Both deliver full domestic + cross-border payment execution</td>
+      </tr>
+      <tr>
+        <td>Virtual card support</td>
+        <td class="centime-cell">Native virtual card execution. Exchange-driven adoption campaigns convert check suppliers to vCard</td>
+        <td class="hr-cell">Virtual card processing within integrated payables. PCI-DSS compliant. Rebate programs</td>
+        <td><span class="badge badge-parity">Parity</span> Both support; Centime has adoption advantage via Exchange outreach</td>
+      </tr>
+      <tr>
+        <td>Early pay / dynamic discounting</td>
+        <td class="centime-cell"><span class="badge badge-leader">Leader</span> FlexPay: bank-funded STP + dynamic discounting + SCF. 0&ndash;2.75% sliding scale. Supplier opts in per invoice in Exchange portal</td>
+        <td class="hr-cell">Dynamic discounting marketplace: supplier proposes, buyer counters. AI recommends opportunities. Works on due and past-due invoices</td>
+        <td><span class="badge badge-partial">Context</span> HR: enterprise cash deployment. Centime: bank-funded mid-market early pay</td>
+      </tr>
+      <tr>
+        <td>Payment fraud prevention</td>
+        <td class="centime-cell"><span class="badge badge-leader">Leader</span> CAS ownership proof at enrollment. Re-verification on bank detail changes. Fraud indemnification (in progress)</td>
+        <td class="hr-cell">Database validation. Anomaly detection. Payment controls. No ownership proof. No indemnification</td>
+        <td><span class="badge badge-leader">Centime</span> CAS + indemnification path = structural advantage</td>
+      </tr>
+
+      <tr class="category-row"><td colspan="4">Platform &amp; Distribution</td></tr>
+      <tr>
+        <td>Target market</td>
+        <td class="centime-cell">Mid-market: $50M&ndash;$500M revenue. CFO/Controller buyer. Bank-delivered</td>
+        <td class="hr-cell">Enterprise: $1B+ revenue. Fortune 500. Office of CFO. Direct sales</td>
+        <td><span class="badge badge-partial">Context</span> Different segments; rarely compete head-to-head</td>
+      </tr>
+      <tr>
+        <td>Distribution channel</td>
+        <td class="centime-cell"><span class="badge badge-leader">Leader</span> 6 bank partners (FNBO, M&amp;T, City National, Integro, others). White-label. Bank carries relationship</td>
+        <td class="hr-cell">Direct sales. No bank distribution. 110+ banks for payment rails only</td>
+        <td><span class="badge badge-leader">Centime</span> Structural channel advantage</td>
+      </tr>
+      <tr>
+        <td>ERP integration</td>
+        <td class="centime-cell"><span class="badge badge-leader">Leader</span> <strong>Two tracks:</strong> AP Automation &mdash; fully embedded in ERP, no professional services, up and running fast. Integrated Payables &mdash; ERP-agnostic, payables-only, for larger enterprises. QB, Sage Intacct, NetSuite, Dynamics</td>
+        <td class="hr-cell">50+ ERPs including SAP, Oracle, NetSuite, Dynamics, Infor, Sage. API-first integration. Generally requires professional services engagement for implementation</td>
+        <td><span class="badge badge-partial">Context</span> HR: more ERPs listed. Centime: embedded, no PS required &mdash; fundamentally different deployment model</td>
+      </tr>
+      <tr>
+        <td>Platform breadth</td>
+        <td class="centime-cell">AP + Payments + Exchange + FlexPay + AR + Expense Mgmt + Cash Flow Forecasting + Business Banking</td>
+        <td class="hr-cell">O2C (AR, Collections, Credit, Cash App, EIPP) + Treasury + R2R + AP. Broader in AR/Treasury, narrower in AP-specific</td>
+        <td><span class="badge badge-partial">Context</span> Both broad. Centime: mid-market financial ops. HR: enterprise finance automation</td>
+      </tr>
+      <tr>
+        <td>Cash flow forecasting</td>
+        <td class="centime-cell"><span class="badge badge-leader">Leader</span> Integrated cash flow forecasting with AP/AR data. Bank balance aggregation. Mid-market-specific</td>
+        <td class="hr-cell">Treasury module with cash forecasting. Claims 95% accuracy. Enterprise-grade multi-entity</td>
+        <td><span class="badge badge-parity">Parity</span> Both strong; different segments</td>
+      </tr>
+      <tr>
+        <td>Reporting &amp; analytics</td>
+        <td class="centime-cell">AP dashboards, payment status, aging reports, cash flow visibility</td>
+        <td class="hr-cell"><span class="badge badge-hr-lead">HR Leads</span> AI-powered analytics. DPO tracking. STP dashboards. Custom reports. KPI benchmarking</td>
+        <td><span class="badge badge-hr-lead">HR Leads</span> Deeper analytics suite</td>
+      </tr>
+      <tr>
+        <td>Fraud indemnification</td>
+        <td class="centime-cell"><span class="badge badge-planned">In Progress</span> Lapsed Lloyd's bond (B1230FC), zero claims. Reinstatement being pursued</td>
+        <td class="hr-cell">None</td>
+        <td><span class="badge badge-leader">Centime</span> When active &mdash; no HR equivalent</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="footnote">Capability assessment based on published product documentation, press releases, analyst reports, and product pages as of February 2026. HighRadius AP launched April 2024; features may have expanded since public documentation was last updated.</p>
+
+  <div class="footer"><div><strong>Centime, Inc.</strong> &mdash; Confidential</div><div>Page 2 of 3 &mdash; February 2026</div></div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- PAGE 3: POSITIONING + VERDICT                                 -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="header">
+    <h1>Centime AP Automation vs. HighRadius AP</h1>
+    <div class="subtitle"><strong>Competitive Analysis</strong><br>Internal &mdash; February 2026</div>
+  </div>
+  <div class="page-label">Part III &mdash; Positioning &amp; Competitive Strategy</div>
+
+  <div class="narrative">
+    <h2>When Do We Compete?</h2>
+  </div>
+  <p style="font-size: 16px; color: var(--muted); margin-bottom: 16px; padding: 0 56px;">HighRadius and Centime rarely compete head-to-head for the same deal. Their target segments are different, their distribution models are different, and their price points are different. But awareness of HighRadius matters in four scenarios:</p>
+
+  <div class="verdict-grid" style="padding: 0 56px;">
+    <div class="verdict-box">
+      <h4>Scenario 1: The Upmarket Mid-Market Buyer</h4>
+      <p>A $300M&ndash;$500M company evaluating AP automation. Large enough to consider enterprise platforms, small enough that HighRadius's implementation overhead is a concern. <strong>Our play:</strong> Lead with total cost of ownership, implementation speed, and bank partnership. Show that Exchange exceeds HighRadius on supplier enrollment, particularly CAS and outreach automation.</p>
+    </div>
+    <div class="verdict-box">
+      <h4>Scenario 2: Bank Partner Conversations</h4>
+      <p>A bank evaluating AP platforms for commercial clients. HighRadius may surface as a &ldquo;name brand.&rdquo; <strong>Our play:</strong> HighRadius doesn't distribute through banks. Their 110+ bank connections are payment rails, not distribution partnerships. Centime is the only platform built for bank partnership from day one.</p>
+    </div>
+    <div class="verdict-box">
+      <h4>Scenario 3: The AR-to-AP Cross-Sell</h4>
+      <p>An existing HighRadius AR customer considering their new AP module. Path of least resistance: one vendor, one contract. <strong>Our play:</strong> This is their strongest position. Lead with Exchange (they don't have it), FlexPay bank-funded early pay, and total cost. If they want best-of-breed AP with verified supplier enrollment, Centime wins.</p>
+    </div>
+    <div class="verdict-box">
+      <h4>Scenario 4: Supplier Verification Evaluation</h4>
+      <p>A buyer specifically evaluating supplier verification and fraud prevention. <strong>Our play:</strong> We win decisively. CAS real-time bank ownership proof, Didit AML/PEP/sanctions screening, TINCheck EIN validation, auto-parsed document management, configurable outreach campaigns. No HighRadius equivalent exists.</p>
+    </div>
+  </div>
+
+  <div class="narrative">
+    <h2>Competitive Summary by Dimension</h2>
+  </div>
+
+  <table class="matrix">
+    <thead>
+      <tr>
+        <th style="width: 22%;">Dimension</th>
+        <th style="width: 30%;">Centime Advantage</th>
+        <th style="width: 30%;">HighRadius Advantage</th>
+        <th style="width: 18%;">Net</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Supplier enrollment &amp; verification</td>
+        <td>Exchange + CAS ownership proof + outreach automation + document management + AML/PEP screening</td>
+        <td>Supplier Connect GenAI portal + data validation + faster query resolution via AI</td>
+        <td><strong style="color: var(--centime);">Centime wins</strong> &mdash; structural gap on verification</td>
+      </tr>
+      <tr>
+        <td>Invoice processing</td>
+        <td>GenAI capture and coding. File/email intake. Supplier-uploaded invoices via Exchange</td>
+        <td>Agentic AI, multi-channel intake (EDI, cXML, email, portal). Claims 90%+ touchless</td>
+        <td><strong style="color: var(--blue);">Parity</strong> &mdash; both GenAI-powered. HR adds enterprise channels</td>
+      </tr>
+      <tr>
+        <td>Early pay / working capital</td>
+        <td>FlexPay: bank-funded STP + SCF. No buyer capital required. Mid-market accessible</td>
+        <td>Dynamic discounting marketplace. Buyer deploys surplus cash. Enterprise-scale optimization</td>
+        <td><strong style="color: var(--amber);">Context</strong> &mdash; different models for different segments</td>
+      </tr>
+      <tr>
+        <td>Virtual card</td>
+        <td>Supported + Exchange drives adoption through outreach campaigns</td>
+        <td>Supported within integrated payables. Rebate programs. PCI-DSS</td>
+        <td><strong style="color: var(--blue);">Parity</strong> &mdash; Centime has adoption velocity edge</td>
+      </tr>
+      <tr>
+        <td>Payment execution</td>
+        <td>ACH, virtual card, check, cross-border local currency (Visa/Currencycloud). Bank-partner rails. ERP-reconciled</td>
+        <td>ACH, check, virtual card, cross-border. 110+ banks. Multi-currency. Consolidated file</td>
+        <td><strong style="color: var(--blue);">Parity</strong> &mdash; both deliver full domestic + cross-border</td>
+      </tr>
+      <tr>
+        <td>Fraud prevention</td>
+        <td>CAS ownership proof + AML/PEP + re-verification + indemnification (in progress)</td>
+        <td>Database validation + anomaly detection + payment controls</td>
+        <td><strong style="color: var(--centime);">Centime wins</strong> &mdash; CAS is unique</td>
+      </tr>
+      <tr>
+        <td>Distribution &amp; market fit</td>
+        <td>Bank distribution. White-label. Mid-market CFO/Controller. Fast deployment</td>
+        <td>Direct sales. Enterprise. Fortune 500. Gartner/IDC/Forrester recognized</td>
+        <td><strong style="color: var(--amber);">Context</strong> &mdash; different markets</td>
+      </tr>
+      <tr>
+        <td>Platform breadth</td>
+        <td>AP + AR + Exchange + FlexPay + Expense Mgmt + Cash Forecasting + Banking</td>
+        <td>O2C + Treasury + R2R + AP. Deeper on AR/Treasury. Broader analyst recognition</td>
+        <td><strong style="color: var(--blue);">Parity</strong> &mdash; both broad, different emphasis</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="bottom-line">
+    <h3>The Bottom Line</h3>
+    <p>Centime delivers a full-featured AP Automation solution &mdash; GenAI invoice capture and coding, 2-way and 3-way PO matching, configurable approval workflows, and complete payment execution including cross-border via Visa/Currencycloud &mdash; embedded in mid-market ERPs, deployed without professional services, and priced for mid-market budgets. On core AP capabilities, we are competitive with HighRadius feature for feature.</p>
+    <p style="margin-top: 8px;">Where we separate is on structural advantages HighRadius cannot replicate. Exchange and CAS deliver supplier verification capabilities they don't have &mdash; real-time bank account ownership proof, configurable outreach campaigns, auto-parsed document management, and comprehensive AML/PEP screening. FlexPay offers bank-funded early payment without the buyer deploying their own capital. Bank distribution gives us a channel HighRadius cannot access. And fraud indemnification, when reinstated, adds a layer no AP automation platform in the market offers.</p>
+    <p style="margin-top: 8px;">The competitive strategy: we lead with a complete AP platform built for how mid-market companies actually buy and deploy software &mdash; then win on supplier verification, bank distribution, and working capital innovation where we have structural advantages that enterprise investment cannot easily replicate.</p>
+  </div>
+
+  <p class="footnote"><strong>Sources &amp; methodology:</strong> HighRadius capabilities assessed via published product documentation (highradius.com), press releases, PYMNTS.com coverage, Gartner and IDC reports, and third-party company data (ZoomInfo, PitchBook, Tracxn) as of February 2026. HighRadius AP launched April 2024; product capabilities may have evolved beyond published documentation. Revenue estimates from multiple third-party sources. Centime capabilities reflect current production and active roadmap items. This document is confidential and intended for internal use and bank partner discussions only.</p>
+
+  <div class="footer"><div><strong>Centime, Inc.</strong> &mdash; Confidential</div><div>Page 3 of 3 &mdash; February 2026</div></div>
+</div>
+
+</body>
+</html>

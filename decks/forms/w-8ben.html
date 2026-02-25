@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form W-8BEN (Rev. February 2014)</title>
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 7.5pt;
+      line-height: 1.25;
+      color: #000;
+      background: #e8e8e8;
+      -webkit-font-smoothing: auto;
+    }
+
+    /* ── Page Container ───────────────────────────────────── */
+    .page {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 0.25in auto;
+      padding: 0.3in 0.4in 0.25in;
+      background: #fff;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.18);
+      position: relative;
+    }
+
+    /* ── Form-wide helpers ────────────────────────────────── */
+    .bold  { font-weight: 700; }
+    .italic { font-style: italic; }
+    .small { font-size: 6pt; }
+    .nowrap { white-space: nowrap; }
+    .right { text-align: right; }
+
+    /* thin border used almost everywhere */
+    .bb  { border-bottom: 1px solid #000; }
+    .bt  { border-top: 1px solid #000; }
+    .bl  { border-left: 1px solid #000; }
+    .br  { border-right: 1px solid #000; }
+    .b   { border: 1px solid #000; }
+
+    /* ── HEADER BLOCK ─────────────────────────────────────── */
+    .header {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      border: 2px solid #000;
+      min-height: 0;
+    }
+
+    .header-left {
+      padding: 4px 8px;
+      border-right: 2px solid #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      width: 1.4in;
+    }
+
+    .header-left .form-label {
+      font-size: 6pt;
+      line-height: 1.1;
+    }
+
+    .header-left .form-number {
+      font-size: 22pt;
+      font-weight: 700;
+      line-height: 1;
+      margin: 1px 0;
+    }
+
+    .header-left .form-rev {
+      font-size: 6.5pt;
+      line-height: 1.1;
+    }
+
+    .header-left .dept {
+      font-size: 5.5pt;
+      line-height: 1.15;
+      margin-top: 2px;
+    }
+
+    .header-center {
+      padding: 4px 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .header-center .title {
+      font-size: 10pt;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 2px;
+    }
+
+    .header-center .bullets {
+      font-size: 6.5pt;
+      line-height: 1.35;
+    }
+
+    .header-center .bullets span.arrow {
+      font-size: 8pt;
+      margin-right: 1px;
+    }
+
+    .header-right {
+      padding: 4px 8px;
+      border-left: 2px solid #000;
+      width: 1.25in;
+      text-align: right;
+    }
+
+    .header-right .omb-label {
+      font-size: 6.5pt;
+      line-height: 1.3;
+    }
+
+    /* ── "Do NOT use this form if" TABLE ───────────────── */
+    .redirect-section {
+      border: 2px solid #000;
+      border-top: none;
+    }
+
+    .redirect-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      font-size: 7pt;
+      line-height: 1.3;
+    }
+
+    .redirect-header-left {
+      padding: 2px 8px;
+      font-weight: 700;
+    }
+
+    .redirect-header-right {
+      padding: 2px 8px;
+      font-weight: 700;
+      text-align: right;
+      font-style: italic;
+    }
+
+    .redirect-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      font-size: 7pt;
+      line-height: 1.35;
+      border-top: 1px solid #000;
+    }
+
+    .redirect-row-left {
+      padding: 1px 8px 1px 14px;
+    }
+
+    .redirect-row-right {
+      padding: 1px 8px;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .redirect-row .bullet {
+      margin-left: -10px;
+      margin-right: 3px;
+    }
+
+    .dotfill {
+      border-bottom: 1px dotted #000;
+      flex: 1;
+      margin: 0 4px;
+      min-width: 20px;
+      display: inline-block;
+    }
+
+    /* ── SECTION HEADERS (Part I, Part II, Part III) ────── */
+    .part-header {
+      background: #000;
+      color: #fff;
+      display: inline-block;
+      padding: 1px 6px;
+      font-size: 8pt;
+      font-weight: 700;
+      margin-right: 6px;
+    }
+
+    .part-title {
+      font-size: 8pt;
+      font-weight: 700;
+      display: inline;
+    }
+
+    .part-row {
+      padding: 3px 0 2px;
+      border-bottom: 2px solid #000;
+      margin-top: 0;
+    }
+
+    /* ── FIELD ROWS ────────────────────────────────────────── */
+    .field-grid {
+      display: grid;
+      border-left: 2px solid #000;
+      border-right: 2px solid #000;
+    }
+
+    .field-grid.cols-2 {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .field-grid.cols-2-wide-left {
+      grid-template-columns: 2fr 1fr;
+    }
+
+    .field-grid.cols-3 {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .field-grid.cols-addr {
+      grid-template-columns: 1fr auto;
+    }
+
+    .field-grid.cols-line56 {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .field-grid.cols-line78 {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .field-cell {
+      padding: 2px 6px 1px;
+      border-bottom: 1px solid #000;
+      min-height: 0.34in;
+      position: relative;
+    }
+
+    .field-cell + .field-cell {
+      border-left: 1px solid #000;
+    }
+
+    .field-cell.no-bottom {
+      border-bottom: none;
+    }
+
+    .field-label {
+      font-size: 6pt;
+      line-height: 1.25;
+      color: #000;
+    }
+
+    .field-label .line-num {
+      font-weight: 700;
+      margin-right: 3px;
+      font-size: 6.5pt;
+    }
+
+    .field-input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9pt;
+      line-height: 1.3;
+      outline: none;
+      padding: 1px 0 0;
+      color: #000;
+    }
+
+    .field-input::placeholder {
+      color: #bbb;
+      font-size: 7pt;
+    }
+
+    /* Address country cells are narrower */
+    .field-cell.country-cell {
+      width: 1.6in;
+      min-width: 1.6in;
+    }
+
+    /* ── PART II SPECIFIC ──────────────────────────────────── */
+    .treaty-line {
+      padding: 3px 6px;
+      font-size: 7pt;
+      line-height: 1.5;
+      border-left: 2px solid #000;
+      border-right: 2px solid #000;
+      border-bottom: 1px solid #000;
+    }
+
+    .treaty-line .line-num {
+      font-weight: 700;
+      font-size: 7pt;
+      margin-right: 3px;
+    }
+
+    .treaty-input-inline {
+      border: none;
+      border-bottom: 1px solid #000;
+      background: transparent;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      outline: none;
+      padding: 0 2px;
+      color: #000;
+      min-width: 40px;
+    }
+
+    .treaty-input-inline.wide { width: 1.8in; }
+    .treaty-input-inline.medium { width: 0.9in; }
+    .treaty-input-inline.narrow { width: 0.45in; }
+    .treaty-input-inline.xwide { width: 3in; }
+
+    .treaty-explain {
+      padding: 3px 6px;
+      font-size: 7pt;
+      line-height: 1.3;
+      border-left: 2px solid #000;
+      border-right: 2px solid #000;
+      border-bottom: 2px solid #000;
+    }
+
+    .treaty-explain textarea {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid #aaa;
+      background: transparent;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+      line-height: 1.4;
+      outline: none;
+      resize: none;
+      padding: 2px 0;
+      color: #000;
+      height: 0.4in;
+    }
+
+    /* ── PART III — CERTIFICATION ──────────────────────────── */
+    .cert-block {
+      padding: 4px 6px;
+      font-size: 6.5pt;
+      line-height: 1.45;
+      border-left: 2px solid #000;
+      border-right: 2px solid #000;
+      border-bottom: 2px solid #000;
+    }
+
+    .cert-block p {
+      margin-bottom: 3px;
+    }
+
+    .cert-block ul {
+      margin: 3px 0 3px 14px;
+      list-style: disc;
+    }
+
+    .cert-block ul li {
+      margin-bottom: 2px;
+    }
+
+    .cert-block ul ul {
+      list-style-type: none;
+      margin: 1px 0 1px 8px;
+    }
+
+    .cert-block ul ul li::before {
+      content: "(";
+    }
+
+    .cert-sub-a, .cert-sub-b, .cert-sub-c {
+      display: inline;
+    }
+
+    /* ── SIGN HERE ─────────────────────────────────────────── */
+    .sign-section {
+      border: 2px solid #000;
+      border-top: none;
+    }
+
+    .sign-label-row {
+      background: #000;
+      color: #fff;
+      font-size: 9pt;
+      font-weight: 700;
+      padding: 2px 8px;
+      display: flex;
+      align-items: center;
+    }
+
+    .sign-label-row .arrow {
+      font-size: 14pt;
+      margin-right: 6px;
+      line-height: 1;
+    }
+
+    .sign-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+    }
+
+    .sign-cell {
+      padding: 2px 6px 1px;
+      min-height: 0.35in;
+      position: relative;
+    }
+
+    .sign-cell + .sign-cell {
+      border-left: 1px solid #000;
+    }
+
+    .sign-cell.date-cell {
+      width: 1.8in;
+    }
+
+    .sign-cell .field-label {
+      font-size: 5.5pt;
+      font-style: italic;
+    }
+
+    .sign-cell .field-input {
+      font-size: 9pt;
+    }
+
+    .sign-row-2 {
+      border-top: 1px solid #000;
+    }
+
+    .sign-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .print-name-cell {
+      padding: 2px 6px 1px;
+      min-height: 0.28in;
+    }
+
+    .capacity-cell {
+      padding: 2px 6px 1px;
+      min-height: 0.28in;
+      border-left: 1px solid #000;
+    }
+
+    /* ── FOOTER ────────────────────────────────────────────── */
+    .form-footer {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      font-size: 6.5pt;
+      padding: 3px 0 0;
+      align-items: baseline;
+    }
+
+    .form-footer .footer-left {
+      font-weight: 700;
+    }
+
+    .form-footer .footer-center {
+      margin-right: 30px;
+    }
+
+    .form-footer .footer-right {
+      text-align: right;
+    }
+
+    .form-footer .footer-right .form-id {
+      font-size: 8pt;
+      font-weight: 700;
+    }
+
+    /* ── PRINT STYLES ──────────────────────────────────────── */
+    @media print {
+      body {
+        background: #fff;
+        margin: 0;
+        padding: 0;
+      }
+
+      .page {
+        width: auto;
+        min-height: auto;
+        margin: 0;
+        padding: 0.25in 0.35in 0.2in;
+        box-shadow: none;
+      }
+
+      .field-input,
+      .treaty-input-inline,
+      .treaty-explain textarea,
+      .sign-cell .field-input {
+        color: #000;
+      }
+
+      @page {
+        size: letter;
+        margin: 0.15in;
+      }
+    }
+
+    /* ── SCREEN: interactive cues ──────────────────────────── */
+    @media screen {
+      .field-input:focus,
+      .treaty-input-inline:focus,
+      .treaty-explain textarea:focus,
+      .sign-cell .field-input:focus {
+        background: #fffff0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ═══════════════ HEADER ═══════════════ -->
+  <div class="header">
+    <div class="header-left">
+      <div class="form-label">Form</div>
+      <div class="form-number">W-8BEN</div>
+      <div class="form-rev">(Rev. February 2014)</div>
+      <div class="dept">Department of the Treasury<br>Internal Revenue Service</div>
+    </div>
+    <div class="header-center">
+      <div class="title">Certificate of Foreign Status of Beneficial Owner for United<br>States Tax Withholding and Reporting (Individuals)</div>
+      <div class="bullets">
+        <span class="arrow">&#9658;</span> For use by individuals. Entities must use Form W-8BEN-E.<br>
+        <span class="arrow">&#9658;</span> Information about Form W-8BEN and its separate instructions is at <span class="italic">www.irs.gov/formw8ben.</span><br>
+        <span class="arrow">&#9658;</span> Give this form to the withholding agent or payer. Do not send to the IRS.
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="omb-label">OMB No. 1545-1621</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ REDIRECT TABLE ═══════════════ -->
+  <div class="redirect-section">
+    <div class="redirect-header">
+      <div class="redirect-header-left">Do NOT use this form if:</div>
+      <div class="redirect-header-right">Instead, use Form:</div>
+    </div>
+    <div class="redirect-row">
+      <div class="redirect-row-left"><span class="bullet">&#8226;</span> You are NOT an individual</div>
+      <div class="redirect-row-right">W-8BEN-E</div>
+    </div>
+    <div class="redirect-row">
+      <div class="redirect-row-left"><span class="bullet">&#8226;</span> You are a U.S. citizen or other U.S. person, including a resident alien individual</div>
+      <div class="redirect-row-right">W-9</div>
+    </div>
+    <div class="redirect-row">
+      <div class="redirect-row-left"><span class="bullet">&#8226;</span> You are a beneficial owner claiming that income is effectively connected with the conduct of trade or business within the U.S.<br>(other than personal services)</div>
+      <div class="redirect-row-right">W-8ECI</div>
+    </div>
+    <div class="redirect-row">
+      <div class="redirect-row-left"><span class="bullet">&#8226;</span> You are a beneficial owner who is receiving compensation for personal services performed in the United States</div>
+      <div class="redirect-row-right">8233 or W-4</div>
+    </div>
+    <div class="redirect-row">
+      <div class="redirect-row-left"><span class="bullet">&#8226;</span> A person acting as an intermediary</div>
+      <div class="redirect-row-right">W-8IMY</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ PART I ═══════════════ -->
+  <div class="part-row">
+    <span class="part-header">Part I</span>
+    <span class="part-title">Identification of Beneficial Owner</span>
+    <span style="font-size:7pt; font-weight:400;"> (see instructions)</span>
+  </div>
+
+  <!-- Line 1 + 2 -->
+  <div class="field-grid cols-2-wide-left">
+    <div class="field-cell">
+      <div class="field-label"><span class="line-num">1</span> Name of individual who is the beneficial owner</div>
+      <input type="text" class="field-input" name="line1_name" autocomplete="name" value="LEE AI LING JANE">
+    </div>
+    <div class="field-cell">
+      <div class="field-label"><span class="line-num">2</span> Country of citizenship</div>
+      <input type="text" class="field-input" name="line2_country" value="SINGAPORE">
+    </div>
+  </div>
+
+  <!-- Line 3: Permanent residence address -->
+  <div class="field-grid" style="grid-template-columns: 1fr;">
+    <div class="field-cell no-bottom">
+      <div class="field-label"><span class="line-num">3</span> Permanent residence address (street, apt. or suite no., or rural route). <span class="bold">Do not use a P.O. box or in-care-of address.</span></div>
+      <input type="text" class="field-input" name="line3_street" autocomplete="street-address" value="35 TIONG BAHRU ROAD, #03-05">
+    </div>
+  </div>
+  <div class="field-grid cols-addr">
+    <div class="field-cell">
+      <div class="field-label">City or town, state or province. Include postal code where appropriate.</div>
+      <input type="text" class="field-input" name="line3_city" value="SINGAPORE 350035">
+    </div>
+    <div class="field-cell country-cell">
+      <div class="field-label">Country</div>
+      <input type="text" class="field-input" name="line3_country" value="SINGAPORE">
+    </div>
+  </div>
+
+  <!-- Line 4: Mailing address -->
+  <div class="field-grid" style="grid-template-columns: 1fr;">
+    <div class="field-cell no-bottom">
+      <div class="field-label"><span class="line-num">4</span> Mailing address (if different from above)</div>
+      <input type="text" class="field-input" name="line4_street">
+    </div>
+  </div>
+  <div class="field-grid cols-addr">
+    <div class="field-cell">
+      <div class="field-label">City or town, state or province. Include postal code where appropriate.</div>
+      <input type="text" class="field-input" name="line4_city">
+    </div>
+    <div class="field-cell country-cell">
+      <div class="field-label">Country</div>
+      <input type="text" class="field-input" name="line4_country">
+    </div>
+  </div>
+
+  <!-- Line 5 + 6 -->
+  <div class="field-grid cols-line56">
+    <div class="field-cell">
+      <div class="field-label"><span class="line-num">5</span> U.S. taxpayer identification number (SSN or ITIN), if required (see instructions)</div>
+      <input type="text" class="field-input" name="line5_tin" placeholder="">
+    </div>
+    <div class="field-cell">
+      <div class="field-label"><span class="line-num">6</span> Foreign tax identifying number (see instructions)</div>
+      <input type="text" class="field-input" name="line6_ftin" value="S0123456A">
+    </div>
+  </div>
+
+  <!-- Line 7 + 8 -->
+  <div class="field-grid cols-line78" style="border-bottom: 2px solid #000;">
+    <div class="field-cell" style="border-bottom:none;">
+      <div class="field-label"><span class="line-num">7</span> Reference number(s) (see instructions)</div>
+      <input type="text" class="field-input" name="line7_ref">
+    </div>
+    <div class="field-cell" style="border-bottom:none;">
+      <div class="field-label"><span class="line-num">8</span> Date of birth (MM-DD-YYYY) (see instructions)</div>
+      <input type="text" class="field-input" name="line8_dob" placeholder="MM-DD-YYYY">
+    </div>
+  </div>
+
+  <!-- ═══════════════ PART II ═══════════════ -->
+  <div class="part-row">
+    <span class="part-header">Part II</span>
+    <span class="part-title">Claim of Tax Treaty Benefits</span>
+    <span style="font-size:7pt; font-weight:400;"> (for chapter 3 purposes only) (see instructions)</span>
+  </div>
+
+  <!-- Line 9 -->
+  <div class="treaty-line">
+    <span class="line-num">9</span>
+    I certify that the beneficial owner is a resident of
+    <input type="text" class="treaty-input-inline wide" name="line9_country">
+    within the meaning of the income tax treaty<br>
+    between the United States and that country.
+  </div>
+
+  <!-- Line 10 -->
+  <div class="treaty-line">
+    <span class="line-num">10</span>
+    Special rates and conditions (if applicable&mdash;see instructions): The beneficial owner is claiming the provisions of Article
+    <input type="text" class="treaty-input-inline narrow" name="line10_article">
+    of the treaty identified on line 9 above to claim a
+    <input type="text" class="treaty-input-inline narrow" name="line10_rate" style="width:0.35in; text-align:center;">% rate of withholding on (specify type of income):
+    <input type="text" class="treaty-input-inline xwide" name="line10_income_type">
+  </div>
+
+  <!-- Explain reasons -->
+  <div class="treaty-explain">
+    <div style="font-size:7pt; margin-bottom:2px;">Explain the reasons the beneficial owner meets the terms of the treaty article:</div>
+    <textarea name="line10_explain" rows="2"></textarea>
+  </div>
+
+  <!-- ═══════════════ PART III ═══════════════ -->
+  <div class="part-row">
+    <span class="part-header">Part III</span>
+    <span class="part-title">Certification</span>
+  </div>
+
+  <div class="cert-block">
+    <p>Under penalties of perjury, I declare that I have examined the information on this form and to the best of my knowledge and belief it is true, correct, and complete. I further certify under penalties of perjury that:</p>
+    <ul>
+      <li>I am the individual that is the beneficial owner (or am authorized to sign for the individual that is the beneficial owner) of all the income to which this form relates or am using this form to document myself as an individual that is an owner or account holder of a foreign financial institution,</li>
+      <li>The person named on line 1 of this form is not a U.S. person,</li>
+      <li>The income to which this form relates is:
+        <ul>
+          <li>a) not effectively connected with the conduct of a trade or business in the United States,</li>
+          <li>b) effectively connected but is not subject to tax under an applicable income tax treaty, or</li>
+          <li>c) the partner's share of a partnership's effectively connected income,</li>
+        </ul>
+      </li>
+      <li>The person named on line 1 of this form is a resident of the treaty country listed on line 9 of the form (if any) within the meaning of the income tax treaty between the United States and that country, and</li>
+      <li>For broker transactions or barter exchanges, the beneficial owner is an exempt foreign person as defined in the instructions.</li>
+    </ul>
+    <p style="margin-top:3px;">Furthermore, I authorize this form to be provided to any withholding agent that has control, receipt, or custody of the income of which I am the beneficial owner or any withholding agent that can disburse or make payments of the income of which I am the beneficial owner. <span class="bold">I agree that I will submit a new form within 30 days if any certification made on this form becomes incorrect.</span></p>
+  </div>
+
+  <!-- ═══════════════ SIGN HERE ═══════════════ -->
+  <div class="sign-section">
+    <div class="sign-label-row">
+      <span class="arrow">&#9658;</span> Sign Here
+    </div>
+    <div class="sign-grid">
+      <div class="sign-cell">
+        <div class="field-label"><em>Signature of beneficial owner (or individual authorized to sign for beneficial owner)</em></div>
+        <input type="text" class="field-input" name="signature" value="Jane Lee" style="border-bottom: 1px dotted #000; margin-top: 2px; font-style: italic; font-family: 'Brush Script MT', 'Segoe Script', cursive;">
+      </div>
+      <div class="sign-cell date-cell">
+        <div class="field-label">Date (MM-DD-YYYY)</div>
+        <input type="text" class="field-input" name="sign_date" value="08-31-2016">
+      </div>
+    </div>
+    <div class="sign-row-2">
+      <div class="sign-grid-2">
+        <div class="print-name-cell">
+          <div class="field-label" style="font-weight:700;">Print name of signer</div>
+          <input type="text" class="field-input" name="print_name" style="font-size:8pt;" value="LEE AI LING JANE">
+        </div>
+        <div class="capacity-cell">
+          <div class="field-label">Capacity in which acting (if form is not signed by beneficial owner)</div>
+          <input type="text" class="field-input" name="capacity" style="font-size:8pt;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <div class="form-footer">
+    <div class="footer-left">For Paperwork Reduction Act Notice, see separate instructions.</div>
+    <div class="footer-center">Cat. No. 25047Z</div>
+    <div class="footer-right"><span class="form-id">Form W-8BEN</span> (Rev. 2-2014)</div>
+  </div>
+
+</div><!-- /.page -->
+
+</body>
+</html>
