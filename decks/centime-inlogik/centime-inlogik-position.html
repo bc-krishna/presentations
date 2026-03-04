@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centime + InLogik: Complete Spend Management for Banks</title>
+
+  <!-- Reveal.js 5.x -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+
+  <!-- Centime Editorial Theme -->
+  <link rel="stylesheet" href="../../css/theme/centime-editorial.css?v=4">
+
+  <style>
+    /* Force large base font */
+    .reveal .slides { font-size: 27px !important; }
+
+    .reveal h2 { font-size: 1.5em; margin-bottom: 0.25em; }
+    .reveal .eyebrow { font-size: 0.5em; margin-bottom: 0.4em; }
+    .reveal .lead { font-size: 0.65em; line-height: 1.5; margin-bottom: 0.4em; }
+    .reveal .subtitle { font-size: 0.62em; line-height: 1.5; }
+
+    .reveal .slides section { text-align: left; }
+
+    /* Body text */
+    .reveal .body { font-size: 0.6em; line-height: 1.55; color: var(--ft-slate); }
+    .reveal .body strong { color: var(--ft-black); }
+    .reveal .meta { font-size: 0.45em; color: var(--ft-slate); }
+
+    /* Bullet list */
+    .reveal ul.pts {
+      list-style: none; padding: 0; margin: 0.3em 0;
+      border-top: 3px solid var(--ft-black);
+    }
+    .reveal ul.pts li {
+      font-size: 0.58em; line-height: 1.5; color: var(--ft-dark);
+      padding: 0.35em 0 0.35em 1.2em; position: relative;
+      border-bottom: 1px solid var(--ft-rule);
+    }
+    .reveal ul.pts li::before {
+      content: '\2192'; position: absolute; left: 0;
+      font-weight: 700; color: var(--ft-claret);
+    }
+    .reveal ul.pts li strong { color: var(--ft-black); }
+
+    /* Dark variant bullets */
+    .slide-dark ul.pts { border-top-color: var(--ft-mandarin); }
+    .slide-dark ul.pts li { color: var(--ft-wheat); border-bottom-color: rgba(206,198,185,0.15); }
+    .slide-dark ul.pts li::before { color: var(--ft-mandarin); }
+    .slide-dark ul.pts li strong { color: var(--ft-pink); }
+
+    /* Two-column comparison */
+    .reveal .vs {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      margin: 0.3em 0; border-top: 3px solid var(--ft-black);
+    }
+    .reveal .vs-l, .reveal .vs-r {
+      padding: 0.5em 0;
+      border-bottom: 1px solid var(--ft-rule);
+    }
+    .reveal .vs-l { padding-right: 0.8em; border-right: 1px solid var(--ft-rule); }
+    .reveal .vs-r { padding-left: 0.8em; }
+    .reveal .vs h4 {
+      font-family: var(--r-heading-font); font-size: 0.62em; font-weight: 700; margin-bottom: 0.2em;
+    }
+    .reveal .vs p {
+      font-size: 0.52em; color: var(--ft-slate); line-height: 1.5;
+    }
+    .reveal .vs p strong { color: var(--ft-black); }
+    .reveal .vs-l h4 { color: var(--ft-claret); }
+    .reveal .vs-r h4 { color: var(--ft-slate); }
+    .reveal .vs-r p { opacity: 0.75; }
+
+    /* Dark variant vs */
+    .slide-dark .vs { border-top-color: var(--ft-mandarin); }
+    .slide-dark .vs-l, .slide-dark .vs-r { border-color: rgba(206,198,185,0.15); }
+    .slide-dark .vs p { color: var(--ft-wheat); }
+    .slide-dark .vs p strong { color: var(--ft-pink); }
+    .slide-dark .vs-l h4 { color: var(--ft-mandarin); }
+    .slide-dark .vs-r h4 { color: var(--ft-wheat); opacity: 0.6; }
+
+    /* Side-by-side cards */
+    .reveal .cards {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.5em; margin: 0.4em 0;
+    }
+    .reveal .card {
+      padding: 0.5em 0.6em; border-radius: 4px;
+    }
+    .reveal .card h4 {
+      font-family: var(--r-main-font); font-size: 0.45em; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3em;
+    }
+    .reveal .card p { font-size: 0.5em; line-height: 1.5; }
+    .card-green { background: #e8f5ec; } .card-green h4 { color: #1e7a3a; }
+    .card-amber { background: #fef7e6; } .card-amber h4 { color: #b8860b; }
+    .card-blue { background: #eaf2f8; } .card-blue h4 { color: #1a5276; }
+    .card-claret { background: rgba(153,15,61,0.08); } .card-claret h4 { color: var(--ft-claret); }
+
+    /* Three-column cards */
+    .reveal .cards-3 {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5em; margin: 0.4em 0;
+    }
+    .reveal .cards-3 .card p { font-size: 0.46em; }
+
+    /* Callout box */
+    .reveal .callout {
+      background: var(--ft-paper); border-top: 3px solid var(--ft-claret);
+      padding: 0.5em 0.7em; margin: 0.3em 0;
+    }
+    .reveal .callout h4 { font-family: var(--r-heading-font); font-size: 0.6em; color: var(--ft-black); margin-bottom: 0.15em; }
+    .reveal .callout p { font-size: 0.5em; color: var(--ft-slate); line-height: 1.5; }
+    .reveal .callout p strong { color: var(--ft-black); }
+
+    /* Dark callout variant */
+    .slide-dark .callout { background: rgba(255,255,255,0.06); border-top-color: var(--ft-mandarin); }
+    .slide-dark .callout h4 { color: var(--ft-pink); }
+    .slide-dark .callout p { color: var(--ft-wheat); }
+    .slide-dark .callout p strong { color: var(--ft-pink); }
+
+    /* Feature comparison rows */
+    .reveal .feats { list-style: none; padding: 0; margin: 0.3em 0; border-top: 3px solid var(--ft-black); }
+    .reveal .feats li {
+      display: grid; grid-template-columns: 1fr 2fr;
+      gap: 0.6em; padding: 0.3em 0; border-bottom: 1px solid var(--ft-rule);
+      font-size: 0.52em; line-height: 1.45;
+    }
+    .reveal .feats .fn { font-family: var(--r-heading-font); font-weight: 700; color: var(--ft-black); }
+    .reveal .feats .fd { color: var(--ft-dark); }
+
+    /* Dark variant feats */
+    .slide-dark .feats { border-top-color: var(--ft-mandarin); }
+    .slide-dark .feats li { border-bottom-color: rgba(206,198,185,0.15); }
+    .slide-dark .feats .fn { color: var(--ft-pink); }
+    .slide-dark .feats .fd { color: var(--ft-wheat); }
+
+    /* Landscape cards — 3-col */
+    .reveal .landscape {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0;
+      margin: 0.3em 0; border: 2px solid var(--ft-black);
+    }
+    .reveal .ls-card {
+      padding: 0.45em 0.55em;
+    }
+    .reveal .ls-card:not(:last-child) { border-right: 1px solid var(--ft-rule); }
+    .reveal .ls-card h4 {
+      font-family: var(--r-heading-font); font-size: 0.6em; font-weight: 700; margin-bottom: 0.1em;
+    }
+    .reveal .ls-card .ls-meta {
+      font-size: 0.38em; color: var(--ft-slate); margin-bottom: 0.3em;
+    }
+    .reveal .ls-card p { font-size: 0.44em; line-height: 1.45; color: var(--ft-dark); }
+    .reveal .ls-card .ls-gap { color: #c0392b; font-weight: 600; font-size: 0.42em; margin-top: 0.2em; }
+
+    /* Five-col matrix */
+    .reveal .matrix-row-5 {
+      display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+      gap: 0; border-bottom: 1px solid var(--ft-rule);
+    }
+    .reveal .matrix-row-5 > div {
+      padding: 0.2em 0.35em; font-size: 0.42em; line-height: 1.4;
+    }
+    .reveal .matrix-row-5 > div:not(:last-child) { border-right: 1px solid var(--ft-rule); }
+    .reveal .matrix-hdr-5 {
+      border-top: 3px solid var(--ft-black); border-bottom: 2px solid var(--ft-black);
+    }
+    .reveal .matrix-hdr-5 > div {
+      font-weight: 700; font-size: 0.38em; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .reveal .matrix-hdr-5 > div:first-child { color: var(--ft-claret); }
+
+    /* Lifecycle table */
+    .reveal .lifecycle {
+      margin: 0.3em 0; border-top: 3px solid var(--ft-black);
+    }
+    .reveal .lc-row {
+      display: grid; grid-template-columns: 1.8fr 2fr 0.8fr;
+      gap: 0; border-bottom: 1px solid var(--ft-rule);
+    }
+    .reveal .lc-row > div {
+      padding: 0.25em 0.4em; font-size: 0.48em; line-height: 1.4;
+    }
+    .reveal .lc-row > div:not(:last-child) { border-right: 1px solid var(--ft-rule); }
+    .reveal .lc-hdr {
+      border-bottom: 2px solid var(--ft-black);
+    }
+    .reveal .lc-hdr > div {
+      font-weight: 700; font-size: 0.42em; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .reveal .lc-hdr > div:first-child { color: var(--ft-claret); }
+
+    /* Dark lifecycle */
+    .slide-dark .lifecycle { border-top-color: var(--ft-mandarin); }
+    .slide-dark .lc-row { border-bottom-color: rgba(206,198,185,0.15); }
+    .slide-dark .lc-row > div { color: var(--ft-wheat); border-color: rgba(206,198,185,0.15); }
+    .slide-dark .lc-hdr > div:first-child { color: var(--ft-mandarin); }
+    .slide-dark .lc-hdr > div { color: var(--ft-pink); }
+
+    /* Phase timeline */
+    .reveal .phases {
+      display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0.5em; margin: 0.4em 0;
+    }
+    .reveal .phase {
+      padding: 0.4em 0.5em; border-top: 3px solid var(--ft-claret); background: var(--ft-paper);
+    }
+    .reveal .phase h4 {
+      font-family: var(--r-main-font); font-size: 0.42em; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px; color: var(--ft-claret); margin-bottom: 0.2em;
+    }
+    .reveal .phase p { font-size: 0.46em; line-height: 1.45; color: var(--ft-dark); }
+
+    /* Tag badges */
+    .reveal .tag {
+      display: inline-block; font-family: var(--r-main-font);
+      font-size: 0.42em; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; padding: 0.1em 0.4em; border-radius: 2px;
+      vertical-align: middle;
+    }
+    .tag-yes { background: #1e7a3a; color: white; }
+    .tag-no { background: #94a3b8; color: white; }
+    .tag-ltd { background: #b8860b; color: white; }
+
+    /* Stat pills */
+    .reveal .stats {
+      display: flex; gap: 0.6em; margin: 0.3em 0; flex-wrap: wrap;
+    }
+    .reveal .stat {
+      border: 1px solid var(--ft-rule); border-radius: 4px;
+      padding: 0.3em 0.5em; text-align: center; flex: 1; min-width: 120px;
+    }
+    .reveal .stat .n {
+      font-family: var(--r-heading-font); font-size: 1.4em; line-height: 1; color: var(--ft-claret);
+    }
+    .reveal .stat .l {
+      font-size: 0.38em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+      margin-top: 0.15em; color: var(--ft-slate);
+    }
+  </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ============================================================ -->
+<!-- SLIDE 1: TITLE (dark)                                         -->
+<!-- ============================================================ -->
+<section data-background-color="#1A1817">
+  <div class="slide-dark">
+    <p class="eyebrow" style="color: var(--ft-mandarin);">Strategic Partnership</p>
+    <h1 style="font-size: 1.5em; color: var(--ft-pink);">Centime + InLogik:<br>Complete Spend Management<br>for Banks</h1>
+    <p class="subtitle" style="color: var(--ft-wheat);">A white-label platform combining AP automation, integrated payments, cash flow forecasting, expense management, and corporate card solutions &mdash; distributed through bank channels.</p>
+    <p class="meta" style="margin-top: 1em; color: var(--ft-wheat); opacity: 0.5;">Confidential &middot; March 2026</p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 2: THE MARKET MOMENT (salmon)                           -->
+<!-- ============================================================ -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">The Market Moment</p>
+  <h2>A $5B acquisition just changed everything</h2>
+  <p class="lead">Capital One&rsquo;s acquisition of Brex for $5.15B in January 2026 signals that integrated spend management is now a strategic imperative for commercial banks &mdash; not a nice-to-have.</p>
+  <ul class="pts">
+    <li><strong>Category validation:</strong> A top-10 US bank paid $5B+ for a spend management platform. Every mid-market bank must respond or risk losing competitive ground</li>
+    <li><strong>Build-vs-buy signal:</strong> Capital One chose to acquire rather than build. For mid-market banks without that budget, <strong>partnership is the pragmatic path</strong></li>
+    <li><strong>Ramp is the remaining threat:</strong> Trusted by 330+ public companies. Over 4,200 companies switched from Brex to Ramp. Positioning explicitly against banks as slow and fragmented</li>
+    <li><strong>12&ndash;18 month window:</strong> Banks are newly aware of the threat. Brex customers face uncertainty. No white-label, bank-distributed alternative exists yet</li>
+  </ul>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 3: THE GAP (paper)                                      -->
+<!-- ============================================================ -->
+<section data-background-color="#FFF7EF">
+  <p class="eyebrow">The Gap</p>
+  <h2>Fintechs offer what banks can&rsquo;t</h2>
+  <p class="lead">Brex, Ramp, and BILL combine corporate cards, expense management, AP automation, and bill pay into unified platforms. Banks cobble together disconnected components.</p>
+  <div class="vs">
+    <div class="vs-l">
+      <h4>What fintechs deliver</h4>
+      <p><strong>Unified experience:</strong> One login, one dashboard, one set of controls across all spend categories.</p>
+      <p style="margin-top: 0.2em;"><strong>AI-driven automation:</strong> Auto-coding expenses, policy enforcement at point of swipe, duplicate detection.</p>
+      <p style="margin-top: 0.2em;"><strong>Speed to value:</strong> Customers live in days, not months. Deep ERP integrations out of the box.</p>
+    </div>
+    <div class="vs-r">
+      <h4>What banks currently offer</h4>
+      <p><strong>Fragmented experience:</strong> Multiple logins, no unified spend view. Card portal, treasury system, and AP tools are separate.</p>
+      <p style="margin-top: 0.2em;"><strong>Manual processes:</strong> Expense reconciliation, approval workflows, payment routing remain largely manual.</p>
+      <p style="margin-top: 0.2em;"><strong>No brand ownership:</strong> Tools carry third-party branding, not the bank&rsquo;s. Limited stickiness.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 4: CENTIME CAPABILITIES (salmon)                        -->
+<!-- ============================================================ -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">Centime</p>
+  <h2>AP automation &amp; integrated payments</h2>
+  <div class="stats">
+    <div class="stat"><div class="n">$3M</div><div class="l">ARR</div></div>
+    <div class="stat"><div class="n">150+</div><div class="l">Customers</div></div>
+    <div class="stat"><div class="n">6</div><div class="l">Bank Partners</div></div>
+    <div class="stat"><div class="n">$1B+</div><div class="l">Processed, Zero Fraud</div></div>
+  </div>
+  <ul class="feats">
+    <li><span class="fn">AP Automation</span><span class="fd">Full invoice lifecycle: capture, OCR/AI extraction, approval workflows, GL coding, three-way matching. Deep ERP integrations with QuickBooks, NetSuite, Sage Intacct</span></li>
+    <li><span class="fn">Integrated Payables</span><span class="fd">Multi-rail payment execution across check, ACH, and virtual card. Single platform consolidating all payment types for bank commercial customers</span></li>
+    <li><span class="fn">Cash Flow Forecasting</span><span class="fd">AI-powered 13-week forecasting with scenario modeling. Basic and Pro tiers with multi-entity support. Strengthens the bank&rsquo;s advisory relationship</span></li>
+    <li><span class="fn">Centime Exchange</span><span class="fd">Supplier onboarding hub: real-time bank ownership verification, compliance tracking, payment preference management. Eliminates document fraud</span></li>
+  </ul>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 5: INLOGIK CAPABILITIES (paper)                         -->
+<!-- ============================================================ -->
+<section data-background-color="#FFF7EF">
+  <p class="eyebrow">InLogik</p>
+  <h2>Card management &amp; expense management</h2>
+  <div class="stats">
+    <div class="stat"><div class="n">30+</div><div class="l">Years in Commercial Cards</div></div>
+    <div class="stat"><div class="n">3</div><div class="l">Offices (Melbourne, Sydney, NYC)</div></div>
+    <div class="stat"><div class="n">$2.5M</div><div class="l">Sales Growth (12 mo)</div></div>
+  </div>
+  <ul class="feats">
+    <li><span class="fn">Card Management (CMP)</span><span class="fd">Modular white-label platform: self-service card issuance, change requests, verification, hierarchy management. Multi-regional, multilingual. Role-based access, full audit trails</span></li>
+    <li><span class="fn">Expense Management (ExpenseMe)</span><span class="fd">Receipt capture, approval workflows, policy enforcement, real-time spend analytics, automated reconciliation. White-labeled under a single contract &mdash; no additional data feeds required</span></li>
+    <li><span class="fn">Card Reporting (CRP)</span><span class="fd">Multi-region, multi-currency reporting on a single dashboard with custom filters. Real-time visibility across all card programs</span></li>
+  </ul>
+  <p class="body" style="margin-top: 0.3em;"><strong>Compliance:</strong> PCI DSS, SOC2 Type II, ISO 27001, ISO 27701. Founded 1993. Active US expansion from New York office.</p>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 6: BETTER TOGETHER — LIFECYCLE (dark)                   -->
+<!-- ============================================================ -->
+<section data-background-color="#1A1817">
+  <div class="slide-dark">
+    <p class="eyebrow" style="color: var(--ft-mandarin);">Better Together</p>
+    <h2 style="color: var(--ft-pink);">Covering the full spend lifecycle</h2>
+    <p class="body" style="color: var(--ft-wheat); margin-bottom: 0.3em;">No single vendor today offers banks a white-label platform covering the entire commercial spend lifecycle. Together, Centime and InLogik do.</p>
+    <div class="lifecycle">
+      <div class="lc-row lc-hdr">
+        <div>Spend Category</div><div>Solution</div><div>Provider</div>
+      </div>
+      <div class="lc-row">
+        <div><strong>Invoice Processing</strong></div><div>AP Automation &mdash; capture, approval, GL coding</div><div>Centime</div>
+      </div>
+      <div class="lc-row">
+        <div><strong>Payment Execution</strong></div><div>Integrated Payables &mdash; check, ACH, virtual card</div><div>Centime</div>
+      </div>
+      <div class="lc-row">
+        <div><strong>Cash Visibility</strong></div><div>13-week cash flow forecasting + scenarios</div><div>Centime</div>
+      </div>
+      <div class="lc-row">
+        <div><strong>Supplier Management</strong></div><div>Exchange &mdash; onboarding, verification, compliance</div><div>Centime</div>
+      </div>
+      <div class="lc-row">
+        <div><strong>Card Programs</strong></div><div>Card issuance, lifecycle, controls, hierarchy</div><div>InLogik</div>
+      </div>
+      <div class="lc-row">
+        <div><strong>Expense Management</strong></div><div>Receipt capture, policy, approvals, reconciliation</div><div>InLogik</div>
+      </div>
+      <div class="lc-row">
+        <div><strong>Spend Reporting</strong></div><div>Multi-currency dashboards, analytics</div><div>InLogik</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 7: WHY THIS COMBINATION IS UNIQUE (salmon)              -->
+<!-- ============================================================ -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">Strategic Fit</p>
+  <h2>Why this combination is unique</h2>
+  <p class="lead">Four structural advantages that no competitor can replicate.</p>
+  <div class="cards">
+    <div class="card card-claret">
+      <h4>White-label first</h4>
+      <p>Unlike Brex or Ramp, both Centime and InLogik are <strong>designed to disappear behind the bank&rsquo;s brand.</strong> This is foundational to bank-channel distribution &mdash; not a bolt-on.</p>
+    </div>
+    <div class="card card-green">
+      <h4>Both sell through banks</h4>
+      <p>Not a theoretical GTM. Centime has <strong>6 US bank partnerships.</strong> InLogik has bank and issuer clients globally. Both teams know how banks buy, implement, and support technology.</p>
+    </div>
+    <div class="card card-blue">
+      <h4>Zero overlap</h4>
+      <p>Centime does not offer card management or expense tracking. InLogik does not offer AP or payments. <strong>The combination is purely additive</strong> &mdash; no product conflict.</p>
+    </div>
+    <div class="card card-amber">
+      <h4>Complementary geographies</h4>
+      <p>Centime has deep <strong>US bank relationships.</strong> InLogik has <strong>global bank relationships</strong> and is building US distribution from NYC. Each accelerates the other&rsquo;s market entry.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 8: BANK VALUE PROPOSITION (paper)                       -->
+<!-- ============================================================ -->
+<section data-background-color="#FFF7EF">
+  <p class="eyebrow">Bank Value Proposition</p>
+  <h2>Why banks should care</h2>
+  <p class="lead">The combined platform drives revenue, retains deposits, and creates daily engagement &mdash; all under the bank&rsquo;s brand.</p>
+  <div class="cards-3">
+    <div class="card card-green">
+      <h4>Drive Interchange Revenue</h4>
+      <p>InLogik&rsquo;s CMP drives card issuance at scale. ExpenseMe drives card adoption by making expense workflows seamless. Centime&rsquo;s virtual card payments extend interchange to vendor payments. <strong>More cards issued, more transactions on cards.</strong></p>
+    </div>
+    <div class="card card-blue">
+      <h4>Retain Commercial Deposits</h4>
+      <p>When AP and payments run through the bank&rsquo;s platform, operating accounts stay. Cash forecasting deepens the advisory relationship. <strong>Without it, deposits follow the fintech.</strong></p>
+    </div>
+    <div class="card card-claret">
+      <h4>Compete Without Building</h4>
+      <p>Both platforms are white-label. The bank presents the solution as its own &mdash; consistent with its brand, integrated into digital banking. <strong>Fraction of the cost and time of building internally.</strong></p>
+    </div>
+  </div>
+  <div class="callout" style="margin-top: 0.3em;">
+    <h4>Daily engagement = switching costs</h4>
+    <p>Controllers and CFOs log into the bank&rsquo;s platform every day to approve invoices, review expenses, and check cash positions. This <strong>positions the bank as a strategic partner</strong> rather than a commodity service provider.</p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 9: COMPETITIVE MATRIX (salmon)                          -->
+<!-- ============================================================ -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">Competitive Positioning</p>
+  <h2>The only bank-ready platform</h2>
+  <p class="lead">No competitor offers white-label, bank-distributed spend management. The combined platform fills a structural gap in the market.</p>
+  <div class="matrix-row-5 matrix-hdr-5">
+    <div>Capability</div><div>Centime + InLogik</div><div>Brex / Cap One</div><div>Ramp</div><div>BILL / Divvy</div>
+  </div>
+  <div class="matrix-row-5">
+    <div><strong>White-label for banks</strong></div><div><span class="tag tag-yes" style="font-size: 0.8em;">Yes</span></div><div><span class="tag tag-no" style="font-size: 0.8em;">No</span></div><div><span class="tag tag-no" style="font-size: 0.8em;">No</span></div><div><span class="tag tag-no" style="font-size: 0.8em;">No</span></div>
+  </div>
+  <div class="matrix-row-5">
+    <div><strong>Bank-channel distribution</strong></div><div><span class="tag tag-yes" style="font-size: 0.8em;">Yes</span></div><div>No (direct)</div><div>No (direct)</div><div>No (direct)</div>
+  </div>
+  <div class="matrix-row-5">
+    <div><strong>AP Automation</strong></div><div><span class="tag tag-yes" style="font-size: 0.8em;">Yes</span></div><div><span class="tag tag-ltd" style="font-size: 0.8em;">Limited</span></div><div><span class="tag tag-yes" style="font-size: 0.8em;">Yes</span></div><div><span class="tag tag-yes" style="font-size: 0.8em;">Yes</span></div>
+  </div>
+  <div class="matrix-row-5">
+    <div><strong>Integrated Payables</strong></div><div>Check / ACH / vCard</div><div><span class="tag tag-ltd" style="font-size: 0.8em;">Limited</span></div><div><span class="tag tag-yes" style="font-size: 0.8em;">Yes</span></div><div><span class="tag tag-yes" style="font-size: 0.8em;">Yes</span></div>
+  </div>
+  <div class="matrix-row-5">
+    <div><strong>Card Management</strong></div><div>InLogik CMP</div><div><span class="tag tag-yes" style="font-size: 0.8em;">Yes</span></div><div><span class="tag tag-yes" style="font-size: 0.8em;">Yes</span></div><div><span class="tag tag-yes" style="font-size: 0.8em;">Yes</span></div>
+  </div>
+  <div class="matrix-row-5">
+    <div><strong>Expense Management</strong></div><div>ExpenseMe</div><div><span class="tag tag-yes" style="font-size: 0.8em;">Yes</span></div><div><span class="tag tag-yes" style="font-size: 0.8em;">Yes</span></div><div><span class="tag tag-yes" style="font-size: 0.8em;">Yes</span></div>
+  </div>
+  <div class="matrix-row-5">
+    <div><strong>Cash Flow Forecasting</strong></div><div><span class="tag tag-yes" style="font-size: 0.8em;">Yes</span></div><div><span class="tag tag-no" style="font-size: 0.8em;">No</span></div><div><span class="tag tag-no" style="font-size: 0.8em;">No</span></div><div><span class="tag tag-no" style="font-size: 0.8em;">No</span></div>
+  </div>
+  <div class="matrix-row-5">
+    <div><strong>Supplier Onboarding</strong></div><div>Centime Exchange</div><div><span class="tag tag-ltd" style="font-size: 0.8em;">Limited</span></div><div><span class="tag tag-ltd" style="font-size: 0.8em;">Limited</span></div><div><span class="tag tag-ltd" style="font-size: 0.8em;">Limited</span></div>
+  </div>
+  <div class="matrix-row-5">
+    <div><strong>Bank retains customer</strong></div><div><span class="tag tag-yes" style="font-size: 0.8em;">Yes</span></div><div><span class="tag tag-no" style="font-size: 0.8em;">No</span></div><div><span class="tag tag-no" style="font-size: 0.8em;">No</span></div><div><span class="tag tag-no" style="font-size: 0.8em;">No</span></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 10: HEAD-TO-HEAD (paper)                                -->
+<!-- ============================================================ -->
+<section data-background-color="#FFF7EF">
+  <p class="eyebrow">Head-to-Head</p>
+  <h2>What we say to each threat</h2>
+  <div class="landscape">
+    <div class="ls-card">
+      <h4>vs. Brex (Capital One)</h4>
+      <div class="ls-meta">Acquired for $5.15B &middot; Now bank-owned</div>
+      <p>Being absorbed into Capital One&rsquo;s ecosystem. Product direction will shift to enterprise. <strong>Was never white-label</strong> &mdash; now it&rsquo;s a competitor&rsquo;s asset. We offer banks what Brex never did: own the customer relationship while matching the experience.</p>
+    </div>
+    <div class="ls-card">
+      <h4>vs. Ramp</h4>
+      <div class="ls-meta">Independent &middot; Most dangerous long-term</div>
+      <p>Strongest independent competitor. Marketing explicitly against banks as slow and fragmented. <strong>Does not offer white-label.</strong> Bypasses banks entirely. No cash forecasting or deep supplier onboarding. For banks, Ramp is the threat; we are the response.</p>
+    </div>
+    <div class="ls-card">
+      <h4>vs. BILL / Divvy</h4>
+      <div class="ls-meta">$2.5B Divvy acquisition &middot; Direct sales</div>
+      <p>Offers AP + corporate cards but <strong>distributes directly, not through banks.</strong> Card management less mature than InLogik&rsquo;s 30+ year platform. Bank-channel strategy limited to integration partnerships, not full white-label.</p>
+    </div>
+  </div>
+  <p class="body" style="margin-top: 0.3em;"><strong>The pattern:</strong> Every competitor sells directly to companies, bypassing banks. None offer white-label distribution. None let banks retain the customer relationship. That&rsquo;s our structural advantage.</p>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 11: GO-TO-MARKET (salmon)                               -->
+<!-- ============================================================ -->
+<section data-background-color="#FFF1E5">
+  <p class="eyebrow">Go-to-Market</p>
+  <h2>Phased approach to market</h2>
+  <p class="lead">Joint bank-channel distribution. The conversation with banks is simple: you need a complete spend management platform to compete with Ramp and Capital One/Brex. We&rsquo;ve already built the pieces.</p>
+  <div class="phases">
+    <div class="phase">
+      <h4>Phase 1 &mdash; Map</h4>
+      <p>Product &amp; technical assessment. Integration points, combined UX, data flows, API touchpoints. Define the joint offering.</p>
+    </div>
+    <div class="phase">
+      <h4>Phase 2 &mdash; Pilot</h4>
+      <p>Select one existing Centime bank partner. Pilot the combined offering. Build a reference case in a live bank environment.</p>
+    </div>
+    <div class="phase">
+      <h4>Phase 3 &mdash; Formalize</h4>
+      <p>Partnership terms, pricing models, joint GTM materials. Begin co-selling to additional bank prospects.</p>
+    </div>
+    <div class="phase">
+      <h4>Phase 4 &mdash; Scale</h4>
+      <p>Expand across both networks. Centime opens US mid-market banks for InLogik. InLogik opens international banks for Centime.</p>
+    </div>
+  </div>
+  <div class="callout" style="margin-top: 0.3em;">
+    <h4>Revenue model</h4>
+    <p>Bank pays per-customer or per-transaction. Revenue sharing follows the product boundary. Card interchange is a critical driver &mdash; <strong>every module drives revenue for the bank,</strong> incentivizing promotion of the full platform.</p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 12: NEXT STEPS (claret)                                 -->
+<!-- ============================================================ -->
+<section data-background-color="#990F3D">
+  <div class="slide-dark">
+    <p class="eyebrow" style="color: var(--ft-wheat); opacity: 0.7;">Next Steps</p>
+    <h2 style="color: white; font-size: 1.15em; line-height: 1.3;">The window is open.<br>Banks are paying attention now.</h2>
+    <ul class="pts" style="border-top-color: rgba(255,255,255,0.3);">
+      <li style="border-bottom-color: rgba(255,255,255,0.15);"><strong style="color: white;">Joint Product Workshop</strong> &mdash; A working session between Centime and InLogik product teams to map capabilities and define the combined offering. <em>Target: 2 weeks</em></li>
+      <li style="border-bottom-color: rgba(255,255,255,0.15);"><strong style="color: white;">Combined Solution Brief</strong> &mdash; A joint one-pager articulating the combined value proposition for bank audiences. The tool for initial conversations</li>
+      <li style="border-bottom-color: rgba(255,255,255,0.15);"><strong style="color: white;">Pilot Bank Selection</strong> &mdash; Identify the right Centime bank partner: active commercial card program, receptive to fintech innovation, sufficient customer base for meaningful results</li>
+      <li style="border-bottom-color: rgba(255,255,255,0.15);"><strong style="color: white;">Market Timing</strong> &mdash; Coordinate messaging around the Brex/Capital One acquisition window. The urgency will fade as the deal closes and the market adjusts</li>
+    </ul>
+    <p class="body" style="color: rgba(255,255,255,0.8); margin-top: 0.5em;">Together, Centime and InLogik create a <strong style="color: white;">complete, white-label spend management platform</strong> that lets banks compete with Ramp and Capital One/Brex &mdash; without building, without losing customers, and without ceding the relationship.</p>
+    <p class="meta" style="color: var(--ft-wheat); margin-top: 0.6em;">Centime + InLogik &middot; Confidential &middot; March 2026</p>
+  </div>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/menu.css">
+<script src="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/menu.js"></script>
+
+<script>
+  Reveal.initialize({
+    width: 960,
+    height: 600,
+    margin: 0.07,
+    center: true,
+    hash: true,
+    transition: 'fade',
+    transitionSpeed: 'default',
+    plugins: [ RevealMenu ],
+    menu: {
+      side: 'left',
+      width: 'normal',
+      numbers: true,
+      titleSelector: 'h1, h2',
+      useTextContentForMissingTitles: true,
+      hideMissingTitles: false,
+      markers: true,
+      themes: false,
+      transitions: false,
+      openButton: true,
+      keyboard: true,
+    }
+  });
+</script>
+</body>
+</html>
