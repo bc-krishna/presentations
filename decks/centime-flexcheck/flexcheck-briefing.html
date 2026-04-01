@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Centime FlexCheck — Product Briefing</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ── Reset ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ── Page ── */
+  body {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 10pt;
+    line-height: 1.6;
+    color: #333;
+    background: #fff;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 0 60px;
+  }
+
+  /* ── Header ── */
+  .ft-header {
+    background: #1a1a1a;
+    color: #fff;
+    padding: 28px 48px 24px;
+    margin-bottom: 0;
+  }
+  .ft-masthead {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 10px;
+  }
+  .ft-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .ft-subtitle {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: #ccc;
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+  .ft-meta {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 8.5px;
+    color: #888;
+    letter-spacing: 0.5px;
+    border-top: 1px solid #333;
+    padding-top: 10px;
+    display: flex;
+    gap: 20px;
+  }
+  .ft-meta span::before {
+    content: '';
+  }
+
+  /* ── Content area ── */
+  .ft-body {
+    padding: 32px 48px;
+  }
+
+  /* ── Standfirst ── */
+  .standfirst {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #444;
+    border-bottom: 2px solid #1a1a1a;
+    padding-bottom: 20px;
+    margin-bottom: 24px;
+  }
+
+  /* ── Section headers ── */
+  h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a1a;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 6px;
+    margin: 32px 0 12px;
+  }
+  h3 {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #555;
+    margin: 20px 0 6px;
+  }
+
+  /* ── Body text ── */
+  p {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 10pt;
+    color: #333;
+    line-height: 1.65;
+    margin-bottom: 10px;
+  }
+
+  /* ── Two column layout ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 32px;
+    margin: 16px 0 24px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 24px;
+  }
+  .two-col .col {
+    padding-right: 0;
+  }
+  .two-col .col + .col {
+    padding-left: 16px;
+    border-left: 1px solid #ddd;
+  }
+  .two-col h2 {
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 8px;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  /* ── Pull quote ── */
+  .pull-quote {
+    border-left: 3px solid #1a1a1a;
+    padding: 4px 0 4px 18px;
+    margin: 20px 0 24px;
+  }
+  .pull-quote p {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 14px;
+    font-style: italic;
+    color: #1a1a1a;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ── Steps grid ── */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin: 12px 0 24px;
+    border-top: 1px solid #ddd;
+  }
+  .step {
+    padding: 16px 20px 16px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  .step:nth-child(even) {
+    padding-left: 20px;
+    border-left: 1px solid #ddd;
+    padding-right: 0;
+  }
+  .step-num {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .step-label {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #333;
+    margin-bottom: 4px;
+  }
+  .step-body {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 9.5pt;
+    color: #555;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* ── Callout / info box ── */
+  .callout {
+    background: #fafafa;
+    border: 1px solid #e5e5e5;
+    border-left: 3px solid #1a1a1a;
+    padding: 14px 16px;
+    margin: 16px 0 24px;
+  }
+  .callout-title {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  .callout ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .callout ul li {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 9.5pt;
+    color: #333;
+    line-height: 1.55;
+    padding: 3px 0;
+    border-bottom: 1px solid #ececec;
+    padding-left: 14px;
+    position: relative;
+  }
+  .callout ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: #aaa;
+  }
+  .callout ul li:last-child {
+    border-bottom: none;
+  }
+
+  /* ── Two-col supplier table ── */
+  .supplier-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 32px;
+    margin: 12px 0 24px;
+  }
+  .supplier-grid .col h3 {
+    margin-top: 0;
+    color: #1a1a1a;
+  }
+  .supplier-grid .col + .col {
+    padding-left: 16px;
+    border-left: 1px solid #ddd;
+  }
+  .supplier-grid ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .supplier-grid ul li {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 9.5pt;
+    color: #444;
+    line-height: 1.55;
+    padding: 4px 0;
+    border-bottom: 1px solid #f0f0f0;
+    padding-left: 14px;
+    position: relative;
+  }
+  .supplier-grid ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: #bbb;
+  }
+  .supplier-grid ul li:last-child { border-bottom: none; }
+
+  /* ── FAQ ── */
+  .faq-section h2 {
+    margin-bottom: 4px;
+  }
+  .faq-divider {
+    border: none;
+    border-top: 2px solid #1a1a1a;
+    margin: 0 0 20px;
+  }
+  .faq-item {
+    border-bottom: 1px solid #e5e5e5;
+    padding: 16px 0;
+  }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 11pt;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .faq-a {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 10pt;
+    color: #444;
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid #e5e5e5;
+    margin: 0;
+  }
+
+  /* ── Section rule ── */
+  .section-rule {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 24px 0 0;
+  }
+
+  /* ── Footer ── */
+  .ft-footer {
+    background: #f5f5f5;
+    border-top: 1px solid #ddd;
+    padding: 16px 48px;
+    margin-top: 40px;
+  }
+  .ft-footer-disclosure {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 8pt;
+    color: #888;
+    line-height: 1.55;
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+  .ft-footer-meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 8pt;
+    color: #aaa;
+    border-top: 1px solid #ddd;
+    padding-top: 8px;
+  }
+
+  /* ── Print ── */
+  @media print {
+    body { max-width: 100%; }
+    .ft-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .callout { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .ft-footer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<div class="ft-header">
+  <div class="ft-masthead">Centime Exchange &nbsp;·&nbsp; Product Briefing</div>
+  <div class="ft-title">FlexCheck</div>
+  <div class="ft-subtitle">Digitally delivered, supplier-printed payment instruments for mid-market AP</div>
+  <div class="ft-meta">
+    <span>April 2025</span>
+    <span>Centime Exchange</span>
+    <span>For distribution to clients and suppliers</span>
+  </div>
+</div>
+
+<!-- ── BODY ── -->
+<div class="ft-body">
+
+  <!-- Standfirst -->
+  <p class="standfirst">
+    Centime FlexCheck (henceforth referred to as FlexCheck) is Centime's digitally
+    delivered, supplier-printed check instrument. It gives buyers the speed and
+    control of electronic payment authorisation while giving suppliers the familiarity
+    and universality of a paper check — without requiring either party to adopt new
+    software, new network memberships, or new bank relationships.
+  </p>
+
+  <!-- What it is / Why it exists -->
+  <div class="two-col">
+    <div class="col">
+      <h2>What it is</h2>
+      <p>A FlexCheck is a payment authorisation issued by a buyer through Centime Exchange.
+      The buyer approves the payment — amount, payee, check number — and the system
+      generates a fully specified check document, complete with MICR line, payer details,
+      and authorised signature. That document is delivered to the supplier digitally.</p>
+      <p>The supplier then prints it on any plain-paper printer, endorses it, and deposits
+      it at their bank exactly as they would any other business check. No special ink, no
+      pre-printed check stock, no new accounts.</p>
+    </div>
+    <div class="col">
+      <h2>Why it exists</h2>
+      <p>Many suppliers — particularly in industries where paper checks remain standard —
+      are reluctant to adopt ACH, virtual cards, or proprietary payment networks. FlexCheck
+      meets them where they are: they receive a check. They deposit a check. Nothing changes
+      on their end.</p>
+      <p>For buyers, the benefit is equally practical. Payment instructions are issued
+      digitally, approved within Centime's AP workflow, and create an auditable record —
+      with none of the cost or delay of physical check printing and mailing.</p>
+    </div>
+  </div>
+
+  <!-- Pull quote -->
+  <div class="pull-quote">
+    <p>"The buyer issues the payment digitally. The supplier receives a check. Both parties get exactly what they expect."</p>
+  </div>
+
+  <!-- How it works -->
+  <h2>How it works</h2>
+  <p>The process from payment approval to bank deposit involves six steps. Each is designed to require the minimum possible action from the supplier.</p>
+
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-label">Buyer approves payment</div>
+      <p class="step-body">The buyer's AP team approves an invoice in Centime Exchange, selecting FlexCheck as the payment method.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-label">Check data is generated</div>
+      <p class="step-body">Centime generates a fully specified check document — MICR line, routing number, account number, check number, amount, payee, payer details, and authorised signature.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-label">Supplier is notified</div>
+      <p class="step-body">An email notification is sent to the supplier with a secure link to retrieve their check from the Centime Exchange portal.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-label">Supplier reviews and accepts</div>
+      <p class="step-body">The supplier logs in, reviews the check details, and agrees to a short set of terms — primarily confirming they will print and deposit the check only once.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-label">Supplier prints</div>
+      <p class="step-body">The supplier downloads and prints the check on plain white paper using any standard printer. Colour is recommended; black and white is accepted by banks.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-label">Supplier deposits</div>
+      <p class="step-body">The printed check is endorsed and deposited in person, via ATM, or via the supplier's bank mobile app — exactly like any other check.</p>
+    </div>
+  </div>
+
+  <!-- Operational detail -->
+  <hr class="section-rule">
+  <h2>Operational detail</h2>
+
+  <h3>Security and fraud prevention</h3>
+  <p>Every FlexCheck carries a unique check number tied to the specific payment authorisation
+  in Centime Exchange. Banks' duplicate detection systems will reject any attempt to deposit
+  the same check number twice from the same account. The MICR line is rendered to ANSI X9.27
+  E-13B standards. The check image incorporates a MICR line security background and a
+  pantograph void watermark. The payer's signature is a stored facsimile authorised at account
+  setup, consistent with industry practice for digitally delivered instruments.</p>
+
+  <h3>Validity window</h3>
+  <p>Each FlexCheck is valid for 90 days from the issue date. After this period, the check data
+  expires and the underlying payment instruction is returned to the buyer for reissuance.
+  Suppliers are sent a reminder at day 75 if the check has not yet been presented.</p>
+
+  <h3>Deposit methods</h3>
+  <p>The printed FlexCheck is accepted by all standard deposit channels: bank branch teller,
+  ATM, and mobile remote deposit capture (RDC) via a banking app. Suppliers should photograph
+  the printed check — not the screen displaying the digital file. Mobile deposit apps rely on
+  optical character recognition of the MICR line, which requires the check to be physically
+  printed to produce accurate results.</p>
+
+  <h3>Geographic scope</h3>
+  <p>FlexCheck is supported for US domestic payments and for cross-border payments to Canada,
+  the United Kingdom, and Singapore, where US dollar check clearing times are sufficiently short
+  to make the instrument commercially practical. FlexCheck is not available for payments to India,
+  Germany, China, or other markets where USD check clearing typically exceeds 30 calendar days.</p>
+
+  <div class="callout">
+    <div class="callout-title">Key operational parameters</div>
+    <ul>
+      <li>90-day validity window from issue date</li>
+      <li>Single presentment only — duplicate deposits are automatically rejected</li>
+      <li>Print on plain white paper; standard printer; colour recommended</li>
+      <li>Endorsed and deposited exactly like any other business check</li>
+      <li>Supported for: US domestic, Canada, United Kingdom, Singapore</li>
+      <li>Check data expires automatically — no manual voiding required by the buyer</li>
+    </ul>
+  </div>
+
+  <!-- Supplier expectations -->
+  <hr class="section-rule">
+  <h2>What suppliers need to know</h2>
+  <p>Receiving a FlexCheck requires no software installation, no new bank account, and no
+  membership in any payment network. The only requirements are an email address, a printer,
+  and an existing bank account.</p>
+
+  <div class="supplier-grid">
+    <div class="col">
+      <h3>What you need</h3>
+      <ul>
+        <li>An email address on file with your buyer</li>
+        <li>A printer (any standard inkjet or laser)</li>
+        <li>Plain white paper</li>
+        <li>An existing bank account for deposit</li>
+        <li>Internet access to retrieve the check</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>What you do not need</h3>
+      <ul>
+        <li>Special check stock or MICR paper</li>
+        <li>A Centime account or login</li>
+        <li>A new bank account or network membership</li>
+        <li>Any software installation</li>
+        <li>Any action before payment is ready</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <hr class="section-rule">
+  <div class="faq-section">
+    <h2>Frequently asked questions</h2>
+    <hr class="faq-divider">
+
+    <div class="faq-item">
+      <div class="faq-q">Is this legal? Can a supplier-printed check actually be deposited?</div>
+      <p class="faq-a">Yes. Under the Uniform Commercial Code (UCC Article 3), a negotiable
+      instrument — which a check is — becomes a legal instrument at the moment it is printed on
+      paper. The digital file in Centime Exchange is not a check; it is check <em>data</em>. When
+      the supplier prints it, they create the physical instrument, acting as the payer's authorised
+      agent for that purpose. This is the same legal construct used by Deluxe Payment Exchange and
+      other established digitally delivered check services. Banks accept these instruments routinely.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Why has this not been done before? What makes FlexCheck different?</div>
+      <p class="faq-a">Digitally delivered checks are not new — Deluxe has offered a version since
+      the 2000s. What FlexCheck adds is tight integration with an AP automation and supplier
+      management workflow. Rather than a standalone check-delivery product, FlexCheck is one
+      payment rail inside Centime Exchange, alongside ACH and wire, selectable at the point of
+      payment approval. The operational detail — check number sequencing, positive pay integration,
+      supplier notification, expiry management — is handled by Centime rather than requiring the
+      buyer's AP team to manage it.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Is this the same as an eCheck?</div>
+      <p class="faq-a">Not exactly. Deluxe's eCheck and similar products are consumer- and
+      SMB-oriented services where the payee chooses a deposit method (print, direct deposit,
+      PayPal). FlexCheck is a B2B instrument designed for mid-market AP workflows, tightly
+      integrated with Centime Exchange's supplier network, invoice data, and approval processes.
+      The underlying legal construct is similar; the product context is different.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What happens if a bank questions the check?</div>
+      <p class="faq-a">The printed FlexCheck includes a verification reference and contact
+      information for Centime. Banks processing the check can verify its authenticity through
+      standard positive pay enquiry processes or by contacting Centime's support line. Each
+      check carries a unique check number that can be cross-referenced against the payment record
+      in Centime Exchange.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Can a FlexCheck be cancelled after it is sent to the supplier?</div>
+      <p class="faq-a">Yes, provided the supplier has not yet downloaded and printed the check.
+      The buyer can void the check in Centime Exchange at any time before retrieval. Once the
+      supplier has downloaded the check data, voiding requires contacting Centime support. A
+      printed and endorsed check cannot be cancelled by either party — a stop payment request
+      to the bank is required, as with any paper check.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What does the supplier pay for?</div>
+      <p class="faq-a">Nothing, unless they choose to have the check professionally printed and
+      mailed to themselves rather than printing it at their office. That optional print-and-mail
+      service is available directly through the Centime Exchange portal at the supplier's cost
+      (approximately $2 per check). Downloading and printing locally is free.</p>
+    </div>
+
+  </div><!-- /faq -->
+
+</div><!-- /ft-body -->
+
+<!-- ── FOOTER ── -->
+<div class="ft-footer">
+  <p class="ft-footer-disclosure">The legal terms governing FlexCheck — including the
+  single-presentment obligation, the supplier's agency for printing, and the 90-day validity
+  window — form part of the Centime Exchange platform terms of service accepted by suppliers
+  on onboarding. Individual per-check terms are displayed and accepted at the point of check
+  retrieval. Buyers should consult their legal counsel regarding any jurisdiction-specific
+  requirements for their supplier relationships.</p>
+  <div class="ft-footer-meta">
+    <span>Confidential — For client and supplier distribution</span>
+    <span>© 2025 Centime, Inc. All rights reserved.</span>
+  </div>
+</div>
+
+</body>
+</html>

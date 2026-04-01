@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlexCheck — Centime Exchange Product Briefing</title>
+
+  <!-- Reveal.js 5.x -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+
+  <!-- Centime Editorial Theme -->
+  <link rel="stylesheet" href="../../css/theme/centime-editorial.css?v=4">
+
+  <!-- Deck-specific styles -->
+  <style>
+    /* Step flow for how-it-works */
+    .reveal .step-flow {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      margin: 1em 0;
+      border-top: 3px solid var(--ft-black);
+    }
+    .reveal .step-card {
+      padding: 1em 1em 1em 0;
+      border-bottom: 1px solid var(--ft-rule);
+    }
+    .reveal .step-card:not(:nth-child(3n+1)) {
+      padding-left: 1em;
+      border-left: 1px solid var(--ft-rule);
+    }
+    .reveal .step-card:not(:nth-child(3n)) {
+      padding-right: 1em;
+    }
+    .reveal .step-card .step-num {
+      font-family: var(--r-heading-font);
+      font-size: 1.6em;
+      font-weight: 700;
+      color: var(--ft-claret);
+      line-height: 1;
+      margin-bottom: 0.2em;
+    }
+    .reveal .step-card h3 {
+      font-size: 0.72em;
+      color: var(--ft-black);
+      margin-bottom: 0.2em;
+    }
+    .reveal .step-card p {
+      font-family: var(--r-main-font);
+      font-size: 0.52em;
+      color: var(--ft-slate);
+      line-height: 1.5;
+    }
+
+    /* Dark variant for step flow */
+    .slide-dark .step-flow { border-top-color: var(--ft-mandarin); }
+    .slide-dark .step-card { border-bottom-color: rgba(206,198,185,0.15); }
+    .slide-dark .step-card:not(:nth-child(3n+1)) { border-left-color: rgba(206,198,185,0.15); }
+    .slide-dark .step-card .step-num { color: var(--ft-mandarin); }
+    .slide-dark .step-card h3 { color: var(--ft-pink); }
+    .slide-dark .step-card p { color: var(--ft-wheat); opacity: 0.85; }
+
+    /* Two-column split for supplier info */
+    .reveal .split-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin: 1em 0;
+      border-top: 3px solid var(--ft-black);
+    }
+    .reveal .split-col {
+      padding: 1.2em 0;
+      border-bottom: 1px solid var(--ft-rule);
+    }
+    .reveal .split-col:first-child {
+      padding-right: 1.5em;
+      border-right: 1px solid var(--ft-rule);
+    }
+    .reveal .split-col:last-child {
+      padding-left: 1.5em;
+    }
+    .reveal .split-col h3 {
+      font-size: 0.8em;
+      color: var(--ft-black);
+      margin-bottom: 0.5em;
+    }
+    .reveal .split-col ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .reveal .split-col ul li {
+      font-family: var(--r-main-font);
+      font-size: 0.6em;
+      color: var(--ft-slate);
+      line-height: 1.55;
+      padding: 0.3em 0;
+      border-bottom: 1px solid rgba(206,198,185,0.3);
+      padding-left: 1em;
+      position: relative;
+    }
+    .reveal .split-col ul li::before {
+      content: '\2014';
+      position: absolute;
+      left: 0;
+      color: var(--ft-rule);
+    }
+    .reveal .split-col ul li:last-child { border-bottom: none; }
+
+    /* Param list for operational detail */
+    .reveal .param-list {
+      margin: 1em 0;
+      border-top: 3px solid var(--ft-black);
+    }
+    .reveal .param-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.7em 0;
+      border-bottom: 1px solid var(--ft-rule);
+      font-family: var(--r-main-font);
+      font-size: 0.62em;
+      color: var(--ft-dark);
+      line-height: 1.5;
+    }
+    .reveal .param-row .param-label { flex: 1; }
+    .reveal .param-row .param-value {
+      font-family: var(--r-heading-font);
+      font-weight: 700;
+      font-size: 1.1em;
+      color: var(--ft-claret);
+      text-align: right;
+      flex-shrink: 0;
+      margin-left: 1em;
+    }
+
+    /* Question list for claret slides */
+    .reveal .question-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+    .reveal .question-list li {
+      font-family: var(--r-main-font);
+      font-size: 0.72em;
+      font-weight: 400;
+      color: rgba(255,255,255,0.9);
+      padding: 0.7em 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: baseline;
+      gap: 0.7em;
+      line-height: 1.5;
+    }
+    .reveal .question-list .q-num {
+      font-family: var(--r-heading-font);
+      font-size: 1.3em;
+      font-weight: 700;
+      color: var(--ft-wheat);
+      flex-shrink: 0;
+      width: 1.4em;
+    }
+  </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+  <!-- SLIDE 1: TITLE (dark) -->
+  <section data-background-color="#1A1817" class="slide-dark">
+    <div class="eyebrow">Centime Exchange &middot; Product Briefing</div>
+    <h1>FlexCheck</h1>
+    <div class="subtitle">Digitally delivered, supplier-printed payment instruments for mid-market AP.</div>
+    <div class="meta">April 2025 &middot; For distribution to clients and suppliers</div>
+  </section>
+
+  <!-- SLIDE 2: WHAT & WHY (salmon) -->
+  <section data-background-color="#FFF1E5">
+    <div class="section-label">The Concept</div>
+    <h2>Digital authorisation. Paper deposit.</h2>
+    <div class="func-grid">
+      <div class="func-item">
+        <div class="func-num">What It Is</div>
+        <h3>A digitally delivered check</h3>
+        <p>The buyer approves a payment in Centime Exchange. The system generates a fully specified check document &mdash; MICR line, payer details, authorised signature. The supplier prints it on any plain-paper printer and deposits it at their bank exactly like any other business check.</p>
+      </div>
+      <div class="func-item">
+        <div class="func-num">Why It Exists</div>
+        <h3>Suppliers want checks. Buyers want digital.</h3>
+        <p>Many suppliers &mdash; particularly in industries where paper checks remain standard &mdash; are reluctant to adopt ACH, virtual cards, or proprietary networks. FlexCheck meets them where they are. Buyers get digital approval and audit trails with none of the cost or delay of physical check printing and mailing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 3: PULL QUOTE (claret) -->
+  <section data-background-color="#990F3D" class="slide-claret">
+    <div class="section-label">The Proposition</div>
+    <h2>The buyer issues the payment digitally. The supplier receives a check. Both parties get exactly what they expect.</h2>
+  </section>
+
+  <!-- SLIDE 4: HOW IT WORKS (dark) -->
+  <section data-background-color="#1A1817" class="slide-dark">
+    <div class="section-label">Process</div>
+    <h2>Six steps from approval to deposit</h2>
+    <p class="body" style="margin-bottom: 0.6em;">Each step requires the minimum possible action from the supplier.</p>
+    <div class="step-flow">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Buyer approves payment</h3>
+        <p>AP team approves an invoice in Centime Exchange, selecting FlexCheck as the payment method.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Check data generated</h3>
+        <p>Centime generates a fully specified check &mdash; MICR line, routing, account, check number, amount, payee, and authorised signature.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Supplier notified</h3>
+        <p>Email notification with a secure link to retrieve the check from the Centime Exchange portal.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h3>Supplier reviews</h3>
+        <p>Logs in, reviews details, and confirms single-presentment terms.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">5</div>
+        <h3>Supplier prints</h3>
+        <p>Downloads and prints on plain white paper. Colour recommended; black and white accepted.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">6</div>
+        <h3>Supplier deposits</h3>
+        <p>Endorsed and deposited in person, via ATM, or mobile banking app &mdash; exactly like any other check.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 5: OPERATIONAL DETAIL (paper) -->
+  <section data-background-color="#FFF7EF" class="slide-paper">
+    <div class="section-label">Operations</div>
+    <h2>Key parameters</h2>
+    <div class="param-list">
+      <div class="param-row">
+        <span class="param-label"><strong>Validity window</strong> &mdash; auto-expires, no manual voiding required; reminder sent at day 75</span>
+        <span class="param-value">90 days</span>
+      </div>
+      <div class="param-row">
+        <span class="param-label"><strong>Presentment</strong> &mdash; unique check number per authorisation; duplicate deposits rejected automatically</span>
+        <span class="param-value">Single</span>
+      </div>
+      <div class="param-row">
+        <span class="param-label"><strong>MICR standard</strong> &mdash; rendered to ANSI X9.27 E-13B with security background and pantograph void watermark</span>
+        <span class="param-value">E-13B</span>
+      </div>
+      <div class="param-row">
+        <span class="param-label"><strong>Print requirements</strong> &mdash; any standard inkjet or laser printer on plain white paper</span>
+        <span class="param-value">Plain paper</span>
+      </div>
+      <div class="param-row">
+        <span class="param-label"><strong>Deposit channels</strong> &mdash; bank branch, ATM, or mobile remote deposit capture (print first, then photograph)</span>
+        <span class="param-value">All standard</span>
+      </div>
+      <div class="param-row">
+        <span class="param-label"><strong>Geographic scope</strong> &mdash; US domestic, Canada, United Kingdom, Singapore (USD clearing &lt; 30 days)</span>
+        <span class="param-value">4 markets</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 6: SUPPLIER REQUIREMENTS (salmon) -->
+  <section data-background-color="#FFF1E5">
+    <div class="section-label">Supplier Experience</div>
+    <h2>No software. No new accounts. No network membership.</h2>
+    <p class="body" style="margin-bottom: 0.6em;">Receiving a FlexCheck requires an email address, a printer, and an existing bank account. Nothing else.</p>
+    <div class="split-grid">
+      <div class="split-col">
+        <h3>What you need</h3>
+        <ul>
+          <li>An email address on file with your buyer</li>
+          <li>A printer (any standard inkjet or laser)</li>
+          <li>Plain white paper</li>
+          <li>An existing bank account for deposit</li>
+          <li>Internet access to retrieve the check</li>
+        </ul>
+      </div>
+      <div class="split-col">
+        <h3>What you do not need</h3>
+        <ul>
+          <li>Special check stock or MICR paper</li>
+          <li>A Centime account or login</li>
+          <li>A new bank account or network membership</li>
+          <li>Any software installation</li>
+          <li>Any action before payment is ready</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 7: FAQ HIGHLIGHTS (dark) -->
+  <section data-background-color="#1A1817" class="slide-dark">
+    <div class="section-label">Common Questions</div>
+    <h2>Three things people ask first</h2>
+    <div class="func-grid">
+      <div class="func-item">
+        <div class="func-num">Legal Basis</div>
+        <h3>Is a supplier-printed check valid?</h3>
+        <p>Yes. Under UCC Article 3, a negotiable instrument becomes legal when printed on paper. The digital file is check <em>data</em>; the supplier creates the instrument by printing it, acting as the payer's authorised agent. Banks accept these routinely &mdash; the same construct used by Deluxe Payment Exchange.</p>
+      </div>
+      <div class="func-item">
+        <div class="func-num">Differentiation</div>
+        <h3>How is this different from eCheck?</h3>
+        <p>Deluxe's eCheck is consumer- and SMB-oriented. FlexCheck is a B2B instrument integrated into Centime Exchange's AP workflow &mdash; alongside ACH and wire &mdash; with check number sequencing, positive pay integration, supplier notification, and expiry management handled by Centime.</p>
+      </div>
+      <div class="func-item func-item-full">
+        <div class="func-num">Cancellation</div>
+        <h3>Can a FlexCheck be cancelled after it is sent?</h3>
+        <p>Yes, if the supplier has not yet downloaded it &mdash; the buyer voids it in Centime Exchange. After download, voiding requires Centime support. A printed and endorsed check requires a stop payment request to the bank, as with any paper check. Supplier cost: free to download and print locally; optional print-and-mail service available at ~$2 per check.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 8: CLOSING (claret) -->
+  <section data-background-color="#990F3D" class="slide-claret">
+    <div class="section-label">Summary</div>
+    <h2>FlexCheck bridges digital AP and paper-check suppliers</h2>
+    <ul class="question-list">
+      <li>
+        <span class="q-num">1</span>
+        <span>Buyers get digital authorisation, audit trails, and no physical check printing or mailing costs.</span>
+      </li>
+      <li>
+        <span class="q-num">2</span>
+        <span>Suppliers receive a check they can print and deposit with no new software, accounts, or network memberships.</span>
+      </li>
+      <li>
+        <span class="q-num">3</span>
+        <span>Integrated into Centime Exchange as a payment rail alongside ACH and wire &mdash; selected at the point of approval.</span>
+      </li>
+      <li>
+        <span class="q-num">4</span>
+        <span>Supported for US domestic payments and cross-border to Canada, UK, and Singapore.</span>
+      </li>
+    </ul>
+    <div class="closing-line">The buyer issues digitally. The supplier deposits a check. Nothing changes on their end.</div>
+  </section>
+
+</div>
+</div>
+
+<!-- Reveal.js 5.x -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<!-- Menu plugin -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/menu.css">
+<script src="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/menu.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    center: true,
+    transition: 'fade',
+    transitionSpeed: 'default',
+    width: 960,
+    height: 700,
+    margin: 0.04,
+    controls: true,
+    progress: true,
+    slideNumber: true,
+    overview: true,
+    menu: {
+      side: 'left',
+      titleSelector: 'h1, h2, .section-label',
+      hideMissingTitles: true,
+      markers: true,
+      themes: false,
+      transitions: false,
+      openButton: true,
+      openSlideNumber: false,
+    },
+    plugins: [ RevealMenu ],
+  });
+</script>
+</body>
+</html>
