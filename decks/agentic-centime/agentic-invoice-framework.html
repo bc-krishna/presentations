@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Towards an Agentic Framework for Invoice Processing — Centime</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Metric:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ft-salmon: #FFF1E5;
+    --ft-salmon-dark: #F9E5D0;
+    --ft-salmon-deeper: #F2D4B8;
+    --ft-ink: #33302E;
+    --ft-ink-mid: #66605A;
+    --ft-ink-light: #9E9589;
+    --ft-teal: #0D7680;
+    --ft-teal-light: #E8F4F5;
+    --ft-rule: #CFC9C2;
+    --ft-rule-dark: #A8A09A;
+    --ft-accent: #CC0000;
+    --ft-white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--ft-salmon);
+    color: var(--ft-ink);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* MASTHEAD */
+  .masthead {
+    background: var(--ft-ink);
+    color: var(--ft-salmon);
+    padding: 12px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid var(--ft-teal);
+  }
+  .masthead-logo {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--ft-salmon);
+  }
+  .masthead-meta {
+    font-size: 11px;
+    color: var(--ft-ink-light);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* LAYOUT */
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 48px 80px;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 64px 0 40px;
+    border-bottom: 1px solid var(--ft-rule-dark);
+    margin-bottom: 48px;
+  }
+  .hero-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ft-teal);
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--ft-ink);
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--ft-teal);
+  }
+  .hero-standfirst {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ft-ink-mid);
+    max-width: 620px;
+    margin-bottom: 32px;
+    font-style: italic;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 32px;
+    font-size: 12px;
+    color: var(--ft-ink-light);
+    font-family: Arial, sans-serif;
+    letter-spacing: 0.04em;
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+  /* ARTICLE BODY */
+  .article-body {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 56px;
+    align-items: start;
+  }
+  .article-main { min-width: 0; }
+  .article-sidebar { position: sticky; top: 32px; }
+
+  /* SECTION HEADERS */
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ft-teal);
+    font-family: Arial, sans-serif;
+    margin-bottom: 10px;
+    margin-top: 56px;
+    padding-top: 16px;
+    border-top: 2px solid var(--ft-teal);
+    display: block;
+  }
+  .section-label:first-child { margin-top: 0; }
+
+  h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--ft-ink);
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+  h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ft-ink);
+    margin-top: 36px;
+    margin-bottom: 14px;
+  }
+
+  p {
+    margin-bottom: 18px;
+    color: var(--ft-ink);
+  }
+
+  /* PULL QUOTE */
+  .pullquote {
+    border-left: 3px solid var(--ft-teal);
+    padding: 20px 24px;
+    margin: 36px 0;
+    background: var(--ft-salmon-dark);
+  }
+  .pullquote p {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 17px;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--ft-ink);
+    margin: 0;
+  }
+
+  /* BULLET LISTS */
+  ul.ft-list {
+    list-style: none;
+    margin: 16px 0 24px;
+    padding: 0;
+  }
+  ul.ft-list li {
+    padding: 10px 0 10px 20px;
+    position: relative;
+    border-bottom: 1px solid var(--ft-rule);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  ul.ft-list li:first-child { border-top: 1px solid var(--ft-rule); }
+  ul.ft-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 18px;
+    width: 6px;
+    height: 6px;
+    background: var(--ft-teal);
+    border-radius: 50%;
+  }
+  ul.ft-list li strong {
+    font-weight: 600;
+    color: var(--ft-ink);
+    display: block;
+    margin-bottom: 2px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  /* TABLES */
+  .table-wrapper {
+    margin: 28px 0;
+    overflow-x: auto;
+  }
+  .table-title {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ft-ink-mid);
+    margin-bottom: 8px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background: var(--ft-white);
+  }
+  thead th {
+    background: var(--ft-ink);
+    color: var(--ft-salmon);
+    padding: 10px 14px;
+    text-align: left;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  tbody tr:nth-child(even) { background: var(--ft-salmon); }
+  tbody td {
+    padding: 10px 14px;
+    vertical-align: top;
+    border-bottom: 1px solid var(--ft-rule);
+    line-height: 1.5;
+    color: var(--ft-ink);
+  }
+  tbody td:first-child {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ft-teal);
+  }
+
+  /* ARCHITECTURE FLOW */
+  .arch-flow {
+    margin: 28px 0;
+    background: var(--ft-white);
+    border: 1px solid var(--ft-rule);
+    overflow: hidden;
+  }
+  .arch-layer {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--ft-rule);
+  }
+  .arch-layer:last-child { border-bottom: none; }
+  .arch-layer-label {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ft-ink-light);
+    margin-bottom: 12px;
+  }
+  .arch-boxes {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .arch-box {
+    flex: 1;
+    min-width: 120px;
+    padding: 10px 14px;
+    border: 1px solid var(--ft-rule);
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+  }
+  .arch-box.primary { border-color: var(--ft-teal); border-width: 2px; }
+  .arch-box .box-title { font-weight: 500; color: var(--ft-ink); font-size: 13px; }
+  .arch-box .box-sub { font-size: 11px; color: var(--ft-ink-light); margin-top: 3px; }
+  .arch-box.agent-step { background: var(--ft-teal-light); border-color: var(--ft-teal); }
+  .arch-box.human-step { background: var(--ft-salmon-dark); }
+  .arch-box.erp { background: var(--ft-salmon-deeper); }
+  .arch-arrow {
+    text-align: center;
+    padding: 8px;
+    color: var(--ft-teal);
+    font-size: 18px;
+    border-bottom: 1px solid var(--ft-rule);
+  }
+
+  /* MOAT CARDS */
+  .moat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--ft-rule);
+    margin: 24px 0;
+    border: 1px solid var(--ft-rule);
+  }
+  .moat-card {
+    background: var(--ft-white);
+    padding: 20px;
+  }
+  .moat-card-label {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ft-teal);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .moat-card h4 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ft-ink);
+    margin-bottom: 8px;
+  }
+  .moat-card p {
+    font-size: 13px;
+    color: var(--ft-ink-mid);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* TIMELINE */
+  .timeline {
+    margin: 24px 0;
+    border-left: 2px solid var(--ft-rule-dark);
+    padding-left: 24px;
+  }
+  .timeline-item {
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -30px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--ft-teal);
+    border: 2px solid var(--ft-salmon);
+  }
+  .timeline-label {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ft-teal);
+    margin-bottom: 4px;
+  }
+  .timeline-text {
+    font-size: 14px;
+    color: var(--ft-ink-mid);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* SIDEBAR */
+  .sidebar-card {
+    background: var(--ft-ink);
+    color: var(--ft-salmon);
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .sidebar-card-label {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ft-teal);
+    font-weight: 500;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+  }
+  .sidebar-card p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #CFC9C2;
+    margin-bottom: 10px;
+  }
+  .sidebar-card p:last-child { margin-bottom: 0; }
+  .sidebar-toc { background: var(--ft-white); border: 1px solid var(--ft-rule); padding: 20px; margin-bottom: 24px; }
+  .sidebar-toc-label {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ft-ink-light);
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .sidebar-toc ol { list-style: none; padding: 0; counter-reset: toc; }
+  .sidebar-toc ol li {
+    counter-increment: toc;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    color: var(--ft-ink-mid);
+    padding: 7px 0;
+    border-bottom: 1px solid var(--ft-rule);
+    cursor: pointer;
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+  }
+  .sidebar-toc ol li:last-child { border-bottom: none; }
+  .sidebar-toc ol li::before {
+    content: counter(toc);
+    color: var(--ft-teal);
+    font-size: 10px;
+    font-weight: 500;
+    min-width: 14px;
+  }
+  .sidebar-toc ol li:hover { color: var(--ft-teal); }
+
+  /* CLAIMS TABLE BADGE */
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-family: Arial, sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 2px;
+  }
+  .badge-yes { background: #E0F5E9; color: #1A7A3A; }
+  .badge-partial { background: #FFF4D6; color: #8A5A00; }
+
+  /* FOOTER */
+  footer {
+    border-top: 2px solid var(--ft-rule-dark);
+    margin-top: 64px;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    color: var(--ft-ink-light);
+    letter-spacing: 0.04em;
+  }
+
+  /* PRINT */
+  @media print {
+    .masthead, footer { break-inside: avoid; }
+    .article-body { grid-template-columns: 1fr; }
+    .article-sidebar { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-logo">Centime</div>
+  <div class="masthead-meta">Internal Working Paper &nbsp;·&nbsp; Confidential</div>
+</div>
+
+<div class="page">
+
+  <div class="hero">
+    <div class="hero-kicker">Product Strategy &nbsp;·&nbsp; Agentic Finance</div>
+    <h1>Towards an Agentic Framework<br>for <em>Invoice Processing</em></h1>
+    <p class="hero-standfirst">A framework for AI-driven invoice capture, assessment, and approval — what large language models provide, what Centime provides, and why the combination is harder to replicate than it appears.</p>
+    <div class="hero-meta">
+      <span>Centime Inc.</span>
+      <span>2025</span>
+      <span>For internal distribution</span>
+    </div>
+  </div>
+
+  <div class="article-body">
+  <div class="article-main">
+
+    <!-- EXEC SUMMARY -->
+    <span class="section-label">Executive Summary</span>
+    <p>The emergence of large language models and AI agents creates a credible path to automating the first mile of accounts payable — the work of getting raw invoices from an email inbox to a ready-to-post state in the ERP. This paper describes the architecture of such a system, the role LLMs play within it, and the proprietary infrastructure that Centime brings to make the approach reliable, trustworthy, and defensible.</p>
+
+    <div class="pullquote">
+      <p>The agent framework is available to anyone. What makes it work at the confidence levels required for financial automation is the data and trust infrastructure it runs on — and that is what Centime owns.</p>
+    </div>
+
+    <!-- THE PROBLEM -->
+    <span class="section-label" id="s1">1. The Problem This Solves</span>
+    <h2>The first mile remains manual</h2>
+    <p>Conventional AP automation improves the workflow once an invoice is in the system — routing, approval, coding, payment. But the first mile remains largely manual: someone receives an email, downloads a PDF, uploads it to the AP system, and initiates the process.</p>
+    <p>For a mid-market company processing hundreds of invoices a month, this is a material cost. More importantly, it is an unstructured, error-prone process that creates the ambiguities downstream automation then has to handle.</p>
+    <p>An agentic approach begins earlier — monitoring an email inbox, capturing and structuring invoices automatically, looking up suppliers, assessing approval readiness using AI, and surfacing only the exceptions that genuinely need human judgment. The goal is not to remove humans from AP. It is to concentrate human judgment where it adds value — on exceptions, on oversight, on policy — and eliminate it where it does not.</p>
+
+    <!-- WHAT IS AGENTIC -->
+    <span class="section-label" id="s2">2. What Makes a System Agentic</span>
+    <h2>Five characteristics, precisely defined</h2>
+    <p>The term "agentic" is used loosely in the market. Precisely defined, an agentic system has five characteristics that distinguish it from conventional automation:</p>
+
+    <ul class="ft-list">
+      <li><strong>Goal-directed</strong>It is given a goal, not a set of instructions — it determines the steps required to reach it.</li>
+      <li><strong>Persistent state</strong>It maintains context across a workflow that may span hours or days, remembering prior actions and their outcomes.</li>
+      <li><strong>Autonomous decision-making</strong>When the process reaches a fork, the agent chooses a path without requesting human input.</li>
+      <li><strong>Tool use across system boundaries</strong>The agent calls external systems as instruments — email, ERP, verification APIs — and orchestrates across them.</li>
+      <li><strong>Self-correction</strong>When an action does not produce the expected result, the agent tries a different approach.</li>
+    </ul>
+
+    <p>Invoice processing meets all five criteria when properly architected. The agent monitors for invoices, decides how to handle each one, calls external systems to validate and enrich, and routes exceptions — without a human directing each step.</p>
+
+    <!-- ARCHITECTURE -->
+    <span class="section-label" id="s3">3. The Architecture</span>
+    <h2>From email inbox to ready-to-post</h2>
+
+    <h3>3.1 Ingestion Layer</h3>
+    <p>Email is the primary intake path. The agent monitors a designated AP email address — ap@company.com or equivalent — and detects incoming invoices as they arrive. This is where the majority of supplier invoices enter the system in practice, and the architecture is designed around this reality.</p>
+    <p>Centime Exchange, the supplier portal, is a secondary path where it exists — one that produces cleaner, more structured input and therefore reduces the agent's extraction workload. Manual upload through the existing Centime AP interface remains available. The quality of the input path directly determines the automation rate achievable downstream.</p>
+
+    <div class="arch-flow">
+      <div class="arch-layer">
+        <div class="arch-layer-label">Ingestion</div>
+        <div class="arch-boxes">
+          <div class="arch-box primary">
+            <div class="box-title">Email inbox</div>
+            <div class="box-sub">Primary path — ap@company.com</div>
+          </div>
+          <div class="arch-box">
+            <div class="box-title">Centime Exchange</div>
+            <div class="box-sub">Structured input — clean path</div>
+          </div>
+          <div class="arch-box erp">
+            <div class="box-title">Manual upload</div>
+            <div class="box-sub">Existing Centime AP</div>
+          </div>
+        </div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-layer">
+        <div class="arch-layer-label">Agent processing</div>
+        <div class="arch-boxes">
+          <div class="arch-box agent-step"><div class="box-title">Extract + structure</div><div class="box-sub">OCR, LLM parsing</div></div>
+          <div class="arch-box agent-step"><div class="box-title">Supplier lookup</div><div class="box-sub">ERP + Centime vendor master</div></div>
+          <div class="arch-box agent-step"><div class="box-title">Predictive PO match</div><div class="box-sub">Confidence-scored</div></div>
+          <div class="arch-box agent-step"><div class="box-title">AI assessment</div><div class="box-sub">GL coding, fraud signals</div></div>
+        </div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-layer">
+        <div class="arch-layer-label">Routing</div>
+        <div class="arch-boxes">
+          <div class="arch-box primary"><div class="box-title">Ready to post</div><div class="box-sub">High confidence → batch digest</div></div>
+          <div class="arch-box human-step"><div class="box-title">Exception queue</div><div class="box-sub">Centime AP control tower</div></div>
+        </div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-layer">
+        <div class="arch-layer-label">Human layer</div>
+        <div class="arch-boxes">
+          <div class="arch-box human-step" style="flex:2"><div class="box-title">Hourly digest</div><div class="box-sub">AP person confirms batch / reviews exceptions</div></div>
+          <div class="arch-box erp" style="flex:2"><div class="box-title">Post to ERP + update forecast</div><div class="box-sub">Bank and cash position updated</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>3.2 The Agent Processing Loop</h3>
+    <p>Once an invoice is ingested, the agent executes a sequential assessment pipeline. Each step produces a confidence score that accumulates into an overall readiness assessment.</p>
+
+    <ul class="ft-list">
+      <li><strong>Extract and structure</strong>OCR for scanned documents, followed by LLM-based field extraction regardless of supplier format variation: vendor name, amount, line items, payment terms, PO reference.</li>
+      <li><strong>Supplier lookup</strong>The extracted vendor name is resolved against the Centime vendor master and the ERP's vendor records using fuzzy matching across name, address, tax ID, email domain, and prior payment history.</li>
+      <li><strong>Predictive PO matching</strong>Confidence-scored rather than binary — a 94% confident match on a recurring vendor proceeds; a 67% match on a new vendor is flagged. This replaces the brittle rules-based matching that generates excessive exceptions.</li>
+      <li><strong>AI assessment</strong>GL coding confidence, duplicate detection, amount reasonableness against vendor history, and fraud signals — new bank account, round amounts, entity name variations, recently registered vendors.</li>
+    </ul>
+
+    <h3>3.3 Human Oversight</h3>
+    <p>The AP person receives a periodic digest summarising invoices ready for batch confirmation alongside flagged exceptions requiring attention. The existing Centime AP interface becomes the control tower rather than the primary work surface — where humans exercise judgment over what the agent could not resolve with sufficient confidence, not where routine work gets done.</p>
+
+    <!-- LLM ROLE -->
+    <span class="section-label" id="s4">4. What the LLM Provides</span>
+    <h2>Specific capabilities, not general intelligence</h2>
+    <p>Large language models contribute specific capabilities within the pipeline that would be difficult or impossible to achieve with traditional rules-based approaches.</p>
+
+    <div class="table-wrapper">
+      <div class="table-title">LLM contributions by pipeline stage</div>
+      <table>
+        <thead>
+          <tr><th>Capability</th><th>What the LLM does</th><th>Why it matters</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Invoice extraction</td><td>Parses unstructured PDF and email content into structured fields regardless of format variation between suppliers</td><td>Eliminates per-supplier template configuration</td></tr>
+          <tr><td>GL coding</td><td>Infers the correct GL account, cost centre, and project code from line item descriptions and vendor history, without predefined rules</td><td>Handles new vendors and non-standard line items gracefully</td></tr>
+          <tr><td>Vendor name resolution</td><td>Matches extracted vendor names to ERP records despite spelling variations, abbreviations, and legal entity suffixes</td><td>Reduces false negatives that rules engines miss</td></tr>
+          <tr><td>Predictive PO matching</td><td>Assesses probability of invoice-to-PO match across multiple signals rather than requiring exact reconciliation</td><td>Dramatically reduces exceptions from minor discrepancies</td></tr>
+          <tr><td>Anomaly reasoning</td><td>Identifies patterns suggesting fraud, duplicates, or data quality issues, and explains its reasoning</td><td>Provides defensible audit trail for automated decisions</td></tr>
+          <tr><td>Supplier communication</td><td>Drafts and interprets communications with suppliers during enrollment and exception resolution</td><td>Enables fully automated supplier onboarding</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Importantly, the LLM is not making final financial decisions. It is producing structured, confidence-scored assessments that either clear an invoice for posting or surface it for human review. Financial decision authority remains with the customer's AP team and the policies they have defined.</p>
+
+    <!-- COMMODITY VS PROPRIETARY -->
+    <span class="section-label" id="s5">5. Commodity vs. Proprietary</span>
+    <h2>What anyone can build, and what they cannot</h2>
+
+    <h3>5.1 Commodity components</h3>
+    <p>The following elements are broadly available and do not represent competitive differentiation. Any well-resourced engineering team could assemble them within months:</p>
+    <ul class="ft-list">
+      <li>Email monitoring and inbox management</li>
+      <li>PDF OCR and document processing libraries</li>
+      <li>LLM API access for extraction and classification</li>
+      <li>Confidence scoring frameworks and orchestration patterns</li>
+      <li>Basic ERP API integrations</li>
+    </ul>
+    <p>This is the agent framework. It is necessary but not sufficient.</p>
+
+    <h3>5.2 What Centime provides that others cannot easily replicate</h3>
+    <p>The agent framework only delivers reliable automation when it runs on trustworthy data. That is what Centime provides.</p>
+
+    <div class="table-wrapper">
+      <div class="table-title">Centime's proprietary assets</div>
+      <table>
+        <thead>
+          <tr><th>Asset</th><th>What it is</th><th>Why it is hard to replicate</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Verified supplier network</td><td>Suppliers enrolled through Centime's agentic onboarding — entity verified via Middesk, bank account verified, enrollment history maintained</td><td>Requires a functioning supplier portal, verification integrations, and growing enrollment volume over time</td></tr>
+          <tr><td>Bank connectivity</td><td>Direct integration with bank partners including FNBO and M&T, providing real cash position data and payment execution capability</td><td>Bank relationships take years to establish; compliance and trust requirements are high barriers to entry</td></tr>
+          <tr><td>Transaction history</td><td>Every invoice processed through Centime builds a pattern model per vendor — typical amount ranges, coding patterns, payment behaviour</td><td>A new entrant starts with no history; the model improves with use, creating compounding advantage for incumbents</td></tr>
+          <tr><td>ERP integrations</td><td>Production-tested integrations with NetSuite, Sage Intacct, and Microsoft Dynamics covering vendor master, PO data, and GL structure</td><td>Each ERP integration is months of engineering; edge cases accumulate with production usage</td></tr>
+          <tr><td>Bank channel distribution</td><td>Established white-label distribution through bank partners who have completed compliance review</td><td>Bank partnerships cannot be purchased; they are earned through demonstrated trust and track record</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- THE MOAT -->
+    <span class="section-label" id="s6">6. Centime's Moat</span>
+    <h2>Trust architecture, not model intelligence</h2>
+
+    <div class="pullquote">
+      <p>Supplier lookup only resolves reliably because Centime has already enrolled and verified the supplier. Predictive PO matching only achieves high confidence because Centime has transaction history against which to calibrate. The agent's automation rate reflects the quality of this infrastructure, not the sophistication of the model.</p>
+    </div>
+
+    <div class="moat-grid">
+      <div class="moat-card">
+        <div class="moat-card-label">Asset 1</div>
+        <h4>Verified supplier network</h4>
+        <p>A competitor can build the same agent. They cannot build a verified supplier network with entity validation and bank account verification at scale without years of enrollment activity.</p>
+      </div>
+      <div class="moat-card">
+        <div class="moat-card-label">Asset 2</div>
+        <h4>Bank partnerships</h4>
+        <p>Banks will not white-label an agent framework from an unknown startup. They extend what Centime already has — an established relationship, compliance posture, and proven track record.</p>
+      </div>
+      <div class="moat-card">
+        <div class="moat-card-label">Asset 3</div>
+        <h4>Transaction history</h4>
+        <p>Every invoice processed calibrates the confidence models to a customer's specific vendor patterns. The longer a customer uses Centime, the higher the automation rate — a switching cost built into the product.</p>
+      </div>
+      <div class="moat-card">
+        <div class="moat-card-label">Asset 4</div>
+        <h4>Production ERP depth</h4>
+        <p>ERP integrations accumulate edge cases and exceptions that only surface in production. Years of live usage creates reliability that is impossible to shortcut.</p>
+      </div>
+    </div>
+
+    <p>Each asset grows in value with usage. More suppliers enrolled means better lookup. More invoices processed means better PO matching confidence. More bank partners means broader distribution. The moat is self-reinforcing over time.</p>
+
+    <!-- TIMELINE -->
+    <span class="section-label" id="s7">7. An Honest Assessment</span>
+    <h2>A 3–5 year journey to full realisation</h2>
+    <p>Agentic AP at the level described here will not be fully realised immediately. Several honest constraints apply:</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-label">Input quality</div>
+        <p class="timeline-text">The automation rate is bounded by input quality. Suppliers who submit outside email — in non-standard formats, without PO references — generate more exceptions. The agentic path improves as supplier data quality improves.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-label">Payment execution trust</div>
+        <p class="timeline-text">Autonomous payment execution will lag autonomous approval. Most mid-market Controllers are not ready to remove human authorisation from payment execution entirely, for audit, fraud, and liability reasons.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-label">System readiness</div>
+        <p class="timeline-text">Reliable agentic workflows across ERP, bank, and supplier systems require those systems to be agent-ready — with stable APIs, consistent data models, and reliable event streams. Not all ERP systems are there yet.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-label">Exception design</div>
+        <p class="timeline-text">The exception queue is where human judgment concentrates. Designing that experience well — so the AP person can assess and resolve exceptions quickly — determines whether the automation feels real or just shifts the burden.</p>
+      </div>
+    </div>
+
+    <!-- WHAT WE CAN CLAIM -->
+    <span class="section-label" id="s8">8. What Centime Can Credibly Claim Today</span>
+    <h2>Honest claims, defensible positions</h2>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>Capability</th><th>Claim</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Supplier onboarding</td>
+            <td>Fully agentic — no human involvement required on the Centime side</td>
+            <td><span class="badge badge-yes">Credible now</span></td>
+          </tr>
+          <tr>
+            <td>Invoice extraction</td>
+            <td>Automated extraction from email with LLM-assisted structuring</td>
+            <td><span class="badge badge-yes">Credible now</span></td>
+          </tr>
+          <tr>
+            <td>Supplier lookup</td>
+            <td>High-confidence resolution for enrolled suppliers against verified vendor master</td>
+            <td><span class="badge badge-yes">Credible now</span></td>
+          </tr>
+          <tr>
+            <td>Predictive PO matching</td>
+            <td>Confidence-scored matching for invoices with PO coverage</td>
+            <td><span class="badge badge-partial">Near term</span></td>
+          </tr>
+          <tr>
+            <td>AI assessment</td>
+            <td>Automated GL coding, duplicate detection, and fraud signal identification</td>
+            <td><span class="badge badge-partial">Near term</span></td>
+          </tr>
+          <tr>
+            <td>Human oversight</td>
+            <td>Exception-based review with full agent reasoning visible</td>
+            <td><span class="badge badge-yes">Credible now</span></td>
+          </tr>
+          <tr>
+            <td>Payment execution</td>
+            <td>Human-authorised, agent-prepared</td>
+            <td><span class="badge badge-yes">Credible now</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- CONCLUSION -->
+    <span class="section-label">Conclusion</span>
+    <h2>The agent is the interface. The infrastructure is the product.</h2>
+    <p>The agentic approach to invoice processing is technically feasible today, commercially compelling, and architecturally aligned with where Centime is already building. The framework described here is not a research concept — it is a near-term product extension built on infrastructure Centime has already developed.</p>
+    <p>The distinction that matters competitively is not whether a company can build an agent. It is whether the agent has trustworthy data to work with, reliable systems to act within, and bank-channel distribution to reach mid-market buyers at scale.</p>
+
+    <div class="pullquote">
+      <p>The supplier network, bank connectivity, transaction history, and distribution channel are the product. The agent is the interface to all of it.</p>
+    </div>
+
+  </div><!-- end article-main -->
+
+  <div class="article-sidebar">
+    <div class="sidebar-toc">
+      <div class="sidebar-toc-label">Contents</div>
+      <ol>
+        <li>The problem this solves</li>
+        <li>What makes a system agentic</li>
+        <li>The architecture</li>
+        <li>What the LLM provides</li>
+        <li>Commodity vs. proprietary</li>
+        <li>Centime's moat</li>
+        <li>An honest assessment</li>
+        <li>What we can claim today</li>
+      </ol>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-card-label">Key distinction</div>
+      <p>Anyone can assemble the agent framework in months. The verified supplier network, bank connectivity, and transaction history that make it trustworthy take years.</p>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-card-label">Near-term claim</div>
+      <p>Automated first-mile processing for invoices from enrolled suppliers with PO coverage. Meaningful, deliverable, and defensible.</p>
+    </div>
+  </div>
+
+  </div><!-- end article-body -->
+
+  <footer>
+    <span>Centime Inc. &nbsp;·&nbsp; Internal Working Paper</span>
+    <span>Confidential &nbsp;·&nbsp; Not for distribution</span>
+  </footer>
+
+</div>
+</body>
+</html>
