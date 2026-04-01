@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Towards an Agentic Framework for Payment Orchestration — Centime</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ft-salmon: #FFF1E5;
+    --ft-salmon-dark: #F9E5D0;
+    --ft-salmon-deeper: #F2D4B8;
+    --ft-ink: #33302E;
+    --ft-ink-mid: #66605A;
+    --ft-ink-light: #9E9589;
+    --ft-teal: #0D7680;
+    --ft-teal-light: #E8F4F5;
+    --ft-rule: #CFC9C2;
+    --ft-rule-dark: #A8A09A;
+    --ft-white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--ft-salmon);
+    color: var(--ft-ink);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .masthead {
+    background: var(--ft-ink);
+    color: var(--ft-salmon);
+    padding: 12px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid var(--ft-teal);
+  }
+  .masthead-logo {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--ft-salmon);
+  }
+  .masthead-meta {
+    font-size: 11px;
+    color: var(--ft-ink-light);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 48px 80px;
+  }
+
+  .hero {
+    padding: 64px 0 40px;
+    border-bottom: 1px solid var(--ft-rule-dark);
+    margin-bottom: 48px;
+  }
+  .hero-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ft-teal);
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--ft-ink);
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--ft-teal);
+  }
+  .hero-standfirst {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ft-ink-mid);
+    max-width: 620px;
+    margin-bottom: 32px;
+    font-style: italic;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 32px;
+    font-size: 12px;
+    color: var(--ft-ink-light);
+    font-family: Arial, sans-serif;
+    letter-spacing: 0.04em;
+  }
+
+  .article-body {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 56px;
+    align-items: start;
+  }
+  .article-main { min-width: 0; }
+  .article-sidebar { position: sticky; top: 32px; }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ft-teal);
+    font-family: Arial, sans-serif;
+    margin-bottom: 10px;
+    margin-top: 56px;
+    padding-top: 16px;
+    border-top: 2px solid var(--ft-teal);
+    display: block;
+  }
+  .section-label:first-child { margin-top: 0; }
+
+  h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--ft-ink);
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+  h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ft-ink);
+    margin-top: 36px;
+    margin-bottom: 14px;
+  }
+
+  p { margin-bottom: 18px; color: var(--ft-ink); }
+
+  .pullquote {
+    border-left: 3px solid var(--ft-teal);
+    padding: 20px 24px;
+    margin: 36px 0;
+    background: var(--ft-salmon-dark);
+  }
+  .pullquote p {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 17px;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--ft-ink);
+    margin: 0;
+  }
+
+  ul.ft-list {
+    list-style: none;
+    margin: 16px 0 24px;
+    padding: 0;
+  }
+  ul.ft-list li {
+    padding: 10px 0 10px 20px;
+    position: relative;
+    border-bottom: 1px solid var(--ft-rule);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  ul.ft-list li:first-child { border-top: 1px solid var(--ft-rule); }
+  ul.ft-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 18px;
+    width: 6px;
+    height: 6px;
+    background: var(--ft-teal);
+    border-radius: 50%;
+  }
+  ul.ft-list li strong {
+    font-weight: 600;
+    color: var(--ft-ink);
+    display: block;
+    margin-bottom: 2px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .table-wrapper { margin: 28px 0; overflow-x: auto; }
+  .table-title {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ft-ink-mid);
+    margin-bottom: 8px;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; background: var(--ft-white); }
+  thead th {
+    background: var(--ft-ink);
+    color: var(--ft-salmon);
+    padding: 10px 14px;
+    text-align: left;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  tbody tr:nth-child(even) { background: var(--ft-salmon); }
+  tbody td {
+    padding: 10px 14px;
+    vertical-align: top;
+    border-bottom: 1px solid var(--ft-rule);
+    line-height: 1.5;
+    color: var(--ft-ink);
+  }
+  tbody td:first-child {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ft-teal);
+  }
+
+  /* PAYMENT FLOW */
+  .payment-flow {
+    margin: 28px 0;
+    background: var(--ft-white);
+    border: 1px solid var(--ft-rule);
+  }
+  .flow-layer {
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--ft-rule);
+  }
+  .flow-layer:last-child { border-bottom: none; }
+  .flow-layer-label {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ft-ink-light);
+    margin-bottom: 12px;
+  }
+  .flow-boxes { display: flex; gap: 10px; flex-wrap: wrap; }
+  .flow-box {
+    flex: 1;
+    min-width: 110px;
+    padding: 10px 12px;
+    border: 1px solid var(--ft-rule);
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    background: var(--ft-salmon);
+  }
+  .flow-box.agent { background: var(--ft-teal-light); border-color: var(--ft-teal); border-width: 1.5px; }
+  .flow-box.human { background: var(--ft-salmon-dark); }
+  .flow-box.bank  { background: var(--ft-salmon-deeper); }
+  .flow-box .bt { font-weight: 500; color: var(--ft-ink); font-size: 12px; }
+  .flow-box .bs { font-size: 11px; color: var(--ft-ink-light); margin-top: 3px; }
+  .flow-arrow {
+    text-align: center;
+    padding: 6px;
+    color: var(--ft-teal);
+    font-size: 16px;
+    border-bottom: 1px solid var(--ft-rule);
+  }
+
+  /* OPTIMIZATION TABLE */
+  .opt-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--ft-rule);
+    margin: 24px 0;
+    border: 1px solid var(--ft-rule);
+  }
+  .opt-card { background: var(--ft-white); padding: 18px 20px; }
+  .opt-card-label {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ft-teal);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .opt-card h4 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ft-ink);
+    margin-bottom: 6px;
+  }
+  .opt-card p { font-size: 13px; color: var(--ft-ink-mid); line-height: 1.5; margin: 0; }
+
+  /* BARRIER BLOCKS */
+  .barrier-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .barrier-block {
+    padding: 20px;
+    border: 1px solid var(--ft-rule);
+    background: var(--ft-white);
+  }
+  .barrier-block.primary { border-color: var(--ft-teal); border-width: 2px; }
+  .barrier-num {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--ft-teal);
+    opacity: 0.3;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .barrier-title {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ft-ink);
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+  .barrier-text { font-size: 13px; color: var(--ft-ink-mid); line-height: 1.55; margin: 0; }
+
+  /* TIMELINE */
+  .timeline {
+    margin: 24px 0;
+    border-left: 2px solid var(--ft-rule-dark);
+    padding-left: 24px;
+  }
+  .timeline-item { margin-bottom: 24px; position: relative; }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -30px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--ft-teal);
+    border: 2px solid var(--ft-salmon);
+  }
+  .timeline-label {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ft-teal);
+    margin-bottom: 4px;
+  }
+  .timeline-text { font-size: 14px; color: var(--ft-ink-mid); line-height: 1.55; margin: 0; }
+
+  /* SIDEBAR */
+  .sidebar-card {
+    background: var(--ft-ink);
+    color: var(--ft-salmon);
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .sidebar-card-label {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ft-teal);
+    font-weight: 500;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+  }
+  .sidebar-card p { font-size: 13px; line-height: 1.6; color: #CFC9C2; margin-bottom: 10px; }
+  .sidebar-card p:last-child { margin-bottom: 0; }
+  .sidebar-toc {
+    background: var(--ft-white);
+    border: 1px solid var(--ft-rule);
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  .sidebar-toc-label {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ft-ink-light);
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .sidebar-toc ol { list-style: none; padding: 0; counter-reset: toc; }
+  .sidebar-toc ol li {
+    counter-increment: toc;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    color: var(--ft-ink-mid);
+    padding: 7px 0;
+    border-bottom: 1px solid var(--ft-rule);
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+  }
+  .sidebar-toc ol li:last-child { border-bottom: none; }
+  .sidebar-toc ol li::before {
+    content: counter(toc);
+    color: var(--ft-teal);
+    font-size: 10px;
+    font-weight: 500;
+    min-width: 14px;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-family: Arial, sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 2px;
+  }
+  .badge-yes { background: #E0F5E9; color: #1A7A3A; }
+  .badge-partial { background: #FFF4D6; color: #8A5A00; }
+  .badge-future { background: #F0F0F0; color: #666; }
+
+  footer {
+    border-top: 2px solid var(--ft-rule-dark);
+    margin-top: 64px;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    color: var(--ft-ink-light);
+    letter-spacing: 0.04em;
+  }
+
+  @media print {
+    .article-body { grid-template-columns: 1fr; }
+    .article-sidebar { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-logo">Centime</div>
+  <div class="masthead-meta">Internal Working Paper &nbsp;·&nbsp; Confidential</div>
+</div>
+
+<div class="page">
+
+  <div class="hero">
+    <div class="hero-kicker">Product Strategy &nbsp;·&nbsp; Agentic Finance</div>
+    <h1>Towards an Agentic Framework<br>for <em>Payment Orchestration</em></h1>
+    <p class="hero-standfirst">Payment execution is more complex, more consequential, and harder to replicate than invoice capture. This paper sets out the architecture of an agentic payment system, what it requires to work reliably, and why replication demands capabilities that take years to build.</p>
+    <div class="hero-meta">
+      <span>Centime Inc.</span>
+      <span>2025</span>
+      <span>For internal distribution</span>
+    </div>
+  </div>
+
+  <div class="article-body">
+  <div class="article-main">
+
+    <!-- EXEC SUMMARY -->
+    <span class="section-label">Executive Summary</span>
+    <p>Agentic invoice capture is a meaningful capability. Agentic payment orchestration is a more valuable one — and a harder one to build. The reason is structural: payments span multiple modalities, multiple systems, and multiple failure modes. Each payment is also a financial optimization decision that most AP teams currently make by default rather than by analysis. An agent with access to real-time cash position, payment terms, modality economics, and supplier preferences can make better decisions on every payment, automatically. The barriers to replicating this are not primarily technical. They are the depth of payment stack access required and the entitlement to participate in a client's payment workflow — both of which Centime earns through its bank channel in ways a direct-to-market competitor cannot easily replicate.</p>
+
+    <div class="pullquote">
+      <p>Getting into a client's payment workflow is not a procurement decision. It is a trust decision made by a CFO, validated by their bank, and underwritten by their audit posture. The bank channel solves this. Nothing else does it as efficiently.</p>
+    </div>
+
+    <!-- THE PROBLEM -->
+    <span class="section-label" id="s1">1. The Problem This Solves</span>
+    <h2>Payments are executed, not optimized</h2>
+    <p>In most mid-market AP operations, payment decisions are made by default. Invoices are paid when someone processes the queue, using whatever payment method is configured for that vendor, with limited awareness of discount windows, cash position, or modality economics. The result is a material and largely invisible cost: missed early pay discounts, suboptimal payment timing, unnecessary wire fees, and working capital tied up in payables that could have been extended.</p>
+    <p>The complexity is compounded by the diversity of payment types in practice. A single AP run might include domestic ACH, international wires in multiple currencies, virtual card payments, check runs, and early pay program settlements. Each has different rules, cutoff times, cost profiles, failure modes, and remittance requirements. Managing this well requires more information and faster decision-making than most AP teams can provide manually.</p>
+    <p>An agentic payment system addresses this by treating every payment as an optimization problem — selecting modality, timing execution, routing remittance, confirming settlement, and handling failures — continuously, across the full payables portfolio.</p>
+
+    <!-- WHAT MAKES IT COMPLEX -->
+    <span class="section-label" id="s2">2. Why Payments Are Structurally Complex</span>
+    <h2>Complexity that does not simplify with AI</h2>
+    <p>Invoice capture complexity is largely a data quality and extraction problem — one that LLMs are well suited to reduce. Payment complexity is different in character. It is process complexity rooted in decades of banking infrastructure, regulatory requirements, and failure recovery patterns. Adding an LLM layer does not make it simpler. It makes it more automatable, which is different.</p>
+
+    <ul class="ft-list">
+      <li><strong>Multiple payment modalities</strong>ACH, domestic wire, international wire, virtual card, RTP, check, early pay settlement — each with distinct timing windows, cutoff times, reversal rules, fee structures, and failure modes. Selecting the right modality per payment requires knowing all of them.</li>
+      <li><strong>International payments</strong>FX rate timing, correspondent banking chains, local payment rails by country, beneficiary bank validation requirements, sanctions screening, regulatory purpose codes, and country-specific reporting obligations. A payment to a supplier in Germany has a materially different process than one in Brazil or Thailand.</li>
+      <li><strong>Remittance delivery</strong>Getting remittance detail to the supplier in a format their AR system can consume for cash application remains one of the most persistently unsolved problems in B2B payments. EDI 820, structured email, PDF advice, and portal posting are all in active use. Mismatched remittance creates reconciliation work on the supplier side that damages relationships.</li>
+      <li><strong>Settlement confirmation</strong>Initiating a payment and confirming it arrived are different events, sometimes separated by days. ACH returns can arrive up to two business days after settlement. International wires can be held in correspondent chains. An agent that initiates and forgets has not completed the process.</li>
+      <li><strong>Failure recovery</strong>When a payment fails — wrong account number, returned ACH, rejected wire — the recovery process is almost entirely manual today. Diagnose the failure reason, correct the data, resubmit through the right channel. This is exactly the kind of structured, multi-step remediation process an agent can handle reliably.</li>
+    </ul>
+
+    <!-- OPTIMIZATION -->
+    <span class="section-label" id="s3">3. Intelligent Payment Routing</span>
+    <h2>Every payment is an optimization decision</h2>
+    <p>Beyond execution, the agent can optimize across four dimensions simultaneously on every payment. This is where the financial value concentrates — and where the distance from conventional AP automation is greatest.</p>
+
+    <div class="opt-grid">
+      <div class="opt-card">
+        <div class="opt-card-label">Dimension 1</div>
+        <h4>Payment timing</h4>
+        <p>Pay on day 28 of net 30 terms — not day 1, not day 31. The agent knows the due date, the current bank balance, and the cash forecast. It preserves float without risking late fees. A human processing a queue does not optimize this. They pay when they reach the invoice.</p>
+      </div>
+      <div class="opt-card">
+        <div class="opt-card-label">Dimension 2</div>
+        <h4>Early pay discount capture</h4>
+        <p>Every invoice with early pay terms is evaluated against the effective APR of taking the discount versus the company's cost of capital. The decision is made automatically, before the window closes. Discount windows are consistently missed in manual AP operations — not through negligence but through volume and timing.</p>
+      </div>
+      <div class="opt-card">
+        <div class="opt-card-label">Dimension 3</div>
+        <h4>Modality selection</h4>
+        <p>Virtual card on eligible suppliers generates a rebate. ACH on standard terms is lowest cost. Early pay via CentimeCredit generates a spread. Wire is used only when necessary. The agent selects the optimal modality per invoice based on supplier acceptance, amount, timing, and rebate economics — not a blanket policy.</p>
+      </div>
+      <div class="opt-card">
+        <div class="opt-card-label">Dimension 4</div>
+        <h4>Working capital sequencing</h4>
+        <p>Across the full payables portfolio, the agent sequences payments to maximise days payable outstanding without triggering late fees or damaging supplier relationships. This is a treasury-level optimisation that most mid-market companies do not perform because it is too complex to execute manually at the invoice level.</p>
+      </div>
+    </div>
+
+    <p>These dimensions interact. An invoice might be worth taking the early pay discount on — but only if cash position supports it, and only if the rebate from virtual card does not exceed the early pay discount value. The agent solves a multi-variable optimisation problem on each payment, in real time, against live bank balance data. That requires inputs that only Centime's stack can provide in combination.</p>
+
+    <!-- ARCHITECTURE -->
+    <span class="section-label" id="s4">4. The Architecture</span>
+    <h2>From approved invoice to confirmed settlement</h2>
+
+    <div class="payment-flow">
+      <div class="flow-layer">
+        <div class="flow-layer-label">Input</div>
+        <div class="flow-boxes">
+          <div class="flow-box agent"><div class="bt">Approved payables</div><div class="bs">Ready-to-pay queue from AP workflow</div></div>
+          <div class="flow-box agent"><div class="bt">Cash position</div><div class="bs">Real-time bank balance via Centime Banking</div></div>
+          <div class="flow-box agent"><div class="bt">Cash forecast</div><div class="bs">Forward-looking liquidity from Centime</div></div>
+        </div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-layer">
+        <div class="flow-layer-label">Agent — decision layer</div>
+        <div class="flow-boxes">
+          <div class="flow-box agent"><div class="bt">Timing optimisation</div><div class="bs">Float vs. due date vs. discount window</div></div>
+          <div class="flow-box agent"><div class="bt">Modality selection</div><div class="bs">ACH / wire / card / early pay / check</div></div>
+          <div class="flow-box agent"><div class="bt">FX assessment</div><div class="bs">Rate timing, local rail vs. SWIFT</div></div>
+          <div class="flow-box agent"><div class="bt">Remittance routing</div><div class="bs">Format per supplier preference</div></div>
+        </div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-layer">
+        <div class="flow-layer-label">Human authorisation</div>
+        <div class="flow-boxes">
+          <div class="flow-box human" style="flex:2"><div class="bt">Payment batch review</div><div class="bs">Agent presents decisions with rationale — human approves, modifies, or holds</div></div>
+          <div class="flow-box human" style="flex:2"><div class="bt">Exception escalation</div><div class="bs">Flagged payments requiring judgment — FX exposure, unusual amounts, new beneficiaries</div></div>
+        </div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-layer">
+        <div class="flow-layer-label">Agent — execution layer</div>
+        <div class="flow-boxes">
+          <div class="flow-box bank"><div class="bt">Payment initiation</div><div class="bs">Via bank API per selected modality</div></div>
+          <div class="flow-box bank"><div class="bt">Remittance dispatch</div><div class="bs">To supplier per agreed format</div></div>
+          <div class="flow-box bank"><div class="bt">Settlement monitoring</div><div class="bs">Confirms arrival, detects returns</div></div>
+          <div class="flow-box bank"><div class="bt">Failure recovery</div><div class="bs">Diagnoses, corrects, resubmits</div></div>
+        </div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-layer">
+        <div class="flow-layer-label">Closure</div>
+        <div class="flow-boxes">
+          <div class="flow-box agent" style="flex:2"><div class="bt">ERP reconciliation</div><div class="bs">Payable closed, journal posted, cash forecast updated</div></div>
+          <div class="flow-box agent" style="flex:2"><div class="bt">Optimisation feedback</div><div class="bs">Actual vs. projected cash impact logged for model calibration</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>4.1 Human authorisation is structural, not a limitation</h3>
+    <p>The architecture retains human sign-off on payment execution. This is not a concession to the current state of the technology — it is the correct design for mid-market finance. Controllers have segregation of duties requirements. Boards have payment authorisation policies. Auditors expect a human in the payment approval chain. An agent that attempted to bypass this would not be deployed, regardless of its accuracy.</p>
+    <p>The agent's value is in the quality and completeness of what it presents for authorisation — optimal timing, correct modality, rationale visible — not in removing the authorisation step.</p>
+
+    <!-- LLM ROLE -->
+    <span class="section-label" id="s5">5. What the LLM Provides</span>
+    <h2>Reasoning over structured complexity</h2>
+
+    <div class="table-wrapper">
+      <div class="table-title">LLM contributions to payment orchestration</div>
+      <table>
+        <thead>
+          <tr><th>Capability</th><th>What the LLM does</th><th>Why it matters</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Modality reasoning</td><td>Evaluates payment terms, supplier preferences, amount, and rebate economics to recommend optimal payment method per invoice</td><td>Replaces static vendor-level configuration with per-payment decision-making</td></tr>
+          <tr><td>Timing optimisation</td><td>Computes optimal payment date against due date, discount window, cash forecast, and float value</td><td>Captures value that is consistently left on the table in manual AP operations</td></tr>
+          <tr><td>FX decision support</td><td>Assesses rate timing, local rail availability, and correspondent chain cost for cross-border payments</td><td>Reduces FX cost and settlement time on international payments</td></tr>
+          <tr><td>Failure diagnosis</td><td>Interprets bank return codes and rejection reasons, determines correct remediation path, and prepares resubmission</td><td>Eliminates the manual investigation step that currently follows every failed payment</td></tr>
+          <tr><td>Remittance formatting</td><td>Generates remittance detail in the format each supplier's AR system requires, inferred from prior successful cash applications</td><td>Reduces supplier-side reconciliation friction and associated disputes</td></tr>
+          <tr><td>Anomaly detection</td><td>Flags payments that deviate from established patterns — amount, beneficiary, account — before execution</td><td>Provides a fraud detection layer within the payment workflow rather than after the fact</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- COMMODITY VS PROPRIETARY -->
+    <span class="section-label" id="s6">6. Commodity vs. Proprietary</span>
+    <h2>What can be assembled, and what cannot</h2>
+
+    <h3>6.1 Commodity components</h3>
+    <p>As with invoice capture, the underlying framework components are broadly available:</p>
+    <ul class="ft-list">
+      <li>LLM API access for reasoning and decision support</li>
+      <li>Payment orchestration workflow tooling</li>
+      <li>FX rate feed integrations</li>
+      <li>Basic ACH and wire submission via payment processors</li>
+      <li>Remittance document generation</li>
+    </ul>
+
+    <h3>6.2 What Centime provides that others cannot easily replicate</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>Asset</th><th>What it is</th><th>Why it is hard to replicate</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Real-time bank balance</td><td>Live cash position via direct bank connectivity, not ERP ledger balance, which lags reality</td><td>Requires bank partnerships, not just API integrations with accounting software</td></tr>
+          <tr><td>Cash flow forecast</td><td>Forward-looking liquidity model that informs payment timing decisions</td><td>Centime's core forecasting product — not available from AP-only vendors</td></tr>
+          <tr><td>FlexPay / early pay program</td><td>Configured early pay economics per buyer — rate, floor, bank and Centime split — enabling automated discount capture decisions</td><td>Requires the full Centime Exchange and bank partner infrastructure to operate</td></tr>
+          <tr><td>Verified supplier bank accounts</td><td>CAS-verified beneficiary accounts for enrolled suppliers, reducing fraud risk in autonomous payment routing</td><td>Bank account verification at scale requires the supplier enrollment infrastructure Centime has built</td></tr>
+          <tr><td>Multi-rail payment access</td><td>ACH origination, wire execution, virtual card issuance, and early pay settlement via bank partners</td><td>Each rail requires direct bank relationships and compliance clearance — not achievable through processors alone</td></tr>
+          <tr><td>Fraud indemnification posture</td><td>Insurance and verification framework that makes autonomous payment routing commercially insurable</td><td>Carrier appetite depends on the verification methodology and transaction history Centime has established</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- THE MOAT -->
+    <span class="section-label" id="s7">7. The Two Barriers to Replication</span>
+    <h2>Technical depth and entitlement compound each other</h2>
+
+    <div class="barrier-pair">
+      <div class="barrier-block primary">
+        <div class="barrier-num">01</div>
+        <div class="barrier-title">Payment stack depth</div>
+        <p class="barrier-text">Direct bank connectivity, actual payment rail access — ACH origination, wire execution, card issuance — settlement monitoring at the bank level, FX infrastructure, and sanctions screening. This is not achievable through payment processors alone. Most AP software vendors hand off to a processor and lose visibility the moment funds leave. An agent that cannot see what happens post-initiation cannot handle failures, confirm settlement, or optimise timing against real balances. Building this stack takes years and significant capital.</p>
+      </div>
+      <div class="barrier-block">
+        <div class="barrier-num">02</div>
+        <div class="barrier-title">Payment workflow entitlement</div>
+        <p class="barrier-text">Being authorised to participate in a client's payment workflow requires someone with authority to have decided: this system moves our money. That is a trust decision made by a CFO, validated by their bank, and embedded in their internal controls. A new entrant with a capable agent framework hits this wall immediately. The bank will not enable payment execution for an unknown vendor. The CFO will not authorise a new system without their bank's endorsement. The auditor will flag it.</p>
+      </div>
+    </div>
+
+    <div class="pullquote">
+      <p>A competitor could build the same payment routing logic in months. They cannot obtain payment workflow entitlement without bank relationships — and bank relationships cannot be purchased. They are earned through demonstrated trust, compliance posture, and track record. Centime arrives through the bank. That is the entitlement.</p>
+    </div>
+
+    <p>The two barriers compound. A well-funded competitor who builds the technical stack still cannot get into the payment workflow without bank relationships. And bank relationships do not come without the compliance posture, trust, and track record that take years to establish. Neither barrier alone is insurmountable over time. Together they create a window of advantage that is meaningful.</p>
+
+    <!-- HONEST ASSESSMENT -->
+    <span class="section-label" id="s8">8. An Honest Assessment</span>
+    <h2>Where the limits are</h2>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-label">Human authorisation will not be removed</div>
+        <p class="timeline-text">Autonomous payment execution — without human sign-off — is not the near-term opportunity and should not be positioned as such. The value is in optimising what the agent presents for authorisation, not removing authorisation. Mid-market Controllers are not ready to cede payment authority to a system, and their auditors would not permit it if they tried.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-label">International payments require incremental rail build-out</div>
+        <p class="timeline-text">The full international payment optimisation capability described here requires local payment rail access in each target corridor, FX execution capability, and country-specific compliance handling. This is a multi-year build that should be sequenced by corridor volume and customer demand rather than attempted all at once.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-label">Remittance quality depends on supplier data</div>
+        <p class="timeline-text">The agent can only route remittance in the format a supplier's AR system requires if that preference is known and current. Building this dataset requires either direct supplier integration or inference from prior successful cash applications — both of which take time to accumulate at scale.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-label">Optimisation value compounds with data volume</div>
+        <p class="timeline-text">Payment timing and modality optimisation models calibrate to a customer's specific patterns over time. A new customer starts with lower confidence and broader exception rates than a customer with twelve months of transaction history. Expectation-setting at onboarding matters.</p>
+      </div>
+    </div>
+
+    <!-- WHAT WE CAN CLAIM -->
+    <span class="section-label" id="s9">9. What Centime Can Credibly Claim Today</span>
+    <h2>Honest claims, defensible positions</h2>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>Capability</th><th>Claim</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Payment timing optimisation</td>
+            <td>Agent recommends optimal payment date against cash position, forecast, and discount windows</td>
+            <td><span class="badge badge-yes">Credible now</span></td>
+          </tr>
+          <tr>
+            <td>Early pay discount capture</td>
+            <td>Automated evaluation of discount economics per invoice against cost of capital and cash position</td>
+            <td><span class="badge badge-yes">Credible now</span></td>
+          </tr>
+          <tr>
+            <td>Modality selection</td>
+            <td>Per-invoice recommendation of ACH, card, early pay, or wire based on supplier, amount, and rebate economics</td>
+            <td><span class="badge badge-partial">Near term</span></td>
+          </tr>
+          <tr>
+            <td>Domestic payment execution</td>
+            <td>ACH and wire initiation via bank partners following human authorisation</td>
+            <td><span class="badge badge-yes">Credible now</span></td>
+          </tr>
+          <tr>
+            <td>Settlement monitoring</td>
+            <td>Automated confirmation of settlement and detection of ACH returns</td>
+            <td><span class="badge badge-partial">Near term</span></td>
+          </tr>
+          <tr>
+            <td>Failure recovery</td>
+            <td>Agent diagnoses return codes, determines remediation, prepares resubmission for human review</td>
+            <td><span class="badge badge-partial">Near term</span></td>
+          </tr>
+          <tr>
+            <td>Remittance routing</td>
+            <td>Automated remittance dispatch in supplier-preferred format</td>
+            <td><span class="badge badge-partial">Near term</span></td>
+          </tr>
+          <tr>
+            <td>International payment optimisation</td>
+            <td>FX timing, local rail selection, corridor-specific compliance</td>
+            <td><span class="badge badge-future">Roadmap</span></td>
+          </tr>
+          <tr>
+            <td>Autonomous payment execution</td>
+            <td>Payment initiation without human authorisation</td>
+            <td><span class="badge badge-future">Not targeted</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- CONCLUSION -->
+    <span class="section-label">Conclusion</span>
+    <h2>The harder problem is the better opportunity</h2>
+    <p>Invoice capture is a more tractable AI problem. Payment orchestration is a more valuable one. The complexity that makes it difficult to build is the same complexity that makes it difficult to replicate. An agent that executes payments suboptimally is worse than no agent at all — the stakes of getting it wrong are immediate and financial. That raises the bar for what the infrastructure underneath must provide.</p>
+    <p>Centime's position — bank connectivity, real-time cash data, verified supplier accounts, multi-rail payment access, and distribution through the bank channel — is not incidental to this capability. It is the capability. The agent is the decision layer on top of infrastructure that takes years to assemble.</p>
+
+    <div class="pullquote">
+      <p>The payment routing logic is the surface. The bank relationships, cash intelligence, verified supplier network, and payment workflow entitlement are what make it work. Competitors need all of them. Most will not get there.</p>
+    </div>
+
+  </div><!-- end article-main -->
+
+  <div class="article-sidebar">
+    <div class="sidebar-toc">
+      <div class="sidebar-toc-label">Contents</div>
+      <ol>
+        <li>The problem this solves</li>
+        <li>Why payments are complex</li>
+        <li>Intelligent payment routing</li>
+        <li>The architecture</li>
+        <li>What the LLM provides</li>
+        <li>Commodity vs. proprietary</li>
+        <li>Two barriers to replication</li>
+        <li>An honest assessment</li>
+        <li>What we can claim today</li>
+      </ol>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-card-label">The two barriers</div>
+      <p>Payment stack depth takes years and capital to build. Payment workflow entitlement requires bank relationships that cannot be purchased. Together they compound.</p>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-card-label">What is not claimed</div>
+      <p>Autonomous payment execution without human authorisation is not the target. The value is in optimising what the agent presents for sign-off — not removing sign-off.</p>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-card-label">Relationship to invoice doc</div>
+      <p>This document is a companion to the agentic invoice capture framework. Together they describe the full AP cycle — first mile through settlement — with Centime as the intelligence layer throughout.</p>
+    </div>
+  </div>
+
+  </div><!-- end article-body -->
+
+  <footer>
+    <span>Centime Inc. &nbsp;·&nbsp; Internal Working Paper</span>
+    <span>Confidential &nbsp;·&nbsp; Not for distribution</span>
+  </footer>
+
+</div>
+</body>
+</html>
