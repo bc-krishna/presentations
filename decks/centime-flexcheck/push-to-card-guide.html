@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Centime Push-to-Card — Operational Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 10pt;
+    line-height: 1.6;
+    color: #333;
+    background: #fff;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 0 60px;
+  }
+
+  /* ── Header ── */
+  .ft-header {
+    background: #1a1a1a;
+    color: #fff;
+    padding: 28px 48px 24px;
+  }
+  .ft-masthead {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 10px;
+  }
+  .ft-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .ft-subtitle {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: #ccc;
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+  .ft-meta {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 8.5px;
+    color: #888;
+    letter-spacing: 0.5px;
+    border-top: 1px solid #333;
+    padding-top: 10px;
+    display: flex;
+    gap: 20px;
+  }
+
+  /* ── Body ── */
+  .ft-body { padding: 32px 48px; }
+
+  /* ── Standfirst ── */
+  .standfirst {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #444;
+    border-bottom: 2px solid #1a1a1a;
+    padding-bottom: 20px;
+    margin-bottom: 24px;
+  }
+
+  /* ── Headers ── */
+  h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a1a;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 6px;
+    margin: 32px 0 12px;
+  }
+  h3 {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #555;
+    margin: 20px 0 6px;
+  }
+
+  /* ── Body text ── */
+  p {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 10pt;
+    color: #333;
+    line-height: 1.65;
+    margin-bottom: 10px;
+  }
+
+  /* ── Two-col layout ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 32px;
+    margin: 16px 0 24px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 24px;
+  }
+  .two-col .col h2 {
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 8px;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .two-col .col + .col {
+    padding-left: 16px;
+    border-left: 1px solid #ddd;
+  }
+
+  /* ── Pull quote ── */
+  .pull-quote {
+    border-left: 3px solid #1a1a1a;
+    padding: 4px 0 4px 18px;
+    margin: 20px 0 24px;
+  }
+  .pull-quote p {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 14px;
+    font-style: italic;
+    color: #1a1a1a;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ── Steps grid ── */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin: 12px 0 24px;
+    border-top: 1px solid #ddd;
+  }
+  .step {
+    padding: 16px 20px 16px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  .step:nth-child(even) {
+    padding-left: 20px;
+    border-left: 1px solid #ddd;
+    padding-right: 0;
+  }
+  .step-num {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .step-label {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #333;
+    margin-bottom: 4px;
+  }
+  .step-body {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 9.5pt;
+    color: #555;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* ── Comparison table ── */
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 24px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 9.5pt;
+  }
+  .comparison-table th {
+    background: #f5f5f5;
+    font-weight: 600;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #555;
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 2px solid #ddd;
+  }
+  .comparison-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #e5e5e5;
+    color: #333;
+    vertical-align: top;
+  }
+  .comparison-table tr:last-child td { border-bottom: none; }
+  .comparison-table tr:nth-child(even) td { background: #f9f9f9; }
+  .comparison-table .col-feature { font-weight: 600; color: #1a1a1a; width: 28%; }
+  .comparison-table .col-ptc { width: 36%; }
+  .comparison-table .col-ach { width: 36%; }
+  .tick { color: #16a34a; font-weight: 700; }
+  .cross { color: #dc2626; font-weight: 700; }
+  .neutral { color: #888; }
+
+  /* ── Callout box ── */
+  .callout {
+    background: #fafafa;
+    border: 1px solid #e5e5e5;
+    border-left: 3px solid #1a1a1a;
+    padding: 14px 16px;
+    margin: 16px 0 24px;
+  }
+  .callout-title {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  .callout ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .callout ul li {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 9.5pt;
+    color: #333;
+    line-height: 1.55;
+    padding: 3px 0 3px 14px;
+    border-bottom: 1px solid #ececec;
+    position: relative;
+  }
+  .callout ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: #aaa;
+  }
+  .callout ul li:last-child { border-bottom: none; }
+
+  /* ── Warning callout ── */
+  .callout.warning {
+    background: #fef2f2;
+    border-left-color: #dc2626;
+  }
+  .callout.warning .callout-title { color: #dc2626; }
+  .callout.warning ul li { border-bottom-color: #fde8e8; }
+
+  /* ── Info callout ── */
+  .callout.info {
+    background: #eff6ff;
+    border-left-color: #2563eb;
+  }
+  .callout.info .callout-title { color: #2563eb; }
+  .callout.info ul li { border-bottom-color: #dbeafe; }
+
+  /* ── Supplier expectations two-col ── */
+  .supplier-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 32px;
+    margin: 12px 0 24px;
+  }
+  .supplier-grid .col h3 { margin-top: 0; color: #1a1a1a; }
+  .supplier-grid .col + .col {
+    padding-left: 16px;
+    border-left: 1px solid #ddd;
+  }
+  .supplier-grid ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .supplier-grid ul li {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 9.5pt;
+    color: #444;
+    line-height: 1.55;
+    padding: 4px 0 4px 14px;
+    border-bottom: 1px solid #f0f0f0;
+    position: relative;
+  }
+  .supplier-grid ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: #bbb;
+  }
+  .supplier-grid ul li:last-child { border-bottom: none; }
+
+  /* ── FAQ ── */
+  .faq-section h2 { margin-bottom: 4px; }
+  .faq-divider {
+    border: none;
+    border-top: 2px solid #1a1a1a;
+    margin: 0 0 20px;
+  }
+  .faq-item {
+    border-bottom: 1px solid #e5e5e5;
+    padding: 16px 0;
+  }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 11pt;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .faq-a {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 10pt;
+    color: #444;
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid #e5e5e5;
+    margin: 0;
+  }
+
+  /* ── Section rule ── */
+  .section-rule {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 24px 0 0;
+  }
+
+  /* ── Footer ── */
+  .ft-footer {
+    background: #f5f5f5;
+    border-top: 1px solid #ddd;
+    padding: 16px 48px;
+    margin-top: 40px;
+  }
+  .ft-footer-disclosure {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 8pt;
+    color: #888;
+    line-height: 1.55;
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+  .ft-footer-meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 8pt;
+    color: #aaa;
+    border-top: 1px solid #ddd;
+    padding-top: 8px;
+  }
+
+  @media print {
+    body { max-width: 100%; }
+    .ft-header, .callout, .ft-footer, .comparison-table th {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<div class="ft-header">
+  <div class="ft-masthead">Centime Exchange &nbsp;·&nbsp; Operational Guide</div>
+  <div class="ft-title">Push-to-Card</div>
+  <div class="ft-subtitle">Instant payment to any eligible Visa or Mastercard debit card, settled in seconds</div>
+  <div class="ft-meta">
+    <span>April 2025</span>
+    <span>Centime Exchange</span>
+    <span>For distribution to clients and suppliers</span>
+  </div>
+</div>
+
+<!-- ── BODY ── -->
+<div class="ft-body">
+
+  <!-- Standfirst -->
+  <p class="standfirst">
+    Centime Push-to-Card (henceforth referred to as Push-to-Card) enables buyers to
+    disburse payment directly to a supplier's Visa or Mastercard debit card in seconds —
+    24 hours a day, 7 days a week, including weekends and public holidays. Funds are
+    credited instantly to the card's linked bank account with no float period, no ACH
+    delay, and no check to print or deposit.
+  </p>
+
+  <!-- What it is / Why it exists -->
+  <div class="two-col">
+    <div class="col">
+      <h2>What it is</h2>
+      <p>Push-to-Card uses the Visa Direct and Mastercard Send rails — the same networks
+      that power instant ATM withdrawals and peer-to-peer apps — to push a credit
+      payment directly to the recipient's debit card number. The funds appear in the
+      cardholder's bank account within seconds of the payment being initiated.</p>
+      <p>The buyer provides only a card number. No routing number, no account number,
+      no bank details. Centime Exchange handles authentication, routing, and settlement.</p>
+    </div>
+    <div class="col">
+      <h2>Why it exists</h2>
+      <p>ACH same-day settlement cuts off at defined windows and does not operate on
+      weekends or holidays. Wires are costly and require full bank account details.
+      FlexCheck requires the supplier to print and physically deposit an instrument.
+      Push-to-Card fills the gap: it is genuinely instant, always available, and
+      requires the supplier to provide only a card number they already carry.</p>
+      <p>It is particularly suited to time-sensitive disbursements, emergency payments,
+      and suppliers who prefer not to share full bank account details.</p>
+    </div>
+  </div>
+
+  <!-- Pull quote -->
+  <div class="pull-quote">
+    <p>"Funds reach the supplier's bank account in seconds — any time, any day, with
+    nothing to print, deposit, or wait for."</p>
+  </div>
+
+  <!-- How it works -->
+  <h2>How it works</h2>
+  <p>The process from payment approval to funds availability involves five steps.
+  Steps 3 through 5 are fully automated and complete in under 30 seconds in normal
+  network conditions.</p>
+
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-label">Buyer approves payment</div>
+      <p class="step-body">The buyer's AP team approves an invoice in Centime Exchange
+      and selects Push-to-Card as the payment method.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-label">Supplier provides card details</div>
+      <p class="step-body">The supplier provides their Visa or Mastercard debit card
+      number through a secure Centime Exchange link. Card details are tokenised and
+      stored for future payments to the same supplier.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-label">Card eligibility verified</div>
+      <p class="step-body">Centime Exchange verifies the card is eligible to receive
+      a push credit on the Visa Direct or Mastercard Send network. Most standard
+      debit cards issued by US banks are eligible.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-label">Payment initiated</div>
+      <p class="step-body">Centime sends a credit push instruction to the card
+      network. The network routes the payment to the issuing bank and credits
+      the cardholder's account.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-label">Funds available</div>
+      <p class="step-body">The supplier receives a notification and funds are
+      available in their bank account — typically within 30 seconds, and in most
+      cases before the notification email is read.</p>
+    </div>
+  </div>
+
+  <!-- Push-to-Card vs ACH comparison -->
+  <hr class="section-rule">
+  <h2>Push-to-Card compared to ACH</h2>
+  <p>Push-to-Card is one of several payment rails available in Centime Exchange.
+  The table below sets out the key differences for common AP use cases.</p>
+
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th class="col-feature">Characteristic</th>
+        <th class="col-ptc">Push-to-Card</th>
+        <th class="col-ach">ACH (Same-Day)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="col-feature">Settlement speed</td>
+        <td>Seconds — typically under 30 seconds</td>
+        <td>Same business day, subject to cut-off windows</td>
+      </tr>
+      <tr>
+        <td class="col-feature">Weekend / holiday availability</td>
+        <td><span class="tick">✓</span> 24 / 7 / 365</td>
+        <td><span class="cross">✗</span> Business days only</td>
+      </tr>
+      <tr>
+        <td class="col-feature">What the supplier provides</td>
+        <td>Debit card number only</td>
+        <td>Routing number + account number</td>
+      </tr>
+      <tr>
+        <td class="col-feature">Reversibility</td>
+        <td>Irrevocable once sent</td>
+        <td>Returns possible for up to 2 business days</td>
+      </tr>
+      <tr>
+        <td class="col-feature">Per-transaction limit</td>
+        <td>Up to $10,000 (standard); higher limits by arrangement</td>
+        <td>Up to $1,000,000 (same-day ACH)</td>
+      </tr>
+      <tr>
+        <td class="col-feature">Typical use cases</td>
+        <td>Urgent payments, weekend disbursements, emergency payouts, gig / field workforce</td>
+        <td>Scheduled vendor payments, payroll, high-value invoices</td>
+      </tr>
+      <tr>
+        <td class="col-feature">Supplier bank account required</td>
+        <td><span class="neutral">Not directly</span> — linked via card</td>
+        <td><span class="tick">Yes</span> — explicit bank details required</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Operational detail -->
+  <hr class="section-rule">
+  <h2>Operational detail</h2>
+
+  <h3>Card eligibility</h3>
+  <p>Push-to-Card credits are supported on most Visa and Mastercard debit cards issued
+  by US financial institutions. Prepaid cards, credit cards, and cards issued outside
+  the United States are not eligible. Centime Exchange performs an eligibility check
+  at the point of card registration and will notify the supplier if their card cannot
+  receive push credits, prompting them to provide an alternative card or select a
+  different payment method.</p>
+
+  <h3>Transaction limits</h3>
+  <p>Standard per-transaction limits are $10,000 on the Visa Direct rail and $10,000
+  on the Mastercard Send rail. Higher limits are available for established Centime Exchange
+  clients by arrangement. Daily and monthly aggregate limits apply at the platform level
+  and vary by client tier. Buyers whose AP workflow regularly requires disbursements above
+  standard limits should contact their Centime account manager.</p>
+
+  <h3>Irrevocability</h3>
+  <p>Push-to-Card payments are irrevocable once the credit instruction has been accepted
+  by the card network. Unlike ACH, there is no return window. Buyers should ensure
+  payment details — card number, amount, and payee — are correct before confirming.
+  Centime Exchange requires a confirmation step for all Push-to-Card disbursements above
+  $1,000. In the event of an erroneous payment, recovery requires the supplier's voluntary
+  cooperation; Centime can facilitate but cannot compel return of funds.</p>
+
+  <h3>Card tokenisation and storage</h3>
+  <p>Supplier card details are tokenised at the point of entry using PCI-DSS Level 1
+  certified processes. Raw card numbers are never stored by Centime. Once a card is
+  registered, subsequent payments to the same supplier require only the token — the
+  supplier does not need to re-enter their card details. Suppliers can update or replace
+  their card at any time from the Centime Exchange supplier portal.</p>
+
+  <h3>Settlement to the buyer's account</h3>
+  <p>Funds are drawn from the buyer's Centime Exchange payment account at the time of
+  disbursement. The buyer's account must hold sufficient balance prior to payment
+  initiation. Centime Exchange does not extend credit for Push-to-Card disbursements.</p>
+
+  <div class="callout">
+    <div class="callout-title">Key operational parameters</div>
+    <ul>
+      <li>Settlement in seconds — 24 / 7 / 365 including weekends and holidays</li>
+      <li>Eligible cards: Visa and Mastercard debit, US-issued only</li>
+      <li>Standard per-transaction limit: $10,000</li>
+      <li>Irrevocable once accepted by the card network — verify details before confirming</li>
+      <li>Card details tokenised to PCI-DSS Level 1 standards; not stored in raw form</li>
+      <li>Supplier registers card once; all subsequent payments use stored token</li>
+      <li>Buyer account must be funded prior to payment initiation</li>
+    </ul>
+  </div>
+
+  <div class="callout warning">
+    <div class="callout-title">Important — before initiating a Push-to-Card payment</div>
+    <ul>
+      <li>Confirm the card number with the supplier before the first payment</li>
+      <li>Push-to-Card payments cannot be recalled — errors require supplier cooperation to resolve</li>
+      <li>Prepaid cards, credit cards, and non-US cards are not eligible and will be declined at registration</li>
+      <li>Payments above $1,000 require explicit confirmation in Centime Exchange before processing</li>
+    </ul>
+  </div>
+
+  <!-- Supplier expectations -->
+  <hr class="section-rule">
+  <h2>What suppliers need to know</h2>
+  <p>Receiving a Push-to-Card payment is straightforward. The supplier needs only a
+  Visa or Mastercard debit card linked to their business or personal bank account.
+  No new accounts, no software, and no waiting for business hours.</p>
+
+  <div class="supplier-grid">
+    <div class="col">
+      <h3>What you need</h3>
+      <ul>
+        <li>A Visa or Mastercard debit card (US-issued)</li>
+        <li>An email address on file with your buyer</li>
+        <li>Internet access to register your card once</li>
+        <li>Nothing further — subsequent payments are automatic</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>What you do not need</h3>
+      <ul>
+        <li>A new bank account or payment network membership</li>
+        <li>Your routing number or account number</li>
+        <li>Any software installation</li>
+        <li>To be available during business hours</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout info">
+    <div class="callout-title">How funds appear in your account</div>
+    <ul>
+      <li>Funds are credited to the bank account linked to your debit card</li>
+      <li>The payment will typically appear as a credit from "Centime Exchange" or your buyer's name</li>
+      <li>Most card-issuing banks make push credits available immediately; some may hold funds for up to 30 minutes</li>
+      <li>You will receive an email notification from Centime Exchange when the payment is initiated</li>
+    </ul>
+  </div>
+
+  <!-- FAQ -->
+  <hr class="section-rule">
+  <div class="faq-section">
+    <h2>Frequently asked questions</h2>
+    <hr class="faq-divider">
+
+    <div class="faq-item">
+      <div class="faq-q">Is Push-to-Card the same as a wire transfer?</div>
+      <p class="faq-a">No. A wire transfer moves funds between bank accounts using
+      routing and account numbers, typically settling within hours on business days.
+      Push-to-Card sends a credit instruction directly to a debit card via the Visa
+      Direct or Mastercard Send network — the same infrastructure used for instant
+      ATM withdrawals. It settles in seconds, operates 24/7, and requires only a
+      card number rather than full bank account details.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What happens if the payment is sent to the wrong card?</div>
+      <p class="faq-a">Push-to-Card payments are irrevocable once accepted by the
+      card network. If a payment is sent to an incorrect card number, Centime Exchange
+      will attempt to contact the receiving cardholder's issuing bank to request a
+      voluntary return of funds. This process is not guaranteed to succeed and may
+      take several business days. Buyers are strongly advised to confirm card details
+      with the supplier before initiating the first payment. Centime Exchange requires
+      explicit confirmation for all payments above $1,000 as an additional safeguard.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Can a supplier use a business debit card rather than a personal one?</div>
+      <p class="faq-a">Yes — and in most B2B contexts, a business debit card is preferred.
+      Business Visa and Mastercard debit cards issued by US banks are eligible for push
+      credits in the same way personal debit cards are. The funds credit to the bank
+      account linked to the card, which in the case of a business card is the company's
+      business checking account.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Is Push-to-Card available for cross-border payments?</div>
+      <p class="faq-a">Push-to-Card within the United States operates on domestic Visa
+      Direct and Mastercard Send rails. Cross-border Push-to-Card — sending to a card
+      issued outside the US — uses the Visa Direct OCT (Original Credit Transaction)
+      international capability, which covers over 190 markets. International push
+      payments may be subject to currency conversion and are available for
+      eligible countries; contact your Centime account manager for specific
+      market availability and limits.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">How is the supplier's card data protected?</div>
+      <p class="faq-a">Card numbers are tokenised immediately at the point of entry
+      through a PCI-DSS Level 1 certified process. Centime Exchange never stores raw
+      card numbers — only the token issued by the card network. This means that even
+      in the event of a data breach, exposed tokens cannot be used to initiate
+      unauthorised payments or to reverse-engineer the underlying card number.
+      Suppliers can revoke or replace their stored card token at any time through
+      the Centime Exchange supplier portal.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What if my debit card is declined or flagged as ineligible?</div>
+      <p class="faq-a">Centime Exchange checks card eligibility at the point of
+      registration — before any payment is attempted. If a card is ineligible
+      (prepaid, credit, or non-US issued), the supplier is notified immediately and
+      prompted to provide an alternative card or to select a different payment method
+      such as ACH or FlexCheck. If an eligible card is subsequently declined during
+      a specific payment — which can occur due to issuer-side controls — Centime
+      Exchange will notify both the buyer and the supplier and prompt the supplier
+      to resolve the issue with their card issuer or provide an alternative card.</p>
+    </div>
+
+  </div><!-- /faq -->
+
+</div><!-- /ft-body -->
+
+<!-- ── FOOTER ── -->
+<div class="ft-footer">
+  <p class="ft-footer-disclosure">Push-to-Card payments are processed via the Visa Direct
+  and Mastercard Send networks. Network availability, transaction limits, and processing
+  times are subject to network operating rules and may vary. Centime Exchange does not
+  guarantee specific settlement times and is not liable for delays caused by card-issuing
+  banks or network conditions outside its control. Cross-border payment availability
+  varies by country. Buyers and suppliers should ensure compliance with applicable
+  financial regulations for their jurisdiction.</p>
+  <div class="ft-footer-meta">
+    <span>Confidential — For client and supplier distribution</span>
+    <span>© 2025 Centime, Inc. All rights reserved.</span>
+  </div>
+</div>
+
+</body>
+</html>
