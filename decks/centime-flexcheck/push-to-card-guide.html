@@ -406,8 +406,8 @@
   <div class="two-col">
     <div class="col">
       <h2>What it is</h2>
-      <p>Push-to-Card uses the Visa Direct and Mastercard Send rails — the same networks
-      that power instant ATM withdrawals and peer-to-peer apps — to push a credit
+      <p>Push-to-Card uses the Visa Direct and Mastercard Send rails — the same card
+      network infrastructure used by peer-to-peer payment apps — to push a credit
       payment directly to the recipient's debit card number. The funds appear in the
       cardholder's bank account within seconds of the payment being initiated.</p>
       <p>The buyer provides only a card number. No routing number, no account number,
@@ -532,12 +532,13 @@
   <h2>Operational detail</h2>
 
   <h3>Card eligibility</h3>
-  <p>Push-to-Card credits are supported on most Visa and Mastercard debit cards issued
-  by US financial institutions. Prepaid cards, credit cards, and cards issued outside
-  the United States are not eligible. Centime Exchange performs an eligibility check
-  at the point of card registration and will notify the supplier if their card cannot
-  receive push credits, prompting them to provide an alternative card or select a
-  different payment method.</p>
+  <p>For domestic payments, Push-to-Card credits are supported on most Visa and Mastercard
+  debit cards issued by US financial institutions. Prepaid cards and credit cards are not
+  eligible. For cross-border payments, cards issued in supported international markets
+  are eligible via the Visa Direct OCT international capability. Centime Exchange performs
+  an eligibility check at the point of card registration and will notify the supplier if
+  their card cannot receive push credits, prompting them to provide an alternative card
+  or select a different payment method.</p>
 
   <h3>Transaction limits</h3>
   <p>Standard per-transaction limits are $10,000 on the Visa Direct rail and $10,000
@@ -561,21 +562,21 @@
   supplier does not need to re-enter their card details. Suppliers can update or replace
   their card at any time from the Centime Exchange supplier portal.</p>
 
-  <h3>Settlement to the buyer's account</h3>
-  <p>Funds are drawn from the buyer's Centime Exchange payment account at the time of
-  disbursement. The buyer's account must hold sufficient balance prior to payment
-  initiation. Centime Exchange does not extend credit for Push-to-Card disbursements.</p>
+  <h3>Source of funds</h3>
+  <p>The buyer can fund a Push-to-Card disbursement from any linked bank account or
+  debit card. Centime Exchange supports multiple funding sources per client, configured
+  at the account level. The funding source is selected at the point of payment initiation.</p>
 
   <div class="callout">
     <div class="callout-title">Key operational parameters</div>
     <ul>
       <li>Settlement in seconds — 24 / 7 / 365 including weekends and holidays</li>
-      <li>Eligible cards: Visa and Mastercard debit, US-issued only</li>
+      <li>Eligible cards: Visa and Mastercard debit; US-issued for domestic, supported international markets for cross-border</li>
       <li>Standard per-transaction limit: $10,000</li>
       <li>Irrevocable once accepted by the card network — verify details before confirming</li>
       <li>Card details tokenised to PCI-DSS Level 1 standards; not stored in raw form</li>
       <li>Supplier registers card once; all subsequent payments use stored token</li>
-      <li>Buyer account must be funded prior to payment initiation</li>
+      <li>Source of funds: any linked bank account or debit card</li>
     </ul>
   </div>
 
@@ -584,7 +585,7 @@
     <ul>
       <li>Confirm the card number with the supplier before the first payment</li>
       <li>Push-to-Card payments cannot be recalled — errors require supplier cooperation to resolve</li>
-      <li>Prepaid cards, credit cards, and non-US cards are not eligible and will be declined at registration</li>
+      <li>Prepaid cards and credit cards are not eligible and will be declined at registration</li>
       <li>Payments above $1,000 require explicit confirmation in Centime Exchange before processing</li>
     </ul>
   </div>
@@ -636,11 +637,11 @@
     <div class="faq-item">
       <div class="faq-q">Is Push-to-Card the same as a wire transfer?</div>
       <p class="faq-a">No. A wire transfer moves funds between bank accounts using
-      routing and account numbers, typically settling within hours on business days.
-      Push-to-Card sends a credit instruction directly to a debit card via the Visa
-      Direct or Mastercard Send network — the same infrastructure used for instant
-      ATM withdrawals. It settles in seconds, operates 24/7, and requires only a
-      card number rather than full bank account details.</p>
+      routing and account numbers. Fedwire transfers settle in minutes; international
+      SWIFT wires can take hours to days. Push-to-Card sends a credit instruction
+      directly to a debit card via the Visa Direct or Mastercard Send network. It
+      settles in seconds, operates 24/7, and requires only a card number rather
+      than full bank account details.</p>
     </div>
 
     <div class="faq-item">
