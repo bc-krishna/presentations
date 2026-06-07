@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Centime Supplier Portal — Scale &amp; Load Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Source Sans Pro',-apple-system,sans-serif;font-size:10.5pt;line-height:1.6;color:#333;background:#fff;padding:40px 20px}
+.container{max-width:900px;margin:0 auto}.masthead{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#16a34a;font-weight:700;margin-bottom:8px}
+h1{font-family:'Libre Baskerville',Georgia,serif;color:#1a1a1a;font-size:29px;line-height:1.2;margin-bottom:6px}.sub{color:#666;margin-bottom:26px;font-size:13px}
+h2{font-family:'Libre Baskerville',Georgia,serif;color:#1a1a1a;font-size:19px;border-bottom:2px solid #1a1a1a;padding-bottom:6px;margin:32px 0 14px}
+.exec{background:#f0fdf4;border-left:4px solid #16a34a;padding:16px 20px;margin:18px 0;border-radius:0 4px 4px 0}.exec h2{border:0;font-size:17px;margin:0 0 8px;padding:0}.exec ul{margin:0 0 0 18px}.exec li{margin:5px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}th{text-align:left;border-bottom:2px solid #1a1a1a;padding:7px 8px;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:#666}
+td{border-bottom:1px solid #e5e5e5;padding:7px 8px;vertical-align:top}.mut{color:#888;font-size:12px}code{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;background:#f6f6f6;padding:1px 4px;border-radius:3px}
+.badge{color:#fff;font-size:11px;font-weight:700;padding:2px 9px;border-radius:10px;letter-spacing:.5px}
+.flag{background:#eff6ff;border-left:4px solid #0ea5e9;padding:12px 16px;margin:14px 0;border-radius:0 4px 4px 0;font-size:13px}
+.warn{background:#fef2f2;border-left:4px solid #dc2626}
+footer{margin-top:38px;padding-top:14px;border-top:1px solid #e5e5e5;color:#999;font-size:11px}</style></head><body><div class="container">
+<div class="masthead">Centime · Performance Engineering</div>
+<h1>Scale &amp; Load — Suppliers, Bills, Invites &amp; Payments</h1>
+<div class="sub">Local PG 17 stack (= Aurora 17.7 planner, co-located) · synthetic load · pre-schema-rationalization baseline · drivers in <code>scripts/local/</code></div>
+
+<div class="exec"><h2>Executive summary</h2><ul>
+<li><b>Read path scales predictably to 5,000 suppliers / 10,000 bills</b> — list-page p95 stays single-digit ms. The cost that grows is <b>shared-buffer reads</b>, ~linearly with population, because rows are wide (~2.3 KB — the <code>enriched</code>/<code>track_search</code> blobs). That is precisely the dial schema rationalization turns.</li>
+<li><b>Found &amp; fixed a hard scaling bug.</b> Submit-for-payment <b>500-errored past ~300–500 bills</b> (a single <code>.in('id', billIds)</code> blew the PostgREST URL limit). Chunked the loads → now handles <b>5,000 bills in one request</b> (803 payments, <b>452 bills/sec</b>).</li>
+<li><b>Two client-side-aggregation hotspots</b> dominate at volume: the supplier list pulls every heavy-vendor bill into JS (<b>646 KB</b> at 10k) and the analytics carousels fetch the whole dataset (and overflow the browser cache). Both want a server-side aggregate.</li>
+<li><b>Bulk invite is email-safe</b> (every invite landed in local Mailpit, none to Resend) but is a <b>sequential per-supplier Clerk-user create</b> — the real bottleneck, and the dev Clerk instance hard-caps at 100 users.</li>
+<li><b>Method:</b> we measured <b>more than wall-clock</b> — query plans, shared buffers, payload bytes — because raw p95 is noisy while those structural metrics are the stable truth.</li>
+</ul></div>
+
+<div class="flag"><b>Scope &amp; method.</b> Synthetic Track-A load: real company names (SEC EDGAR), fabricated everything else (<code>bc+…@centime.com</code> contacts, format-valid EINs, Apollo/MC-shaped blobs). Deterministic seed (identical data every run → clean before/after a schema change). Read-path measured via direct EXPLAIN(ANALYZE,BUFFERS) probes of the real hot queries; write-path via the real authenticated endpoints. No live Apollo/Mastercard, no real email, no money moved.</div>
+
+<h2>Read path · Supplier list <span class="mut">(the hot CP surface, 200 → 5,000)</span></h2>
+<svg viewBox="0 0 720 200" width="100%" style="max-width:720px"><rect x="36" y="6" width="11" height="11" fill="#16a34a"/><text x="52" y="16" font-size="11" fill="#666">200</text><rect x="186" y="6" width="11" height="11" fill="#0ea5e9"/><text x="202" y="16" font-size="11" fill="#666">500</text><rect x="336" y="6" width="11" height="11" fill="#f59e0b"/><text x="352" y="16" font-size="11" fill="#666">1,000</text><rect x="486" y="6" width="11" height="11" fill="#dc2626"/><text x="502" y="16" font-size="11" fill="#666">5,000</text><line x1="36" y1="164" x2="684" y2="164" stroke="#ccc"/><rect x="46" y="153.2537313432836" width="22" height="10.746268656716419" fill="#16a34a"><title>Shared buffers / 50-row page 200: 270 blks</title></rect><rect x="72" y="147.16417910447763" width="22" height="16.83582089552239" fill="#0ea5e9"><title>Shared buffers / 50-row page 500: 423 blks</title></rect><rect x="98" y="126.62686567164178" width="22" height="37.37313432835821" fill="#f59e0b"><title>Shared buffers / 50-row page 1,000: 939 blks</title></rect><rect x="124" y="36" width="22" height="128" fill="#dc2626"><title>Shared buffers / 50-row page 5,000: 3,216 blks</title></rect><text x="56" y="179" font-size="11" fill="#666">Shared buffers / 50-row page</text></svg>
+<p class="mut">Shared 8 KB buffers read to render one 50-row page, by supplier count. Latency stays single-digit ms (table below) while <b>buffers grow ~12×</b> — wide rows scatter 50 records across thousands of heap pages. This is the row-width signal schema rationalization targets.</p>
+<table><tr><th>Metric</th><th>200<br><span class="mut">suppliers</span></th><th>500<br><span class="mut">suppliers</span></th><th>1,000<br><span class="mut">suppliers</span></th><th>5,000<br><span class="mut">suppliers</span></th></tr>
+<tr><td><b>List page p95</b> <span class="mut">(ms)</span></td><td>4.93 ms</td><td>5.29 ms</td><td>5.84 ms</td><td>8.05 ms</td></tr>
+<tr><td><b>List buffers</b> <span class="mut">(8KB blks/page)</span></td><td><b style="color:#16a34a">270</b></td><td><b style="color:#16a34a">423</b></td><td><b style="color:#16a34a">939</b></td><td><b style="color:#f59e0b">3,216</b></td></tr>
+<tr><td><b>List scan</b></td><td><code>Seq</code></td><td><code>Seq</code></td><td><code>Seq</code></td><td><code>Index</code></td></tr>
+<tr><td><b>count(*) buffers</b></td><td>6</td><td>284</td><td>552</td><td>2,140</td></tr>
+<tr><td><b>Deep-page p95</b> <span class="mut">(OFFSET)</span></td><td><b style="color:#16a34a">7.8 ms</b></td><td><b style="color:#16a34a">6.89 ms</b></td><td><b style="color:#16a34a">5.57 ms</b></td><td><b style="color:#dc2626">23.95 ms</b></td></tr>
+<tr><td><b>all_suppliers heap</b></td><td>1.9 MB</td><td>2 MB</td><td>3.6 MB</td><td>10.6 MB</td></tr></table>
+<div class="flag"><b>Reading it:</b> a single 50-row page touches <b>270 → 3,216</b> 8 KB pages from 200 → 5,000 suppliers — wide rows scatter 50 records across thousands of heap pages. <code>count(*)</code> runs on every list load and scales the same way. The <span style="color:#dc2626"><b>OFFSET deep page is an O(n) cliff</b></span> (24 ms p95 at 5,000, still seq-scanning) — keyset pagination flattens it.</div>
+
+<h2>Read path · Bills <span class="mut">(5,000 suppliers fixed; 500 → 10,000 bills)</span></h2>
+<table><tr><th>Metric</th><th>500<br><span class="mut">bills</span></th><th>1,000<br><span class="mut">bills</span></th><th>5,000<br><span class="mut">bills</span></th><th>10,000<br><span class="mut">bills</span></th></tr>
+<tr><td><b>Active-vendor agg payload</b> <span class="mut">(JS-side)</span></td><td><b style="color:#16a34a">40 KB</b></td><td><b style="color:#16a34a">69 KB</b></td><td><b style="color:#dc2626">326 KB</b></td><td><b style="color:#dc2626">646 KB</b></td></tr>
+<tr><td><b>Active-vendor agg p95</b></td><td>2.57 ms</td><td>2.48 ms</td><td>4.83 ms</td><td>13.3 ms</td></tr>
+<tr><td><b>Bills count(*) buffers</b></td><td>172</td><td>400</td><td>1,596</td><td>1,698</td></tr></table>
+<div class="flag"><b>The bills hotspot:</b> the supplier list's "active-vendor" bill aggregate pulls <b>every</b> heavy-supplier bill into the handler to sum in JS — <b>4,063 rows / 646 KB</b> at 10k bills, planner falls back to a sequential scan. A DB-side <code>GROUP BY</code> would return ~50 rows. Loading one heavy supplier's 100 bills is cheap (142 KB) — batch-pay isn't the bottleneck; cross-supplier aggregation is.</div>
+
+<h2>Write path · Bulk invite <span class="mut">(real <code>/api/invitations</code>, 3 → 500)</span></h2>
+<table><tr><th>Property</th><th>Result</th></tr>
+<tr><td><b>Email safety</b></td><td><b style="color:#16a34a">84/84 invites → local Mailpit, 0 to Resend</b> (verified 1:1)</td></tr>
+<tr><td><b>Per-invite latency</b></td><td>~250–500 ms p50 · ~1.4–4.3/sec · sequential</td></tr>
+<tr><td><b>Work per invite</b></td><td>DB state update + alias reserve + <b>Clerk user create</b> + email</td></tr>
+<tr><td><b>Gate 1</b></td><td>Business supplier needs Track Search complete before invite (correct rule)</td></tr>
+<tr><td><b>Ceiling</b></td><td><span style="color:#dc2626"><b>Clerk dev instance hard-caps at 100 users</b></span> — invite creates one user per supplier</td></tr></table>
+<div class="flag"><b>Bottleneck:</b> bulk invite is a <b>sequential loop of external calls</b> (Clerk create + email). Scaling to thousands needs batching / an async queue — and a production Clerk instance (the dev cap is 100). Email transport is safe by config (<code>EMAIL_TRANSPORT=mailpit</code>).</div>
+
+<h2>Write path · Submit bills for payment <span class="mut">(real <code>/api/bills-send-for-payment</code>)</span> <span class="badge" style="background:#16a34a">BUG FIXED</span></h2>
+<svg viewBox="0 0 720 200" width="100%" style="max-width:720px"><rect x="36" y="6" width="11" height="11" fill="#16a34a"/><text x="52" y="16" font-size="11" fill="#666">500</text><rect x="186" y="6" width="11" height="11" fill="#0ea5e9"/><text x="202" y="16" font-size="11" fill="#666">1,000</text><rect x="336" y="6" width="11" height="11" fill="#f59e0b"/><text x="352" y="16" font-size="11" fill="#666">5,000</text><line x1="36" y1="164" x2="684" y2="164" stroke="#ccc"/><rect x="46" y="122.52799999999999" width="22" height="41.472" fill="#16a34a"><title>Throughput (bills/sec, after fix) 500: 162/s</title></rect><rect x="72" y="79.52" width="22" height="84.48" fill="#0ea5e9"><title>Throughput (bills/sec, after fix) 1,000: 330/s</title></rect><rect x="98" y="48.288" width="22" height="115.712" fill="#f59e0b"><title>Throughput (bills/sec, after fix) 5,000: 452/s</title></rect><text x="56" y="179" font-size="11" fill="#666">Throughput (bills/sec, after fix)</text></svg>
+<p class="mut">Bills/sec after the fix, by request size — throughput <b>rises</b> with batch size (per-request overhead amortizes).</p>
+<table><tr><th>Bills / request</th><th>Before fix</th><th>After fix</th><th>Payments created</th><th>Throughput</th></tr>
+<tr><td>300</td><td><span class="badge" style="background:#16a34a">200 OK</span></td><td><span class="badge" style="background:#16a34a">200 OK</span></td><td>53</td><td>~110/s</td></tr>
+<tr><td>500</td><td><span class="badge" style="background:#dc2626">500 ERR</span></td><td><span class="badge" style="background:#16a34a">200 OK</span></td><td>121</td><td>162/s</td></tr>
+<tr><td>1,000</td><td><span class="badge" style="background:#dc2626">500 ERR</span></td><td><span class="badge" style="background:#16a34a">200 OK</span></td><td>218</td><td>330/s</td></tr>
+<tr><td>1,850</td><td><span class="badge" style="background:#dc2626">500 ERR</span></td><td><span class="badge" style="background:#16a34a">200 OK</span></td><td>371</td><td>277/s</td></tr>
+<tr><td><b>5,000</b></td><td><span class="badge" style="background:#dc2626">500 ERR</span></td><td><span class="badge" style="background:#16a34a">200 OK</span></td><td><b>803</b></td><td><b>452/s</b></td></tr></table>
+<div class="flag warn"><b>The bug:</b> the handler loaded the whole selection via one <code>.from('bills').select(…).in('id', billIds)</code>; a few hundred UUIDs overflow the PostgREST request URL → HTTP 500 "Failed to load bills". A user selecting 500+ bills to pay hit a hard failure.</div>
+<div class="flag"><b>The fix:</b> new <code>api/lib/pg-chunk.js</code> (<code>selectInChunks</code> / <code>updateInChunks</code>, chunk 200) applied to the bill load + the per-group link update. Re-validated end-to-end: <b>5,000 bills → 803 payments in one request</b>, all <code>pending_approval</code>, <b>0 executed</b> (money-safety enforced via a temporary $0-floor approval policy, restored after).</div>
+
+<h2>Recommendations</h2>
+<table><tr><th>#</th><th>Recommendation</th><th>Finding</th><th>Status</th></tr>
+<tr><td>1</td><td><b>Server-side CP analytics aggregate</b> — carousels fetch the whole dataset client-side + overflow the sessionStorage cache</td><td>F5 / F6</td><td><span class="badge" style="background:#dc2626">OPEN · high</span></td></tr>
+<tr><td>2</td><td><b>DB-side bills aggregate</b> for the supplier list (646 KB JS aggregation → ~50-row GROUP BY)</td><td>F5</td><td><span class="badge" style="background:#dc2626">OPEN · high</span></td></tr>
+<tr><td>3</td><td><b>Keyset pagination</b> — kill the O(n) OFFSET deep-page cliff</td><td>F2</td><td><span class="badge" style="background:#f59e0b">OPEN · med</span></td></tr>
+<tr><td>4</td><td><b>Trim list projections</b> — stop selecting full blobs / <code>SELECT *</code></td><td>F4</td><td><span class="badge" style="background:#f59e0b">OPEN · med</span></td></tr>
+<tr><td>5</td><td><b>Chunk <code>.in(id,…)</code> in send-for-payment</b></td><td>F9</td><td><span class="badge" style="background:#16a34a">FIXED</span></td></tr>
+<tr><td>6</td><td><b>Async/batch bulk invite</b> — sequential per-supplier Clerk-create + email</td><td>F8</td><td><span class="badge" style="background:#f59e0b">OPEN · med</span></td></tr>
+<tr><td>7</td><td><b>Cached / approximate count(*)</b>; <b>bills index audit</b></td><td>F3 / F7</td><td><span class="badge" style="background:#888">OPEN · low</span></td></tr></table>
+
+<footer>Centime Supplier Portal · Scale &amp; Load report · drivers <code>scripts/local/{load-seed,perf-probe,invite-load,payment-load}.mjs</code> · findings <code>docs/LOAD-TEST-FINDINGS.md</code> · raw <code>scripts/load/results/</code></footer>
+</div></body></html>
