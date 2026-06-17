@@ -339,6 +339,148 @@ ul, ol { margin: 10px 0 16px 20px; font-size: 9.5pt; } li { margin-bottom: 4px; 
   Weeks 1–4 fixes (cannibalization, internal links, low-KD enrichment) should show movement within days to ~6 weeks. AEO can produce qualified leads inside 4–8 weeks. The category <strong>head terms remain a multi-quarter effort</strong> — the 90-day plan sets them up; it does not win them.
 </div>
 
+<h2 class="page-break">Part II — Operating &amp; Execution Plan</h2>
+<p class="section-intro">Sections 1–11 are the diagnosis and the what. This part is the how: who does what, the production mechanics, the measurement system, and the requirements to run it. It is designed around a lean model — an AI execution engine (Claude) plus a small editorial/design team — replacing a single full-time SEO operator.</p>
+
+<h2>12. Operating model &amp; roles</h2>
+<p class="section-intro">Three lanes. Only one needs your people; it is review-and-polish, not build-from-scratch.</p>
+<div class="metrics-row">
+  <div class="metric"><div class="metric-value">Engine</div><div class="metric-label">Claude — production, technical SEO, measurement</div></div>
+  <div class="metric"><div class="metric-value">Team</div><div class="metric-label">Editor + Webflow designer — review, layout, QA</div></div>
+  <div class="metric"><div class="metric-value">Owner</div><div class="metric-label">BC — priorities &amp; publish go/no-go</div></div>
+</div>
+
+<h3>RACI — who is Responsible / Accountable / Consulted / Informed</h3>
+<table>
+  <thead><tr><th>Activity</th><th>Claude</th><th>Editor</th><th>Designer</th><th>Owner (BC)</th></tr></thead>
+  <tbody>
+    <tr><td>Keyword research, prioritization, briefs</td><td><strong>R</strong></td><td>C</td><td>I</td><td>A</td></tr>
+    <tr class="highlight-row"><td>Draft content + meta/SEO fields + schema</td><td><strong>R</strong></td><td>C</td><td>I</td><td>I</td></tr>
+    <tr><td>Editorial review (voice, accuracy, claims, legal)</td><td>C</td><td><strong>R/A</strong></td><td>I</td><td>I</td></tr>
+    <tr class="highlight-row"><td>New page template / visual layout (Webflow Designer)</td><td>C</td><td>I</td><td><strong>R</strong></td><td>A</td></tr>
+    <tr><td>Push content to Webflow as draft (API)</td><td><strong>R</strong></td><td>I</td><td>I</td><td>I</td></tr>
+    <tr class="highlight-row"><td>Technical QA (links, schema, meta length, redirects)</td><td><strong>R</strong></td><td>I</td><td>I</td><td>I</td></tr>
+    <tr><td>Visual / brand QA across breakpoints</td><td>I</td><td>C</td><td><strong>R</strong></td><td>I</td></tr>
+    <tr class="highlight-row"><td>Publish-to-live approval (go/no-go)</td><td>I</td><td>C</td><td>C</td><td><strong>A</strong></td></tr>
+    <tr><td>Publish + post-publish verification + change log</td><td><strong>R</strong></td><td>I</td><td>I</td><td>I</td></tr>
+    <tr class="highlight-row"><td>Internal linking &amp; cannibalization fixes</td><td><strong>R</strong></td><td>I</td><td>C</td><td>I</td></tr>
+    <tr><td>Backlink / digital-PR outreach</td><td><strong>R</strong> (draft)</td><td>R (send)</td><td>I</td><td>A</td></tr>
+    <tr class="highlight-row"><td>Measurement pulls, dashboard, weekly report</td><td><strong>R</strong></td><td>I</td><td>I</td><td>A</td></tr>
+    <tr><td>Strategy adjustments from the data</td><td><strong>R</strong></td><td>C</td><td>I</td><td>A</td></tr>
+  </tbody>
+</table>
+<p style="font-size:8.5pt;color:#666;">R = does the work · A = accountable / signs off · C = consulted · I = informed.</p>
+
+<h2>13. The production workflow (page lifecycle)</h2>
+<p class="section-intro">Every content/page change moves through the same seven stages. Batches run weekly; nothing reaches the live site without the owner's go.</p>
+<table>
+  <thead><tr><th>#</th><th>Stage</th><th>Owner</th><th>Output / gate</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Brief</td><td>Claude</td><td>Keyword, target page, intent, outline, internal-link plan</td></tr>
+    <tr class="highlight-row"><td>2</td><td>Draft</td><td>Claude</td><td>Publish-ready copy + meta title/description + slug + schema</td></tr>
+    <tr><td>3</td><td>Editorial review</td><td>Editor</td><td>Copy approved for voice, accuracy, claims, legal</td></tr>
+    <tr class="highlight-row"><td>4</td><td>Template (only if new layout)</td><td>Designer</td><td>Webflow template/components built once; reused after</td></tr>
+    <tr><td>5</td><td>Stage as draft</td><td>Claude</td><td>Pushed to Webflow via API as a draft (not live)</td></tr>
+    <tr class="highlight-row"><td>6</td><td>QA + approve</td><td>Designer + Owner</td><td>Visual/brand QA in preview; owner gives publish go</td></tr>
+    <tr><td>7</td><td>Publish + verify</td><td>Claude</td><td>Go-live, fetch live URL to confirm title/schema/canonical/links, log change</td></tr>
+  </tbody>
+</table>
+
+<h3>Definition of done — content QA checklist (per page)</h3>
+<table>
+  <thead><tr><th>Technical (Claude auto-checks)</th><th>Editorial / visual (team)</th></tr></thead>
+  <tbody>
+    <tr><td>☐ Target keyword in H1, title, first 100 words</td><td>☐ On-brand voice &amp; tone</td></tr>
+    <tr class="highlight-row"><td>☐ Meta title ≤60 chars, description ≤155, unique</td><td>☐ Claims accurate &amp; legally clean</td></tr>
+    <tr><td>☐ FAQ/Article schema valid; answer visible in copy</td><td>☐ Renders correctly mobile + desktop</td></tr>
+    <tr class="highlight-row"><td>☐ 3–5 internal links in with descriptive anchors</td><td>☐ Images/screens correct &amp; current</td></tr>
+    <tr><td>☐ One canonical URL; no duplicate competing page</td><td>☐ CTA present &amp; correct</td></tr>
+    <tr class="highlight-row"><td>☐ Post-publish live-URL verification passed</td><td>☐ Final publish sign-off (owner)</td></tr>
+  </tbody>
+</table>
+
+<h2 class="page-break">14. The measurement system (the early-warning engine)</h2>
+<p class="section-intro">Leadflow is the objective (lagging). Position &amp; AEO visibility are the leading indicators that move first. The system is automated and self-updating once credentials are in place.</p>
+
+<h3>Data architecture</h3>
+<table>
+  <thead><tr><th>Layer</th><th>Source</th><th>Mechanism</th><th>Cadence</th></tr></thead>
+  <tbody>
+    <tr><td>Owned position (impressions, clicks, avg position)</td><td>Google Search Console API</td><td>Service account → automated pull</td><td>Weekly</td></tr>
+    <tr class="highlight-row"><td>Absolute SERP position, competitor-relative, volume/KD</td><td>Semrush API</td><td>API key → automated pull</td><td>Weekly</td></tr>
+    <tr><td>AEO visibility (breadth)</td><td>Semrush AI Visibility</td><td>Via Semrush API</td><td>Weekly</td></tr>
+    <tr class="highlight-row"><td>AEO citations (controlled probe)</td><td>LLM / Perplexity API</td><td>12 buying questions → log citations</td><td>Weekly</td></tr>
+    <tr><td>Leadflow (pipeline, lead source)</td><td>HubSpot</td><td>MCP (interactive) / private-app token (headless)</td><td>Weekly</td></tr>
+  </tbody>
+</table>
+<p>Tracked against <code>data/tracked-universe.csv</code> (116 keywords + target pages) and <code>data/aeo-questions.csv</code> (12 questions). Snapshots accumulate in <code>data/history/</code> so we see trajectory, not just today's number. Output: an FT-Prism trend dashboard (published to the repo) + a weekly movers report with alerts.</p>
+
+<h3>KPIs — the leading-to-lagging chain</h3>
+<table>
+  <thead><tr><th>Tier</th><th>Metric</th><th>Why it matters</th></tr></thead>
+  <tbody>
+    <tr><td>Leading</td><td>Position of target-universe keywords; # in top 10 / top 3; AI citations won</td><td>Moves first — the early warning</td></tr>
+    <tr class="highlight-row"><td>Mid</td><td>Non-branded commercial impressions &amp; clicks (GSC)</td><td>Confirms rankings are turning into visits</td></tr>
+    <tr><td>Lagging</td><td>Organic MQLs, pipeline, closed-won (HubSpot)</td><td>The objective — leadflow</td></tr>
+    <tr class="highlight-row"><td>Guardrail</td><td>Exclude meme &amp; vanity traffic from all reporting</td><td>Prevents false "success" signals</td></tr>
+  </tbody>
+</table>
+<div class="callout info"><div class="callout-title">Targets — calibrate after baseline #1</div>
+  Indicative 90-day goals (lock once we have the baseline): move <strong>6–10 low-KD commercial terms into the top 10</strong>; lift <strong>non-branded commercial clicks 3–5×</strong> off a tiny base; win <strong>AI citations on ≥5 of the 12 probe questions</strong>; grow organic-sourced qualified leads quarter-over-quarter.</div>
+
+<h2>15. Requirements, access &amp; governance</h2>
+<h3>Credentials required (drop in <code>/.secrets/</code> — local, never committed)</h3>
+<table>
+  <thead><tr><th>Credential</th><th>For</th><th>Scope</th><th>Provider</th></tr></thead>
+  <tbody>
+    <tr><td>gsc-service-account.json</td><td>GSC position data</td><td>Search Console: read</td><td>BC / IT</td></tr>
+    <tr class="highlight-row"><td>semrush-api.key</td><td>SERP + AI visibility + volume/KD</td><td>Analytics + Trends</td><td>BC</td></tr>
+    <tr><td>aeo-llm.key</td><td>AEO citation probe</td><td>Perplexity / OpenAI completions</td><td>BC</td></tr>
+    <tr class="highlight-row"><td>webflow-api.token</td><td>Publishing content</td><td>CMS r/w, Pages r/w, Sites read + publish</td><td>BC / web owner</td></tr>
+  </tbody>
+</table>
+<h3>Team required</h3>
+<ul>
+  <li><strong>Editor</strong> (part-time) — copy review, accuracy/legal, publish sign-off. The pacing constraint; batch reviews weekly.</li>
+  <li><strong>Webflow designer</strong> (occasional) — builds new page templates/layouts; not needed for ongoing content updates.</li>
+  <li><strong>Owner (BC)</strong> — sets priorities, gives publish go/no-go, reviews the weekly report.</li>
+</ul>
+<h3>Governance &amp; guardrails</h3>
+<div class="callout warning"><div class="callout-title">Non-negotiable</div>
+  <strong>Draft → review → publish.</strong> Nothing reaches the live site without owner approval. No autonomous publishing; no autonomous outreach. Every change is logged; every publish is verified on the live URL. Measurement access is read-only. Secrets stay in the local <code>.secrets</code> folder, never in the git repo, rotatable anytime.</div>
+<h3>Cadence &amp; rituals</h3>
+<table>
+  <thead><tr><th>Ritual</th><th>Frequency</th><th>Purpose</th></tr></thead>
+  <tbody>
+    <tr><td>Automated measurement run + report</td><td>Weekly</td><td>Update dashboard, flag movers, queue next actions</td></tr>
+    <tr class="highlight-row"><td>Production batch (draft → QA → publish)</td><td>Weekly</td><td>Ship the week's content &amp; fixes</td></tr>
+    <tr><td>Review meeting (owner + team)</td><td>Weekly, 30 min</td><td>Read the report, approve the batch, set next priorities</td></tr>
+    <tr class="highlight-row"><td>Strategy review</td><td>Monthly</td><td>Re-prioritize universe; double down on what's moving</td></tr>
+  </tbody>
+</table>
+<h3>Risks &amp; mitigations</h3>
+<table>
+  <thead><tr><th>Risk</th><th>Mitigation</th></tr></thead>
+  <tbody>
+    <tr><td>Young domain (AS 28) — head terms slow</td><td>Win low-KD + ERP + long-tail first; build authority/links over quarters</td></tr>
+    <tr class="highlight-row"><td>Editorial review becomes the bottleneck</td><td>Batch reviews; templated briefs; prioritize ruthlessly by opportunity score</td></tr>
+    <tr><td>HubSpot absent in headless runs</td><td>Add a HubSpot private-app token to <code>.secrets</code> for scheduled runs</td></tr>
+    <tr class="highlight-row"><td>Webflow Designer is GUI-only</td><td>Build a reusable template library once; content flows via API thereafter</td></tr>
+    <tr><td>Ranking volatility week-to-week</td><td>Track trend lines, not single weeks; alert on sustained moves</td></tr>
+    <tr class="highlight-row"><td>Key-person risk (what just happened)</td><td>This model removes it — the engine + briefs + change log are documented and portable</td></tr>
+  </tbody>
+</table>
+
+<h3>Startup checklist — first 2 weeks to operationalize</h3>
+<ul>
+  <li>☐ Drop the 4 credentials in <code>/.secrets/</code>; Claude verifies access (read-only) and reports.</li>
+  <li>☐ Run measurement <strong>baseline #1</strong>; publish the trend dashboard; lock the 90-day targets.</li>
+  <li>☐ Stand up the weekly automated run + report cadence.</li>
+  <li>☐ Assemble the team (editor + designer); share this plan + the QA checklist.</li>
+  <li>☐ Run the first production batch = the §10 Week-1 fixes + the <code>/features/ocr</code> rebuild (draft → review → publish).</li>
+  <li>☐ Confirm the weekly review meeting time.</li>
+</ul>
+
 <h2 class="page-break">Appendix A — Priority keyword targets (full)</h2>
 <p class="section-intro">All commercial-intent targets where Centime is underranked, scored by opportunity (volume ÷ difficulty). Tier per Section 5. Source: Semrush organic positions, US, June 2026.</p>
 <table>
