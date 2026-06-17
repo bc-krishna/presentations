@@ -346,9 +346,9 @@ ul, ol { margin: 10px 0 16px 20px; font-size: 9.5pt; } li { margin-bottom: 4px; 
 <p class="section-intro">Three lanes. Only one needs your people; it is review-and-polish, not build-from-scratch.</p>
 <div class="metrics-row">
   <div class="metric"><div class="metric-value">Engine</div><div class="metric-label">Claude — production, technical SEO, measurement</div></div>
-  <div class="metric"><div class="metric-value">Editorial</div><div class="metric-label">BC, Andrew, Molina, Alex — review &amp; bless major copy</div></div>
-  <div class="metric"><div class="metric-value">Web/Design</div><div class="metric-label">Sathish &amp; Kartik own the website (Webflow)</div></div>
-  <div class="metric"><div class="metric-value">Art Dir.</div><div class="metric-label">Himanshu — templates, look &amp; feel</div></div>
+  <div class="metric"><div class="metric-value">Editorial board</div><div class="metric-label">CEO, Sales, Partnerships, Marketing — bless major copy</div></div>
+  <div class="metric"><div class="metric-value">Marketing lead</div><div class="metric-label">Molina (Dir. Marketing) — day-to-day program owner</div></div>
+  <div class="metric"><div class="metric-value">Web &amp; design</div><div class="metric-label">Sathish/Kartik (designers) + Himanshu (art director)</div></div>
 </div>
 
 <h3>RACI — who is Responsible / Accountable / Consulted / Informed</h3>
@@ -371,7 +371,7 @@ ul, ol { margin: 10px 0 16px 20px; font-size: 9.5pt; } li { margin-bottom: 4px; 
     <tr class="highlight-row"><td>Strategy adjustments from the data</td><td><strong>R</strong></td><td>C</td><td>I</td><td>A</td></tr>
   </tbody>
 </table>
-<p style="font-size:8.5pt;color:#666;">R = does the work · A = accountable / signs off · C = consulted · I = informed. <strong>Editorial team</strong> = BC, Andrew, Molina, Alex. <strong>Web &amp; design</strong> = Sathish &amp; Kartik (own the website), Himanshu (art director — templates, look &amp; feel).</p>
+<p style="font-size:8.5pt;color:#666;">R = does the work · A = accountable / signs off · C = consulted · I = informed. <strong>Editorial board</strong> (leadership, reviews from their domain lens) = BC Krishna (CEO — positioning), Alex (Head of Sales — does it match how we sell), Andrew (Head of Partnerships — ERP/partner alignment), Molina (Director of Marketing — brand/voice + operational program owner). <strong>Web &amp; design</strong> = Sathish &amp; Kartik (designers — own the website), Himanshu (art director — templates, look &amp; feel). <strong>Exec sponsor</strong> = Ted (CFO) — and a useful internal proxy for the CFO buyer persona.</p>
 <div class="callout"><div class="callout-title">Major vs. minor changes</div>Only <strong>major</strong> copy changes (new pages, repositioned messaging, claims) require full Editorial-team blessing. <strong>Minor/mechanical</strong> edits (meta tags, schema, internal links, typo/format fixes, cannibalization consolidation) proceed on a single owner approval — so throughput isn't bottlenecked by full review on every change.</div>
 
 <h2>13. The production workflow (page lifecycle)</h2>
@@ -442,13 +442,15 @@ ul, ol { margin: 10px 0 16px 20px; font-size: 9.5pt; } li { margin-bottom: 4px; 
     <tr class="highlight-row"><td>webflow-api.token</td><td>Publishing content</td><td>CMS r/w, Pages r/w, Sites read + publish</td><td>BC / web owner</td></tr>
   </tbody>
 </table>
-<h3>Team — named</h3>
+<h3>Team — named, with roles</h3>
 <ul>
-  <li><strong>Editorial team — BC, Andrew, Molina, Alex.</strong> Review and bless <em>major</em> copy before publish (voice, accuracy, claims, legal). Works in weekly batches so it doesn't bottleneck throughput.</li>
-  <li><strong>Website owners — Sathish &amp; Kartik.</strong> Own the Webflow site: build/QA pages, implement templates, run visual/brand QA, hold the publish action.</li>
-  <li><strong>Art director — Himanshu.</strong> Owns templates and the overall look &amp; feel; sets the design system the content flows into. Engaged for new layouts, not routine updates.</li>
-  <li><strong>Owner — BC.</strong> Sets priorities, gives publish go/no-go, owns positioning sign-off, reviews the weekly report.</li>
-  <li><strong>Engine — Claude.</strong> Production, technical SEO, publishing mechanics (via Webflow API), and the automated measurement loop.</li>
+  <li><strong>Editorial board (leadership) — BC Krishna (CEO), Alex (Head of Sales), Andrew (Head of Partnerships), Molina (Director of Marketing).</strong> These are execs, not copy editors — so their review is <em>high-altitude and async</em>: each blesses <em>major</em> copy from their lens (CEO = positioning; Sales = does it match the pitch; Partnerships = ERP/partner alignment; Marketing = brand/voice). Batched weekly; no four-execs-in-a-room dependency.</li>
+  <li><strong>Marketing lead — Molina (Director of Marketing).</strong> Operational owner of the day-to-day program: works directly with Claude on priorities, briefs, and the content calendar; the single point of coordination so the board isn't in the critical path.</li>
+  <li><strong>Designers — Sathish &amp; Kartik.</strong> Own the Webflow site: build/QA pages, implement templates, run visual/brand QA, hold the publish action.</li>
+  <li><strong>Art director — Himanshu.</strong> Owns templates and the overall look &amp; feel; sets the design system content flows into. Engaged for new layouts, not routine updates.</li>
+  <li><strong>Exec sponsor &amp; persona proxy — Ted (CFO).</strong> Budget/sponsor — and, since the CFO is a primary buyer, an internal voice-of-customer for the §16 persona &amp; voice work.</li>
+  <li><strong>Owner — BC (CEO).</strong> Sets priorities, gives publish go/no-go, owns positioning sign-off, reviews the weekly report.</li>
+  <li><strong>Engine — Claude.</strong> Production, technical SEO, publishing mechanics (Webflow API), and the automated measurement loop.</li>
 </ul>
 <h3>Governance &amp; guardrails</h3>
 <div class="callout warning"><div class="callout-title">Non-negotiable</div>
